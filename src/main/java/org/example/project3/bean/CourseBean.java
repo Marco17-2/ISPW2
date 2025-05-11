@@ -88,5 +88,7 @@ public class CourseBean {
         this.sessions.add(session);
     }
 
+
+
     //provaprovaprovaprova
 }
