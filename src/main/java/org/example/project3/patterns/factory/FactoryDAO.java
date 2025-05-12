@@ -2,6 +2,8 @@ package org.example.project3.patterns.factory;
 
 
 import org.example.project3.dao.*;
+import org.example.project3.dao.demo.*;
+import org.example.project3.dao.full.sql.*;
 
 
 import java.io.IOException;
@@ -14,11 +16,13 @@ public class FactoryDAO {
     private static final String CONFIG_FILE = "config.properties";
     private static final Properties properties = new Properties();
     private static final String PERSISTENCE_TYPE = "persistence.type";
-    private static LoginAndRegistrationDAO loginAndRegistrationDAO;
-    private static ExAndScheduleDAO exAndScheduleDAO;
-    private static UpdateDAO updateDAO;
+    private static CredentialsDAO credentialsDAO;
+    private static CustomerDAO customerDAO;
+    private static ExerciseDAO exerciseDAO;
     private static RequestDAO requestDAO;
-    private static RetrieveDAO retrieveDAO;
+    private static ScheduleDAO scheduleDAO;
+    private static SubscriptionDAO subscriptionDAO;
+    private static TrainerDAO trainerDAO;
 
     // Caricamento delle proprietà una sola volta
     private static void loadProperties() {
@@ -58,4 +62,91 @@ public class FactoryDAO {
             default -> throw new IllegalArgumentException("Tipo di DAO non valido: " + type);
         };
     }
+
+    // Getters per i DAO
+    // Sincronizzazione per evitare problemi di concorrenza
+    public static synchronized CredentialsDAO getDAO() {
+        if (credentialsDAO == null) {
+            credentialsDAO = createDAO(
+                    getPersistenceType(),
+                    CredentialsDAOSQL::new,
+                    CredentialsDAOP::new,
+                    null
+            );
+        }
+        return credentialsDAO;
+    }
+
+    public static synchronized CustomerDAO getCustomerDAO() {
+        if (customerDAO == null) {
+            customerDAO = createDAO(
+                    getPersistenceType(),
+                    CustomerDAOSQL::new,
+                    CustomerDAOP::new,
+                    null
+            );
+        }
+        return customerDAO;
+    }
+
+    public static synchronized ExerciseDAO getExerciseDAO() {
+        if (exerciseDAO == null) {
+            exerciseDAO = createDAO(
+                    getPersistenceType(),
+                    ExerciseDAOSQL::new,
+                    ExerciseDAOP::new,
+                    null
+            );
+        }
+        return exerciseDAO;
+    }
+
+    public static synchronized RequestDAO getRequestDAO() {
+        if (requestDAO == null) {
+            requestDAO = createDAO(
+                    getPersistenceType(),
+                    RequestDAOSQL::new,
+                    RequestDAOP::new,
+                    null
+            );
+        }
+        return requestDAO;
+    }
+
+    public static synchronized ScheduleDAO getScheduleDAO() {
+        if (scheduleDAO == null) {
+            scheduleDAO = createDAO(
+                    getPersistenceType(),
+                    ScheduleDAOSQL::new,
+                    ScheduleDAOP::new,
+                    null
+            );
+        }
+        return scheduleDAO;
+    }
+
+    public static synchronized SubscriptionDAO getSubscriptionDAO() {
+        if (subscriptionDAO == null) {
+            subscriptionDAO = createDAO(
+                    getPersistenceType(),
+                    SubscriptionDAOSQL::new,
+                    SubscriptionDAOP::new,
+                    null
+            );
+        }
+        return subscriptionDAO;
+    }
+
+    public static synchronized TrainerDAO getTrainerDAO() {
+        if (trainerDAO == null) {
+            trainerDAO = createDAO(
+                    getPersistenceType(),
+                    TrainerDAOSQL::new,
+                    TrainerDAOP::new,
+                    null
+            );
+        }
+        return trainerDAO;
+    }
+
 }

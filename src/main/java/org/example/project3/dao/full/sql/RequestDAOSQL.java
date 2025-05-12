@@ -1,4 +1,6 @@
 package org.example.project3.dao.full.sql;
 
-public class RequestDAOSQL {
+import org.example.project3.dao.RequestDAO;
+
+public class RequestDAOSQL implements RequestDAO {
 }

@@ -57,7 +57,7 @@ public abstract class LoggedUser {
         return gender;
     }
 
-    public boolean isOnline() {
+    public Boolean isOnline() {
         return online;
     }
 

@@ -1,4 +1,6 @@
 package org.example.project3.dao.demo;
 
-public class RequestDAOP {
+import org.example.project3.dao.RequestDAO;
+
+public class RequestDAOP implements RequestDAO {
 }

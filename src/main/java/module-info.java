@@ -9,6 +9,7 @@ module org.example.project3 {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens org.example.project3 to javafx.fxml;
     exports org.example.project3;
