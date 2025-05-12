@@ -1,6 +1,6 @@
 package org.example.project3.patterns.factory;
 
-import com.example.bodybuild.utilities.others.mappers.BeanAndModelMapper;
+import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
 
 import java.util.HashMap;
 import java.util.Map;

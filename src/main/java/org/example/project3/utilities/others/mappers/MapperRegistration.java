@@ -1,8 +1,8 @@
 package org.example.project3.utilities.others.mappers;
 
-import com.example.bodybuild.beans.*;
-import com.example.bodybuild.model.*;
-import com.example.bodybuild.patterns.factory.BeanAndModelMapperFactory;
+import org.example.project3.beans.*;
+import org.example.project3.model.*;
+import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 
 public class MapperRegistration {
     //Questo metodo viene chiamato nel main per registrare tutti i mappers
@@ -18,5 +18,6 @@ public class MapperRegistration {
         factory.registerMapper(RequestBean.class, Request.class, new RequestMapper());
         factory.registerMapper(ScheduleBean.class, Schedule.class, new ScheduleMapper());
         factory.registerMapper(ExerciseBean.class, Exercise.class, new ExerciseMapper());
+        factory.registerMapper(CourseBean.class, Course.class, new CourseMapper());
     }
 }

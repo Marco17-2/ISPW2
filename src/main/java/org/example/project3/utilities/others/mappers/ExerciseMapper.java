@@ -1,9 +1,7 @@
 package org.example.project3.utilities.others.mappers;
 
-import com.example.bodybuild.beans.ExerciseBean;
-import com.example.bodybuild.model.Exercise;
-
-import java.util.ArrayList;
+import org.example.project3.beans.ExerciseBean;
+import org.example.project3.model.Exercise;
 
 public class ExerciseMapper implements BeanAndModelMapper<ExerciseBean,Exercise> {
     CustomerMapper customerMapper = new CustomerMapper();

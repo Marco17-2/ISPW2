@@ -1,6 +1,6 @@
 package org.example.project3.dao;
 
-import com.example.bodybuild.model.Request;
+import org.example.project3.model.Request;
 
 public interface RequestDAO {
     //metodi per la gestione delle richieste

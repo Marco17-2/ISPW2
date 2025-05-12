@@ -1,20 +1,20 @@
-package org.example.project3.model;
+package org.example.project3.beans;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trainer extends LoggedUser{
+public class TrainerBean extends LoggedUserBean {
 
     private Integer trainerID;
     private ArrayList<String> specializations;
 
-    public Trainer(Credentials credentials, String name, String surname, String gender, boolean isOnline) {
-        super(credentials, name, surname, gender, isOnline);
+    public TrainerBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline) {
+        super(credentialsBean, name, surname, gender, isOnline);
         this.specializations = new ArrayList<>();
     }
 
-    public Trainer(Credentials credentials) {
-        super(credentials);
+    public TrainerBean(CredentialsBean credentialsBean) {
+        super(credentialsBean);
         this.specializations = new ArrayList<>();
     }
 

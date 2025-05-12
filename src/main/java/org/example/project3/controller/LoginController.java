@@ -1,9 +1,9 @@
 package org.example.project3.controller;
 
 
-import com.example.bodybuild.dao.LoginAndRegistrationDAO;
-import com.example.bodybuild.patterns.factory.BeanAndModelMapperFactory;
-import com.example.bodybuild.patterns.factory.FactoryDAO;
+import org.example.project3.dao.LoginAndRegistrationDAO;
+import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
+import org.example.project3.patterns.factory.FactoryDAO;
 
 /*********Parte del caso d'uso: Login*********/
 public class LoginController {

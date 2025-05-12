@@ -1,8 +1,8 @@
 package org.example.project3.exceptions;
 
-public class DbOperationException {
+public class DbOperationException extends Exception{
 
-    public DatabaseOperationException(String message, Throwable cause){
+    public DbOperationException(String message, Throwable cause){
         super(message, cause);
     }
 

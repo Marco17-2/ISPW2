@@ -1,7 +1,7 @@
 package org.example.project3.dao;
 
-import com.example.bodybuild.model.Exercise;
-import com.example.bodybuild.model.Schedule;
+import org.example.project3.model.Exercise;
+import org.example.project3.model.Schedule;
 
 public interface ExAndScheduleDAO {
     //metodi per aggiungere, modificare e rimuovere schede e esercizi

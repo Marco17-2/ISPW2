@@ -1,6 +1,8 @@
 package org.example.project3.model;
 
 
+import java.time.Duration;
+
 // correzione costruttore by bean
 public class Course {
 
@@ -9,13 +11,13 @@ public class Course {
     private Trainer trainer;
     private int slots;
     private int remainingSlots;
-    private String duration;
+    private Duration duration;
     private String level;
     private String day;
     private String hour;
 
-    public Course(String courseName, Trainer trainer, int slots, int remainingSlots, String duration, String level, String day, String hour) {
-
+    public Course(int courseID, String courseName, Trainer trainer, int slots, int remainingSlots, Duration duration, String level, String day, String hour) {
+        this.courseID = courseID;
         this.courseName = courseName;
         this.trainer = trainer;
         this.slots = slots;
@@ -44,7 +46,7 @@ public class Course {
         this.slots = slots;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
@@ -68,7 +70,7 @@ public class Course {
         return slots;
     }
 
-    public int getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 

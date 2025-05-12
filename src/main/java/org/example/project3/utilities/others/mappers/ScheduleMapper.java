@@ -1,9 +1,9 @@
 package org.example.project3.utilities.others.mappers;
 
-import com.example.bodybuild.beans.ExerciseBean;
-import com.example.bodybuild.beans.ScheduleBean;
-import com.example.bodybuild.model.Exercise;
-import com.example.bodybuild.model.Schedule;
+import org.example.project3.beans.ExerciseBean;
+import org.example.project3.beans.ScheduleBean;
+import org.example.project3.model.Exercise;
+import org.example.project3.model.Schedule;
 
 import java.util.ArrayList;
 

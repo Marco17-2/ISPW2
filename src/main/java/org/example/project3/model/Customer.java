@@ -1,92 +1,85 @@
 package org.example.project3.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Customer {
+public class Customer extends LoggedUser{
+    private Integer userID;
+    private Subscription subscription;
+    private ArrayList<Schedule> schedules;
+    private String injury;
+    private Date startDate;
+    private Date endDate;
 
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private String email;
-    private String password;
-    private List<String> injuries;
-    private Boolean subscription;
-    private int userID;
-
-    public void setCredentialsByBean(clientBean clientbean){
-        this.firstName = clientbean.getFirstName();
-        this.lastName = clientbean.getLastName();
-        this.gender = clientbean.getGender();
-        this.email = clientbean.getEmail();
-        this.password = clientbean.getPassword();
-
+    public Customer(Credentials credentials, String name, String surname,String gender, boolean isOnline) {
+        super(credentials, name, surname, gender, isOnline);
+        this.subscription = null;
+        this.schedules = new ArrayList<>();
+        this.startDate = new Date();
+        this.endDate = new Date();
+        this.injury = "";
     }
 
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
+    public Customer(Credentials credentials) {
+        super(credentials);
+        this.subscription = null;
+        this.schedules = new ArrayList<>();
+        this.startDate = new Date();
+        this.endDate = new Date();
+        this.injury = "";
     }
 
-    public void setLastName(String lastName){
-        this.lastName = lastName;
+    public Subscription getSubscription() {
+        return subscription;
     }
 
-    public void setGender(String gender){
-        this.gender = gender;
-    }
-
-    public void setEmail(String email){
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setSubscription(Boolean subscription) {
+    public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
 
-    public void setUserID(int userID) {
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = (ArrayList<Schedule>) schedules;
+    }
+
+    public void addSchedule(Schedule schedule){
+        this.schedules.add(schedule);
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public void getFirstName(){
-        return this.firstName;
+    public Integer getUserID() {
+        return userID;
     }
 
-    public void getLastName(){
-        return this.lastName;
+    public void setInjury(String injury) {
+        this.injury = injury;
     }
 
-    public void getGender(){
-        return this.gender;
+    public String getInjury() {
+        return injury;
     }
 
-    public void getEmail(){
-        return this.email;
-    }
-
-    public void getPassword(){
-        return this.password;
-    }
-
-    public void getSubscription(){
-        return this.subscription;
-    }
-
-    public void getUserID(){
-        return this.userID;
-    }
-
-    public List<String> getInjuries() {
-        return injuries;
-    }
-
-    public void setInjuries(List<String> injuries) {
-        this.injuries = injuries;
-    }
-
-    public void addInjuries(String injuries){
-        this.injuries.add(injuries);
-    }
 }

@@ -1,19 +1,20 @@
 package org.example.project3.utilities.others.mappers;
 
-import com.example.bodybuild.beans.RequestBean;
-import com.example.bodybuild.model.Request;
-import com.example.bodybuild.model.Schedule;
+import org.example.project3.beans.RequestBean;
+import org.example.project3.model.Request;
 
 public class RequestMapper implements BeanAndModelMapper<RequestBean, Request>{
     ScheduleMapper scheduleMapper = new ScheduleMapper();
     ExerciseMapper exerciseMapper = new ExerciseMapper();
+    CustomerMapper customerMapper = new CustomerMapper();
+    CourseMapper courseMapper = new CourseMapper();
     @Override
     public Request fromBeanToModel(RequestBean bean) {
-        return new Request(bean.getID(), scheduleMapper.fromBeanToModel(bean.getSchedule()), exerciseMapper.fromBeanToModel(bean.getExercise()), bean.getReason());
+        return new Request(bean.getID(), scheduleMapper.fromBeanToModel(bean.getScheduleBean()), exerciseMapper.fromBeanToModel(bean.getExerciseBean()), bean.getReason(), customerMapper.fromBeanToModel(bean.getCustomer()), bean.getDateTime(), courseMapper.fromBeanToModel(bean.getCourse()) );
     }
 
     @Override
     public RequestBean fromModelToBean(Request model) {
-        return new RequestBean(model.getID(), scheduleMapper.fromModelToBean(model.getSchedule()), exerciseMapper.fromModelToBean(model.getExercise()), model.getReason());
+        return new RequestBean(model.getID(), scheduleMapper.fromModelToBean(model.getSchedule()), exerciseMapper.fromModelToBean(model.getExercise()), model.getReason(), customerMapper.fromModelToBean(model.getCustomer()), model.getDateTime(), courseMapper.fromModelToBean(model.getCourse()));
     }
 }

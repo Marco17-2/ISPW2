@@ -1,6 +1,6 @@
 package org.example.project3.dao;
 
-import com.example.bodybuild.model.*;
+import org.example.project3.model.*;
 
 public interface LoginAndRegistrationDAO {
     //metodi per il login e la registrazione

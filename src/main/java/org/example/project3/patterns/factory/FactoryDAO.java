@@ -1,7 +1,7 @@
 package org.example.project3.patterns.factory;
 
 
-import com.example.bodybuild.dao.*;
+import org.example.project3.dao.*;
 
 
 import java.io.IOException;

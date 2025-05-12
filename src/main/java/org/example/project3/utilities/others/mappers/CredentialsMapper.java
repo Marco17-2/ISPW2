@@ -1,7 +1,7 @@
 package org.example.project3.utilities.others.mappers;
 
-import com.example.bodybuild.beans.CredentialsBean;
-import com.example.bodybuild.model.Credentials;
+import org.example.project3.beans.CredentialsBean;
+import org.example.project3.model.Credentials;
 
 public class CredentialsMapper implements BeanAndModelMapper<CredentialsBean, Credentials> {
     @Override

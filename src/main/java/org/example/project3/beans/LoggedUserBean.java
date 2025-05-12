@@ -1,0 +1,69 @@
+package org.example.project3.beans;
+
+
+public abstract class LoggedUserBean {
+    private CredentialsBean credentialsBean;
+    private String name;
+    private String surname;
+    private String gender;
+    private boolean online;
+
+    protected LoggedUserBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline) {
+        this.credentialsBean = credentialsBean;
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+        this.online = isOnline;
+    }
+
+    protected LoggedUserBean(CredentialsBean credentialsBean){
+        this.credentialsBean = credentialsBean;
+        this.name = null;
+        this.surname = null;
+        this.gender = null;
+        this.online = false;
+    }
+    //getter e setter per i nuovi campi
+
+    public CredentialsBean getCredentialsBean() {
+        return credentialsBean;
+    }
+
+    //FORSE DA TOGLIERE
+    public void setCredentialsBean(CredentialsBean credentials) {
+        this.credentialsBean = credentials;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+}

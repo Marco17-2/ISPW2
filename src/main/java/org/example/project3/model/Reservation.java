@@ -10,10 +10,10 @@ public class Reservation {
     LocalDateTime dateTime;
 
 
-    public void Reservation(RequestBean requestBean){
-        this.customer = requestBean.getCustomer();
-        this.course = requestBean.getCourse();
-        this.datetime = requestBean.getDateTime();
+    public void Reservation(Customer customer, Course course, LocalDateTime dateTime) {
+        this.customer = customer;
+        this.course = course;
+        this.dateTime = dateTime;
     }
 
     public void setCourse(Course course) {
@@ -24,8 +24,8 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
-        this.datetime = datetime;
+    public void setDatetime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public Customer getCustomer() {
@@ -36,7 +36,7 @@ public class Reservation {
         return course;
     }
 
-    public LocalDateTime getDatetime() {
-        return datetime;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 }
