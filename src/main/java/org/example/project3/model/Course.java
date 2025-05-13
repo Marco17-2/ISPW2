@@ -9,17 +9,17 @@ public class Course {
     private int courseID;
     private String courseName;
     private Trainer trainer;
-    private int slots;
-    private int remainingSlots;
-    private Duration duration;
+    private String slots;
+    private String remainingSlots;
+    private String duration;
     private String level;
     private String day;
     private String hour;
 
-    public Course(int courseID, String courseName, Trainer trainer, int slots, int remainingSlots, Duration duration, String level, String day, String hour) {
-        this.courseID = courseID;
+    public Course(String courseName, String slots, String remainingSlots, String duration, String level, String day, String hour) {
+
         this.courseName = courseName;
-        this.trainer = trainer;
+        this.trainer = null;
         this.slots = slots;
         this.duration = duration;
         this.remainingSlots = remainingSlots;
