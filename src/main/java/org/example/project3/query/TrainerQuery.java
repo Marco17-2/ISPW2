@@ -21,7 +21,7 @@ public class TrainerQuery {
             pstmt.setString(2, trainer.getName());
             pstmt.setString(3, trainer.getSurname());
             pstmt.setString(4, trainer.getGender());
-            pstmt.setString(5, trainer.isOnline());
+            pstmt.setBoolean(5, trainer.isOnline());
             int rs = pstmt.executeUpdate();
             if (rs == 0) {
                 throw new MailAlreadyExistsException("Mail già esistente");
@@ -31,18 +31,17 @@ public class TrainerQuery {
         }
     }
 
-    private static void setModifyParameters(PreparedStatement pstmt, LoggedUser loggedUser) throws SQLException {
-        pstmt.setString(1, loggedUser.getName());
-        pstmt.setString(2, loggedUser.getSurname());
-        pstmt.setString(3, loggedUser.getGender());
-        pstmt.setBoolean(4, loggedUser.isOnline());
-    }
+
 
     public static void modifyTrainer(Connection conn, Trainer trainer) throws DbOperationException {
         String query = "UPDATE trainer SET name = ?, surname = ?, gender = ?, online = ? WHERE mail = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
-            setModifyParameters(pstmt, trainer);
+            pstmt.setString(1, trainer.getName());
+            pstmt.setString(2, trainer.getSurname());
+            pstmt.setString(3, trainer.getGender());
+            pstmt.setBoolean(4, trainer.isOnline());
+            pstmt.setString(5, trainer.getCredentials().getMail());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nella modifica del profilo", e);
@@ -70,7 +69,7 @@ public class TrainerQuery {
             pstmt2.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione del paziente", e);
+            throw new DbOperationException("Errore nella rimozione del trainer", e);
         }
     }
 }

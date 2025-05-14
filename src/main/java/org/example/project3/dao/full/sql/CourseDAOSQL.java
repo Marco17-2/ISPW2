@@ -6,7 +6,6 @@ import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Course;
-import org.example.project3.patterns.factory.ConnectionFactory;
 import org.example.project3.query.CourseQuery;
 
 import java.sql.Connection;
@@ -28,7 +27,7 @@ public class CourseDAOSQL implements CourseDAO{
 
     @Override
     public void searchCourses(List<Course> courses){
-        try (Connection conn = ConnectionFactory.getConnection();
+        try (Connection conn = ConnectionSQL.getConnection();
              ResultSet rs = CourseQuery.retrieveCourse(conn)){
 
             while(rs.next()) {

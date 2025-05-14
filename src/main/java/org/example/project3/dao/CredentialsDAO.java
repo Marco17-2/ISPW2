@@ -1,10 +1,12 @@
 package org.example.project3.dao;
 
+import org.example.project3.exceptions.MailAlreadyExistsException;
+import org.example.project3.exceptions.WrongEmailOrPasswordException;
 import org.example.project3.model.Credentials;
 
 public interface CredentialsDAO {
     boolean emailExists(String email);
     boolean insertUser(Credentials credentials);
-    void login(Credentials credentials);
-    void modifyCredentials(Credentials newCredentials, Credentials oldCredentials);
+    void login(Credentials credentials) throws WrongEmailOrPasswordException;
+    void modifyCredentials(Credentials newCredentials, Credentials oldCredentials) throws MailAlreadyExistsException;
 }
