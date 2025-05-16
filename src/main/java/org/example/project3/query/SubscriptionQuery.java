@@ -51,10 +51,10 @@ public class SubscriptionQuery {
         }
     }
 
-    public static void deleteSubscription(Connection conn, String name) throws DbOperationException {
-        String query = "DELETE FROM subscription WHERE name = ? ";
+    public static void deleteSubscription(Connection conn, Integer id) throws DbOperationException {
+        String query = "DELETE FROM subscription WHERE id = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, name);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nella rimozione dell'abbonamento", e);
