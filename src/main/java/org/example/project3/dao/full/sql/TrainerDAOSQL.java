@@ -1,15 +1,20 @@
 package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.TrainerDAO;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.model.Credentials;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Subscription;
 import org.example.project3.model.Trainer;
+import org.example.project3.model.Course;
 import org.example.project3.query.CredentialsQuery;
 import org.example.project3.query.CustomerQuery;
 import org.example.project3.query.TrainerQuery;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,6 +26,7 @@ public class TrainerDAOSQL implements TrainerDAO {
     private static final String SURNAME = "surname";
     private static final String GENDER = "gender";
     private static final String ONLINE = "online";
+    private static final String SPECIALIZZATION = "specialization";
 
     @Override
     public boolean emailExists(String mail)  {
@@ -97,5 +103,37 @@ public class TrainerDAOSQL implements TrainerDAO {
 
     private void handleException(Exception e) {
         System.out.println(String.format("%s", e.getMessage()));
+    }
+
+    @Override
+    public List<String> retrieveSpecializzation(Trainer trainer) throws SQLException {
+        List<String> spec = new ArrayList<>();
+        try( Connection conn = ConnectionSQL.getConnection()){
+
+            ResultSet rs = TrainerQuery.retrieveSpecializzation(conn, trainer.getCredentials().getMail());
+            while(rs.next()){
+                spec.add(rs.getString(SPECIALIZZATION));
+            }
+            return spec;
+
+            }catch(SQLException e){
+                throw new DAOException();
+            }
+    }
+
+    @Override
+    public void retrieveTrainerCourse(Course course, Trainer trainer){
+        try(Connection conn = ConnectionSQL.getConnection()){
+            ResultSet rs = TrainerQuery.retrieveCourseTrainer(conn, course.getCourseName());
+            while(rs.next()){
+
+                trainer.setName(rs.getString(NAME));
+                trainer.setSurname(rs.getString(SURNAME));
+                trainer.setGender(rs.getString(GENDER));
+                trainer.setOnline(rs.getBoolean(ONLINE));
+            }
+        } catch (SQLException e) {
+            throw new DAOException();
+        }
     }
 }

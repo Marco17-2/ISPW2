@@ -72,4 +72,18 @@ public class TrainerQuery {
             throw new DbOperationException("Errore nella rimozione del trainer", e);
         }
     }
+
+    public static ResultSet retrieveCourseTrainer( Connection conn, String course) throws SQLException {
+        String query = "SELECT mail, name, surname, gender, online FROM trainer where course = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, course);
+        return pstmt.executeQuery();
+    }
+
+    public static ResultSet retrieveSpecializzation(Connection conn, String trainer) throws SQLException {
+        String query = "SELECT descripion FROM specializzation s, trainter t, expertieses e WHERE e.trainer = ? AND e.specializzation = s.id";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, trainer);
+        return pstmt.executeQuery();
+    }
 }
