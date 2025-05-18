@@ -62,4 +62,16 @@ public class RequestQuery {
             throw new DbOperationException("Errore nella rimozione delle altre richieste", e);
         }
     }
+
+    public static ResultSet retireveCourseRequest(Connection conn, String trainer) throws SQLException {
+
+        String query = "SELECT cu.mail, cu.name, cu.surname, cu.gender, r.data, c.nome " +
+                "FROM customer cu, courseRequest r, course c " +
+                "WHERE r.cliente = cu.mail AND r.course = c.name AND c.trainer = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, trainer);
+        return pstmt.executeQuery();
+    }
+
+
 }

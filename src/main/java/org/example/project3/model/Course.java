@@ -42,11 +42,11 @@ public class Course {
         this.trainer = trainer;
     }
 
-    public void setSlots(int slots) {
+    public void setSlots(String slots) {
         this.slots = slots;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -66,11 +66,11 @@ public class Course {
         return trainer;
     }
 
-    public int getSlots() {
+    public String getSlots() {
         return slots;
     }
 
-    public Duration getDuration() {
+    public String getDuration() {
         return duration;
     }
 
@@ -94,11 +94,11 @@ public class Course {
         return hour;
     }
 
-    public int getRemainingSlots() {
+    public String getRemainingSlots() {
         return remainingSlots;
     }
 
-    public void setRemainingSlots(int remainingSlots) {
+    public void setRemainingSlots(String remainingSlots) {
         this.remainingSlots = remainingSlots;
     }
 }

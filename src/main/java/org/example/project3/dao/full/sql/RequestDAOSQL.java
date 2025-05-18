@@ -3,10 +3,9 @@ package org.example.project3.dao.full.sql;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.model.Credentials;
-import org.example.project3.model.Customer;
-import org.example.project3.model.Request;
+import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,6 +20,11 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String CUSTOMER = "customer";
     private static final String DATETIME = "datetime";
     private static final String COURSE = "course";
+
+    private static final String NAME = "name";
+    private static final String SURNAME = "surname";
+    private static final String GENDER = "gender";
+    private static final String EMAIL = "email";
 
 
     @Override
@@ -75,6 +79,21 @@ public class RequestDAOSQL implements RequestDAO {
             RequestQuery.deleteRequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getTrainer().getCredentials().getMail(), request.getDateTime());
         } catch(SQLException | DbOperationException e){
             handleException(e);
+        }
+    }
+
+    @Override
+    public void retrieveCourseRequest(Trainer trainer, List<Reservation> reservationList){
+
+        try(Connection conn = ConnectionSQL.getConnection()){
+            ResultSet rs = RequestQuery.retireveCourseRequest(conn, trainer.getCredentials().getMail());
+            while(rs.next()){
+
+                // finire
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

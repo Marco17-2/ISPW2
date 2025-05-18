@@ -14,6 +14,7 @@ public class SharedResources {
 
     // Mappe condivise per i vari entità
     private final Map<String, Trainer> trainers = new ConcurrentHashMap<>();
+    private final Map<String, Course> courses = new ConcurrentHashMap<>();
     private final Map<String, Customer> customers = new ConcurrentHashMap<>();
     private final Map<String, Subscription> subscriptions = new ConcurrentHashMap<>();
     private final Map<Long, Schedule> schedules = new ConcurrentHashMap<>();
@@ -25,6 +26,7 @@ public class SharedResources {
 //    private final Map<String, Map<LocalDate,String>> diaryTable= new ConcurrentHashMap<>();//<mail,<data,contenuto>>
 //    private final Map<String, List<ToDoItem>> toDoTable= new ConcurrentHashMap<>();//<mail,listaToDo>
 //    private final Map<String, List<Task>> taskTable= new ConcurrentHashMap<>();//<mail,listaTask>
+
 
     // Singleton per garantire che ci sia una sola istanza della classe
     private static SharedResources instance=null;
@@ -78,6 +80,7 @@ public class SharedResources {
 //        return taskTable;
 //    }
 
+    public Map<String, Course> getCourses() { return courses; }
 
 }
 

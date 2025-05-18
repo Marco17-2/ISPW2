@@ -8,4 +8,5 @@ import java.util.List;
 public interface CourseDAO {
 
     void searchCourses(List<Course> courses) throws NoResultException;
+
 }

@@ -2,6 +2,8 @@ package org.example.project3.dao;
 
 import org.example.project3.model.Customer;
 import org.example.project3.model.Request;
+import org.example.project3.model.Trainer;
+import org.example.project3.model.Reservation;
 
 import java.util.List;
 
@@ -11,4 +13,6 @@ public interface RequestDAO {
     boolean hasAlreadySentRequest(Request request);
 //    void retrieveCustomerRequest(Customer customer, List<Request> requests);
     void deleteRequest(Request request);
+
+    void retrieveCourseRequest(Trainer trainer, List<Reservation> reservationList);
 }
