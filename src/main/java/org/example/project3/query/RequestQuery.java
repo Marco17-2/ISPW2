@@ -2,6 +2,8 @@ package org.example.project3.query;
 
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Customer;
+import org.example.project3.model.Exercise;
+import org.example.project3.model.Schedule;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,24 +11,24 @@ import java.time.LocalDateTime;
 
 public class RequestQuery {
 
-    public static void sendRequest(Connection conn, String psychologist, String patient, LocalDateTime date) throws DbOperationException {
-        String query = "INSERT INTO request (psychologist, patient, date) VALUES (?, ?, ?)";
+    public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason, LocalDateTime date) throws DbOperationException {
+        String query = "INSERT INTO request (schedule, exercise, reason, date) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, psychologist);
-            preparedStatement.setString(2, patient);
-            preparedStatement.setObject(3, date);
+            preparedStatement.setLong(1, schedule.getId());
+            preparedStatement.setLong(2, exercise.getId());
+            preparedStatement.setString(3, reason);
+            preparedStatement.setObject(4, date);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nell'invio della richiesta", e);
         }
     }
 
-    public static ResultSet hasAlreadySentARequest(Connection conn, String trainer, String customer) throws DbOperationException {
-        String query = "SELECT COUNT(*) FROM request WHERE psychologist = ? AND patient = ?";
+    public static ResultSet hasAlreadySentARequest(Connection conn, Schedule schedule) throws DbOperationException {
+        String query = "SELECT COUNT(*) FROM request WHERE schedule = ?";
         try{
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, trainer);
-            preparedStatement.setString(2, customer);
+            preparedStatement.setLong(1, schedule.getId());
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nel controllo della richiesta", e);

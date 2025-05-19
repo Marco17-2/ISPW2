@@ -8,6 +8,6 @@ import org.example.project3.model.Credentials;
 public interface CredentialsDAO {
     boolean emailExists(String email);
     boolean insertUser(Credentials credentials);
-    void login(Credentials credentials) throws WrongEmailOrPasswordException;
+    void login(Credentials credentials) throws WrongEmailOrPasswordException, LoginAndRegistrationException;
     void modifyCredentials(Credentials newCredentials, Credentials oldCredentials) throws MailAlreadyExistsException;
 }

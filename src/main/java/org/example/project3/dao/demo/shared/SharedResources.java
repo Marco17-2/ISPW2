@@ -16,11 +16,11 @@ public class SharedResources {
     private final Map<String, Trainer> trainers = new ConcurrentHashMap<>();
     private final Map<String, Course> courses = new ConcurrentHashMap<>();
     private final Map<String, Customer> customers = new ConcurrentHashMap<>();
-    private final Map<String, Subscription> subscriptions = new ConcurrentHashMap<>();
+    private final Map<Integer, Subscription> subscriptions = new ConcurrentHashMap<>();
     private final Map<Long, Schedule> schedules = new ConcurrentHashMap<>();
     private final Map<Long, Exercise> exercises = new ConcurrentHashMap<>();
     private final Map<String, Credentials> userTable = new ConcurrentHashMap<>();
-    private final Map<String, List<Request>> requestsSent = new HashMap<>();
+    private final Map<Long, List<Request>> requestsSent = new HashMap<>();
     // Mappa per tenere traccia delle relazioni pazienti-psicologi
 //    private final  Map<String, Psychologist> patientsWithPsychologists = new HashMap<>();
 //    private final Map<String, Map<LocalDate,String>> diaryTable= new ConcurrentHashMap<>();//<mail,<data,contenuto>>
@@ -52,7 +52,7 @@ public class SharedResources {
         return customers;
     }
 
-    public Map<String, Subscription> getSubscriptions() {
+    public Map<Integer, Subscription> getSubscriptions() {
         return subscriptions;
     }
     public Map<Long,Schedule> getSchedules(){
@@ -67,7 +67,7 @@ public class SharedResources {
 //    public Map<String,Psychologist> getPatientsWithPsychologists(){
 //        return patientsWithPsychologists;
 //    }
-    public Map<String,List<Request>> getRequestsSent(){
+    public Map<Long,List<Request>> getRequestsSent(){
         return requestsSent;
     }
 //    public Map<String, Map<LocalDate,String>> getDiaryTable(){

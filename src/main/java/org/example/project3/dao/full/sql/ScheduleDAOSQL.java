@@ -1,7 +1,9 @@
 package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.ScheduleDAO;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
@@ -69,6 +71,24 @@ public class ScheduleDAOSQL implements ScheduleDAO {
             }
         } catch (SQLException e) {
             handleException(e);
+        }
+    }
+
+    @Override
+    public void searchSchedules(List<Schedule> schedules, String search){
+        try (Connection conn = ConnectionSQL.getConnection()) {
+            ResultSet rs = ScheduleQuery.searchSchedules(conn, search);
+            if (rs.next()) {
+                Schedule schedule = new Schedule(
+                        rs.getLong(ID),
+                        rs.getString(NAME),
+                        rs.getObject(CUSTOMER, Customer.class),
+                        rs.getObject(TRAINER, Trainer.class)
+                );
+                schedules.add(schedule);
+            }
+        } catch (SQLException | NoResultException e) {
+            throw new DAOException("Errore nella ricerca della scheda", e);
         }
     }
 

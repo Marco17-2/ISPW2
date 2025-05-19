@@ -21,9 +21,9 @@ public class Request {
         this.course = course;
     }
 
-    public Request(long ID) {
-        this.ID = ID;
-        this.schedule = null;
+    public Request(Schedule schedule) {
+        this.ID = 0;
+        this.schedule = schedule;
         this.exercise = null;
         this.reason = "";
         this.customer = null;

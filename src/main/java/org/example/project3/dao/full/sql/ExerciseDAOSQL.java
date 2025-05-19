@@ -1,11 +1,12 @@
 package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.ExerciseDAO;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-import org.example.project3.model.Subscription;
+import org.example.project3.exceptions.NoResultException;
+import org.example.project3.model.*;
 import org.example.project3.query.ExerciseQuery;
+import org.example.project3.query.ScheduleQuery;
 import org.example.project3.query.SubscriptionQuery;
 
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Period;
+import java.util.List;
 
 public class ExerciseDAOSQL implements ExerciseDAO {
     private static final String ID="id";
@@ -44,6 +46,22 @@ public class ExerciseDAOSQL implements ExerciseDAO {
             }
         } catch (SQLException e) {
             handleException(e);
+        }
+    }
+
+    @Override
+    public void searchExercises(List<Exercise> exercises, String search){
+        try (Connection conn = ConnectionSQL.getConnection()) {
+            ResultSet rs = ExerciseQuery.searchExercises(conn, search);
+            if (rs.next()) {
+                Exercise exercise = new Exercise(
+                        rs.getString(NAME),
+                        rs.getString(DESCRIPTION)
+                );
+                exercises.add(exercise);
+            }
+        } catch (SQLException | NoResultException e) {
+            throw new DAOException("Errore nella ricerca della scheda", e);
         }
     }
 

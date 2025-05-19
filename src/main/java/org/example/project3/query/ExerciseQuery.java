@@ -55,6 +55,19 @@ public class ExerciseQuery {
         return pstmt.executeQuery();
     }
 
+    public static ResultSet searchExercises(Connection conn, String search) throws SQLException {
+        try {
+            String query = "SELECT name, description FROM exercise WHERE LOWER(name) LIKE LOWER(?) ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            String wildcard = "%" + search + "%";
+            pstmt.setString(1, wildcard);
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("Errore nella ricerca della scheda");
+            return null;
+        }
+    }
+
     public static void deleteExercise(Connection conn, Long id) throws DbOperationException {
         String query = "DELETE FROM exercise WHERE exercise.id = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {

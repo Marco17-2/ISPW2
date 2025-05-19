@@ -30,7 +30,7 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public void sendRequest(Request request) {
         try(Connection conn = ConnectionSQL.getConnection()) {
-            RequestQuery.sendRequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getTrainer().getCredentials().getMail(), request.getDateTime());
+            RequestQuery.sendRequest(conn, request.getSchedule(), request.getExercise(), request.getReason(), request.getDateTime());
         } catch (SQLException | DbOperationException e){
             handleException(e);
 
@@ -40,7 +40,7 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public boolean hasAlreadySentRequest(Request request) {
         try (Connection conn = ConnectionSQL.getConnection()) {
-            ResultSet rs = RequestQuery.hasAlreadySentARequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getTrainer().getCredentials().getMail());
+            ResultSet rs = RequestQuery.hasAlreadySentARequest(conn, request.getSchedule());
             if(rs.next()){
                 return rs.getInt(1) > 0;
             }

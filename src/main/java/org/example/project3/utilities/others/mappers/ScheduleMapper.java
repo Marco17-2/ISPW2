@@ -6,13 +6,14 @@ import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleMapper implements BeanAndModelMapper<ScheduleBean,Schedule> {
     CustomerMapper customerMapper = new CustomerMapper();
     TrainerMapper trainerMapper = new TrainerMapper();
     ExerciseMapper exerciseMapper = new ExerciseMapper();
-    ArrayList<Exercise> exercises = new ArrayList<>();
-    ArrayList<ExerciseBean> exerciseBeans = new ArrayList<>();
+    List<Exercise> exercises = new ArrayList<>();
+    List<ExerciseBean> exerciseBeans = new ArrayList<>();
     Integer i=0;
     @Override
     public Schedule fromBeanToModel(ScheduleBean bean) {

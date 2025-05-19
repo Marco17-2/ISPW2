@@ -14,6 +14,11 @@ public class ExerciseDAOP implements ExerciseDAO {
     @Override
     public void addExercise(Schedule schedule, Exercise exercise) {
         SharedResources.getInstance().getExercises().putIfAbsent(exercise.getId(), exercise);
+        if (schedule == null) {
+            throw new NoResultException(exercise.getClass().getSimpleName() + " non trovato");
+        }
+        schedule.addExercise(exercise);
+        SharedResources.getInstance().getSchedules().put(schedule.getId(), schedule);
     }
 
     @Override
@@ -32,6 +37,21 @@ public class ExerciseDAOP implements ExerciseDAO {
         exercise.setNumberSeries(storedExercise.getNumberSeries());
         exercise.setNumberReps(storedExercise.getNumberReps());
         exercise.setRestTime(storedExercise.getRestTime());
+    }
+
+    @Override
+    public void searchExercises(List<Exercise> exercises, String search) {
+        String lowerSearch = search.toLowerCase();
+
+        for (Exercise exercise : SharedResources.getInstance().getExercises().values()) {
+            if (exercise.getName().toLowerCase().contains(lowerSearch)) {
+                exercises.add(exercise);
+            }
+        }
+
+        if (exercises.isEmpty()) {
+            throw new NoResultException("Nessun esercizio trovato per: " + search);
+        }
     }
 
     @Override
