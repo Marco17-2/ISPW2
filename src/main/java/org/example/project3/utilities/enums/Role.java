@@ -1,8 +1,8 @@
 package org.example.project3.utilities.enums;
 
 public enum Role {
-    PSYCHOLOGIST(1),
-    PATIENT(2);
+    TRAINER(1),
+    CLIENT(2);
 
     private final int id;
 
