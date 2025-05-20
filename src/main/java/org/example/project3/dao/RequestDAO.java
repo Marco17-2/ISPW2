@@ -6,6 +6,8 @@ import org.example.project3.model.Trainer;
 import org.example.project3.model.Course;
 import org.example.project3.model.ReservationReq;
 
+import java.time.LocalDate;
+
 import java.util.List;
 
 public interface RequestDAO {
@@ -16,4 +18,6 @@ public interface RequestDAO {
     void deleteRequest(Request request);
 
     void retrieveCourseRequest(Course course, List<ReservationReq> reservationList);
+    void removeCourseRequest(ReservationReq reservationReq);
+    void addCourseRequest(Course course, Customer customer, LocalDate date, String hour);
 }

@@ -4,6 +4,8 @@ import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
+import org.example.project3.model.Course;
+import org.example.project3.model.ReservationReq;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -65,14 +67,47 @@ public class RequestQuery {
         }
     }
 
-    public static ResultSet retireveCourseRequest(Connection conn, String course) throws SQLException {
+    public static ResultSet retireveCourseRequest(Connection conn, Course course) throws SQLException {
 
-        String query = "SELECT cu.mail, cu.name, cu.surname, cu.gender, r.data" +
-                "FROM customer cu, courseRequest r " +
-                "WHERE r.cliente = cu.mail AND r.course = ?";
+        String query = "SELECT cu.mail, cu.name, cu.surname, cu.gender, cu.injury, r.data" +
+                        "FROM customer cu, courseRequest r " +
+                        "WHERE r.cliente = cu.mail AND r.course = ?";
+
         PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, course);
+        pstmt.setString(1, course.getCourseName());
         return pstmt.executeQuery();
+    }
+
+    public static void removeCourseRequest(Connection conn, String customer, String course, String date, String hour) throws SQLException, DbOperationException {
+        String query = "DELETE FROM courseRequest cu WHERE cu.mail = ? AND cu.name = ? AND cu.date = ? AND cu.hour = ?";
+
+        try( PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, customer);
+            pstmt.setString(2, course);
+            pstmt.setString(3, date);
+            pstmt.setString(4, hour);
+
+
+            pstmt.executeQuery();
+        }catch(SQLException e) {
+            throw new DbOperationException("Errore nella rimozione delle richiesta", e);
+        }
+    }
+
+    public static void addCourseRequest(Connection conn, String course, String customer, String date, String hour) throws SQLException, DbOperationException {
+        String query = "INSERT INTO courseRequest VALUES (?, ?, ?, ?, ?, ?)";
+
+        try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, customer);
+            pstmt.setString(2, course);
+            pstmt.setObject(3, date);
+            pstmt.setString(4, hour);
+
+            pstmt.executeQuery();
+        }catch (SQLException e) {
+            throw new DbOperationException("Errore invio richieste", e);
+        }
+
     }
 
 

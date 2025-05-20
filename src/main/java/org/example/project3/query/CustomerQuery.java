@@ -72,4 +72,5 @@ public class CustomerQuery {
             throw new DbOperationException("Errore nella rimozione del cliente", e);
         }
     }
+
 }

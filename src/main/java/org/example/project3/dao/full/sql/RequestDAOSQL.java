@@ -7,6 +7,9 @@ import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
 import org.example.project3.utilities.enums.Role;
 
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,6 +30,8 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String SURNAME = "surname";
     private static final String GENDER = "gender";
     private static final String EMAIL = "email";
+    private static final String INJURY = "injury";
+    private static final String HOUR = "hour";
 
 
 
@@ -86,6 +91,16 @@ public class RequestDAOSQL implements RequestDAO {
     }
 
     @Override
+    public void removeCourseRequest(ReservationReq reservationReq){
+        try(Connection conn = ConnectionSQL.getConnection()) {
+            RequestQuery.removeCourseRequest(conn, reservationReq.getCustomer().getCredentials().getMail(), reservationReq.getCourse().getCourseName(), reservationReq.getDateTime().toString(), reservationReq.getHour());
+        }catch (Exception e){
+            handleException(e);
+        }
+    }
+
+
+    @Override
     public void retrieveCourseRequest(Course course, List<ReservationReq> reservationList){
 
         try(Connection conn = ConnectionSQL.getConnection()){
@@ -96,15 +111,28 @@ public class RequestDAOSQL implements RequestDAO {
                         rs.getString(NAME),
                         rs.getString(SURNAME),
                         rs.getString(GENDER),
-                        //ONLINE - OFFLINE
+                        false  // poi da sistemare
                 );
 
-                ReservationReq reservationReq = new ReservationReq (customer, course, rs.getDate("datetime").toLocalDate());
+                customer.setInjury(rs.getString(INJURY));
+
+                ReservationReq reservationReq = new ReservationReq (customer, course, rs.getDate("date").toLocalDate(), rs.getString(HOUR));
                 reservationList.add(reservationReq);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void addCourseRequest(Course course, Customer customer, LocalDate date, String hour){
+
+        try(Connection conn = ConnectionSQL.getConnection()) {
+            RequestQuery.addCourseRequest(conn, customer.getCredentials().getMail(), course.getCourseName(), date.toString(), hour);
+
+        }catch (SQLException | DbOperationException e){
+            handleException(e);
         }
     }
 
