@@ -23,12 +23,12 @@ public class ReservationQuery {
         return pstmt.executeQuery();
     }
 
-    public void addRequest(Connection conn, Course course, Customer customer, LocalDate date, String hour) throws DbOperationException {
+    public static void addRequest(Connection conn, String course, String customer, LocalDate date, String hour) throws DbOperationException {
         String query = "INSERT INTO reservation(customer, course, date, hour) VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
-            preparedStatement.setString(1, customer.getCredentials().getMail());
-            preparedStatement.setString(2,course.getCourseName());
+            preparedStatement.setString(1, customer);
+            preparedStatement.setString(2,course);
             preparedStatement.setString(3,date.toString());
             preparedStatement.setString(4,hour);
 
@@ -37,12 +37,12 @@ public class ReservationQuery {
         }
     }
 
-    public void removeReservation(Connection conn, Course course, Customer customer, LocalDate date, String hour) throws DbOperationException {
+    public static void removeReservation(Connection conn, String course, String customer, LocalDate date, String hour) throws DbOperationException {
         String query = "REMOVE FROM reservation WHERE customer = ? AND course = ? AND date = ? AND hour = ?";
 
         try(PreparedStatement pstmt= conn.prepareStatement(query)){
-            pstmt.setString(1, course.getCourseName());
-            pstmt.setString(2, customer.getCredentials().getMail());
+            pstmt.setString(1, course);
+            pstmt.setString(2, customer);
             pstmt.setString(3, date.toString());
             pstmt.setString(4, hour);
 

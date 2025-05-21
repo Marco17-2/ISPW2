@@ -1,19 +1,21 @@
 package org.example.project3.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 public class Reservation {
 
     Customer customer;
     Course course;
-    LocalDateTime dateTime;
+    LocalDate dateTime;
+    String hour;
 
 
-    public void Reservation(Customer customer, Course course, LocalDateTime dateTime) {
+    public void Reservation(Customer customer, Course course, LocalDate dateTime, String hour) {
         this.customer = customer;
         this.course = course;
         this.dateTime = dateTime;
+        this.hour = hour;
     }
 
     public void setCourse(Course course) {
@@ -24,7 +26,7 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public void setDatetime(LocalDateTime dateTime) {
+    public void setDate(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -36,7 +38,15 @@ public class Reservation {
         return course;
     }
 
-    public LocalDateTime getDateTime() {
+    public LocalDate getDate() {
         return dateTime;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
     }
 }

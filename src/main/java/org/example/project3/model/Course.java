@@ -30,6 +30,10 @@ public class Course {
 
     }
 
+    public Course(String coursName){
+        this.courseName = coursName;
+    }   // verificare se utile per reservation
+
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }

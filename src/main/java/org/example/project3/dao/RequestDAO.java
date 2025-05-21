@@ -4,7 +4,7 @@ import org.example.project3.model.Customer;
 import org.example.project3.model.Request;
 import org.example.project3.model.Trainer;
 import org.example.project3.model.Course;
-import org.example.project3.model.ReservationReq;
+import org.example.project3.model.Reservation;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,7 @@ public interface RequestDAO {
 //    void retrieveCustomerRequest(Customer customer, List<Request> requests);
     void deleteRequest(Request request);
 
-    void retrieveCourseRequest(Course course, List<ReservationReq> reservationList);
-    void removeCourseRequest(ReservationReq reservationReq);
-    void addCourseRequest(Course course, Customer customer, LocalDate date, String hour);
+    void retrieveCourseRequest(Course course, List<Reservation> reservationList);
+    void removeCourseRequest(Reservation reservation);
+    void addCourseRequest(Reservation reservation);
 }
