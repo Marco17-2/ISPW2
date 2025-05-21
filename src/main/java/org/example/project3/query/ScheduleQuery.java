@@ -3,7 +3,6 @@ package org.example.project3.query;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
-import org.example.project3.model.Subscription;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +13,7 @@ public class ScheduleQuery {
     private ScheduleQuery(){}
 
     public static void addSchedule(Connection conn, Schedule schedule) throws DbOperationException {
-        String query = "INSERT INTO schedule (name, customer, trainer) VALUES (?, ?, ?,?)";
+        String query = "INSERT INTO schedule (name, customer, trainer) VALUES (?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, schedule.getName());
             preparedStatement.setString(2, schedule.getCustomer().getCredentials().getMail());
@@ -27,7 +26,7 @@ public class ScheduleQuery {
 
     public static ResultSet retrieveSchedules(Connection conn, String mailCustomer) throws SQLException {
         //Mettere un order by date (da più a meno recente)
-        String query = "SELECT schedule.name, schedule.customer, schedule.trainer WHERE schedule.customer = ? ";
+        String query = "SELECT name, customer, trainer FROM schedule WHERE customer = ? ";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mailCustomer);
         return pstmt.executeQuery();

@@ -28,10 +28,10 @@ public class UserRegistrationController {
     }
 
     public void registerUser(LoggedUserBean loggedUserBean) throws LoginAndRegistrationException, MailAlreadyExistsException {
-        if(loggedUserBean.getCredentialsBean().getRole().equals(Role.PATIENT)){
+        if(loggedUserBean.getCredentialsBean().getRole().equals(Role.CLIENT)){
             registerCustomer(new CustomerBean(loggedUserBean.getCredentialsBean(), loggedUserBean.getName(), loggedUserBean.getSurname(), loggedUserBean.getGender(), loggedUserBean.isOnline()));
         }
-        else if(loggedUserBean.getCredentialsBean().getRole().equals(Role.PSYCHOLOGIST)){
+        else if(loggedUserBean.getCredentialsBean().getRole().equals(Role.TRAINER)){
             registerTrainer(new TrainerBean(loggedUserBean.getCredentialsBean(), loggedUserBean.getName(), loggedUserBean.getSurname(), loggedUserBean.getGender(), loggedUserBean.isOnline()));
         }
     }

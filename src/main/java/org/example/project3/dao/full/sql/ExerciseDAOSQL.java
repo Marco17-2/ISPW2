@@ -6,14 +6,11 @@ import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 import org.example.project3.query.ExerciseQuery;
-import org.example.project3.query.ScheduleQuery;
-import org.example.project3.query.SubscriptionQuery;
+import org.example.project3.utilities.enums.RestTime;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Duration;
-import java.time.Period;
 import java.util.List;
 
 public class ExerciseDAOSQL implements ExerciseDAO {
@@ -42,7 +39,7 @@ public class ExerciseDAOSQL implements ExerciseDAO {
                 exercise.setDescription(rs.getString(DESCRIPTION));
                 exercise.setNumberSeries(rs.getInt(NUMBERSERIES));
                 exercise.setNumberReps(rs.getInt(NUMBERREPS));
-                exercise.setRestTime(rs.getObject(RESTTIME, Duration.class));
+                exercise.setRestTime(RestTime.convertIntToRestTime(rs.getInt(RESTTIME)));
             }
         } catch (SQLException e) {
             handleException(e);

@@ -4,17 +4,14 @@ import org.example.project3.dao.ScheduleDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Customer;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-import org.example.project3.model.Trainer;
-import org.example.project3.query.ExerciseQuery;
+import org.example.project3.model.*;
 import org.example.project3.query.ScheduleQuery;
+import org.example.project3.utilities.enums.RestTime;
+import org.example.project3.utilities.enums.Role;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +41,8 @@ public class ScheduleDAOSQL implements ScheduleDAO {
              ResultSet rs = ScheduleQuery.retrieveSchedules(conn, schedule.getCustomer().getCredentials().getMail())){
             if (rs.next()) {
                 schedule.setName(rs.getString(NAME));
-                schedule.setCustomer(rs.getObject(CUSTOMER, Customer.class));
-                schedule.setTrainer(rs.getObject(TRAINER, Trainer.class));
+                schedule.setCustomer(new Customer(new Credentials(rs.getString(CUSTOMER), Role.CLIENT)));
+                schedule.setTrainer(new Trainer(new Credentials(rs.getString(TRAINER), Role.TRAINER)));
             }
         } catch (SQLException e) {
             handleException(e);
@@ -64,7 +61,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
                         rs.getString(DESCRIPTION),
                         rs.getInt(NUMBERSERIES),
                         rs.getInt(NUMBERREPS),
-                        rs.getObject(RESTTIME, Duration.class)
+                        RestTime.convertIntToRestTime(rs.getInt(RESTTIME))
                 );
                 exercises.add(exercise);
                 schedule.setExercises(exercises);
@@ -82,8 +79,8 @@ public class ScheduleDAOSQL implements ScheduleDAO {
                 Schedule schedule = new Schedule(
                         rs.getLong(ID),
                         rs.getString(NAME),
-                        rs.getObject(CUSTOMER, Customer.class),
-                        rs.getObject(TRAINER, Trainer.class)
+                        new Customer(new Credentials(rs.getString(CUSTOMER), Role.CLIENT)),
+                        new Trainer(new Credentials(rs.getString(TRAINER), Role.TRAINER))
                 );
                 schedules.add(schedule);
             }

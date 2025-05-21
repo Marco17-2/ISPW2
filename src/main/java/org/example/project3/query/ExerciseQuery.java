@@ -1,12 +1,10 @@
 package org.example.project3.query;
 
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 
 import java.sql.*;
-import java.time.LocalDate;
 
 public class ExerciseQuery {
     private ExerciseQuery(){}
@@ -21,7 +19,7 @@ public class ExerciseQuery {
             preparedStatement.setString(2, exercise.getDescription());
             preparedStatement.setInt(3, exercise.getNumberSeries());
             preparedStatement.setInt(4, exercise.getNumberReps());
-            preparedStatement.setString(5, exercise.getRestTime().toString());
+            preparedStatement.setInt(5, exercise.getRestTime().getId());
             preparedStatement.executeUpdate();
 
 
@@ -40,7 +38,7 @@ public class ExerciseQuery {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, exercise.getNumberSeries());
             pstmt.setInt(2, exercise.getNumberReps());
-            pstmt.setString(3, exercise.getRestTime().toString());
+            pstmt.setInt(3, exercise.getRestTime().getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nella modifica dell'esercizio", e);
@@ -69,7 +67,7 @@ public class ExerciseQuery {
     }
 
     public static void deleteExercise(Connection conn, Long id) throws DbOperationException {
-        String query = "DELETE FROM exercise WHERE exercise.id = ? ";
+        String query = "DELETE FROM exercise WHERE id = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setLong(1, id);
             pstmt.executeUpdate();

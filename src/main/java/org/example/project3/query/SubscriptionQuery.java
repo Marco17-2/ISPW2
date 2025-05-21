@@ -1,9 +1,6 @@
 package org.example.project3.query;
 
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.model.Customer;
-import org.example.project3.model.LoggedUser;
-import org.example.project3.model.Schedule;
 import org.example.project3.model.Subscription;
 
 import java.sql.Connection;
@@ -29,8 +26,7 @@ public class SubscriptionQuery {
 
     public static ResultSet retrieveSubscription(Connection conn, String name) throws SQLException {
         //Mettere un order by date (da più a meno recente)
-        String query = "SELECT subscription.name, subscription.type, subscription.price, subscription.discount" +
-                "FROM subscription  WHERE subscription.name = ?";
+        String query = "SELECT name, type, price, discount FROM subscription  WHERE name = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, name);
         return pstmt.executeQuery();
@@ -41,7 +37,7 @@ public class SubscriptionQuery {
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, subscription.getName());
-            pstmt.setString(2, subscription.getType().toString());
+            pstmt.setInt(2, subscription.getType().getId());
             pstmt.setFloat(3, subscription.getPrice());
             pstmt.setInt(4, subscription.getDisconut());
             pstmt.setInt(5, subscription.getId());

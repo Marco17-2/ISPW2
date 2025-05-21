@@ -1,15 +1,16 @@
 package org.example.project3.model;
 
-import java.time.Period;
+import org.example.project3.utilities.enums.Type;
+
 
 public class Subscription {
     private int id;
-    private Period type;
+    private Type type;
     private String name;
     private Float price;
     private Integer disconut;
 
-    public Subscription(int id, Period type, String name, Float price, Integer disconut) {
+    public Subscription(int id, Type type, String name, Float price, Integer disconut) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -17,10 +18,10 @@ public class Subscription {
         this.disconut = disconut;
     }
 
-    public Subscription(int id, Period type, String name) {
+    public Subscription(int id) {
         this.id = id;
-        this.type = type;
-        this.name = name;
+        this.type = null;
+        this.name = null;
         this.price = null;
         this.disconut = null;
     }
@@ -49,11 +50,11 @@ public class Subscription {
         this.disconut = disconut;
     }
 
-    public Period getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Period type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

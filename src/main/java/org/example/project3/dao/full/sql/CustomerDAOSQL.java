@@ -5,11 +5,9 @@ import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.model.Credentials;
 import org.example.project3.model.Customer;
-import org.example.project3.dao.full.sql.CredentialsDAOSQL;
 import org.example.project3.model.Subscription;
 import org.example.project3.query.CredentialsQuery;
 import org.example.project3.query.CustomerQuery;
-import org.example.project3.utilities.enums.Role;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -74,7 +72,7 @@ public class CustomerDAOSQL implements CustomerDAO {
                 customer.setSurname(rs.getString(SURNAME));
                 customer.setGender(rs.getString(GENDER));
                 customer.setOnline(rs.getBoolean(ONLINE));
-                customer.setSubscription(rs.getObject(SUBSCRIPTION, Subscription.class));
+                customer.setSubscription(new Subscription(rs.getInt(SUBSCRIPTION)));
                 customer.setInjury(rs.getString(INJURY));
                 customer.setStartDate(rs.getDate(STARTDATE));
                 customer.setStartDate(rs.getDate(ENDDATE));

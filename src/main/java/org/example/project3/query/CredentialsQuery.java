@@ -12,23 +12,23 @@ public class CredentialsQuery {
     private CredentialsQuery() {
     }
 
-    public static int registerUser(Connection conn, Credentials credentialsBean) throws SQLException, DbOperationException {
+    public static int registerUser(Connection conn, Credentials credentials) throws SQLException, DbOperationException {
         String query = "INSERT INTO users (mail, password, role) VALUES (?, ?, ?)";
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, credentialsBean.getMail());
-            pstmt.setString(2, credentialsBean.getPassword());
-            pstmt.setString(3, credentialsBean.getRole().toString());
+            pstmt.setString(1, credentials.getMail());
+            pstmt.setString(2, credentials.getPassword());
+            pstmt.setString(3, credentials.getRole().toString());
             return pstmt.executeUpdate(); //restituisce il numero di righe influenzate dalla query
         }catch (SQLException e) {
             throw new DbOperationException("Errore nella registrazione", e);
         }
     }
 
-    public static ResultSet logQuery(Connection conn, Credentials credentialsBean) throws SQLException {
+    public static ResultSet logQuery(Connection conn, Credentials credentials) throws SQLException {
         String query = "SELECT mail, password, role FROM users WHERE mail = ? AND password = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, credentialsBean.getMail());
-        pstmt.setString(2, credentialsBean.getPassword());
+        pstmt.setString(1, credentials.getMail());
+        pstmt.setString(2, credentials.getPassword());
         return pstmt.executeQuery();
     }
 

@@ -5,10 +5,8 @@ import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 import org.example.project3.model.Course;
-import org.example.project3.model.ReservationReq;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class RequestQuery {
@@ -39,7 +37,7 @@ public class RequestQuery {
 
     public static ResultSet retrieveRequests(Connection conn, String mailCustomer) throws SQLException {
         //Mettere un order by date (da più a meno recente)
-        String query = "SELECT request.id, request.schedule, request.exercise, request.reason, request.date FROM request WHERE request.schedule.customer = ?";
+        String query = "SELECT id, schedule, exercise, reason, date FROM request WHERE schedule.customer = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mailCustomer);
         return pstmt.executeQuery();

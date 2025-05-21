@@ -1,6 +1,6 @@
 package org.example.project3.model;
 
-import java.time.Duration;
+import org.example.project3.utilities.enums.RestTime;
 
 public class Exercise {
     public long id;
@@ -8,9 +8,9 @@ public class Exercise {
     public String description;
     public Integer numberSeries;
     public Integer numberReps;
-    public Duration restTime;
+    public RestTime restTime;
 
-    public Exercise(long id, String name, String description, Integer numberSeries, Integer numberReps, Duration restTime) {
+    public Exercise(long id, String name, String description, Integer numberSeries, Integer numberReps, RestTime restTime) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,7 +48,7 @@ public class Exercise {
         this.numberReps = numberReps;
     }
 
-    public void setRestTime(Duration restTime) {
+    public void setRestTime(RestTime restTime) {
         this.restTime = restTime;
     }
 
@@ -72,7 +72,7 @@ public class Exercise {
         return numberReps;
     }
 
-    public Duration getRestTime() {
+    public RestTime getRestTime() {
         return restTime;
     }
 

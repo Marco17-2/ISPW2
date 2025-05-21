@@ -2,17 +2,13 @@ package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.SubscriptionDAO;
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
 import org.example.project3.model.Subscription;
-import org.example.project3.model.Trainer;
 import org.example.project3.query.SubscriptionQuery;
-import org.example.project3.query.TrainerQuery;
+import org.example.project3.utilities.enums.Type;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Period;
 
 public class SubscriptionDAOSQL implements SubscriptionDAO {
     private static final String ID="id";
@@ -36,7 +32,7 @@ public class SubscriptionDAOSQL implements SubscriptionDAO {
              ResultSet rs = SubscriptionQuery.retrieveSubscription(conn, subscription.getName())) {
             if (rs.next()) {
                 subscription.setName(rs.getString(NAME));
-                subscription.setType(rs.getObject(TYPE, Period.class));
+                subscription.setType(Type.valueOf(rs.getString(TYPE)));
                 subscription.setPrice(rs.getFloat(PRICE));
                 subscription.setDisconut(rs.getInt(DISCOUNT));
             }

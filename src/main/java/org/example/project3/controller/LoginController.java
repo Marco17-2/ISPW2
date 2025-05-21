@@ -57,9 +57,9 @@ public class LoginController {
 
     private <M extends LoggedUser, B extends LoggedUserBean> void retrieveUser (M user, B userBean) throws NoResultException {
         // Recupera l'utente dal DAO
-        if (user.getCredentials().getRole().equals(Role.PATIENT)) {
+        if (user.getCredentials().getRole().equals(Role.CLIENT)) {
             customerGeneric.retrieveCustomer((Customer) user);
-        }else if (user.getCredentials().getRole().equals(Role.PSYCHOLOGIST)) {
+        }else if (user.getCredentials().getRole().equals(Role.TRAINER)) {
             trainerGeneric.retrieveTrainer((Trainer) user);
         }
         // Imposta i dati nel bean
