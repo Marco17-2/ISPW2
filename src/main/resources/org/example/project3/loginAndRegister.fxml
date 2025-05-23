@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
@@ -15,78 +13,67 @@
    <children>
       <fx:include source="commonPanel.fxml" />
       <BorderPane prefHeight="544.0" prefWidth="764.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <AnchorPane prefHeight="470.0" prefWidth="306.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="467.0" fitWidth="313.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 16 px;">
-                     <image>
-                        <Image url="@img/homepageImage.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </left>
-         <right>
-            <AnchorPane prefHeight="470.0" prefWidth="450.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button layoutX="57.0" layoutY="139.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Utente">
-                     <font>
-                        <Font name="Segoe UI Bold" size="16.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
-                           <color>
-                              <Color opacity="0.5871559381484985" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </Button>
-                  <Text layoutX="197.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oppure" wrappingWidth="56.25933837890625">
-                     <font>
-                        <Font name="Segoe UI" size="16.0" />
-                     </font>
-                  </Text>
-                  <Button layoutX="155.0" layoutY="247.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Registrati">
-                     <font>
-                        <Font name="Segoe UI Bold" size="16.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
-                           <color>
-                              <Color opacity="0.5871559381484985" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </Button>
-                  <Text layoutX="177.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accedi come" wrappingWidth="96.25933837890625">
-                     <font>
-                        <Font name="Segoe UI" size="16.0" />
-                     </font>
-                  </Text>
-                  <Button layoutX="243.0" layoutY="139.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Trainer">
-                     <font>
-                        <Font name="Segoe UI Bold" size="16.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
-                           <color>
-                              <Color opacity="0.5871559381484985" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </Button>
-                  <Text layoutX="217.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" wrappingWidth="7.4593505859375">
-                     <font>
-                        <Font name="Segoe UI" size="16.0" />
-                     </font>
-                  </Text>
-               </children>
-            </AnchorPane>
-         </right>
          <top>
             <AnchorPane prefHeight="75.0" prefWidth="764.0" BorderPane.alignment="CENTER" />
          </top>
+         <center>
+            <AnchorPane prefHeight="469.0" prefWidth="763.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="220.0" layoutY="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Utente">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Text layoutX="271.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non sei ancora registrato?    Entra a far parte del nostro team!" textAlignment="CENTER" wrappingWidth="231.45938110351562">
+                     <font>
+                        <Font name="Segoe UI Italic" size="16.0" />
+                     </font>
+                  </Text>
+                  <Button layoutX="314.0" layoutY="354.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Registrati">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Text layoutX="327.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accedi come" wrappingWidth="105.85931396484375">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Button layoutX="406.0" layoutY="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Trainer">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
+                  <Text layoutX="380.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" wrappingWidth="7.4593505859375">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Line endX="90.99996948242188" endY="296.09991455078125" layoutX="1.0" layoutY="-62.0" startX="678.0" startY="296.09991455078125" stroke="#c1c1c1" />
+               </children>
+            </AnchorPane>
+         </center>
       </BorderPane>
-      <Line endX="311.3333435058594" endY="77.19999694824219" startX="311.3333435058594" startY="544.2000122070312" stroke="#c1c1c1" />
    </children>
 </AnchorPane>

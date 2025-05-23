@@ -88,21 +88,10 @@
                </children>
             </AnchorPane>
          </top>
-         <left>
-            <AnchorPane prefHeight="430.0" prefWidth="287.0" BorderPane.alignment="CENTER">
+         <center>
+            <AnchorPane prefHeight="429.0" prefWidth="762.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="401.0" fitWidth="267.0" layoutX="11.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/homepageImage.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </left>
-         <right>
-            <AnchorPane prefHeight="429.0" prefWidth="465.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button layoutX="163.0" layoutY="316.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Entra">
+                  <Button layoutX="311.0" layoutY="335.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Entra">
                      <font>
                         <Font name="Segoe UI Bold" size="16.0" />
                      </font>
@@ -114,19 +103,44 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Text layoutX="35.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puoi scegliere tra tanti corsi diversi e prenotarti in qualunque momento, o scegliere di allenarti da solo o con un nostro esperto, con il massimo della libertà" wrappingWidth="161.60000610351574">
+                  <Text layoutX="70.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puoi scegliere tra tanti corsi diversi e prenotarti in qualunque momento, o scegliere di allenarti da solo o con un nostro esperto, con il massimo della libertà" textAlignment="CENTER" wrappingWidth="272.800018310547">
                      <font>
-                        <Font name="Segoe UI" size="16.0" />
+                        <Font name="Segoe UI" size="13.0" />
                      </font>
                   </Text>
-                  <Text layoutX="221.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I nostri esperti ti seguiranno e ti faranno un scheda personalizzata adatta a te e agli obiettivi che vuoi raggiungere. Con un supporto sempre a disposizione, possono soddisfare tutte le tue esigenze" wrappingWidth="216.0000915527345">
+                  <Text layoutX="384.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I nostri esperti ti seguiranno e ti faranno un scheda personalizzata adatta a te e agli obiettivi che vuoi raggiungere. Con un supporto sempre a disposizione, possono soddisfare tutte le tue esigenze" textAlignment="CENTER" wrappingWidth="332.00027465820324">
                      <font>
-                        <Font name="Segoe UI" size="16.0" />
+                        <Font name="Segoe UI" size="13.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="74.0" fitWidth="114.0" layoutX="135.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/undraw_booking_1ztt.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="87.0" fitWidth="104.0" layoutX="518.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/undraw_collaboration_dtwk.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="76.0" fitWidth="86.0" layoutX="339.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/undraw_healthy-habit_2ata.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="206.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bodybuild: vieni ad allenarti da noi!" wrappingWidth="344.0687561035156">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="71.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tanti corsi diversi per ogni livello, schede personalizzate, assistenza e molto altro" textAlignment="CENTER" wrappingWidth="626.4479064941406">
+                     <font>
+                        <Font name="Segoe UI Semibold Italic" size="17.0" />
                      </font>
                   </Text>
                </children>
             </AnchorPane>
-         </right>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
