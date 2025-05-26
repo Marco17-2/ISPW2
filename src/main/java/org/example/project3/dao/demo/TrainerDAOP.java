@@ -45,6 +45,7 @@ public class TrainerDAOP implements TrainerDAO {
         trainer.setSurname(storedTrainer.getSurname());
         trainer.setGender(storedTrainer.getGender());
         trainer.setOnline(storedTrainer.isOnline());
+        trainer.setBirthday(storedTrainer.getBirthday());
     }
 
     @Override

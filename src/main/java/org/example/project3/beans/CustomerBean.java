@@ -1,6 +1,7 @@
 package org.example.project3.beans;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +14,8 @@ public class CustomerBean extends LoggedUserBean {
     private Date startDate;
     private Date endDate;
 
-    public CustomerBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline) {
-        super(credentialsBean, name, surname, gender, isOnline);
+    public CustomerBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
+        super(credentialsBean, name, surname, gender, isOnline, birthday);
         this.subscriptionBean = null;
         this.schedulesBean = new ArrayList<>();
         this.startDate = new Date();

@@ -1,19 +1,23 @@
 package org.example.project3.beans;
 
 
+import java.time.LocalDate;
+
 public abstract class LoggedUserBean {
     private CredentialsBean credentialsBean;
     private String name;
     private String surname;
     private String gender;
     private boolean online;
+    private LocalDate birthday;
 
-    protected LoggedUserBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline) {
+    protected LoggedUserBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
         this.credentialsBean = credentialsBean;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
         this.online = isOnline;
+        this.birthday = birthday;
     }
 
     protected LoggedUserBean(CredentialsBean credentialsBean){
@@ -22,6 +26,7 @@ public abstract class LoggedUserBean {
         this.surname = null;
         this.gender = null;
         this.online = false;
+        this.birthday = null;
     }
     //getter e setter per i nuovi campi
 
@@ -66,4 +71,11 @@ public abstract class LoggedUserBean {
         this.online = online;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 }

@@ -52,6 +52,7 @@ public class CustomerDAOP implements CustomerDAO {
         customer.setSurname(storedCustomer.getSurname());
         customer.setGender(storedCustomer.getGender());
         customer.setOnline(storedCustomer.isOnline());
+        customer.setBirthday(storedCustomer.getBirthday());
         customer.setSubscription(storedCustomer.getSubscription());
         customer.setInjury(storedCustomer.getInjury());
         customer.setStartDate(storedCustomer.getStartDate());

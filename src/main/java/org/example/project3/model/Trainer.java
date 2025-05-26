@@ -1,5 +1,6 @@
 package org.example.project3.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,8 @@ public class Trainer extends LoggedUser{
     private Integer trainerID;
     private ArrayList<String> specializations;
 
-    public Trainer(Credentials credentials, String name, String surname, String gender, boolean isOnline) {
-        super(credentials, name, surname, gender, isOnline);
+    public Trainer(Credentials credentials, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
+        super(credentials, name, surname, gender, isOnline, birthday);
         this.specializations = new ArrayList<>();
     }
 

@@ -1,5 +1,6 @@
 package org.example.project3.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,8 @@ public class Customer extends LoggedUser{
     private Date startDate;
     private Date endDate;
 
-    public Customer(Credentials credentials, String name, String surname,String gender, boolean isOnline) {
-        super(credentials, name, surname, gender, isOnline);
+    public Customer(Credentials credentials, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
+        super(credentials, name, surname, gender, isOnline, birthday);
         this.subscription = null;
         this.schedules = new ArrayList<>();
         this.startDate = new Date();

@@ -18,6 +18,7 @@ public class CustomerDAOSQL implements CustomerDAO {
     private static final String SURNAME = "surname";
     private static final String GENDER = "gender";
     private static final String ONLINE = "online";
+    private static final String BIRTHDATE = "birthDate";
     private static final String SUBSCRIPTION = "subscription";
     private static final String INJURY = "injury";
     private static final String STARTDATE = "startDate";
@@ -72,6 +73,7 @@ public class CustomerDAOSQL implements CustomerDAO {
                 customer.setSurname(rs.getString(SURNAME));
                 customer.setGender(rs.getString(GENDER));
                 customer.setOnline(rs.getBoolean(ONLINE));
+                customer.setBirthday(rs.getDate(BIRTHDATE).toLocalDate());
                 customer.setSubscription(new Subscription(rs.getInt(SUBSCRIPTION)));
                 customer.setInjury(rs.getString(INJURY));
                 customer.setStartDate(rs.getDate(STARTDATE));

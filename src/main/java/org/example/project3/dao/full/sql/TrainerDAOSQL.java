@@ -26,6 +26,7 @@ public class TrainerDAOSQL implements TrainerDAO {
     private static final String SURNAME = "surname";
     private static final String GENDER = "gender";
     private static final String ONLINE = "online";
+    private static final String BIRTHDATE = "birthDate";
     private static final String SPECIALIZZATION = "specialization";
 
     @Override
@@ -77,6 +78,7 @@ public class TrainerDAOSQL implements TrainerDAO {
                 trainer.setSurname(rs.getString(SURNAME));
                 trainer.setGender(rs.getString(GENDER));
                 trainer.setOnline(rs.getBoolean(ONLINE));
+                trainer.setBirthday(rs.getDate(BIRTHDATE).toLocalDate());
             }
         } catch (SQLException e) {
             handleException(e);
@@ -106,7 +108,7 @@ public class TrainerDAOSQL implements TrainerDAO {
     }
 
     @Override
-    public List<String> retrieveSpecializzation(Trainer trainer) throws SQLException {
+    public List<String> retrieveSpecialization(Trainer trainer) throws SQLException {
         List<String> spec = new ArrayList<>();
         try( Connection conn = ConnectionSQL.getConnection()){
 
@@ -131,6 +133,7 @@ public class TrainerDAOSQL implements TrainerDAO {
                 trainer.setSurname(rs.getString(SURNAME));
                 trainer.setGender(rs.getString(GENDER));
                 trainer.setOnline(rs.getBoolean(ONLINE));
+                trainer.setBirthday(rs.getDate(BIRTHDATE).toLocalDate());
             }
         } catch (SQLException e) {
             throw new DAOException();

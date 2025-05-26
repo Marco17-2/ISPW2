@@ -1,18 +1,22 @@
 package org.example.project3.model;
 
+import java.time.LocalDate;
+
 public abstract class LoggedUser {
     private Credentials credentials;
     private String name;
     private String surname;
     private String gender;
     private boolean online;
+    private LocalDate birthday;
 
-    protected LoggedUser(Credentials credentials, String name, String surname, String gender, boolean isOnline) {
+    protected LoggedUser(Credentials credentials, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
         this.credentials = credentials;
         this.name = name;
         this.surname = surname;
         this.gender = gender;
         this.online = isOnline;
+        this.birthday = birthday;
     }
 
     protected  LoggedUser(Credentials credentials){
@@ -63,6 +67,14 @@ public abstract class LoggedUser {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
 }
