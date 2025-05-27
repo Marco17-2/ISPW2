@@ -2,7 +2,9 @@ package org.example.project3.dao.demo;
 
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
+import org.example.project3.model.Course;
 import org.example.project3.model.Request;
+import org.example.project3.model.Reservation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,4 +34,44 @@ public class RequestDAOP implements RequestDAO {
     public void deleteRequest(Request request) {
         SharedResources.getInstance().getRequestsSent().remove(request.getID());
     }
+
+
+
+    // chiave per la lista Corso,
+    @Override
+    public void retrieveCourseRequest(Course course, List<Reservation> reservationList){
+        reservationList.addAll(SharedResources.getInstance().getReservationRequests().get(course.getCourseName()));
+    }
+
+
+    @Override
+    public void removeCourseRequest(Reservation reservation){
+
+        List<Reservation> reservationsRequests = SharedResources.getInstance().getReservationRequests().get(reservation.getCustomer().getCredentials().getMail());
+
+        reservationsRequests.removeIf(r->
+                        r.getCourse().equals(reservation.getCourse()) &&
+                                r.getCustomer().equals(reservation.getCustomer()) &&
+                                r.getDate().equals(reservation.getDate()) &&
+                                r.getHour().equals(reservation.getHour())
+                );
+
+        //il corso identifica la lista precisa
+        SharedResources.getInstance().getReservationRequests().remove(reservation.getCourse().getCourseName());
+
+        SharedResources.getInstance().getReservationRequests().put(reservation.getCourse().getCourseName(), reservationsRequests);
+    }
+
+
+    @Override
+    public void addCourseRequest(Reservation reservation){
+
+        String course = reservation.getCourse().getCourseName();
+
+        // Aggiunge la prenotazione alla mappa
+        SharedResources.getInstance().getReservationRequests() .computeIfAbsent(course, k -> new ArrayList<>()).add(reservation);
+    }
+    }
+
+
 }

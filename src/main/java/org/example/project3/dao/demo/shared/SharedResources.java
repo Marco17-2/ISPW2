@@ -3,11 +3,9 @@ package org.example.project3.dao.demo.shared;
 
 import org.example.project3.model.*;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SharedResources {
@@ -21,6 +19,13 @@ public class SharedResources {
     private final Map<Long, Exercise> exercises = new ConcurrentHashMap<>();
     private final Map<String, Credentials> userTable = new ConcurrentHashMap<>();
     private final Map<Long, List<Request>> requestsSent = new HashMap<>();
+
+
+    //Verificarre l'utilità:
+
+    private final Map<String, List<Reservation>> reservations = new HashMap<>();
+    private final Map<String, List<Reservation>> reservationRequests = new HashMap<>();
+
     // Mappa per tenere traccia delle relazioni pazienti-psicologi
 //    private final  Map<String, Psychologist> patientsWithPsychologists = new HashMap<>();
 //    private final Map<String, Map<LocalDate,String>> diaryTable= new ConcurrentHashMap<>();//<mail,<data,contenuto>>
@@ -81,6 +86,10 @@ public class SharedResources {
 //    }
 
     public Map<String, Course> getCourses() { return courses; }
+
+    public Map<String, List<Reservation>> getReservations() { return reservations; }
+    public Map<String, List<Reservation>> getReservationRequests() { return reservationRequests; }
+
 
 }
 

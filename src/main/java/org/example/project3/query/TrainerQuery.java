@@ -83,7 +83,7 @@ public class TrainerQuery {
     }
 
     public static ResultSet retrieveSpecializzation(Connection conn, String trainer) throws SQLException {
-        String query = "SELECT descripion FROM specializzation s, trainter t, expertieses e WHERE e.trainer = ? AND e.specializzation = s.id";
+        String query = "SELECT description FROM specializzation s, trainter t, expertieses e WHERE e.trainer = ? AND e.specializzation = s.id";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, trainer);
         return pstmt.executeQuery();
