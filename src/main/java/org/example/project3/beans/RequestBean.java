@@ -25,9 +25,9 @@ public class RequestBean {
         this.courseBean = courseBean;
     }
 
-    public RequestBean(long ID) {
-        this.ID = ID;
-        this.scheduleBean = null;
+    public RequestBean(ScheduleBean scheduleBean) {
+        this.ID = 0;
+        this.scheduleBean = scheduleBean;
         this.exerciseBean = null;
         this.reason = "";
         this.customerBean = null;

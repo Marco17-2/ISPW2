@@ -27,7 +27,7 @@ public class SharedResources {
     private final Map<String, List<Reservation>> reservationRequests = new HashMap<>();
 
     // Mappa per tenere traccia delle relazioni pazienti-psicologi
-//    private final  Map<String, Psychologist> patientsWithPsychologists = new HashMap<>();
+    private final  Map<String, List<Schedule>> customerSchedules = new HashMap<>();
 //    private final Map<String, Map<LocalDate,String>> diaryTable= new ConcurrentHashMap<>();//<mail,<data,contenuto>>
 //    private final Map<String, List<ToDoItem>> toDoTable= new ConcurrentHashMap<>();//<mail,listaToDo>
 //    private final Map<String, List<Task>> taskTable= new ConcurrentHashMap<>();//<mail,listaTask>
@@ -69,9 +69,9 @@ public class SharedResources {
     public Map<String,Credentials> getUserTable(){
         return userTable;
     }
-//    public Map<String,Psychologist> getPatientsWithPsychologists(){
-//        return patientsWithPsychologists;
-//    }
+    public Map<String,List<Schedule>> getCustomerSchedules(){
+        return customerSchedules;
+    }
     public Map<Long,List<Request>> getRequestsSent(){
         return requestsSent;
     }

@@ -51,7 +51,7 @@ public class LoginGUI extends CommonGUI{
                 loginController.retrieveTrainer(trainerBean);
                 session.setUser(trainerBean);
             }
-//            goToHomepage(event, credentialsBean.getRole());
+            goToCustomerHomepage(event);
         }catch(WrongEmailOrPasswordException | EmptyFieldException e){
             error.setText(e.getMessage());
             error.setVisible(true);
@@ -66,7 +66,5 @@ public class LoginGUI extends CommonGUI{
         }
     }
 
-    private void goToHomepage(MouseEvent event, Role role) throws IOException {
 
-    }
 }

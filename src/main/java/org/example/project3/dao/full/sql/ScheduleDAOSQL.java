@@ -36,13 +36,15 @@ public class ScheduleDAOSQL implements ScheduleDAO {
     }
 
     @Override
-    public void retrieveSchedule(Schedule schedule) {
+    public void retrieveSchedule(Customer customer,List<Schedule> schedules) {
         try (Connection conn = ConnectionSQL.getConnection();
-             ResultSet rs = ScheduleQuery.retrieveSchedules(conn, schedule.getCustomer().getCredentials().getMail())){
-            if (rs.next()) {
-                schedule.setName(rs.getString(NAME));
-                schedule.setCustomer(new Customer(new Credentials(rs.getString(CUSTOMER), Role.CLIENT)));
-                schedule.setTrainer(new Trainer(new Credentials(rs.getString(TRAINER), Role.TRAINER)));
+             ResultSet rs = ScheduleQuery.retrieveSchedules(conn, customer.getCredentials().getMail())){
+            while (rs.next()) {
+                Schedule schedule = new Schedule(
+                        rs.getInt(ID),
+                        rs.getString(NAME),
+                        new Customer(new Credentials(rs.getString(CUSTOMER), Role.CLIENT)),
+                        new Trainer(new Credentials(rs.getString(TRAINER), Role.TRAINER)));
             }
         } catch (SQLException e) {
             handleException(e);

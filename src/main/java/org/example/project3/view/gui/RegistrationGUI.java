@@ -71,7 +71,7 @@ public class RegistrationGUI extends CommonGUI {
 
             loginController.login(loggedUserBean.getCredentialsBean());
             session.setUser(loggedUserBean);
-            //goToHomepage(event);
+            goToCustomerHomepage(event);
         }catch(MailAlreadyExistsException| WrongEmailOrPasswordException| EmptyFieldException| LoginAndRegistrationException e){
             error.setText(e.getMessage());
             error.setVisible(true);

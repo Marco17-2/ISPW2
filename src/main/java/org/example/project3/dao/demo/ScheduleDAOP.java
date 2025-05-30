@@ -3,10 +3,12 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.ScheduleDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.NoResultException;
+import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 import org.example.project3.model.Subscription;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleDAOP implements ScheduleDAO {
@@ -21,15 +23,14 @@ public class ScheduleDAOP implements ScheduleDAO {
     }
 
     @Override
-    public void retrieveSchedule(Schedule schedule) throws NoResultException {
-        Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
-        if (storedSchedule == null) {
-            throw new NoResultException(schedule.getClass().getSimpleName() + " non trovato");
+    public void retrieveSchedule(Customer customer, List<Schedule> schedules) throws NoResultException {
+        List<Schedule> storedSchedules = SharedResources.getInstance().getCustomerSchedules().get(customer.getCredentials().getMail());
+        if (storedSchedules == null) {
+            throw new NoResultException(schedules.getClass().getSimpleName() + " non trovato");
+        } else if (storedSchedules != null){
+            schedules.addAll(storedSchedules);
         }
-        schedule.setId(storedSchedule.getId());
-        schedule.setName(storedSchedule.getName());
-        schedule.setCustomer(storedSchedule.getCustomer());
-        schedule.setTrainer(storedSchedule.getTrainer());
+
     }
 
     @Override
