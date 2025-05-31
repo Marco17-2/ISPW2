@@ -15,6 +15,7 @@ import org.example.project3.beans.ExerciseBean;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
+import org.example.project3.exceptions.EmptyFieldException;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.model.Request;
 import org.example.project3.model.Schedule;
@@ -130,15 +131,16 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     }
 
     @FXML
-    public void send(MouseEvent event){
-            requestBean.setReason(motivazione.getText());
-            if(!requestModifyController.hasAlreadySentARequest(requestBean.getScheduleBean())){
-                requestModifyController.sendRequest(requestBean);
-                update();
-                goToCustomerHomepage(event);
-            }else{
-                System.out.println("Hai già inviato una richiesta");
-            }
+    public void send(MouseEvent event) throws EmptyFieldException {
+        validateFields();
+        requestBean.setReason(motivazione.getText());
+        if(!requestModifyController.hasAlreadySentARequest(requestBean.getScheduleBean())){
+            requestModifyController.sendRequest(requestBean);
+            update();
+            goToCustomerHomepage(event);
+        }else{
+            System.out.println("Hai già inviato una richiesta");
+        }
     }
 
 
@@ -149,6 +151,12 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         alert.setHeaderText(null);
         alert.setContentText("Richiesta inviata con successo");
         alert.showAndWait();
+    }
+
+    private void validateFields() throws EmptyFieldException {
+        if (motivazione.getText().isEmpty()) {
+            throw new EmptyFieldException("Inserisci una motivazione!");
+        }
     }
 
 
