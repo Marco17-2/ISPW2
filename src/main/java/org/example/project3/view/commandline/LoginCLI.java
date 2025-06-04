@@ -11,7 +11,6 @@ import org.example.project3.model.Trainer;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;
 import org.example.project3.utilities.enums.Role;
-import org.example.project3.
 
 import java.util.Scanner;
 
@@ -40,7 +39,7 @@ import java.util.Scanner;
                 AbstractState homeCLI;
                 if(credentials.getRole().equals(Role.TRAINER)){
                     user = setupTrainer(login, credentials);
-//                    homeCLI = new TrainerHomepageCLI(user);
+                    homeCLI = new CustomerHomepageCLI(user);
                 } else {
                     user = setupCustomer(login, credentials);
                     homeCLI = new CustomerHomepageCLI(user);

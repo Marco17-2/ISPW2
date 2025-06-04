@@ -150,7 +150,6 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         alert.setTitle("Invio richiesta");
         alert.setHeaderText(null);
         alert.setContentText("Richiesta inviata con successo");
-        alert.showAndWait();
     }
 
     private void validateFields() throws EmptyFieldException {
