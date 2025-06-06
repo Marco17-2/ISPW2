@@ -22,7 +22,7 @@ public class RequestDAOP implements RequestDAO {
         // Verifica se esiste già una richiesta per la coppia paziente-psicologo
         if (SharedResources.getInstance().getRequestsSent().containsKey(request.getSchedule().getCustomer())) {
             for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(request.getSchedule().getTrainer())) {
-                if (existingRequest.getCustomer().getCredentials().getMail().equals(request.getCustomer().getCredentials().getMail())) {
+                if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(request.getSchedule().getCustomer().getCredentials().getMail())) {
                     return true;  // Se la richiesta esiste già, restituisce true
                 }
             }

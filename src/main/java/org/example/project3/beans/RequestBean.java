@@ -11,18 +11,14 @@ public class RequestBean {
     private ScheduleBean scheduleBean;
     private ExerciseBean exerciseBean;
     private String reason;
-    private CustomerBean customerBean;
     private LocalDateTime dateTime;
-    private CourseBean courseBean;
 
-    public RequestBean(long ID, ScheduleBean scheduleBean, ExerciseBean exerciseBean, String reason, CustomerBean customer, LocalDateTime dateTime, CourseBean courseBean) {
+    public RequestBean(long ID, ScheduleBean scheduleBean, ExerciseBean exerciseBean, String reason, LocalDateTime dateTime) {
         this.ID = ID;
         this.scheduleBean = scheduleBean;
         this.exerciseBean = exerciseBean;
         this.reason = reason;
-        this.customerBean = customerBean;
         this.dateTime = dateTime;
-        this.courseBean = courseBean;
     }
 
     public RequestBean(ScheduleBean scheduleBean) {
@@ -30,9 +26,7 @@ public class RequestBean {
         this.scheduleBean = scheduleBean;
         this.exerciseBean = null;
         this.reason = "";
-        this.customerBean = null;
         this.dateTime = null;
-        this.courseBean = null;
     }
 
     public long getID() {
@@ -65,22 +59,6 @@ public class RequestBean {
 
     public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public void setCustomer(CustomerBean customerBean) {
-        this.customerBean = customerBean;
-    }
-
-    public CustomerBean getCustomer() {
-        return customerBean;
-    }
-
-    public void setCourse(CourseBean courseBean) {
-        this.courseBean = courseBean;
-    }
-
-    public CourseBean getCourse() {
-        return courseBean;
     }
 
     public LocalDateTime getDateTime() {

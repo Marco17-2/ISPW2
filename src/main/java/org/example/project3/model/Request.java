@@ -7,18 +7,14 @@ public class Request {
     private Schedule schedule;
     private Exercise exercise;
     private String reason;
-    private Customer customer;
     private LocalDateTime dateTime;
-    private Course course;
 
-    public Request(long ID, Schedule schedule, Exercise exercise, String reason, Customer customer, LocalDateTime dateTime, Course course) {
+    public Request(long ID, Schedule schedule, Exercise exercise, String reason, LocalDateTime dateTime) {
         this.ID = ID;
         this.schedule = schedule;
         this.exercise = exercise;
         this.reason = reason;
-        this.customer = customer;
         this.dateTime = dateTime;
-        this.course = course;
     }
 
     public Request(Schedule schedule) {
@@ -26,9 +22,7 @@ public class Request {
         this.schedule = schedule;
         this.exercise = null;
         this.reason = "";
-        this.customer = null;
         this.dateTime = null;
-        this.course = null;
     }
 
     public long getID() {
@@ -61,22 +55,6 @@ public class Request {
 
     public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Course getCourse() {
-        return course;
     }
 
     public LocalDateTime getDateTime() {

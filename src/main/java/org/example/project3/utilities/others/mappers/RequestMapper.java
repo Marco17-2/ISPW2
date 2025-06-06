@@ -10,11 +10,11 @@ public class RequestMapper implements BeanAndModelMapper<RequestBean, Request>{
     CourseMapper courseMapper = new CourseMapper();
     @Override
     public Request fromBeanToModel(RequestBean bean) {
-        return new Request(bean.getID(), scheduleMapper.fromBeanToModel(bean.getScheduleBean()), exerciseMapper.fromBeanToModel(bean.getExerciseBean()), bean.getReason(), customerMapper.fromBeanToModel(bean.getCustomer()), bean.getDateTime(), courseMapper.fromBeanToModel(bean.getCourse()) );
+        return new Request(bean.getID(), scheduleMapper.fromBeanToModel(bean.getScheduleBean()), exerciseMapper.fromBeanToModel(bean.getExerciseBean()), bean.getReason(), bean.getDateTime() );
     }
 
     @Override
     public RequestBean fromModelToBean(Request model) {
-        return new RequestBean(model.getID(), scheduleMapper.fromModelToBean(model.getSchedule()), exerciseMapper.fromModelToBean(model.getExercise()), model.getReason(), customerMapper.fromModelToBean(model.getCustomer()), model.getDateTime(), courseMapper.fromModelToBean(model.getCourse()));
+        return new RequestBean(model.getID(), scheduleMapper.fromModelToBean(model.getSchedule()), exerciseMapper.fromModelToBean(model.getExercise()), model.getReason(), model.getDateTime());
     }
 }
