@@ -24,7 +24,7 @@ public class CustomerHomepageCLI extends AbstractState {
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
                     case 1:
-                        goNext(context, new );
+                        goNext(context, new RequestCLI((CustomerBean) user ));
                     case 2:
                         goNext(context, new RequestCLI((CustomerBean) user ));
                     case 0:

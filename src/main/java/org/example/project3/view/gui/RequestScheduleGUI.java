@@ -78,7 +78,7 @@ public class RequestScheduleGUI extends CommonGUI{
 
     private void completeRequest(RequestBean requestBean, MouseEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath("/fxml/scheduleDetails.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath(SCHEDULE_DETAILS)));
             loader.setControllerFactory(c -> new RequestExerciseGUI(fxmlPathConfig, session));
             Parent root = loader.load();
             ((RequestExerciseGUI)loader.getController()).loadExercises(requestBean);

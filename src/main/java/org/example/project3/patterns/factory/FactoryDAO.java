@@ -33,7 +33,7 @@ public class FactoryDAO {
             }
             properties.load(input);
         } catch (IOException e) {
-            Printer.errorPrint("Error loading properties file: " + e.getMessage());
+            System.out.println("Error loading properties file: " + e.getMessage());
         }
     }
 

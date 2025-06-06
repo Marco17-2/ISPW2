@@ -25,6 +25,8 @@ public class CustomerHomepageGUI extends CommonGUI{
 
     public CustomerHomepageGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }
 
+
+
     @FXML
     ButtonBar richiediModifica;
 
@@ -41,7 +43,7 @@ public class CustomerHomepageGUI extends CommonGUI{
 
     private void goToRequest(List<ScheduleBean> scheduleBeans, MouseEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath("src/main/resources/org/example/project3/requestModify.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath(REQUEST_MODIFY)));
             loader.setControllerFactory(c -> new RequestScheduleGUI(fxmlPathConfig, session));
             Parent root = loader.load();
             ((RequestScheduleGUI)loader.getController()).loadSchedule(scheduleBeans);
