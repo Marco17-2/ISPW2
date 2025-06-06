@@ -7,14 +7,14 @@ public class Reservation {
 
     Customer customer;
     Course course;
-    LocalDate dateTime;
+    String day;
     String hour;
 
 
-    public void Reservation(Customer customer, Course course, LocalDate dateTime, String hour) {
+    public Reservation(Customer customer, Course course, String day, String hour) {
         this.customer = customer;
         this.course = course;
-        this.dateTime = dateTime;
+        this.day = day;
         this.hour = hour;
     }
 
@@ -26,8 +26,8 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public void setDate(LocalDate dateTime) {
-        this.dateTime = dateTime;
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public Customer getCustomer() {
@@ -38,8 +38,8 @@ public class Reservation {
         return course;
     }
 
-    public LocalDate getDate() {
-        return dateTime;
+    public String getDay() {
+        return day;
     }
 
     public String getHour() {

@@ -32,7 +32,7 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String EMAIL = "email";
     private static final String INJURY = "injury";
     private static final String HOUR = "hour";
-
+    private static final String DAY = "day";
 
 
     @Override
@@ -111,12 +111,14 @@ public class RequestDAOSQL implements RequestDAO {
                         rs.getString(NAME),
                         rs.getString(SURNAME),
                         rs.getString(GENDER),
-                        false  // poi da sistemare
+                        false,
+                         null
+                         // poi da sistemare
                 );
 
                 customer.setInjury(rs.getString(INJURY));
 
-                Reservation reservation = new Reservation (customer, course, rs.getDate("date").toLocalDate(), rs.getString(HOUR));
+                Reservation reservation = new Reservation (customer, course, rs.getString(DAY), rs.getString(HOUR));
                 reservationList.add(reservation);
             }
 

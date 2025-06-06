@@ -2,7 +2,6 @@ package org.example.project3.view.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,8 +10,11 @@ import javafx.stage.Stage;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
+import org.example.project3.beans.*;
+
 
 import java.io.IOException;
+import java.util.List;
 
 public abstract class CommonGUI {
     protected Session session;
@@ -135,6 +137,80 @@ public abstract class CommonGUI {
         }catch(IOException e){
             throw new LoadingException("Errore durante il caricamento della scena", e);
         }
+    }
+
+    @FXML
+    protected void goToTrainerDescription(MouseEvent event, CourseBean coursebean){
+
+    }
+
+    @FXML
+    protected void goToCourseList(MouseEvent event, List<CourseBean> coursesBean){
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CourseList.fxml"));
+            fxmlLoader.setControllerFactory(c -> new CourseListGUI(session, fxmlPathConfig));
+            Parent root = fxmlLoader.load();
+            ((CourseListGUI) fxmlLoader.getController()).printCourseList(coursesBean);
+            changeScene(root,event);
+
+        }catch(IOException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
+    @FXML
+    protected void goToTrainerDetail(MouseEvent event, CourseBean coursebean){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TrainerDetail.fxml"));
+            fxmlLoader.setControllerFactory(c -> new TrainerDetailGUI(session, fxmlPathConfig));
+            Parent root = fxmlLoader.load();
+            ((TrainerDetailGUI) fxmlLoader.getController()).TrainerDetail(coursebean);
+            changeScene(root, event);
+
+        }catch(IOException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
+    @FXML
+    protected void goToCustomerDetail(MouseEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerDetail.fxml"));
+            fxmlLoader.setControllerFactory(c -> new CustomerDetailGUI(fxmlPathConfig, session));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        }catch(IOException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
+    @FXML
+    protected void goToCourseReservationRequest(MouseEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/RservationReq.fxml"));
+            fxmlLoader.setControllerFactory(c -> new ReservationRequestGUI(fxmlPathConfig, session));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        }catch(IOException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
+    //Metodo per cambiare finestra
+    protected void changeScene(Parent root, MouseEvent event) {
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

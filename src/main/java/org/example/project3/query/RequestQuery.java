@@ -65,14 +65,14 @@ public class RequestQuery {
         }
     }
 
-    public static ResultSet retireveCourseRequest(Connection conn, Course course) throws SQLException {
+    public static ResultSet retireveCourseRequest(Connection conn, String course) throws SQLException {
 
         String query = "SELECT cu.mail, cu.name, cu.surname, cu.gender, cu.injury, r.data" +
                         "FROM customer cu, courseRequest r " +
                         "WHERE r.cliente = cu.mail AND r.course = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, course.getCourseName());
+        pstmt.setString(1, course);
         return pstmt.executeQuery();
     }
 

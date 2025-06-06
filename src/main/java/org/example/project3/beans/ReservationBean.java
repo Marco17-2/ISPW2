@@ -7,12 +7,14 @@ public class ReservationBean {
 
     private CustomerBean customerBean;
     private CourseBean courseBean;
-    private LocalDateTime dateTime;
+    private String day;
+    private String hour;
 
-    public void ReservationBean(RequestBean requestBean){
-        this.customerBean = requestBean.getCustomer();
-        this.courseBean = requestBean.getCourse();
-        this.dateTime = requestBean.getDateTime();
+    public ReservationBean(CustomerBean customerBean, CourseBean courseBean, String day, String hour){
+        this.customerBean = customerBean;
+        this.courseBean = courseBean;
+        this.day = day;
+        this.hour = hour;
     }
 
     public void setCourse(CourseBean courseBean) {
@@ -23,9 +25,11 @@ public class ReservationBean {
         this.customerBean = customerBean;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
-        this.dateTime = dateTime;
+    public void setday(String day) {
+        this.day= day;
     }
+
+    public void setHour(String hour) {this.hour = hour;}
 
     public CustomerBean getCustomer() {
         return customerBean;
@@ -35,7 +39,9 @@ public class ReservationBean {
         return courseBean;
     }
 
-    public LocalDateTime getDatetime() {
-        return dateTime;
+    public String getHpur() {
+        return hour;
     }
+
+    public String getDay() { return day; }
 }
