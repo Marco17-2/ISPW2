@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Customer extends LoggedUser{
-    private Integer userID;
     private Subscription subscription;
     private ArrayList<Schedule> schedules;
     private String injury;
@@ -65,14 +64,6 @@ public class Customer extends LoggedUser{
 
     public List<Schedule> getSchedules() {
         return schedules;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public Integer getUserID() {
-        return userID;
     }
 
     public void setInjury(String injury) {

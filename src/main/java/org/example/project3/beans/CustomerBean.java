@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public class CustomerBean extends LoggedUserBean {
-    private Integer userID;
     private SubscriptionBean subscriptionBean;
     private ArrayList<ScheduleBean> schedulesBean;
     private String injury;
@@ -64,14 +63,6 @@ public class CustomerBean extends LoggedUserBean {
 
     public List<ScheduleBean> getSchedulesBean() {
         return schedulesBean;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
-
-    public Integer getUserID() {
-        return userID;
     }
 
     public void setInjury(String injury) {

@@ -45,10 +45,6 @@ public class RequestBean {
         return reason;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
-    }
-
     public void setSchedule(ScheduleBean scheduleBean) {
         this.scheduleBean = scheduleBean;
     }

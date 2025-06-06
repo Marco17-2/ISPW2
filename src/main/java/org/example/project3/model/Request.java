@@ -41,10 +41,6 @@ public class Request {
         return reason;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
-    }
-
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }

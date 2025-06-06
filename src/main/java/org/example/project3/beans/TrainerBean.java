@@ -6,7 +6,6 @@ import java.util.List;
 
 public class TrainerBean extends LoggedUserBean {
 
-    private Integer trainerID;
     private ArrayList<String> specializations;
 
     public TrainerBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
@@ -17,14 +16,6 @@ public class TrainerBean extends LoggedUserBean {
     public TrainerBean(CredentialsBean credentialsBean) {
         super(credentialsBean);
         this.specializations = new ArrayList<>();
-    }
-
-    public Integer getTrainerID() {
-        return trainerID;
-    }
-
-    public void setTrainerID(Integer trainerID) {
-        this.trainerID = trainerID;
     }
 
     public ArrayList<String> getSpecializations() {

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trainer extends LoggedUser{
-
-    private Integer trainerID;
     private ArrayList<String> specializations;
 
     public Trainer(Credentials credentials, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
@@ -17,14 +15,6 @@ public class Trainer extends LoggedUser{
     public Trainer(Credentials credentials) {
         super(credentials);
         this.specializations = new ArrayList<>();
-    }
-
-    public Integer getTrainerID() {
-        return trainerID;
-    }
-
-    public void setTrainerID(Integer trainerID) {
-        this.trainerID = trainerID;
     }
 
     public ArrayList<String> getSpecializations() {
