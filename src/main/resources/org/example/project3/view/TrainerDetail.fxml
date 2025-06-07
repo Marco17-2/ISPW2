@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="60.0" layoutY="66.0" text="First Name" />
@@ -17,7 +16,7 @@
       <TextField id="Gender" editable="false" layoutX="322.0" layoutY="86.0" prefHeight="26.0" prefWidth="150.0" promptText="Null" />
       <Label layoutX="324.0" layoutY="68.0" prefHeight="18.0" prefWidth="56.0" text="Gender" />
       <Label layoutX="325.0" layoutY="122.0" prefHeight="18.0" prefWidth="86.0" text="Specialization" />
-      <TextField id="Specialization" editable="false" layoutX="326.0" layoutY="144.0" prefHeight="26.0" prefWidth="150.0" promptText="Null" />
+      <TextField id="Specialization" editable="false" layoutX="326.0" layoutY="144.0" prefHeight="89.0" prefWidth="150.0" promptText="Null" />
       <Button id="Back" layoutX="274.0" layoutY="275.0" mnemonicParsing="false" text="Go Back" />
    </children>
 </AnchorPane>

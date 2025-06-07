@@ -6,8 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.example.project3.exceptions.LoadingException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.mappers.Session;
 import org.example.project3.utilities.others.FXMLPathConfig;
@@ -40,6 +42,22 @@ public class TrainerDetailGUI extends CommonGUI{
         printTrainerDetail(trainer);
 
     }
+
+
+    @FXML
+    public void goBack(MouseEvent event){
+
+        try{
+            List<CourseBean> coursesBean = new ArrayList<>();
+            // da implementare il controller;
+            // courseController.retrieveCoruses(coursesBean);
+            goToCourseList(event, coursesBean);
+
+        }catch(NoResultException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
 
     public void printTrainerDetail(TrainerBean trainer) throws NoResultException {
 

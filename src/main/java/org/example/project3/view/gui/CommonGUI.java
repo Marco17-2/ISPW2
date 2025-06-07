@@ -174,15 +174,13 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToCustomerDetail(MouseEvent event){
+    protected void goToCourseReservationRequest(MouseEvent event, List<ReservationBean> reservationReqBean){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerDetail.fxml"));
-            fxmlLoader.setControllerFactory(c -> new CustomerDetailGUI(fxmlPathConfig, session));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/RservationReq.fxml"));
+            fxmlLoader.setControllerFactory(c -> new ReservationReqGUI(session, fxmlPathConfig));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            ((ReservationReqGUI) fxmlLoader.getController()).loadReservationReq(reservationReqBean);
+            changeScene(root, event);
 
         }catch(IOException e){
             throw new LoadingException("Errore durante il caricamento della scena", e);
@@ -190,15 +188,14 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToCourseReservationRequest(MouseEvent event){
+    protected void goToCustomerDetail(MouseEvent event, ReservationBean reservationBean){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/RservationReq.fxml"));
-            fxmlLoader.setControllerFactory(c -> new ReservationRequestGUI(fxmlPathConfig, session));
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerDetail.fxml"));
+            fxmlLoader.setControllerFactory(c -> new CustomerDetailGUI(session, fxmlPathConfig));
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            ((CustomerDetailGUI) fxmlLoader.getController()).loadCustomerDetail(reservationBean);
+            changeScene(root, event);
 
         }catch(IOException e){
             throw new LoadingException("Errore durante il caricamento della scena", e);

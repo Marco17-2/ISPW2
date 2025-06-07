@@ -46,6 +46,11 @@ public class CourseListGUI extends CommonGUI implements Observer{
     private TableColumn<CourseBean, Void> buttonColumn;
     @FXML
     private Label message; // da aggiungere
+    @FXML
+    private Button goBack;
+
+
+    //private final RequestManagerConcreteSubject requestManagerConcreteSubject;   ConcreteSubject
 
     private final ToggleGroup rowToggleGroup = new ToggleGroup();
 
@@ -140,20 +145,9 @@ public class CourseListGUI extends CommonGUI implements Observer{
         alert.showAndWait();
     }
 
-    //collegamento bottone per la lista corsi nella pagine dedicata
+
     @FXML
-    protected void retrieveCourse(MouseEvent event){
-       try{
-           List<CourseBean> coursesBean = new ArrayList<>();
-           // da implementare il controller;
-          // courseController.retrieveCoruses(coursesBean);
-           goToCourseList(event, coursesBean);
-       }catch(NoResultException exceprion){
-
-          // errorMessage.setText(exception.getMessage());
-           // errorMessage.setVisible(true);
-           //implementare label
-       }
-
+    public void goBack(MouseEvent event){
+       goToHomepage(event);
     }
 }

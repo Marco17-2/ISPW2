@@ -9,11 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.example.project3.beans.CourseBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ScheduleDetailsController;
 import org.example.project3.exceptions.LoadingException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
@@ -26,12 +28,14 @@ public class CustomerHomepageGUI extends CommonGUI{
     public CustomerHomepageGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }
 
 
-
     @FXML
     ButtonBar richiediModifica;
 
     @FXML
     Button modifica;
+
+    @FXML
+    Button prenota;
 
     @FXML
     public void seeRequest(MouseEvent event) {
@@ -54,5 +58,18 @@ public class CustomerHomepageGUI extends CommonGUI{
         } catch (IOException e) {
             throw new LoadingException("Errore durante il caricamento della scena", e);
         }
+    }
+
+    protected void retrieveCourse(MouseEvent event){
+        try{
+            List<CourseBean> coursesBean = new ArrayList<>();
+            // da implementare il controller;
+            // courseController.retrieveCoruses(coursesBean);
+            goToCourseList(event, coursesBean);
+
+        }catch(NoResultException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+
     }
 }

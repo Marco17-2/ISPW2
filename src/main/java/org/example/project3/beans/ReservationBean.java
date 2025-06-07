@@ -39,7 +39,7 @@ public class ReservationBean {
         return courseBean;
     }
 
-    public String getHpur() {
+    public String getHour() {
         return hour;
     }
 
