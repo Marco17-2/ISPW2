@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.example.project3.beans.CourseBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ScheduleBean;
+import org.example.project3.controller.CourseListController;
 import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ScheduleDetailsController;
 import org.example.project3.exceptions.LoadingException;
@@ -63,8 +64,8 @@ public class CustomerHomepageGUI extends CommonGUI{
     protected void retrieveCourse(MouseEvent event){
         try{
             List<CourseBean> coursesBean = new ArrayList<>();
-            // da implementare il controller;
-            // courseController.retrieveCoruses(coursesBean);
+            CourseListController courseListController = new CourseListController();
+            courseListController.retrieveCourses(coursesBean);
             goToCourseList(event, coursesBean);
 
         }catch(NoResultException e){

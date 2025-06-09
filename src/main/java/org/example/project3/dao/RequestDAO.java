@@ -17,7 +17,7 @@ public interface RequestDAO {
 //    void retrieveCustomerRequest(Customer customer, List<Request> requests);
     void deleteRequest(Request request);
 
-    void retrieveCourseRequest(Course course, List<Reservation> reservationList);
+    void retrieveCourseRequest(Trainer trainer, List<Reservation> reservationList);
     void removeCourseRequest(Reservation reservation);
     void addCourseRequest(Reservation reservation);
 }

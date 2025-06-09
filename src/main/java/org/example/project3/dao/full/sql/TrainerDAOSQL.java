@@ -4,6 +4,7 @@ import org.example.project3.dao.TrainerDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Credentials;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Subscription;
@@ -12,6 +13,7 @@ import org.example.project3.model.Course;
 import org.example.project3.query.CredentialsQuery;
 import org.example.project3.query.CustomerQuery;
 import org.example.project3.query.TrainerQuery;
+import org.example.project3.utilities.enums.Role;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class TrainerDAOSQL implements TrainerDAO {
 
     private static final String NAME = "name";
     private static final String SURNAME = "surname";
+    private static final String MAIL = "mail";
     private static final String GENDER = "gender";
     private static final String ONLINE = "online";
     private static final String BIRTHDATE = "birthDate";
@@ -124,19 +127,28 @@ public class TrainerDAOSQL implements TrainerDAO {
     }
 
     @Override
-    public void retrieveTrainerCourse(Course course, Trainer trainer){
+    public Trainer retrieveTrainerCourse(Course course){
         try(Connection conn = ConnectionSQL.getConnection()){
             ResultSet rs = TrainerQuery.retrieveCourseTrainer(conn, course.getCourseName());
-            while(rs.next()){
+            if(rs.next()){
 
-                trainer.setName(rs.getString(NAME));
-                trainer.setSurname(rs.getString(SURNAME));
-                trainer.setGender(rs.getString(GENDER));
-                trainer.setOnline(rs.getBoolean(ONLINE));
-                trainer.setBirthday(rs.getDate(BIRTHDATE).toLocalDate());
+                Trainer trainer = new Trainer (
+                        new Credentials(rs.getString(MAIL), Role.TRAINER),
+                        rs.getString(NAME),
+                        rs.getString(SURNAME),
+                        rs.getString(GENDER),
+                        false,
+                        rs.getDate(BIRTHDATE).toLocalDate()
+                        );
+
+                return trainer;
+            }else {
+                throw new NoResultException();
             }
-        } catch (SQLException e) {
-            throw new DAOException();
+        }  catch (SQLException | NoResultException e) {
+            handleException(e);
         }
+
+        return null;
     }
 }

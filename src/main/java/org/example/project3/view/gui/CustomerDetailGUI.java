@@ -35,10 +35,12 @@ public class CustomerDetailGUI extends CommonGUI{
     private Label injuri;
     @FXML
     private Label gender;
+    @FXML
+    private Button goback;
 
     public void loadCustomerDetail(ReservationBean reservationBean){
 
-        CustomerBean customerBean = CustomerDescriptionController.customerInfo(reservationBean);
+        CustomerBean customerBean = reservationBean.getCustomer();
         printCustomerDetail(customerBean);
     }
 

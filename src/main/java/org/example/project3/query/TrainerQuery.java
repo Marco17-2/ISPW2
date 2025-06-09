@@ -76,7 +76,7 @@ public class TrainerQuery {
     }
 
     public static ResultSet retrieveCourseTrainer( Connection conn, String course) throws SQLException {
-        String query = "SELECT mail, name, surname, gender, online, birthday FROM trainer where course = ?";
+        String query = "SELECT t.mail, t.name, t.surname, t.gender, t.birthday FROM trainer t, course c where course = ? AND c.trainer = t.mail";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, course);
         return pstmt.executeQuery();
