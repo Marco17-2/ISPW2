@@ -111,11 +111,11 @@ public class TrainerDAOSQL implements TrainerDAO {
     }
 
     @Override
-    public List<String> retrieveSpecialization(Trainer trainer) throws SQLException {
+    public List<String> retrieveSpecialization(Course course) throws SQLException {
         List<String> spec = new ArrayList<>();
         try( Connection conn = ConnectionSQL.getConnection()){
 
-            ResultSet rs = TrainerQuery.retrieveSpecializzation(conn, trainer.getCredentials().getMail());
+            ResultSet rs = TrainerQuery.retrieveSpecializzation(conn, course.getCourseName());
             while(rs.next()){
                 spec.add(rs.getString(SPECIALIZZATION));
             }

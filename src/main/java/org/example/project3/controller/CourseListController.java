@@ -1,6 +1,8 @@
 package org.example.project3.controller;
 
 import org.example.project3.dao.CourseDAO;
+import org.example.project3.dao.RequestDAO;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
@@ -15,21 +17,41 @@ public class CourseListController
 {
     private final BeanAndModelMapperFactory factory;
     private final CourseDAO courseDAO;
+    private final RequestDAO requestDAO;
 
     public CourseListController(){
         this.factory = BeanAndModelMapperFactory.getInstance();
         this.courseDAO = FactoryDAO.getCourseDAO();
+        this.requestDAO = FactoryDAO.getRequestDAO();
     }
 
-    public void retrieveCourses(List<CourseBean> coursesBean){
+    public void retrieveCourses(List<CourseBean> coursesBean) {
 
-        List<Course> courses = new ArrayList<>();
-        courseDAO.searchCourses(courses);
-        CourseBean courseBean;
+        try {
+            List<Course> courses = new ArrayList<>();
+            courseDAO.searchCourses(courses);
+            CourseBean courseBean;
 
-        for(Course course: courses){
-            courseBean = factory.fromModelToBean(course, Course.class);
-            coursesBean.add(courseBean);
+            for (Course course : courses) {
+                courseBean = factory.fromModelToBean(course, Course.class);
+                coursesBean.add(courseBean);
+            }
+        }catch(Exception e) {
+            throw new NoResultException("Errore recupero corsi");
         }
     }
+
+    public void sendReservationReq(ReservationBean reservationBean) throws NoResultException {
+
+        Reservation reservation = factory.fromBeanToModel(reservationBean, ReservationBean.class);
+
+        try{
+            requestDAO.addCourseRequest(reservation);
+            //RequestConcrete Manager Pattern da realizzare
+            //RequestManagerAdd
+        }catch(Exception e) {
+            throw new NoResultException("Errore invio richiesta");
+        }
+    }
+
 }

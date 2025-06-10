@@ -3,6 +3,7 @@ package org.example.project3.view.gui;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import org.example.project3.beans.*;
+import org.example.project3.controller.CourseListController;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Course;
 import org.example.project3.utilities.others.FXMLPathConfig;
@@ -51,8 +52,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
 
 
     //private final RequestManagerConcreteSubject requestManagerConcreteSubject;   ConcreteSubject
-
-    private final ToggleGroup rowToggleGroup = new ToggleGroup();
 
 
     private TableCell<CourseBean, Void> createButtonCell(String buttonText){
@@ -130,9 +129,12 @@ public class CourseListGUI extends CommonGUI implements Observer{
         String day = courseBean.getDay();
         String hour = courseBean.getHour();
         ReservationBean reservationReqBean = new ReservationBean(customerBean, courseBean, day, hour);
-        //Controller.sendReservationRequest(reservatiionReqBean);
+        CourseListController courseListController = new CourseListController();
+        courseListController.sendReservationReq(reservationReqBean);
         message.setText("Richiesta inviata con successo");
         message.setVisible(true);
+
+        // finire manage
     }
 
 

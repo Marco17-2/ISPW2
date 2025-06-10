@@ -110,9 +110,12 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
     private void manageReservationReq(ReservationBean reservationBean, boolean isAccept) {
 
         //controller da implementare
-        reservationController.deleteRequestReq(reservationBean);
+        reservationApplicationController.deleteRequestReq(reservationBean);
         if(isAccept){
             reservationController.addReservation(reservationBean);
+
+            //da finire
+
         }
     }
 
@@ -136,11 +139,14 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
 
     @Override
     public void update(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Esito richiesta");
-        alert.setHeaderText(null);
-        alert.setContentText("Richiesta Accettata con successo");
-        alert.showAndWait();
+        //restituzione lista aggionrata
+        List<Reservation> reservations = reservationManagerCocnreteSubjcet.getReservatin();
+        // aggiorna lista dei vean
+        reservationBeans.clear();
+        for(Reservation reservation : reservations){
+            reservationBeans.add(reservationApplicationController.createReservationBean(reservation));
+        }
+        refreshTableView();
     }
 
 

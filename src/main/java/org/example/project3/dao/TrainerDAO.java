@@ -18,7 +18,7 @@ public interface TrainerDAO {
     void removeTrainer(Trainer trainer);
     void modifyTrainer(Trainer trainer);
     Trainer retrieveTrainerCourse(Course course);
-    List<String> retrieveSpecialization(Trainer trainer) throws SQLException;
+    List<String> retrieveSpecialization(Course course) throws SQLException;
 
 
 }

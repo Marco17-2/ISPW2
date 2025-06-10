@@ -76,16 +76,20 @@ public class TrainerQuery {
     }
 
     public static ResultSet retrieveCourseTrainer( Connection conn, String course) throws SQLException {
-        String query = "SELECT t.mail, t.name, t.surname, t.gender, t.birthday FROM trainer t, course c where course = ? AND c.trainer = t.mail";
+        String query = "SELECT t.mail, t.name, t.surname, t.gender, t.birthday " +
+                "FROM trainer t, course c " +
+                "WHERE course = ? AND c.trainer = t.mail";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, course);
         return pstmt.executeQuery();
     }
 
-    public static ResultSet retrieveSpecializzation(Connection conn, String trainer) throws SQLException {
-        String query = "SELECT description FROM specializzation s, trainter t, expertieses e WHERE e.trainer = ? AND e.specializzation = s.id";
+    public static ResultSet retrieveSpecializzation(Connection conn, String course) throws SQLException {
+        String query = "SELECT description " +
+                "FROM specializzation s, trainter t, course c " +
+                " WHERE t.mail = c.trainer AND s.trainer = t.mail AND c.course = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setString(1, trainer);
+        pstmt.setString(1, course);
         return pstmt.executeQuery();
     }
 }
