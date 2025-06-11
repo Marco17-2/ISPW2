@@ -1,17 +1,15 @@
 package org.example.project3.view.gui;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import org.example.project3.beans.*;
+import org.example.project3.controller.CourseListController;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Reservation;
+import org.example.project3.controller.ReservationListController;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import org.example.project3.utilities.others.mappers.Session;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.project3.patterns.observer.Observer;
 import javafx.scene.control.Button;
 
@@ -46,6 +44,8 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
     private TableColumn<ReservationBean, Void> acceptButton;
     @FXML
     private TableColumn<ReservationBean, Void> refuseButton;
+    @FXML
+    private Label errorMessage;
 
 
     /*
@@ -154,8 +154,9 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
     public void goBack(MouseEvent event){
 
         List<CourseBean> coursesBean = new ArrayList<>();
-        // da implementare il controller;
-        // courseController.retrieveCoruses(coursesBean);
+
+        CourseListController courseListController = new CourseListController();
+        courseListController.retrieveCourses(coursesBean);
         goToCourseList(event, coursesBean);
 
     }
@@ -167,16 +168,14 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
         try{
             List<ReservationBean> reservationReqBean = new ArrayList<>();
 
-            // da implementare il controller;
-            // TrainerController trainerController = new TrainerController();
-            // trainerController.getReservationReq((TrainerBean).session.getMail(), reservationReqBean);
+            ReservationListController reservationController = new ReservationListController();
+             reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
 
             goToCourseReservationRequest(event, reservationReqBean);
-        }catch(NoResultException exceprion){
+        }catch(NoResultException exception){
 
-            // errorMessage.setText(exception.getMessage());
-            // errorMessage.setVisible(true);
-            //implementare label
+             errorMessage.setText(exception.getMessage());
+             errorMessage.setVisible(true);
         }
 
     }
