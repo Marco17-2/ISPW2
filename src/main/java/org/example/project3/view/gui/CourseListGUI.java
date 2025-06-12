@@ -125,6 +125,7 @@ public class CourseListGUI extends CommonGUI implements Observer{
     }
 
     private void manageReservationReq(CourseBean courseBean){
+
         CustomerBean customerBean = (CustomerBean) session.getUser();
         String day = courseBean.getDay();
         String hour = courseBean.getHour();

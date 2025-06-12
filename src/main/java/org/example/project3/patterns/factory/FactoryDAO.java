@@ -24,6 +24,8 @@ public class FactoryDAO {
     private static SubscriptionDAO subscriptionDAO;
     private static TrainerDAO trainerDAO;
     private static CourseDAO courseDAO;
+    private static ReservationDAO reservationDAO;
+
 
     // Caricamento delle proprietà una sola volta
     private static void loadProperties() {
@@ -160,6 +162,18 @@ public class FactoryDAO {
             );
         }
         return courseDAO;
+    }
+
+    public static synchronized ReservationDAO getReservationDAO() {
+        if (reservationDAO == null) {
+            reservationDAO = createDAO(
+                    getPersistenceType(),
+                    ReservationDAOSQL::new,
+                    ReservationDAOP::new,
+                    null
+            );
+        }
+        return reservationDAO;
     }
 
 }
