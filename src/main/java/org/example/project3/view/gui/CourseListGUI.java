@@ -135,7 +135,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
         message.setText("Richiesta inviata con successo");
         message.setVisible(true);
 
-        // finire manage
     }
 
 

@@ -5,9 +5,13 @@ import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.LoginAndRegistrationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.NoResultException;
+import org.example.project3.model.Course;
 import org.example.project3.model.Credentials;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Trainer;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class TrainerDAOP implements TrainerDAO {
     public boolean emailExists(String mail) {
@@ -56,5 +60,27 @@ public class TrainerDAOP implements TrainerDAO {
     @Override
     public void modifyTrainer(Trainer trainer) {
         SharedResources.getInstance().getTrainers().put(trainer.getCredentials().getMail(), trainer);
+    }
+
+    @Override
+    public Trainer retrieveTrainerCourse(Course course) {
+
+        for(Course courses: SharedResources.getInstance().getCourses().values()) {
+
+            if(matchesCourse(courses, course.getCourseName())){
+                return courses.getTrainer();
+            }
+        }
+        throw new NoResultException();
+    }
+
+    @Override
+    public List<String> retrieveSpecialization(Course course) throws SQLException {
+        Trainer trainer = retrieveTrainerCourse(course);
+        return trainer.getSpecializations();
+    }
+
+    private boolean matchesCourse(Course course1, String name){
+        return course1.getCourseName().contains(name);
     }
 }

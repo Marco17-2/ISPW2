@@ -20,7 +20,7 @@ public class ReservationDAOP implements ReservationDAO {
         reservations.removeIf(r ->
                 r.getCourse().equals(reservation.getCourse()) &&
                         r.getCustomer().equals(reservation.getCustomer()) &&
-                        r.getDate().equals(reservation.getDate()) &&
+                        r.getDay().equals(reservation.getDay()) &&
                         r.getHour().equals(reservation.getHour())
         );
 

@@ -176,9 +176,11 @@ public abstract class CommonGUI {
     @FXML
     protected void goToCourseReservationRequest(MouseEvent event, List<ReservationBean> reservationReqBean){
         try {
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/RservationReq.fxml"));
             fxmlLoader.setControllerFactory(c -> new ReservationReqGUI(session, fxmlPathConfig));
             Parent root = fxmlLoader.load();
+            ((ReservationReqGUI)fxmlLoader.getController()).initializeObserver();
             ((ReservationReqGUI) fxmlLoader.getController()).loadReservationReq(reservationReqBean);
             changeScene(root, event);
 

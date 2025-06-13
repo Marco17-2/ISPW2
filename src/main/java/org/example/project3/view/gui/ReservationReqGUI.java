@@ -3,9 +3,11 @@ package org.example.project3.view.gui;
 import javafx.beans.property.SimpleStringProperty;
 import org.example.project3.beans.*;
 import org.example.project3.controller.CourseListController;
+import org.example.project3.controller.ReservationReqApplicationController;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Reservation;
 import org.example.project3.controller.ReservationListController;
+import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
@@ -21,9 +23,13 @@ import java.util.ArrayList;
 public class ReservationReqGUI extends CommonGUI implements Observer {
 
     private List<ReservationBean> reservationBeans = new ArrayList<>();
+    private final ReservationReqApplicationController reservationReqApplicationController = new ReservationReqApplicationController();
+    private final ReservationManagerConcreteSubject reservationManagerConcreteSubject;
 
     protected ReservationReqGUI(Session session, FXMLPathConfig fxmlPathConfig) {
+
         super(session, fxmlPathConfig);
+        this.reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getInstance();
     }
 
     // name course date hour detail accept refuse
@@ -48,13 +54,12 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
     private Label errorMessage;
 
 
-    /*
         // Metodo per inizializzare l'observer
     public void initializeObserver() {
-        requestManagerConcreteSubject.addObserver(this); // Aggiungi l'osservatore
+        reservationManagerConcreteSubject.addObserver(this); // Aggiungi l'osservatore
     }
 
-     */
+
 
 
     private TableCell<ReservationBean, Void> createButtonCell(String buttonText, boolean isAccept){
@@ -110,9 +115,9 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
     private void manageReservationReq(ReservationBean reservationBean, boolean isAccept) {
 
         //controller da implementare
-        reservationApplicationController.deleteRequestReq(reservationBean);
+        reservationReqApplicationController.deleteReservationReq(reservationBean);
         if(isAccept){
-            reservationController.addReservation(reservationBean);
+            reservationReqApplicationController.addReservation(reservationBean);
         }
     }
 
@@ -137,11 +142,11 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
     @Override
     public void update(){
         //restituzione lista aggionrata
-        List<Reservation> reservations = reservationManagerCocnreteSubjcet.getReservatin();
+        List<Reservation> reservations = reservationManagerConcreteSubject.getReservationsReq();
         // aggiorna lista dei vean
         reservationBeans.clear();
         for(Reservation reservation : reservations){
-            reservationBeans.add(reservationApplicationController.createReservationBean(reservation));
+            reservationBeans.add(reservationReqApplicationController.createReservationBean(reservation));
         }
         refreshTableView();
     }
@@ -166,7 +171,7 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
             List<ReservationBean> reservationReqBean = new ArrayList<>();
 
             ReservationListController reservationController = new ReservationListController();
-             reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
+            reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
 
             goToCourseReservationRequest(event, reservationReqBean);
         }catch(NoResultException exception){

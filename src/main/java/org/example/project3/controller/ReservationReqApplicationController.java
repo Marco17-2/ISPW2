@@ -8,6 +8,7 @@ import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 
 import org.example.project3.beans.*;
 import org.example.project3.model.*;
+import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +26,21 @@ public class ReservationReqApplicationController {
     }
 
     public void addReservation(ReservationBean reservationBean){
-            Reservation reervation = factory.fromBeanToModel(reservationBean, ReservationBean.class);
-            reservationDAO.addReservation(reervation);
+            Reservation reservation = factory.fromBeanToModel(reservationBean, ReservationBean.class);
+            reservationDAO.addReservation(reservation);
     }
 
     public void deleteReservationReq(ReservationBean reservationBean){
-        ReservationManagerConcreteSucjet reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getIstanve();
+        ReservationManagerConcreteSubject reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getInstance();
         Reservation reservation = factory.fromBeanToModel(reservationBean, ReservationBean.class);
         requestDAO.removeCourseRequest(reservation);
-        reservationManagerConcreteSubject.removeReservation(reservation);
+        reservationManagerConcreteSubject.removeReservationReq(reservation);
     }
+
+    public ReservationBean createReservationBean(Reservation reservation){
+        return factory.fromModelToBean(reservation, Reservation.class);
+    }
+
+
 
 }

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.project3.controller.CourseListController;
 import org.example.project3.controller.TrainerDescriptionController;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.exceptions.NoResultException;
@@ -37,7 +38,6 @@ public class TrainerDetailGUI extends CommonGUI{
 
     public void TrainerDetail(CourseBean courseBean) throws NoResultException {
 
-        //controller da implementare
         TrainerDescriptionController trainerDescriptionController = new TrainerDescriptionController();
         TrainerBean trainer = trainerDescriptionController.trainerDescription(courseBean);
         printTrainerDetail(trainer);
@@ -49,9 +49,10 @@ public class TrainerDetailGUI extends CommonGUI{
     public void goBack(MouseEvent event){
 
         try{
+
             List<CourseBean> coursesBean = new ArrayList<>();
-            // da implementare il controller;
-            // courseController.retrieveCoruses(coursesBean);
+            CourseListController courseListController = new CourseListController();
+            courseListController.retrieveCourses(coursesBean);
             goToCourseList(event, coursesBean);
 
         }catch(NoResultException e){

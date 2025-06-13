@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.example.project3.controller.ReservationListController;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.mappers.Session;
@@ -21,7 +22,6 @@ public class CustomerDetailGUI extends CommonGUI{
     protected CustomerDetailGUI(Session session, FXMLPathConfig fxmlPathConfig) {
         super(session, fxmlPathConfig);
     }
-    // firstName Lastname mail date injuri gender
 
     @FXML
     private Label firstName;
@@ -59,18 +59,16 @@ public class CustomerDetailGUI extends CommonGUI{
     public void goBack(MouseEvent event){
 
         try{
+
             List<ReservationBean> reservationReqBean = new ArrayList<>();
 
-            // da implementare il controller;
-            // TrainerController trainerController = new TrainerController();
-            // trainerController.getReservationReq((TrainerBean).session.getMail(), reservationReqBean);
+            ReservationListController reservationController = new ReservationListController();
+            reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
 
             goToCourseReservationRequest(event, reservationReqBean);
-        }catch(NoResultException exceprion){
 
-            // errorMessage.setText(exception.getMessage());
-            // errorMessage.setVisible(true);
-            //implementare label
+        }catch(NoResultException exception){
+            throw new NoResultException("Errore recupero richieste");
         }
     }
 
