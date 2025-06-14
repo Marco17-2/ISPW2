@@ -36,8 +36,6 @@ public class CustomerDetailGUI extends CommonGUI{
     private TextField injury;
     @FXML
     private TextField gender;
-    @FXML
-    private Button goBack;
 
     public void loadCustomerDetail(ReservationBean reservationBean){
 

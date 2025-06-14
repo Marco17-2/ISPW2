@@ -17,10 +17,7 @@ import org.example.project3.beans.*;
 public class TrainerHomepageGUI extends CommonGUI{
 
     @FXML
-    private Button reservationReq;
-    @FXML
     private Label errorMessage;
-
 
     protected TrainerHomepageGUI(Session session, FXMLPathConfig fxmlPathConfig) {
         super(session, fxmlPathConfig);

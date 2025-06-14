@@ -34,8 +34,6 @@ public class TrainerDetailGUI extends CommonGUI{
     private TextField gender;
     @FXML
     private TextField specialization;
-    @FXML
-    private Button goback;
 
     public void TrainerDetail(CourseBean courseBean) throws NoResultException {
 

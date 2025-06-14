@@ -47,9 +47,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
     private TableColumn<CourseBean, Void> buttonColumn;
     @FXML
     private Label message; // da aggiungere
-    @FXML
-    private Button goBack;
-
 
     //private final RequestManagerConcreteSubject requestManagerConcreteSubject;   ConcreteSubject
 
