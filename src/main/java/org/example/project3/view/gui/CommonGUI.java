@@ -204,6 +204,23 @@ public abstract class CommonGUI {
         }
     }
 
+
+    //aggiugnere la chiamata di questa funzione nella schermata login trainer
+
+    @FXML
+    protected void goToTrainerHome(MouseEvent event){
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TrainerHomepage.fxml"));
+            fxmlLoader.setControllerFactory(c -> new CustomerDetailGUI(session, fxmlPathConfig));
+            Parent root = fxmlLoader.load();
+            changeScene(root, event);
+
+        }catch(IOException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
     //Metodo per cambiare finestra
     protected void changeScene(Parent root, MouseEvent event) {
         Scene scene = new Scene(root);

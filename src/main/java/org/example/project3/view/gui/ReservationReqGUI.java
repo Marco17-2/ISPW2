@@ -163,25 +163,6 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
 
     }
 
-
-    // da mette home trainer
-    @FXML
-    protected void retrieveReservationReq(MouseEvent event){
-        try{
-            List<ReservationBean> reservationReqBean = new ArrayList<>();
-
-            ReservationListController reservationController = new ReservationListController();
-            reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
-
-            goToCourseReservationRequest(event, reservationReqBean);
-        }catch(NoResultException exception){
-
-             errorMessage.setText(exception.getMessage());
-             errorMessage.setVisible(true);
-        }
-
-    }
-
     private void refreshTableView() {
         reservationList.getItems().clear();
         reservationList.getItems().addAll(reservationBeans);

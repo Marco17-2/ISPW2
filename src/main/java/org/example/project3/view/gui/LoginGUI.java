@@ -50,6 +50,8 @@ public class LoginGUI extends CommonGUI{
                 TrainerBean trainerBean= new TrainerBean(credentialsBean);
                 loginController.retrieveTrainer(trainerBean);
                 session.setUser(trainerBean);
+
+                goToTrainerHome(event);
             }
             goToCustomerHomepage(event);
         }catch(WrongEmailOrPasswordException | EmptyFieldException e){
