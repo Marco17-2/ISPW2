@@ -4,6 +4,7 @@ package org.example.project3.view.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,19 +25,19 @@ public class CustomerDetailGUI extends CommonGUI{
     }
 
     @FXML
-    private Label firstName;
+    private TextField firstName;
     @FXML
-    private Label lastName;
+    private TextField lastName;
     @FXML
-    private Label mail;
+    private TextField mail;
     @FXML
-    private Label date;
+    private TextField dbirth;
     @FXML
-    private Label injuri;
+    private TextField injury;
     @FXML
-    private Label gender;
+    private TextField gender;
     @FXML
-    private Button goback;
+    private Button goBack;
 
     public void loadCustomerDetail(ReservationBean reservationBean){
 
@@ -49,9 +50,9 @@ public class CustomerDetailGUI extends CommonGUI{
         firstName.setText(customerBean.getName());
         lastName.setText(customerBean.getSurname());
         mail.setText(customerBean.getCredentialsBean().getMail());
-        date.setText(String.valueOf(customerBean.getBirthday()));
+        dbirth.setText(String.valueOf(customerBean.getBirthday()));
         gender.setText(customerBean.getGender());
-        injuri.setText(customerBean.getInjury());
+        injury.setText(customerBean.getInjury());
 
     }
 

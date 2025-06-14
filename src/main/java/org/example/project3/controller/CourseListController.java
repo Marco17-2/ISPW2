@@ -5,6 +5,7 @@ import org.example.project3.dao.RequestDAO;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
+import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
 
 import org.example.project3.beans.*;
@@ -47,8 +48,8 @@ public class CourseListController
 
         try{
             requestDAO.addCourseRequest(reservation);
-            //RequestConcrete Manager Pattern da realizzare
-            //RequestManagerAdd
+            ReservationManagerConcreteSubject reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getInstance();
+            reservationManagerConcreteSubject.addReservationReq(reservation);
         }catch(Exception e) {
             throw new NoResultException("Errore invio richiesta");
         }

@@ -6,21 +6,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.view.gui.CourseListGUI">
    <children>
-      <TableView layoutX="38.0" layoutY="60.0" prefHeight="200.0" prefWidth="606.0">
+      <TableView fx:id="ListCourse" layoutX="38.0" layoutY="60.0" prefHeight="200.0" prefWidth="606.0">
         <columns>
-          <TableColumn id="NameCourse" prefWidth="75.0" text="Name" />
-          <TableColumn id="TrainerCourse" prefWidth="75.0" text="Trainer" />
-            <TableColumn id="SlotsCourse" prefWidth="75.0" text="Slots" />
-            <TableColumn id="RemainingCourse" prefWidth="75.0" text="Remaining" />
-            <TableColumn id="DurationCourse" prefWidth="75.0" text="Duration" />
-            <TableColumn id="DayCourse" prefWidth="75.0" text="Day" />
-            <TableColumn id="HourCourse" prefWidth="75.0" text="Hour" />
-            <TableColumn id="RequestCourse" prefWidth="75.0" text="Request" />
+          <TableColumn id="NameCourse" fx:id="courseNameColumn" prefWidth="75.0" text="Name" />
+          <TableColumn id="TrainerCourse" fx:id="trainerButtonColumn" prefWidth="75.0" text="Trainer" />
+            <TableColumn id="SlotsCourse" fx:id="slotsColumn" prefWidth="75.0" text="Slots" />
+            <TableColumn id="RemainingCourse" fx:id="remainingColumn" prefWidth="75.0" text="Remaining" />
+            <TableColumn id="DurationCourse" fx:id="durationColumn" prefWidth="75.0" text="Duration" />
+            <TableColumn id="DayCourse" fx:id="dayColumn" prefWidth="75.0" text="Day" />
+            <TableColumn id="HourCourse" fx:id="hourColumn" prefWidth="75.0" text="Hour" />
+            <TableColumn id="RequestCourse" fx:id="buttonColumn" prefWidth="75.0" text="Request" />
         </columns>
       </TableView>
-      <Button id="Home" layoutX="311.0" layoutY="331.0" mnemonicParsing="false" text="Go back" />
-      <Label id="Esito" layoutX="221.0" layoutY="284.0" prefHeight="18.0" prefWidth="233.0" text="Label" />
+      <Button id="Home" fx:id="goBack" layoutX="311.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Go back" />
+      <Label id="Esito" fx:id="message" layoutX="221.0" layoutY="284.0" prefHeight="18.0" prefWidth="233.0" text="Label" />
    </children>
 </AnchorPane>

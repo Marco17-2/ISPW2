@@ -4,6 +4,7 @@ package org.example.project3.view.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,15 +25,15 @@ public class TrainerDetailGUI extends CommonGUI{
     }
 
     @FXML
-    private Label firstName;
+    private TextField firstName;
     @FXML
-    private Label lastName;
+    private TextField lastName;
     @FXML
-    private Label mail;
+    private TextField mail;
     @FXML
-    private Label gender;
+    private TextField gender;
     @FXML
-    private Label specialization;
+    private TextField specialization;
     @FXML
     private Button goback;
 

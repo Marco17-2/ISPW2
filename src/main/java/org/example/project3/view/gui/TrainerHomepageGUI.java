@@ -1,0 +1,47 @@
+package org.example.project3.view.gui;
+
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.example.project3.controller.ReservationListController;
+import org.example.project3.exceptions.NoResultException;
+import org.example.project3.utilities.others.mappers.Session;
+import org.example.project3.utilities.others.FXMLPathConfig;
+import org.example.project3.beans.*;
+
+public class TrainerHomepageGUI extends CommonGUI{
+
+    @FXML
+    private Button reservationReq;
+    @FXML
+    private Label errorMessage;
+
+
+    protected TrainerHomepageGUI(Session session, FXMLPathConfig fxmlPathConfig) {
+        super(session, fxmlPathConfig);
+    }
+
+    @FXML
+    protected void retrieveReservationReq(MouseEvent event){
+        try{
+            List<ReservationBean> reservationReqBean = new ArrayList<>();
+
+            ReservationListController reservationController = new ReservationListController();
+            reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
+
+            goToCourseReservationRequest(event, reservationReqBean);
+
+        }catch(NoResultException exception){
+
+            errorMessage.setText(exception.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+    }
+
+}
