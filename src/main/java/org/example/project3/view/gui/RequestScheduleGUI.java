@@ -7,17 +7,20 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
+import org.example.project3.controller.SearchController;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.model.Request;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestScheduleGUI extends CommonGUI{
@@ -28,10 +31,16 @@ public class RequestScheduleGUI extends CommonGUI{
     Button indietro;
 
     @FXML
+    ImageView cancellaRicerca;
+
+    @FXML
     TextField ricerca;
 
     @FXML
-    TableView<ScheduleBean> SheduleChoice;
+    Button cerca;
+
+    @FXML
+    TableView<ScheduleBean> ScheduleChoice;
 
     @FXML
     TableColumn<ScheduleBean, String> Name;
@@ -41,6 +50,8 @@ public class RequestScheduleGUI extends CommonGUI{
 
     @FXML
     TableColumn<ScheduleBean, Void> Seleziona;
+
+    private static List<ScheduleBean> originalSchedules = new ArrayList<>();
 
     private RequestModifyController requestModifyController= new RequestModifyController();
 
@@ -70,10 +81,16 @@ public class RequestScheduleGUI extends CommonGUI{
 
     @FXML
     public void loadSchedule(List<ScheduleBean> scheduleBeansParam){
+        if(originalSchedules.isEmpty()&&!scheduleBeansParam.isEmpty()){
+            originalSchedules.addAll(scheduleBeansParam);
+        }
         //Imposto valori della tabella
         Name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         Trainer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTrainerBean().getName()));
         Seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
+        ScheduleChoice.getItems().clear();
+        ScheduleChoice.getItems().addAll(scheduleBeansParam);
+
     }
 
     private void completeRequest(RequestBean requestBean, MouseEvent event){
@@ -90,4 +107,28 @@ public class RequestScheduleGUI extends CommonGUI{
             throw new LoadingException("Errore durante il caricamento della scena", e);
         }
     }
+
+    private SearchController searchController = new SearchController();
+
+    @FXML
+    private void cancelSearch(){
+        loadSchedule(originalSchedules);
+        cancellaRicerca.setVisible(false);
+    }
+
+    @FXML
+    private void SearchButton() {
+        String searchText = ricerca.getText();
+        cancellaRicerca.setVisible(true);
+
+        if (searchText != null && !searchText.trim().isEmpty()) {
+            // Il campo non è vuoto, esegui la ricerca
+            List<ScheduleBean> schedulesTemp = new ArrayList<>();
+            searchController.searchSchedules(schedulesTemp, searchText, session.getUser());
+            loadSchedule(schedulesTemp);
+        } else {
+            loadSchedule(originalSchedules);
+        }
+    }
+
 }

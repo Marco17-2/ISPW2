@@ -13,8 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.RequestModify">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.view.gui.RequestScheduleGUI">
    <children>
       <fx:include source="commonPanel.fxml" />
       <BorderPane prefHeight="542.4" prefWidth="762.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -24,11 +23,11 @@
          <center>
             <AnchorPane prefHeight="468.0" prefWidth="762.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView layoutX="55.0" layoutY="86.0" prefHeight="332.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                  <TableView fx:id="ScheduleChoice" layoutX="55.0" layoutY="86.0" prefHeight="332.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
                     <columns>
-                      <TableColumn prefWidth="239.20001983642578" text="Nome" />
-                      <TableColumn prefWidth="260.7999572753906" text="Trainer" />
-                        <TableColumn prefWidth="151.20001220703125" text="Seleziona" />
+                      <TableColumn fx:id="Name" prefWidth="239.20001983642578" text="Nome" />
+                      <TableColumn fx:id="Trainer" prefWidth="260.7999572753906" text="Trainer" />
+                        <TableColumn fx:id="Seleziona" prefWidth="151.20001220703125" text="Seleziona" />
                     </columns>
                      <effect>
                         <DropShadow height="15.0" radius="7.0" width="15.0">
@@ -38,7 +37,7 @@
                         </DropShadow>
                      </effect>
                   </TableView>
-                  <Button layoutX="55.0" layoutY="22.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
+                  <Button fx:id="indietro" layoutX="55.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
@@ -50,7 +49,7 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <TextField layoutX="162.0" layoutY="22.0" prefHeight="35.0" prefWidth="545.0" promptText="Ricerca" style="-fx-background-color: #f7f7f7; -fx-background-radius: 22px;">
+                  <TextField fx:id="ricerca" layoutX="162.0" layoutY="22.0" prefHeight="35.0" prefWidth="545.0" promptText="Ricerca" style="-fx-background-color: #f7f7f7; -fx-background-radius: 22px;">
                      <effect>
                         <InnerShadow height="10.0" radius="4.5" width="10.0">
                            <color>
@@ -62,9 +61,28 @@
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
                   </TextField>
-                  <ImageView blendMode="OVERLAY" fitHeight="21.0" fitWidth="18.0" layoutX="679.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                  <Button fx:id="cerca" layoutX="668.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#SearchButton" prefHeight="25.0" prefWidth="30.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <graphic>
+                        <ImageView blendMode="OVERLAY" fitHeight="21.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/magnifier_118394.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ImageView fx:id="cancellaRicerca" blendMode="OVERLAY" onMouseClicked="#cancelSearch" fitHeight="21.0" fitWidth="21.0" layoutX="636.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
-                        <Image url="@img/magnifier_118394.png" />
+                        <Image url="@img/letterx_87521.png" />
                      </image>
                   </ImageView>
                </children>

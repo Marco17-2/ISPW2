@@ -19,7 +19,6 @@ public class ExerciseDetailsController {
     public void retrieveExerciseDetails(ExerciseBean exerciseBean) {
         Exercise exercise = beanAndModelMapperFactory.fromBeanToModel(exerciseBean, ExerciseBean.class);
         exerciseDAO.retrieveExercise(exercise);
-        exerciseBean.setId(exercise.getId());
         exerciseBean.setName(exercise.getName());
         exerciseBean.setDescription(exercise.getDescription());
         exerciseBean.setNumberSeries(exercise.getNumberSeries());

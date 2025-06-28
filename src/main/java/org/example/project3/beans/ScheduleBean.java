@@ -26,6 +26,14 @@ public class ScheduleBean {
         this.exercisesBean = null;
     }
 
+    public ScheduleBean(List<ExerciseBean> exercisesBean) {
+        this.id = 0;
+        this.name = null;
+        this.customerBean = null;
+        this.trainerBean = null;
+        this.exercisesBean = (ArrayList<ExerciseBean>) exercisesBean;
+    }
+
     public long getId() {
         return id;
     }

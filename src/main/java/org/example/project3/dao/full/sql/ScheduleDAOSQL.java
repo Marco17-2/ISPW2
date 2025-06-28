@@ -74,14 +74,14 @@ public class ScheduleDAOSQL implements ScheduleDAO {
     }
 
     @Override
-    public void searchSchedules(List<Schedule> schedules, String search){
+    public void searchSchedules(List<Schedule> schedules, String search, LoggedUser user) {
         try (Connection conn = ConnectionSQL.getConnection()) {
-            ResultSet rs = ScheduleQuery.searchSchedules(conn, search);
+            ResultSet rs = ScheduleQuery.searchSchedules(conn, search, user);
             if (rs.next()) {
                 Schedule schedule = new Schedule(
                         rs.getLong(ID),
                         rs.getString(NAME),
-                        new Customer(new Credentials(rs.getString(CUSTOMER), Role.CLIENT)),
+                        new Customer(new Credentials(user.getCredentials().getMail(), Role.CLIENT)),
                         new Trainer(new Credentials(rs.getString(TRAINER), Role.TRAINER))
                 );
                 schedules.add(schedule);

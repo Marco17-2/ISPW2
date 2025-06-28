@@ -2,13 +2,11 @@ package org.example.project3.controller;
 
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ExerciseBean;
+import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.dao.ScheduleDAO;
-import org.example.project3.model.Customer;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-import org.example.project3.model.Trainer;
+import org.example.project3.model.*;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
@@ -27,24 +25,24 @@ public class SearchController {
         this.exerciseDAO = FactoryDAO.getExerciseDAO();
     }
 
-    public void searchSchedules(List<ScheduleBean> scheduleBeans, String search){
+    public void searchSchedules(List<ScheduleBean> scheduleBeans, String search, LoggedUserBean userBean){
         List<Schedule> schedules = new ArrayList<>();
-        scheduleDAO.searchSchedules(schedules,search);
+        LoggedUser user = beanAndModelMapperFactory.fromBeanToModel(userBean, LoggedUserBean.class);
+        scheduleDAO.searchSchedules(schedules,search,user);
         for(Schedule schedule : schedules){
             ScheduleBean scheduleBean = beanAndModelMapperFactory.fromModelToBean(schedule,Schedule.class);
-            scheduleBean.setId(schedule.getId());
             scheduleBean.setName(schedule.getName());
             scheduleBean.setCustomerBean(beanAndModelMapperFactory.fromModelToBean(schedule.getCustomer(), Customer.class));
             scheduleBean.setTrainerBean(beanAndModelMapperFactory.fromModelToBean(schedule.getTrainer(), Trainer.class));
         }
     }
 
-    public void searchExercises(List<ExerciseBean> exerciseBeans, String search){
+    public void searchExercises(List<ExerciseBean> exerciseBeans, String search, ScheduleBean scheduleBean){
         List<Exercise> exercises = new ArrayList<>();
-        exerciseDAO.searchExercises(exercises,search);
+        Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);
+        exerciseDAO.searchExercises(exercises,search,schedule);
         for(Exercise exercise : exercises){
             ExerciseBean exerciseBean = beanAndModelMapperFactory.fromModelToBean(exercise, Exercise.class);
-            exerciseBean.setId(exercise.getId());
             exerciseBean.setName(exercise.getName());
         }
 

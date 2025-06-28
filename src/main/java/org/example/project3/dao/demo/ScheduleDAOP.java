@@ -3,10 +3,7 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.ScheduleDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Customer;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-import org.example.project3.model.Subscription;
+import org.example.project3.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +40,13 @@ public class ScheduleDAOP implements ScheduleDAO {
     }
 
     @Override
-    public void searchSchedules(List<Schedule> schedules, String search) {
+    public void searchSchedules(List<Schedule> schedules, String search, LoggedUser user) {
         String lowerSearch = search.toLowerCase();
 
         for (Schedule schedule : SharedResources.getInstance().getSchedules().values()) {
-            if (schedule.getCustomer().getCredentials().getMail().toLowerCase().contains(lowerSearch)||
+            if (schedule.getCustomer().getCredentials().getMail().toLowerCase().contains(user.getCredentials().getMail().toLowerCase())&&
                     schedule.getTrainer().getCredentials().getMail().toLowerCase().contains(lowerSearch)||
+                    schedule.getId()==Long.parseLong(lowerSearch)||
                     schedule.getName().toLowerCase().contains(lowerSearch)
             ) {
                 schedules.add(schedule);

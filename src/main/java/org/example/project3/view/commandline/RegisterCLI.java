@@ -79,6 +79,7 @@ public class RegisterCLI extends AbstractState {
             System.out.println("Errore durante la registrazione. Riprova più tardi.");
         }
     }
+
     //metodo per chiedere l'input
     private String prompt(String message) {
         System.out.print(message);

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="505.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bodybuild.view.Homepage">
+<AnchorPane prefHeight="505.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.view.gui.CommonGUI">
    <children>
       <BorderPane prefHeight="506.0" prefWidth="762.0" style="-fx-background-color: #ffffff;">
          <top>
@@ -26,7 +26,7 @@
                                  <children>
                                     <ImageView fitHeight="76.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@img/Yellow%20and%20Black%20Modern%20Gym%20Center%20Logo.jpg" />
+                                          <Image url="@img/Logo.jpg" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -91,7 +91,7 @@
          <center>
             <AnchorPane prefHeight="429.0" prefWidth="762.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="311.0" layoutY="335.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Entra">
+                  <Button layoutX="311.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#goToLoginAndRegister" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Entra">
                      <font>
                         <Font name="Segoe UI Bold" size="16.0" />
                      </font>

@@ -47,9 +47,9 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     }
 
     @Override
-    public void searchExercises(List<Exercise> exercises, String search){
+    public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) {
         try (Connection conn = ConnectionSQL.getConnection()) {
-            ResultSet rs = ExerciseQuery.searchExercises(conn, search);
+            ResultSet rs = ExerciseQuery.searchExercises(conn, search, schedule);
             if (rs.next()) {
                 Exercise exercise = new Exercise(
                         rs.getString(NAME),

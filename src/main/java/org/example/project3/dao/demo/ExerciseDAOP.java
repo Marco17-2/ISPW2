@@ -40,10 +40,16 @@ public class ExerciseDAOP implements ExerciseDAO {
     }
 
     @Override
-    public void searchExercises(List<Exercise> exercises, String search) {
+    public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) {
         String lowerSearch = search.toLowerCase();
 
-        for (Exercise exercise : SharedResources.getInstance().getExercises().values()) {
+        Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
+//        if (storedSchedule == null) {
+//            throw new NoResultException(schedule.getClass().getSimpleName() + " non trovato");
+//        }
+        schedule.setExercises(storedSchedule.getExercises());
+
+        for (Exercise exercise : schedule.getExercises()) {
             if (exercise.getName().toLowerCase().contains(lowerSearch)) {
                 exercises.add(exercise);
             }

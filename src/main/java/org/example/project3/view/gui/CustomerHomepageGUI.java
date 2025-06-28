@@ -39,7 +39,7 @@ public class CustomerHomepageGUI extends CommonGUI{
     Button prenota;
 
     @FXML
-    public void seeRequest(MouseEvent event) {
+    public void seeSchedules(MouseEvent event) {
         ArrayList<ScheduleBean> scheduleBeans = new ArrayList<>();
         ScheduleDetailsController scheduleDetailsController = new ScheduleDetailsController();
         scheduleDetailsController.retriveScheduleDetails((CustomerBean)session.getUser(), scheduleBeans);
@@ -61,6 +61,7 @@ public class CustomerHomepageGUI extends CommonGUI{
         }
     }
 
+    @FXML
     protected void retrieveCourse(MouseEvent event){
         try{
             List<CourseBean> coursesBean = new ArrayList<>();

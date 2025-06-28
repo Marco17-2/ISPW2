@@ -9,14 +9,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ExerciseBean;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
+import org.example.project3.controller.ScheduleDetailsController;
+import org.example.project3.controller.SearchController;
 import org.example.project3.exceptions.EmptyFieldException;
 import org.example.project3.exceptions.LoadingException;
+import org.example.project3.model.Customer;
 import org.example.project3.model.Request;
 import org.example.project3.model.Schedule;
 import org.example.project3.patterns.observer.Observer;
@@ -25,6 +30,7 @@ import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RequestExerciseGUI extends CommonGUI implements Observer {
@@ -37,16 +43,22 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     Button indietro;
 
     @FXML
+    ImageView cancellaRicerca;
+
+    @FXML
     TextField ricerca;
 
     @FXML
     Button invia;
 
     @FXML
+    Button cerca;
+
+    @FXML
     TextField motivazione;
 
     @FXML
-    TableView<ExerciseBean> SheduleChoice;
+    TableView<ExerciseBean> ExerciseChoice;
 
     @FXML
     TableColumn<ExerciseBean, Long> ID;
@@ -76,6 +88,8 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     private final ToggleGroup rowToggleGroup = new ToggleGroup();
 
     private RequestBean requestBean;
+
+    private static List<ExerciseBean> exerciseList= new ArrayList<>();
 
     private TableCell<ExerciseBean, Void> createButtonCell() {
         return new TableCell<>() {
@@ -118,8 +132,11 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     @FXML
     public void loadExercises(RequestBean request) {
-        List<ExerciseBean> scheduleBeansParam = request.getScheduleBean().getExercisesBean();
-        requestBean = request;
+        List<ExerciseBean> exerciseBeansParam = request.getScheduleBean().getExercisesBean();
+        if(requestBean==null&&!exerciseBeansParam.isEmpty()){
+            requestBean = request;
+            exerciseList.addAll(exerciseBeansParam);
+        }
         //Imposto valori della tabella
         ID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         Name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -128,6 +145,8 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         Reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
         RestTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().toString()));
         Check.setCellFactory(param -> createButtonCell());
+        ExerciseChoice.getItems().clear();
+        ExerciseChoice.getItems().addAll(exerciseBeansParam);
     }
 
     @FXML
@@ -143,6 +162,12 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         }
     }
 
+    @FXML
+    public void cancelSearch(){
+        loadExercises(requestBean);
+        cancellaRicerca.setVisible(false);
+    }
+
 
     @Override
     public void update() {
@@ -155,6 +180,24 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     private void validateFields() throws EmptyFieldException {
         if (motivazione.getText().isEmpty()) {
             throw new EmptyFieldException("Inserisci una motivazione!");
+        }
+    }
+
+    private SearchController searchController = new SearchController();
+
+    @FXML
+    private void SearchButton() {
+        String searchText = ricerca.getText();
+        cancellaRicerca.setVisible(true);
+
+        if (searchText != null && !searchText.trim().isEmpty()) {
+            // Il campo non è vuoto, esegui la ricerca
+            List<ExerciseBean> exercisesTemp = new ArrayList<>();
+            searchController.searchExercises(exercisesTemp, searchText,requestBean.getScheduleBean());
+            RequestBean requestTemp= new RequestBean(new ScheduleBean(exercisesTemp));
+            loadExercises(requestTemp);
+        } else {
+            loadExercises(requestBean);
         }
     }
 

@@ -9,6 +9,6 @@ public interface ExerciseDAO {
     void addExercise(Schedule schedule, Exercise exercise);
     void updateExercise(Exercise exercise);
     void retrieveExercise(Exercise exercise);
-    void searchExercises(List<Exercise> exercises, String search);
+    void searchExercises(List<Exercise> exercises, String search, Schedule schedule);
     void deleteExercise(Exercise exercise);
 }

@@ -1,6 +1,7 @@
 package org.example.project3.query;
 
 import org.example.project3.exceptions.DbOperationException;
+import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 
@@ -53,12 +54,13 @@ public class ExerciseQuery {
         return pstmt.executeQuery();
     }
 
-    public static ResultSet searchExercises(Connection conn, String search) throws SQLException {
+    public static ResultSet searchExercises(Connection conn, String search, Schedule schedule) throws SQLException {
         try {
-            String query = "SELECT name, description FROM exercise WHERE LOWER(name) LIKE LOWER(?) ";
+            String query = "SELECT exercise.name, exercise.description FROM exercise JOIN participation ON participation.exercise = exercise.id JOIN schedule ON schedule.id = participation.schedule WHERE LOWER(name) LIKE LOWER(?) AND schedule.customer = LOWER(?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             String wildcard = "%" + search + "%";
             pstmt.setString(1, wildcard);
+            pstmt.setString(2, schedule.getCustomer().getCredentials().getMail());
             return pstmt.executeQuery();
         } catch (SQLException e) {
             System.out.println("Errore nella ricerca della scheda");

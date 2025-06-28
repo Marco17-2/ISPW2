@@ -14,5 +14,4 @@ import java.util.List;
 public class DashboardGUI extends CommonGUI {
     protected DashboardGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }
 
-
 }
