@@ -8,6 +8,7 @@ import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 
 import org.example.project3.beans.*;
 import org.example.project3.model.*;
+import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,10 @@ public class ReservationListController {
                 reservationBean = factory.fromModelToBean(reservation, Reservation.class);
                 reservationReqBean.add(reservationBean);
             }
+
+            ReservationManagerConcreteSubject reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getInstance();
+            reservationManagerConcreteSubject.loadReservations(reservationReq);
+
         }catch(Exception e){
             throw new NoResultException("Errore recupero descrizione trainer");
         }

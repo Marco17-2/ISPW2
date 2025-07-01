@@ -39,7 +39,7 @@ import java.util.Scanner;
                 AbstractState homeCLI;
                 if(credentials.getRole().equals(Role.TRAINER)){
                     user = setupTrainer(login, credentials);
-                    homeCLI = new CustomerHomepageCLI(user);
+                    homeCLI = new TrainerHomepageCLI(user);
                 } else {
                     user = setupCustomer(login, credentials);
                     homeCLI = new CustomerHomepageCLI(user);

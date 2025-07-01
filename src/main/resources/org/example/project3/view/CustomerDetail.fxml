@@ -10,15 +10,14 @@
       <Label layoutX="67.0" layoutY="107.0" text="First Name" />
       <Label layoutX="68.0" layoutY="164.0" text="Last Name" />
       <Label layoutX="74.0" layoutY="221.0" prefHeight="18.0" prefWidth="44.0" text="Mail" />
-      <TextField id="firstName" fx:id="firstName" editable="false" layoutX="66.0" layoutY="128.0" prefHeight="26.0" prefWidth="154.0" promptText="Null" />
-      <TextField id="lastName" fx:id="lastName" editable="false" layoutX="68.0" layoutY="186.0" prefHeight="26.0" prefWidth="153.0" promptText="Null" />
-      <TextField id="mail" fx:id="mail" editable="false" layoutX="68.0" layoutY="243.0" prefHeight="26.0" prefWidth="153.0" promptText="Null" />
+      <TextField id="FirstName" fx:id="firstName" editable="false" layoutX="66.0" layoutY="128.0" prefHeight="26.0" prefWidth="154.0" promptText="Null" />
+      <TextField id="LastName" fx:id="lastName" editable="false" layoutX="68.0" layoutY="186.0" prefHeight="26.0" prefWidth="153.0" promptText="Null" />
+      <TextField id="Mail" fx:id="mail" editable="false" layoutX="68.0" layoutY="243.0" prefHeight="26.0" prefWidth="153.0" promptText="Null" />
       <Label layoutX="365.0" layoutY="108.0" text="Date" />
-      <TextField id="dbirth" fx:id="dbirth" editable="false" layoutX="364.0" layoutY="127.0" prefHeight="26.0" prefWidth="150.0" promptText="Null" />
+      <TextField id="Birth" fx:id="dbirth" editable="false" layoutX="364.0" layoutY="127.0" prefHeight="26.0" prefWidth="150.0" promptText="Null" />
       <Label layoutX="362.0" layoutY="163.0" text="injury" />
-      <TextField id="injury" fx:id="injury" editable="false" layoutX="362.0" layoutY="183.0" prefHeight="26.0" prefWidth="149.0" promptText="Null" />
+      <TextField id="Injury" fx:id="injury" editable="false" layoutX="362.0" layoutY="183.0" prefHeight="26.0" prefWidth="149.0" promptText="Null" />
       <Label layoutX="360.0" layoutY="222.0" text="Gender" />
-      <TextField id="gender" fx:id="gender" editable="false" layoutX="361.0" layoutY="240.0" prefHeight="26.0" prefWidth="154.0" promptText="Null" />
-      <Button id="goback" fx:id="goBack" layoutX="268.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Go BAck" />
+      <TextField id="Gender" fx:id="gender" editable="false" layoutX="361.0" layoutY="240.0" prefHeight="26.0" prefWidth="154.0" promptText="Null" />
    </children>
 </AnchorPane>

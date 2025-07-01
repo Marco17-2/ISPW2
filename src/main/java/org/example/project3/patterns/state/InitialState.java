@@ -5,7 +5,7 @@ import org.example.project3.view.commandline.RegisterCLI;
 
 import java.util.Scanner;
 
-public class InitialState extends AbstractState{
+public class  InitialState extends AbstractState{
     public InitialState() {super();}
     @Override
     public void action(StateMachineConcrete context){

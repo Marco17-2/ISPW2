@@ -27,6 +27,8 @@ public class CustomerHomepageCLI extends AbstractState {
                         goNext(context, new RequestCLI((CustomerBean) user ));
                     case 2:
                         goNext(context, new RequestCLI((CustomerBean) user ));
+                    case 3:
+                        goNext(context, new CourseListCLI((CustomerBean) user));
                     case 0:
                         exit=true;
                         goNext(context, new InitialState());
@@ -42,6 +44,7 @@ public class CustomerHomepageCLI extends AbstractState {
     public void showMenu(){
         System.out.println("1. Prenotati per un corso");
         System.out.println("2. Richiedi la modifica di una scheda");
+        System.out.println("3. Prenota Corsi");
 //        System.out.println("3. Vedi progressi");
 //        System.out.println("4. Modifica prenotazione");
 //        System.out.println("5. Richiedi una scheda");
