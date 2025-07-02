@@ -41,7 +41,7 @@
                         </DropShadow>
                      </effect>
                   </TableView>
-                  <Button layoutX="55.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
+                  <Button fx:id="indietro" layoutX="55.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>

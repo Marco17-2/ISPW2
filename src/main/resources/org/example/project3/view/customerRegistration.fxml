@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
@@ -48,6 +50,9 @@
                            </color>
                         </InnerShadow>
                      </effect>
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
                   </TextField>
                   <Text layoutX="126.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="58.6593017578125">
                      <font>
@@ -62,6 +67,9 @@
                            </color>
                         </InnerShadow>
                      </effect>
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
                   </TextField>
                   <Text layoutX="127.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" wrappingWidth="58.6593017578125">
                      <font>
@@ -81,6 +89,9 @@
                            </color>
                         </InnerShadow>
                      </effect>
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
                   </PasswordField>
                   <TextField fx:id="cognome" layoutX="452.0" layoutY="98.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-radius: 22px; -fx-background-color: #f7f7f7;">
                      <effect>
@@ -90,6 +101,9 @@
                            </color>
                         </InnerShadow>
                      </effect>
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
                   </TextField>
                   <Text layoutX="470.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome" wrappingWidth="95.45928955078125">
                      <font>
@@ -129,6 +143,25 @@
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
+                  <Button layoutX="48.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#goToLoginAndRegister" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/arrow.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </center>

@@ -6,8 +6,6 @@ import org.example.project3.model.Request;
 public class RequestMapper implements BeanAndModelMapper<RequestBean, Request>{
     ScheduleMapper scheduleMapper = new ScheduleMapper();
     ExerciseMapper exerciseMapper = new ExerciseMapper();
-    CustomerMapper customerMapper = new CustomerMapper();
-    CourseMapper courseMapper = new CourseMapper();
     @Override
     public Request fromBeanToModel(RequestBean bean) {
         return new Request(bean.getID(), scheduleMapper.fromBeanToModel(bean.getScheduleBean()), exerciseMapper.fromBeanToModel(bean.getExerciseBean()), bean.getReason(), bean.getDateTime() );

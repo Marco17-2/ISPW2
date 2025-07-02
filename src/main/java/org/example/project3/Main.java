@@ -13,6 +13,7 @@ import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.MapperRegistration;
 import org.example.project3.utilities.others.mappers.Session;
 import org.example.project3.view.gui.CustomerHomepageGUI;
+import org.example.project3.view.gui.DashboardGUI;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -41,6 +42,7 @@ public class Main extends Application {
                         System.out.println("Scelta non valida");
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println(e.getMessage());
                 scanner.nextLine();
             }
@@ -55,7 +57,7 @@ public class Main extends Application {
         FXMLPathConfig fxmlPathConfig = new FXMLPathConfig("/paths.properties");
         Session session = new Session();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath("HOMEPAGE")));
-        loader.setControllerFactory(c -> new CustomerHomepageGUI(fxmlPathConfig, session)); //Controller homepage
+        loader.setControllerFactory(c -> new DashboardGUI(fxmlPathConfig, session)); //Controller homepage
         Parent rootParent = loader.load();
         Scene scene = new Scene(rootParent);
         stage.setTitle("Bodybuild");

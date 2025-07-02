@@ -14,6 +14,7 @@ import org.example.project3.beans.*;
 
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public abstract class CommonGUI {
@@ -35,9 +36,14 @@ public abstract class CommonGUI {
 
 
     @FXML
-    protected void goToLogin(MouseEvent event) {
+    public void goToLogin(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(LOGIN));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(LOGIN);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(LOGIN));
             fxmlLoader.setControllerFactory( c->new LoginGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -50,9 +56,14 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToCustomerHomepage(MouseEvent event) {
+    public void goToCustomerHomepage(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CUSTOMER_HOMEPAGE));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(CUSTOMER_HOMEPAGE);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CUSTOMER_HOMEPAGE));
             fxmlLoader.setControllerFactory( c->new CustomerHomepageGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -65,9 +76,14 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToRequestSchedule(MouseEvent event) {
+    public void goToRequestSchedule(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(REQUEST_MODIFY));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(REQUEST_MODIFY);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(REQUEST_MODIFY));
             fxmlLoader.setControllerFactory( c->new RequestScheduleGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -80,9 +96,14 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToRequestExercise(MouseEvent event) {
+    public void goToRequestExercise(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(SCHEDULE_DETAILS));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(SCHEDULE_DETAILS);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(SCHEDULE_DETAILS));
             fxmlLoader.setControllerFactory( c->new RequestExerciseGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -95,9 +116,14 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToRegistration(MouseEvent event) {
+    public void goToRegistration(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CUSTOMER_REGISTRATION));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(CUSTOMER_REGISTRATION);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CUSTOMER_REGISTRATION));
             fxmlLoader.setControllerFactory( c->new RegistrationGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -110,10 +136,14 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToLoginAndRegister(MouseEvent event) {
+    public void goToLoginAndRegister(MouseEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(LOGIN_AND_REGISTER));
-            fxmlLoader.setControllerFactory( c->new RegistrationGUI(fxmlPathConfig, session));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(LOGIN_AND_REGISTER);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+            fxmlLoader.setControllerFactory( c->new LoginAndRegistrationGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -125,10 +155,10 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToHomepage(MouseEvent event) {
+    public void goToHomepage(MouseEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(HOMEPAGE));
-            fxmlLoader.setControllerFactory( c->new RegistrationGUI(fxmlPathConfig, session));
+            fxmlLoader.setControllerFactory( c->new DashboardGUI(fxmlPathConfig, session));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -140,12 +170,12 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToTrainerDescription(MouseEvent event, CourseBean coursebean){
+    public void goToTrainerDescription(MouseEvent event, CourseBean coursebean){
 
     }
 
     @FXML
-    protected void goToCourseList(MouseEvent event, List<CourseBean> coursesBean){
+    public void goToCourseList(MouseEvent event, List<CourseBean> coursesBean){
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CourseList.fxml"));
@@ -160,7 +190,7 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToTrainerDetail(MouseEvent event, CourseBean coursebean){
+    public void goToTrainerDetail(MouseEvent event, CourseBean coursebean){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TrainerDetail.fxml"));
             fxmlLoader.setControllerFactory(c -> new TrainerDetailGUI(session, fxmlPathConfig));
@@ -174,7 +204,7 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToCourseReservationRequest(MouseEvent event, List<ReservationBean> reservationReqBean){
+    public void goToCourseReservationRequest(MouseEvent event, List<ReservationBean> reservationReqBean){
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/RservationReq.fxml"));
@@ -190,7 +220,7 @@ public abstract class CommonGUI {
     }
 
     @FXML
-    protected void goToCustomerDetail(MouseEvent event, ReservationBean reservationBean){
+    public void goToCustomerDetail(MouseEvent event, ReservationBean reservationBean){
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/CustomerDetail.fxml"));
@@ -208,7 +238,7 @@ public abstract class CommonGUI {
     //aggiugnere la chiamata di questa funzione nella schermata login trainer
 
     @FXML
-    protected void goToTrainerHome(MouseEvent event){
+    public void goToTrainerHome(MouseEvent event){
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/TrainerHomepage.fxml"));

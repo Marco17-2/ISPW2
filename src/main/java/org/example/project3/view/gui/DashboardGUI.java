@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardGUI extends CommonGUI {
-    protected DashboardGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }
+    public DashboardGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }
 
+    @FXML
+    public void startButton(MouseEvent event){
+        goToLoginAndRegister(event);
+    }
 }

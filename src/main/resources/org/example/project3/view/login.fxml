@@ -5,6 +5,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
@@ -46,6 +48,9 @@
                            </color>
                         </InnerShadow>
                      </effect>
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
                   </TextField>
                   <Text layoutX="296.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="58.6593017578125">
                      <font>
@@ -65,6 +70,9 @@
                            </color>
                         </InnerShadow>
                      </effect>
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
                   </PasswordField>
                   <Text layoutX="266.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai dimenticato la password?" textAlignment="CENTER" wrappingWidth="231.45938110351562">
                      <font>
@@ -76,6 +84,25 @@
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
+                  <Button layoutX="64.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#goToLoginAndRegister" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <graphic>
+                        <ImageView fitHeight="55.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/arrow.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </center>
