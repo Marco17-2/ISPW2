@@ -102,7 +102,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
     }
 
 
-
     @FXML
     public void printCourseList(List<CourseBean> courseBeans){
 

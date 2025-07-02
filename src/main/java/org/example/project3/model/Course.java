@@ -9,14 +9,14 @@ public class Course {
     private int courseID;
     private String courseName;
     private Trainer trainer;
-    private String slots;
-    private String remainingSlots;
+    private int slots;
+    private int remainingSlots;
     private String duration;
     private String level;
     private String day;
     private String hour;
 
-    public Course(String courseName, String slots, String remainingSlots, String duration, String level, String day, String hour) {
+    public Course(String courseName, int slots, int remainingSlots, String duration, String level, String day, String hour) {
 
         this.courseName = courseName;
         this.trainer = null;
@@ -46,7 +46,7 @@ public class Course {
         this.trainer = trainer;
     }
 
-    public void setSlots(String slots) {
+    public void setSlots(int slots) {
         this.slots = slots;
     }
 
@@ -70,7 +70,7 @@ public class Course {
         return trainer;
     }
 
-    public String getSlots() {
+    public int getSlots() {
         return slots;
     }
 
@@ -98,11 +98,11 @@ public class Course {
         return hour;
     }
 
-    public String getRemainingSlots() {
+    public int getRemainingSlots() {
         return remainingSlots;
     }
 
-    public void setRemainingSlots(String remainingSlots) {
+    public void setRemainingSlots(int remainingSlots) {
         this.remainingSlots = remainingSlots;
     }
 }

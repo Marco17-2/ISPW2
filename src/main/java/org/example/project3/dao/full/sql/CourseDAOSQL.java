@@ -33,8 +33,8 @@ public class CourseDAOSQL implements CourseDAO{
             while(rs.next()) {
                 Course course = new Course(
                         rs.getString(NAME),
-                        rs.getString(SLOTS),
-                        rs.getString(REMAINING),
+                        rs.getInt(SLOTS),
+                        rs.getInt(REMAINING),
                         rs.getString(DURATION),
                         rs.getString(LEVEL),
                         rs.getString(DAY),

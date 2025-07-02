@@ -12,13 +12,13 @@ public class CourseBean {
     private TrainerBean trainerBean;
     private int slots;
     private int remainingSlots;
-    private Duration duration;
+    private String duration;
     private String level;
     private String day;
     private String hour;
 //    private List<SessionCourse> sessions;
 
-    public CourseBean(int courseID, String courseName, TrainerBean trainerBean, int slots,int remainingSlots, Duration duration, String level, String day, String hour) {
+    public CourseBean(int courseID, String courseName, TrainerBean trainerBean, int slots,int remainingSlots, String duration, String level, String day, String hour) {
 
         this.courseID = courseID;
         this.courseName = courseName;
@@ -73,11 +73,11 @@ public class CourseBean {
         this.remainingSlots = remainingSlots;
     }
 
-    public Duration getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
