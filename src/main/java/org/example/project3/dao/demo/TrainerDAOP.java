@@ -65,13 +65,13 @@ public class TrainerDAOP implements TrainerDAO {
     @Override
     public Trainer retrieveTrainerCourse(Course course) {
 
-        for(Course courses: SharedResources.getInstance().getCourses().values()) {
-
-            if(matchesCourse(courses, course.getCourseName())){
-                return courses.getTrainer();
-            }
+        Trainer trainer = SharedResources.getInstance().getTrainerCourse().get(course.getCourseName());
+        if (trainer != null) {
+            return trainer;
         }
-        throw new NoResultException();
+        else {
+            throw new NoResultException();
+        }
     }
 
     @Override

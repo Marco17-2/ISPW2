@@ -20,6 +20,8 @@ public class SharedResources {
     private final Map<String, Credentials> userTable = new ConcurrentHashMap<>();
     private final Map<Long, List<Request>> requestsSent = new HashMap<>();
 
+    //associazione corso-trainer
+    private final Map<String, Trainer> trainerCourse = new ConcurrentHashMap<>();
 
     //Verificarre l'utilità:
 
@@ -89,6 +91,9 @@ public class SharedResources {
 
     public Map<String, List<Reservation>> getReservations() { return reservations; }
     public Map<String, List<Reservation>> getReservationRequests() { return reservationRequests; }
+    public Map<String, Trainer> getTrainerCourse() {
+        return trainerCourse;
+    }
 
 
 }

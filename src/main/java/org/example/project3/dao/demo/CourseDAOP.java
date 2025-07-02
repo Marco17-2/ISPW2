@@ -11,10 +11,6 @@ public class CourseDAOP implements CourseDAO {
 
     @Override
     public void searchCourses(List<Course> courses) throws NoResultException {
-        for(Course c : SharedResources.getInstance().getCourses().values()){
-            if(c.getTrainer() != null && c.getTrainer().getCredentials() != null){
-                courses.add(c);
-                }
-            }
+        courses.addAll(SharedResources.getInstance().getCourses().values());
         }
 }

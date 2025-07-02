@@ -8,7 +8,6 @@ public class Course {
 
     private int courseID;
     private String courseName;
-    private Trainer trainer;
     private int slots;
     private int remainingSlots;
     private String duration;
@@ -19,14 +18,12 @@ public class Course {
     public Course(String courseName, int slots, int remainingSlots, String duration, String level, String day, String hour) {
 
         this.courseName = courseName;
-        this.trainer = null;
         this.slots = slots;
         this.duration = duration;
         this.remainingSlots = remainingSlots;
         this.level = level;
         this.day = day;
         this.hour = hour;
-
 
     }
 
@@ -40,10 +37,6 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
     }
 
     public void setSlots(int slots) {
@@ -64,10 +57,6 @@ public class Course {
 
     public String getCourseName() {
         return courseName;
-    }
-
-    public Trainer getTrainer() {
-        return trainer;
     }
 
     public int getSlots() {
