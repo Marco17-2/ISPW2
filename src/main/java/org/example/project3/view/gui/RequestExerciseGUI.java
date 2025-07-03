@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ExerciseBean;
@@ -81,6 +82,9 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     @FXML
     TableColumn<ExerciseBean, Void> Check;
 
+    @FXML
+    Text error;
+
     public void initializeObserver() {requestManagerConcreteSubject.addObserver(this);}
 
     private final RequestModifyController requestModifyController = new RequestModifyController();
@@ -118,7 +122,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                     ExerciseBean current = getTableView().getItems().get(getIndex());
 
                     // Se questa riga è quella selezionata, evidenziala
-                    if (current.equals(requestBean.getExerciseBean())) {
+                    if (requestBean!=null&&current.equals(requestBean.getExerciseBean())) {
                         radioButton.setSelected(true);
                     } else {
                         radioButton.setSelected(false);
@@ -133,7 +137,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     @FXML
     public void loadExercises(RequestBean request) {
         List<ExerciseBean> exerciseBeansParam = request.getScheduleBean().getExercisesBean();
-        if(requestBean==null&&!exerciseBeansParam.isEmpty()){
+        if(requestBean==null&&exerciseList.isEmpty()){
             requestBean = request;
             exerciseList.addAll(exerciseBeansParam);
         }
@@ -151,20 +155,29 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     @FXML
     public void send(MouseEvent event) throws EmptyFieldException {
-        validateFields();
-        requestBean.setReason(motivazione.getText());
-        if(!requestModifyController.hasAlreadySentARequest(requestBean.getScheduleBean())){
-            requestModifyController.sendRequest(requestBean);
-            update();
-            goToCustomerHomepage(event);
-        }else{
-            System.out.println("Hai già inviato una richiesta");
+        try{
+            validateFields();
+            requestBean.setReason(motivazione.getText());
+            if(!requestModifyController.hasAlreadySentARequest(requestBean.getScheduleBean())){
+                requestModifyController.sendRequest(requestBean);
+                update();
+                goToCustomerHomepage(event);
+            }else{
+                System.out.println("Hai già inviato una richiesta");
+                error.setText("Hai già inviato una richiesta per questo esercizio di questa scheda!");
+                error.setVisible(true);
+            }
+        }catch(EmptyFieldException e){
+            error.setText(e.getMessage());
+            error.setVisible(true);
         }
+
     }
 
     @FXML
     public void cancelSearch(){
         loadExercises(requestBean);
+        ricerca.setText("");
         cancellaRicerca.setVisible(false);
     }
 
@@ -175,6 +188,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         alert.setTitle("Invio richiesta");
         alert.setHeaderText(null);
         alert.setContentText("Richiesta inviata con successo");
+        alert.showAndWait();
     }
 
     private void validateFields() throws EmptyFieldException {

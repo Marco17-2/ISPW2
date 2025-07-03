@@ -16,6 +16,7 @@ import java.util.List;
 
 public class CourseDAOSQL implements CourseDAO{
 
+    private static final String ID="id";
     private static final String NAME = "name";
     private static final String SLOTS = "slots";
     private static final String REMAINING = "remaining";
@@ -32,6 +33,7 @@ public class CourseDAOSQL implements CourseDAO{
 
             while(rs.next()) {
                 Course course = new Course(
+                        rs.getInt(ID),
                         rs.getString(NAME),
                         rs.getInt(SLOTS),
                         rs.getInt(REMAINING),

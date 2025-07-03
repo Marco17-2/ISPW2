@@ -50,6 +50,7 @@ public class CourseListController
             requestDAO.addCourseRequest(reservation);
             ReservationManagerConcreteSubject reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getInstance();
             reservationManagerConcreteSubject.addReservationReq(reservation);
+
         }catch(Exception e) {
             throw new NoResultException("Errore invio richiesta");
         }

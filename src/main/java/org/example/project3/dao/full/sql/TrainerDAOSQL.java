@@ -26,11 +26,11 @@ public class TrainerDAOSQL implements TrainerDAO {
 
     private static final String NAME = "name";
     private static final String SURNAME = "surname";
-    private static final String MAIL = "mail";
+    private static final String MAIL = "email";
     private static final String GENDER = "gender";
     private static final String ONLINE = "online";
     private static final String BIRTHDATE = "birthDate";
-    private static final String SPECIALIZZATION = "specialization";
+    private static final String SPECIALIZATION = "description";
 
     @Override
     public boolean emailExists(String mail)  {
@@ -117,7 +117,7 @@ public class TrainerDAOSQL implements TrainerDAO {
 
             ResultSet rs = TrainerQuery.retrieveSpecializzation(conn, course.getCourseName());
             while(rs.next()){
-                spec.add(rs.getString(SPECIALIZZATION));
+                spec.add(rs.getString(SPECIALIZATION));
             }
             return spec;
 

@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 
 public class RequestQuery {
 
-    public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason, LocalDateTime date) throws DbOperationException {
-        String query = "INSERT INTO request (schedule, exercise, reason, date) VALUES (?, ?, ?, ?)";
+    public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason) throws DbOperationException {
+        String query = "INSERT INTO request (schedule, exercise, reason, datetime) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setLong(1, schedule.getId());
             preparedStatement.setLong(2, exercise.getId());
             preparedStatement.setString(3, reason);
-            preparedStatement.setObject(4, date);
+            preparedStatement.setObject(4, LocalDateTime.now());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'invio della richiesta", e);
+            throw new DbOperationException("Errore nell'invio della richiesta db: " + e.getMessage(), e);
         }
     }
 
@@ -92,18 +92,18 @@ public class RequestQuery {
         }
     }
 
-    public static void addCourseRequest(Connection conn, String course, String customer, String date, String hour) throws SQLException, DbOperationException {
-        String query = "INSERT INTO courseRequest VALUES (?, ?, ?, ?, ?, ?)";
+    public static void addCourseRequest(Connection conn,  String customer, Integer course, String date, String hour) throws SQLException, DbOperationException {
+        String query = "INSERT INTO reservation(customer,course,date,hour) VALUES (?, ?, ?, ?)";
 
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, customer);
-            pstmt.setString(2, course);
+            pstmt.setInt(2, course);
             pstmt.setObject(3, date);
             pstmt.setString(4, hour);
 
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
         }catch (SQLException e) {
-            throw new DbOperationException("Errore invio richieste", e);
+            throw new DbOperationException("Errore invio richieste"+e.getMessage(), e);
         }
 
     }

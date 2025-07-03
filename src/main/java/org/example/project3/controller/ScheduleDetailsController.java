@@ -20,7 +20,6 @@ public class ScheduleDetailsController {
     List<Exercise> exercises = new ArrayList<>();
     List<ExerciseBean> exerciseBeans = new ArrayList<>();
     List<Schedule> schedules = new ArrayList<>();
-    Integer i=0;
 
     public ScheduleDetailsController(){
         this.beanAndModelMapperFactory = BeanAndModelMapperFactory.getInstance();
@@ -28,33 +27,59 @@ public class ScheduleDetailsController {
     }
 
     public void retriveScheduleDetails(CustomerBean customerBean, List<ScheduleBean> scheduleBeans){
-        // converte il bean in model per poter cercare la scheda visto che non si effettua con il bean
         List<Schedule> schedules = new ArrayList<>();
 
         Customer customer = beanAndModelMapperFactory.fromBeanToModel(customerBean, CustomerBean.class);
         scheduleDAO.retrieveSchedule(customer, schedules);
-        for(i=0;i<schedules.size();i++){
+
+        // --- AGGIUNGI QUI ---
+        System.out.println("DEBUG - Controller: Dopo chiamata DAO, 'schedules' list size: " + schedules.size());
+        // --- FINE AGGIUNTA ---
+
+        for(int i = 0; i < schedules.size(); i++){
             ScheduleBean scheduleBean = beanAndModelMapperFactory.fromModelToBean(schedules.get(i), Schedule.class);
 
             //inserisce i dati nel bean
+            scheduleBean.setId(schedules.get(i).getId());
             scheduleBean.setName(schedules.get(i).getName());
             scheduleBean.setCustomerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getCustomer(), Customer.class));
             scheduleBean.setTrainerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getTrainer(), Trainer.class));
 
             scheduleBeans.add(scheduleBean);
-
         }
+        // --- AGGIUNGI QUI ---
+        System.out.println("DEBUG - Controller: Dopo ciclo di mapping, 'scheduleBeans' list size: " + scheduleBeans.size());
+        // --- FINE AGGIUNTA ---
     }
+
+
+//    public void retriveScheduleDetails(CustomerBean customerBean, List<ScheduleBean> scheduleBeans){
+//        // converte il bean in model per poter cercare la scheda visto che non si effettua con il bean
+//        List<Schedule> schedules = new ArrayList<>();
+//
+//        Customer customer = beanAndModelMapperFactory.fromBeanToModel(customerBean, CustomerBean.class);
+//        scheduleDAO.retrieveSchedule(customer, schedules);
+//        for(int i=0;i<schedules.size();i++){
+//            ScheduleBean scheduleBean = beanAndModelMapperFactory.fromModelToBean(schedules.get(i), Schedule.class);
+//
+//            //inserisce i dati nel bean
+//            scheduleBean.setName(schedules.get(i).getName());
+//            scheduleBean.setCustomerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getCustomer(), Customer.class));
+//            scheduleBean.setTrainerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getTrainer(), Trainer.class));
+//
+//            scheduleBeans.add(scheduleBean);
+//
+//        }
+//    }
 
     public void retriveExercises(ScheduleBean scheduleBean){
         Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);
         scheduleDAO.retrieveExercises(schedule);
-
         exercises.clear();
         exercises = schedule.getExercises();
         exerciseBeans.clear();
-        for(i=0;i<exercises.size();i++){
-            exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exerciseBeans.get(i), ExerciseBean.class));
+        for(int i=0;i<exercises.size();i++){
+            exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));
         }
         scheduleBean.setExercisesBean(exerciseBeans);
     }

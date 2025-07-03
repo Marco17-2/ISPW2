@@ -15,8 +15,8 @@ public class Course {
     private String day;
     private String hour;
 
-    public Course(String courseName, int slots, int remainingSlots, String duration, String level, String day, String hour) {
-
+    public Course(Integer id,String courseName, int slots, int remainingSlots, String duration, String level, String day, String hour) {
+        this.courseID = id;
         this.courseName = courseName;
         this.slots = slots;
         this.duration = duration;

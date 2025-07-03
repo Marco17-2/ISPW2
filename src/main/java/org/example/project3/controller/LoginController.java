@@ -37,7 +37,7 @@ public class LoginController {
         try{
             Credentials credentials = beanAndModelMapperFactory.fromBeanToModel(credentialsBean, CredentialsBean.class);
             loginGeneric.login(credentials);
-            credentials.setRole(credentialsBean.getRole());
+            credentialsBean.setRole(credentials.getRole());
         } catch (WrongEmailOrPasswordException e){
             throw new WrongEmailOrPasswordException(e.getMessage());
         } catch (LoginAndRegistrationException e){

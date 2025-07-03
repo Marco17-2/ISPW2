@@ -13,7 +13,7 @@ public class CredentialsQuery {
     }
 
     public static int registerUser(Connection conn, Credentials credentials) throws SQLException, DbOperationException {
-        String query = "INSERT INTO users (mail, password, role) VALUES (?, ?, ?)";
+        String query = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, credentials.getMail());
             pstmt.setString(2, credentials.getPassword());
@@ -25,7 +25,7 @@ public class CredentialsQuery {
     }
 
     public static ResultSet logQuery(Connection conn, Credentials credentials) throws SQLException {
-        String query = "SELECT mail, password, role FROM users WHERE mail = ? AND password = ?";
+        String query = "SELECT email, password, role FROM users WHERE email = ? AND password = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, credentials.getMail());
         pstmt.setString(2, credentials.getPassword());
@@ -33,7 +33,7 @@ public class CredentialsQuery {
     }
 
     public static int checkMail(Connection conn, String mail) throws SQLException, DbOperationException {
-        String query = "SELECT COUNT(*) FROM users WHERE mail = ?";
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, mail);
             ResultSet result = pstmt.executeQuery();
@@ -45,7 +45,7 @@ public class CredentialsQuery {
     }
 
     public static void modifyCredentials(Connection conn, String mail, String password, String oldMail) throws DbOperationException {
-        String query = "UPDATE users SET mail = ?, password = ? WHERE mail = ?";
+        String query = "UPDATE users SET mail = ?, password = ? WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, mail);
             pstmt.setString(2, password);

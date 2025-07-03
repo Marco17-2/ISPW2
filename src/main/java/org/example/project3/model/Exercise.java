@@ -19,13 +19,13 @@ public class Exercise {
         this.restTime = restTime;
     }
 
-    public Exercise(String name, String description) {
+    public Exercise( String name, String description, Integer numberSeries, Integer numberReps, RestTime restTime) {
         this.id = 0;
         this.name = name;
         this.description = description;
-        this.numberSeries = 0;
-        this.numberReps = 0;
-        this.restTime = null;
+        this.numberSeries = numberSeries;
+        this.numberReps = numberReps;
+        this.restTime = restTime;
     }
 
     public void setName(String name) {

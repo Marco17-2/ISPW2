@@ -14,23 +14,84 @@ public class CustomerQuery {
     public static void registerCustomer(Connection conn, Customer customer) throws SQLException, MailAlreadyExistsException, DbOperationException {
         String query = "INSERT INTO customer (mail, name, surname, gender, online, birthday, subscription, injury, startDate) VALUES (?,?,?,?,?,?,?,?,?)";
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+            System.out.println("DEBUG: Esecuzione query INSERT per cliente.");
+            System.out.println("DEBUG: Parametro 1 (mail): " + customer.getCredentials().getMail());
+            System.out.println("DEBUG: Parametro 2 (name): " + customer.getName());
+            System.out.println("DEBUG: Parametro 3 (surname): " + customer.getSurname());
+            System.out.println("DEBUG: Parametro 4 (gender): " + customer.getGender());
+            System.out.println("DEBUG: Parametro 5 (online): " + customer.isOnline());
+            System.out.println("DEBUG: Parametro 6 (birthday): " + customer.getBirthday());
+
+            // Aggiungi un controllo per subscription qui per evitare NPE prima della pstmt.setString
+            String subscriptionName = null;
+            if (customer.getSubscription() != null) {
+                subscriptionName = customer.getSubscription().getName();
+            }
+            System.out.println("DEBUG: Parametro 7 (subscription): " + subscriptionName);
+            pstmt.setString(7, subscriptionName); // Usa la variabile temporanea che può essere null
+
+            System.out.println("DEBUG: Parametro 8 (injury): " + customer.getInjury());
+            System.out.println("DEBUG: Parametro 9 (startDate): " + LocalDate.now());
+
+
             pstmt.setString(1, customer.getCredentials().getMail());
             pstmt.setString(2, customer.getName());
             pstmt.setString(3, customer.getSurname());
             pstmt.setString(4, customer.getGender());
             pstmt.setBoolean(5, customer.isOnline());
             pstmt.setDate(6, java.sql.Date.valueOf(customer.getBirthday()));
-            pstmt.setString(7, customer.getSubscription().getName());
+            // Modifica qui per usare subscriptionName
+            pstmt.setString(7, subscriptionName); // Ora passerà null se customer.getSubscription() è null
             pstmt.setString(8, customer.getInjury());
             pstmt.setDate(9, Date.valueOf(LocalDate.now()));
+
             int rs = pstmt.executeUpdate();
+            System.out.println("DEBUG: Righe affette: " + rs); // Questo è FONDAMENTALE!
+
             if (rs == 0) {
-                throw new MailAlreadyExistsException("Mail già esistente");
+                // Questo blocco viene raggiunto se l'insert non ha affetto righe.
+                // Se non è per mail duplicata, c'è un altro problema che impedisce l'inserimento.
+                throw new MailAlreadyExistsException("Mail già esistente o registrazione fallita (nessuna riga affetta).");
             }
-        }catch (SQLException e) {
-            throw new DbOperationException("Errore nella registrazione", e);
+            System.out.println("DEBUG: Inserimento cliente avvenuto con successo.");
+        } catch (SQLException e) {
+            System.err.println("ERRORE SQL in CustomerQuery.registerCustomer:");
+            System.err.println("Messaggio: " + e.getMessage());
+            System.err.println("SQLState: " + e.getSQLState());
+            System.err.println("ErrorCode: " + e.getErrorCode());
+            // Il resto della gestione delle eccezioni rimane come prima
+            if (e.getSQLState().startsWith("23")) {
+                throw new MailAlreadyExistsException("Mail già esistente (violazione di integrità).");
+            }
+            throw new DbOperationException("Errore nella registrazione dell'utente (SQL): " + e.getMessage(), e);
+        } catch (NullPointerException npe) {
+            // Questo catch specifico per rilevare NPE durante la preparazione dei parametri
+            System.err.println("ERRORE: NullPointerException durante l'assegnazione dei parametri SQL: " + npe.getMessage());
+            throw new DbOperationException("Errore interno: Dati mancanti o non validi (es. Abbonamento nullo).", npe);
         }
     }
+
+
+//    public static void registerCustomer(Connection conn, Customer customer) throws SQLException, MailAlreadyExistsException, DbOperationException {
+//        String query = "INSERT INTO customer (mail, name, surname, gender, online, birthday, subscription, injury, startDate) VALUES (?,?,?,?,?,?,?,?,?)";
+//        try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+//            pstmt.setString(1, customer.getCredentials().getMail());
+//            pstmt.setString(2, customer.getName());
+//            pstmt.setString(3, customer.getSurname());
+//            pstmt.setString(4, customer.getGender());
+//            pstmt.setBoolean(5, customer.isOnline());
+//            pstmt.setDate(6, java.sql.Date.valueOf(customer.getBirthday()));
+//            pstmt.setString(7, customer.getSubscription().getName());
+//            pstmt.setString(8, customer.getInjury());
+//            pstmt.setDate(9, Date.valueOf(LocalDate.now()));
+//            int rs = pstmt.executeUpdate();
+//            if (rs == 0) {
+//                throw new MailAlreadyExistsException("Mail già esistente");
+//            }
+//        }catch (SQLException e) {
+//            throw new DbOperationException("Errore nella registrazione", e);
+//        }
+//    }
 
 
 

@@ -1,7 +1,10 @@
 package org.example.project3.view.gui;
 
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.scene.text.Text;
 import org.example.project3.beans.*;
 import org.example.project3.controller.CourseListController;
 import org.example.project3.exceptions.NoResultException;
@@ -34,9 +37,9 @@ public class CourseListGUI extends CommonGUI implements Observer{
     @FXML
     private TableColumn<CourseBean, Void> trainerButtonColumn;
     @FXML
-    private TableColumn<CourseBean, String> slotsColumn;
+    private TableColumn<CourseBean, Integer> slotsColumn;
     @FXML
-    private TableColumn<CourseBean, String> remainingColumn;
+    private TableColumn<CourseBean, Integer> remainingColumn;
     @FXML
     private TableColumn<CourseBean, String> durationColumn;
     @FXML
@@ -46,10 +49,9 @@ public class CourseListGUI extends CommonGUI implements Observer{
     @FXML
     private TableColumn<CourseBean, Void> buttonColumn;
     @FXML
-    private Label message; // da aggiungere
+    private Text message; // da aggiungere
 
-    //private final RequestManagerConcreteSubject requestManagerConcreteSubject;   ConcreteSubject
-
+    //private final RequestManagerConcreteSubject requestManagerConcreteSubject;
 
     private TableCell<CourseBean, Void> createButtonCell(String buttonText){
         return new TableCell<>(){
@@ -59,6 +61,7 @@ public class CourseListGUI extends CommonGUI implements Observer{
                 btn.setOnMouseClicked(event -> {
                     CourseBean courseBean = getTableView().getItems().get(getIndex());
                     manageReservationReq(courseBean);
+                    goToCustomerHomepage(event);
                 });
                 return btn;
             }
@@ -107,13 +110,13 @@ public class CourseListGUI extends CommonGUI implements Observer{
 
         //Associazione colonne ai campi
         ObservableList<CourseBean> courseBeanList = FXCollections.observableList(courseBeans);
-        courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        slotsColumn.setCellValueFactory(new PropertyValueFactory<>("slots"));
-        remainingColumn.setCellValueFactory(new PropertyValueFactory<>("remaining"));
-        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        dayColumn.setCellValueFactory(new PropertyValueFactory<>("day"));
-        hourColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));
-        buttonColumn.setCellFactory(param -> createButtonCell("Accetta"));
+        courseNameColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getCourseName()));
+        slotsColumn.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getSlots()));
+        remainingColumn.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getRemainingSlots()));
+        durationColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getDuration()));
+        dayColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getDay()));
+        hourColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getHour()));
+        buttonColumn.setCellFactory(param -> createButtonCell("Iscriviti"));
         trainerButtonColumn.setCellFactory(param -> createViewCell("Detail"));
 
         listCourse.setItems(courseBeanList);
@@ -128,14 +131,15 @@ public class CourseListGUI extends CommonGUI implements Observer{
         ReservationBean reservationReqBean = new ReservationBean(customerBean, courseBean, day, hour);
         CourseListController courseListController = new CourseListController();
         courseListController.sendReservationReq(reservationReqBean);
-        message.setText("Richiesta inviata con successo");
-        message.setVisible(true);
+        update();
 
     }
 
 
     @Override
     public void update(){
+        message.setText("Richiesta inviata con successo");
+        message.setVisible(true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Invio richiesta");
         alert.setHeaderText(null);

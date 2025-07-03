@@ -28,7 +28,7 @@ public class ScheduleQuery {
 
     public static ResultSet retrieveSchedules(Connection conn, String mailCustomer) throws SQLException {
         //Mettere un order by date (da più a meno recente)
-        String query = "SELECT name, customer, trainer FROM schedule WHERE customer = ? ";
+        String query = "SELECT id, name, customer, trainer FROM schedule WHERE customer = ? ";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mailCustomer);
         return pstmt.executeQuery();
@@ -36,9 +36,9 @@ public class ScheduleQuery {
 
     public static ResultSet retrieveExercises(Connection conn, Schedule schedule) throws SQLException {
         //Mettere un order by date (da più a meno recente)
-        String query = "SELECT exercise.name, exercise.description, exercise.numberSeries, exercise.numberReps, exercise.restTime FROM exercise JOIN participation ON exercise.id = participation.exercise JOIN schedule ON participation.schedule = schedule.id WHERE schedule.id = ? ";
+        String query = "SELECT exercise.id, exercise.name, exercise.description, exercise.numberSeries, exercise.numberReps, exercise.restTime FROM exercise JOIN participation ON exercise.id = participation.exercise JOIN schedule ON participation.schedule = schedule.id WHERE schedule.name = ? ";
         PreparedStatement pstmt = conn.prepareStatement(query);
-        pstmt.setLong(1, schedule.getId());
+        pstmt.setString(1, schedule.getName());
         return pstmt.executeQuery();
     }
 

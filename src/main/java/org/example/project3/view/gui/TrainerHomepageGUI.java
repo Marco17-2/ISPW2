@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.text.Text;
 import org.example.project3.controller.ReservationListController;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.mappers.Session;
@@ -16,7 +17,7 @@ import org.example.project3.beans.*;
 public class TrainerHomepageGUI extends CommonGUI{
 
     @FXML
-    private Label errorMessage;
+    private Text errorMessage;
 
     protected TrainerHomepageGUI(Session session, FXMLPathConfig fxmlPathConfig) {
         super(session, fxmlPathConfig);

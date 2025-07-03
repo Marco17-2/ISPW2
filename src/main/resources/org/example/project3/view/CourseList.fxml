@@ -20,7 +20,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="ListCourse" layoutX="78.0" layoutY="117.0" prefHeight="200.0" prefWidth="606.0" style="-fx-background-color: efefef; -fx-background-radius: 22;">
+                  <TableView fx:id="listCourse" layoutX="61.0" layoutY="115.0" prefHeight="302.0" prefWidth="641.0" style="-fx-background-color: efefef; -fx-background-radius: 22;">
                     <columns>
                       <TableColumn id="NameCourse" fx:id="courseNameColumn" prefWidth="75.0" text="Name" />
                       <TableColumn id="TrainerCourse" fx:id="trainerButtonColumn" prefWidth="75.0" text="Trainer" />
@@ -39,9 +39,14 @@
                         </DropShadow>
                      </effect>
                   </TableView>
-                  <Button layoutX="310.0" layoutY="360.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Go Back">
+                  <Text layoutX="355.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Corsi" wrappingWidth="53.05926513671875">
                      <font>
-                        <Font name="Segoe UI Bold" size="18.0" />
+                        <Font name="Segoe UI Black" size="20.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="indietro" layoutX="78.0" layoutY="47.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
@@ -51,9 +56,9 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Text layoutX="338.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accedi" wrappingWidth="66.6593017578125">
+                  <Text fx:id="message" fill="#ff0027" layoutX="360.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Errore" textAlignment="CENTER" visible="false">
                      <font>
-                        <Font name="Segoe UI Black" size="20.0" />
+                        <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
                </children>

@@ -17,9 +17,9 @@ public class CourseBean {
     private String hour;
 //    private List<SessionCourse> sessions;
 
-    public CourseBean(String courseName, int slots,int remainingSlots, String duration, String level, String day, String hour) {
+    public CourseBean(Integer id, String courseName, int slots,int remainingSlots, String duration, String level, String day, String hour) {
 
-        //this.courseID = courseID;
+        this.courseID = id;
         this.courseName = courseName;
         this.slots = slots;
         this.remainingSlots = remainingSlots;

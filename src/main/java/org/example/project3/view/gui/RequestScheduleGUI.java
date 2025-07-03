@@ -10,9 +10,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.example.project3.beans.CustomerBean;
+import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
+import org.example.project3.controller.ScheduleDetailsController;
 import org.example.project3.controller.SearchController;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.model.Request;
@@ -20,6 +23,7 @@ import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +58,7 @@ public class RequestScheduleGUI extends CommonGUI{
     private static List<ScheduleBean> originalSchedules = new ArrayList<>();
 
     private RequestModifyController requestModifyController= new RequestModifyController();
+    private ScheduleDetailsController scheduleDetailsController= new ScheduleDetailsController();
 
     private TableCell<ScheduleBean, Void> createButtonCell(String buttonText) {
         return new TableCell<>() {
@@ -62,6 +67,7 @@ public class RequestScheduleGUI extends CommonGUI{
                 Button btn = new Button(buttonText);
                 btn.setOnMouseClicked(event -> {
                     ScheduleBean scheduleBean = getTableView().getItems().get(getIndex());
+                    scheduleDetailsController.retriveExercises(scheduleBean);
                     RequestBean requestBean= new RequestBean(scheduleBean);
                     completeRequest(requestBean, event);
                 });
@@ -86,7 +92,7 @@ public class RequestScheduleGUI extends CommonGUI{
         }
         //Imposto valori della tabella
         Name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        Trainer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTrainerBean().getName()));
+        Trainer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTrainerBean().getCredentialsBean().getMail()));
         Seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
         ScheduleChoice.getItems().clear();
         ScheduleChoice.getItems().addAll(scheduleBeansParam);
@@ -95,7 +101,12 @@ public class RequestScheduleGUI extends CommonGUI{
 
     private void completeRequest(RequestBean requestBean, MouseEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath(SCHEDULE_DETAILS)));
+            String fxmlPath = fxmlPathConfig.getFXMLPath(SCHEDULE_DETAILS);
+            System.out.println("DEBUG: Percorso FXML recuperato: " + fxmlPath);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("DEBUG: URL risorsa ottenuta da getResource(): " + resourceUrl);
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPathConfig.getFXMLPath(SCHEDULE_DETAILS)));
             loader.setControllerFactory(c -> new RequestExerciseGUI(fxmlPathConfig, session));
             Parent root = loader.load();
             ((RequestExerciseGUI)loader.getController()).loadExercises(requestBean);
@@ -113,7 +124,9 @@ public class RequestScheduleGUI extends CommonGUI{
     @FXML
     private void cancelSearch(){
         loadSchedule(originalSchedules);
+        ricerca.setText("");
         cancellaRicerca.setVisible(false);
+
     }
 
     @FXML
@@ -124,7 +137,7 @@ public class RequestScheduleGUI extends CommonGUI{
         if (searchText != null && !searchText.trim().isEmpty()) {
             // Il campo non è vuoto, esegui la ricerca
             List<ScheduleBean> schedulesTemp = new ArrayList<>();
-            searchController.searchSchedules(schedulesTemp, searchText, session.getUser());
+            searchController.searchSchedules(schedulesTemp, searchText, (CustomerBean) session.getUser());
             loadSchedule(schedulesTemp);
         } else {
             loadSchedule(originalSchedules);

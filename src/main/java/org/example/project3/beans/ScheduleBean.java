@@ -8,14 +8,14 @@ public class ScheduleBean {
     public String name;
     public CustomerBean customerBean;
     public TrainerBean trainerBean;
-    public ArrayList<ExerciseBean> exercisesBean;
+    public List<ExerciseBean> exercisesBean;
 
     public ScheduleBean(long id, String name, CustomerBean customerBean, TrainerBean trainerBean, List<ExerciseBean> exercisesBean) {
         this.id = id;
         this.name = name;
         this.customerBean = customerBean;
         this.trainerBean = trainerBean;
-        this.exercisesBean = (ArrayList<ExerciseBean>) exercisesBean;
+        this.exercisesBean = exercisesBean;
     }
 
     public ScheduleBean(long id, String name, CustomerBean customerBean, TrainerBean trainerBean) {
@@ -31,7 +31,7 @@ public class ScheduleBean {
         this.name = null;
         this.customerBean = null;
         this.trainerBean = null;
-        this.exercisesBean = (ArrayList<ExerciseBean>) exercisesBean;
+        this.exercisesBean = exercisesBean;
     }
 
     public long getId() {
@@ -50,10 +50,13 @@ public class ScheduleBean {
         return trainerBean;
     }
 
-    public ArrayList<ExerciseBean> getExercisesBean() {
+    public List<ExerciseBean> getExercisesBean() {
         return exercisesBean;
     }
 
+     public void setId(long id) {
+        this.id = id;
+     }
     public void setName(String name) {
         this.name = name;
     }
@@ -67,7 +70,7 @@ public class ScheduleBean {
     }
 
     public void setExercisesBean(List<ExerciseBean> exercisesBean) {
-        this.exercisesBean = (ArrayList<ExerciseBean>) exercisesBean;
+        this.exercisesBean = exercisesBean;
     }
 
     public void addExerciseBean(ExerciseBean exerciseBean) {

@@ -37,7 +37,7 @@ public class TrainerDescriptionController {
             return trainerBean;
 
         }catch(Exception e){
-            throw new NoResultException("Errore recupero descrizione trainer");
+            throw new NoResultException("Errore recupero descrizione trainer"+ e.getMessage());
         }
     }
 
@@ -51,7 +51,7 @@ public class TrainerDescriptionController {
             return specializations;
 
         }catch(Exception e){
-            throw new NoResultException("Errore recuper specializzazionei");
+            throw new NoResultException("Errore recuper specializzazionei"+ e.getMessage());
         }
     }
 

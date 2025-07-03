@@ -38,10 +38,9 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public void sendRequest(Request request) {
         try(Connection conn = ConnectionSQL.getConnection()) {
-            RequestQuery.sendRequest(conn, request.getSchedule(), request.getExercise(), request.getReason(), request.getDateTime());
+            RequestQuery.sendRequest(conn, request.getSchedule(), request.getExercise(), request.getReason());
         } catch (SQLException | DbOperationException e){
             handleException(e);
-
         }
     }
 
@@ -133,7 +132,7 @@ public class RequestDAOSQL implements RequestDAO {
     public void addCourseRequest(Reservation reservation){
 
         try(Connection conn = ConnectionSQL.getConnection()) {
-            RequestQuery.addCourseRequest(conn, reservation.getCustomer().getCredentials().getMail(), reservation.getCourse().getCourseName(), reservation.getDay(), reservation.getHour());
+            RequestQuery.addCourseRequest(conn, reservation.getCustomer().getCredentials().getMail(), reservation.getCourse().getCourseID(), reservation.getDay(), reservation.getHour());
 
         }catch (SQLException | DbOperationException e){
             handleException(e);

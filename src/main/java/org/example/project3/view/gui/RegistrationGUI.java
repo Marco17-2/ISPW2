@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import org.example.project3.beans.CredentialsBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.LoggedUserBean;
@@ -36,7 +37,7 @@ public class RegistrationGUI extends CommonGUI {
     @FXML
     DatePicker dataNascita;
     @FXML
-    Label error;
+    Text error;
 
     private final UserRegistrationController registrationController = new UserRegistrationController();
     private final LoginController loginController = new LoginController();
@@ -56,7 +57,7 @@ public class RegistrationGUI extends CommonGUI {
     }
 
     @FXML
-    public void checkFields(TextField fields[], PasswordField password,ChoiceBox genere, DatePicker dataNascita, Label error) throws EmptyFieldException {
+    public void checkFields(TextField fields[], PasswordField password,ChoiceBox genere, DatePicker dataNascita, javafx.scene.text.Text error) throws EmptyFieldException {
         for(TextField field : fields) {
             if(field.getText().isEmpty()) {
                 throw new EmptyFieldException("Compila tutti i campi");
@@ -101,7 +102,7 @@ public class RegistrationGUI extends CommonGUI {
         }
     }
 
-    public static boolean isValidMail(String mail, Label errorMessage) {
+    public static boolean isValidMail(String mail, javafx.scene.text.Text errorMessage) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         if (!mail.matches(emailRegex)) {
             errorMessage.setText("Mail non valida");

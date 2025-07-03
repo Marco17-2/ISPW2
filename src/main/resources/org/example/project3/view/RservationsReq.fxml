@@ -20,15 +20,15 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="reservationList" layoutX="115.0" layoutY="101.0" prefHeight="228.0" prefWidth="534.0" style="-fx-background-color: efefef; -fx-background-radius: 22;">
+                  <TableView fx:id="reservationList" layoutX="47.0" layoutY="100.0" prefHeight="321.0" prefWidth="669.0" style="-fx-background-color: efefef; -fx-background-radius: 22;">
                     <columns>
-                      <TableColumn fx:id="customerName" prefWidth="75.0" text="Name" />
-                      <TableColumn fx:id="courseName" prefWidth="75.0" text="Course" />
-                        <TableColumn fx:id="date" prefWidth="75.0" text="Date" />
-                        <TableColumn fx:id="hour" prefWidth="75.0" text="Hour" />
-                        <TableColumn fx:id="detailButton" prefWidth="75.0" text="Detail" />
-                        <TableColumn fx:id="acceptButton" prefWidth="75.0" text="Accept" />
-                        <TableColumn fx:id="refuseButton" prefWidth="75.0" text="Refuse" />
+                      <TableColumn fx:id="customerName" prefWidth="75.99996948242188" text="Name" />
+                      <TableColumn fx:id="courseName" prefWidth="135.99996185302734" text="Course" />
+                        <TableColumn fx:id="date" prefWidth="87.20001220703125" text="Date" />
+                        <TableColumn fx:id="hour" prefWidth="87.99993896484375" text="Hour" />
+                        <TableColumn fx:id="detailButton" prefWidth="136.00003051757812" text="Detail" />
+                        <TableColumn fx:id="acceptButton" prefWidth="72.00006103515625" text="Accept" />
+                        <TableColumn fx:id="refuseButton" prefWidth="71.9998779296875" text="Refuse" />
                     </columns>
                      <effect>
                         <DropShadow height="15.0" radius="7.0" width="15.0">
@@ -38,9 +38,14 @@
                         </DropShadow>
                      </effect>
                   </TableView>
-                  <Button layoutX="312.0" layoutY="366.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Go Back">
+                  <Text layoutX="336.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Richieste" wrappingWidth="91.45928955078125">
                      <font>
-                        <Font name="Segoe UI Bold" size="18.0" />
+                        <Font name="Segoe UI Black" size="20.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="indietro" layoutX="48.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
                      <effect>
                         <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
@@ -50,11 +55,6 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Text layoutX="349.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accedi" wrappingWidth="66.6593017578125">
-                     <font>
-                        <Font name="Segoe UI Black" size="20.0" />
-                     </font>
-                  </Text>
                </children>
             </AnchorPane>
          </center>

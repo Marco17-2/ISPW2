@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import org.example.project3.beans.CredentialsBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.TrainerBean;
@@ -29,7 +30,7 @@ public class LoginGUI extends CommonGUI{
     @FXML
     PasswordField password;
     @FXML
-    Label error;
+    Text error;
 
     @FXML
     private void setCredentials(MouseEvent event) throws IOException {
@@ -45,6 +46,7 @@ public class LoginGUI extends CommonGUI{
                 CustomerBean customerBean= new CustomerBean(credentialsBean);
                 loginController.retrieveCustomer(customerBean);
                 session.setUser(customerBean);
+                goToCustomerHomepage(event);
             }
             else if(credentialsBean.getRole().equals(Role.TRAINER)){
                 TrainerBean trainerBean= new TrainerBean(credentialsBean);
@@ -53,7 +55,7 @@ public class LoginGUI extends CommonGUI{
 
                 goToTrainerHome(event);
             }
-            goToCustomerHomepage(event);
+
         }catch(WrongEmailOrPasswordException | EmptyFieldException e){
             error.setText(e.getMessage());
             error.setVisible(true);

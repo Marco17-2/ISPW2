@@ -50,10 +50,14 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = ExerciseQuery.searchExercises(conn, search, schedule);
-            if (rs.next()) {
+            while (rs.next()) {
                 Exercise exercise = new Exercise(
+                        rs.getInt(ID),
                         rs.getString(NAME),
-                        rs.getString(DESCRIPTION)
+                        rs.getString(DESCRIPTION),
+                        rs.getInt(NUMBERSERIES),
+                        rs.getInt(NUMBERREPS),
+                        RestTime.convertIntToRestTime(rs.getInt(RESTTIME))
                 );
                 exercises.add(exercise);
             }

@@ -45,7 +45,7 @@ public class RequestModifyController {
             RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();
             requestManagerConcreteSubject.addRequest(request);
         } catch (Exception e){
-            throw new NoResultException("Errore nell'invio della richiesta",e);
+            throw new NoResultException("Errore nell'invio della richiesta controller",e);
 
         }
     }

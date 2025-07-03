@@ -40,7 +40,7 @@ public class ScheduleDAOP implements ScheduleDAO {
     }
 
     @Override
-    public void searchSchedules(List<Schedule> schedules, String search, LoggedUser user) {
+    public void searchSchedules(List<Schedule> schedules, String search, Customer user) {
         String lowerSearch = search.toLowerCase();
 
         for (Schedule schedule : SharedResources.getInstance().getSchedules().values()) {

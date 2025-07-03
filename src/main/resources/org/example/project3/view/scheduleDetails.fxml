@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.view.gui.RequestExerciseGUI">
    <children>
@@ -65,7 +66,7 @@
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="motivazione" layoutX="55.0" layoutY="396.0" prefHeight="35.0" prefWidth="545.0" promptText="Inserisci motivazione" style="-fx-background-color: #f7f7f7; -fx-background-radius: 22px;">
+                  <TextField fx:id="motivazione" layoutX="55.0" layoutY="396.0" prefHeight="35.0" prefWidth="545.0" promptText="Inserisci motivazione" style="-fx-background-color: #f7f7f7; -fx-background-radius: 22px;" visible="false">
                      <effect>
                         <InnerShadow height="10.0" radius="4.5" width="10.0">
                            <color>
@@ -113,6 +114,11 @@
                         <Image url="@img/letterx_87521.png" />
                      </image>
                   </ImageView>
+                  <Text fx:id="error" fill="#ff0027" layoutX="290.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserisci una motivazione!" textAlignment="CENTER" visible="false">
+                     <font>
+                        <Font name="Segoe UI" size="16.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
          </center>

@@ -21,7 +21,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ButtonBar layoutX="96.0" layoutY="63.0" prefHeight="78.0" prefWidth="250.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                  <ButtonBar onMouseClicked="#retrieveCourse" layoutX="96.0" layoutY="63.0" prefHeight="78.0" prefWidth="250.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
                     <buttons>
                         <ImageView blendMode="MULTIPLY" fitHeight="56.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                            <image>

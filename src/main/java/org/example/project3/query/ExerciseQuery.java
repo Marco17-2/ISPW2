@@ -56,7 +56,7 @@ public class ExerciseQuery {
 
     public static ResultSet searchExercises(Connection conn, String search, Schedule schedule) throws SQLException {
         try {
-            String query = "SELECT exercise.name, exercise.description FROM exercise JOIN participation ON participation.exercise = exercise.id JOIN schedule ON schedule.id = participation.schedule WHERE LOWER(name) LIKE LOWER(?) AND schedule.customer = LOWER(?)";
+            String query = "SELECT exercise.id, exercise.name, exercise.description, exercise.numberSeries, exercise.numberReps, exercise.restTime FROM exercise JOIN participation ON participation.exercise = exercise.id JOIN schedule ON schedule.id = participation.schedule WHERE LOWER(exercise.name) LIKE LOWER(?) AND schedule.customer = LOWER(?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             String wildcard = "%" + search + "%";
             pstmt.setString(1, wildcard);

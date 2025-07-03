@@ -27,6 +27,14 @@ public class Schedule {
         this.exercises = null;
     }
 
+    public Schedule( String name, Customer customer, Trainer trainer) {
+        this.id = 0;
+        this.name = name;
+        this.customer = customer;
+        this.trainer = trainer;
+        this.exercises = null;
+    }
+
     public long getId() {
         return id;
     }

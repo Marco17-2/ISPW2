@@ -4,8 +4,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
@@ -22,7 +20,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="firstName" editable="false" layoutX="136.0" layoutY="106.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: #f7f7f7; -fx-background-radius: 22;">
+                  <TextField fx:id="firstName" editable="false" layoutX="132.0" layoutY="122.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: #f7f7f7; -fx-background-radius: 22;">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -34,7 +32,7 @@
                         </InnerShadow>
                      </effect>
                   </TextField>
-                  <TextField fx:id="lastName" editable="false" layoutX="136.0" layoutY="194.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
+                  <TextField fx:id="lastName" editable="false" layoutX="132.0" layoutY="210.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -46,7 +44,7 @@
                         </InnerShadow>
                      </effect>
                   </TextField>
-                  <TextField fx:id="mail" editable="false" layoutX="136.0" layoutY="284.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
+                  <TextField fx:id="mail" editable="false" layoutX="132.0" layoutY="300.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -58,7 +56,7 @@
                         </InnerShadow>
                      </effect>
                   </TextField>
-                  <TextField fx:id="specialization" editable="false" layoutX="417.0" layoutY="195.0" prefHeight="127.0" prefWidth="218.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
+                  <TextField fx:id="specialization" editable="false" layoutX="413.0" layoutY="211.0" prefHeight="127.0" prefWidth="218.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -70,7 +68,7 @@
                         </InnerShadow>
                      </effect>
                   </TextField>
-                  <TextField fx:id="gender" editable="false" layoutX="418.0" layoutY="106.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
+                  <TextField fx:id="gender" editable="false" layoutX="414.0" layoutY="122.0" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: f7f7f7; -fx-background-radius: 22;">
                      <font>
                         <Font name="Segoe UI" size="14.0" />
                      </font>
@@ -82,32 +80,32 @@
                         </InnerShadow>
                      </effect>
                   </TextField>
-                  <Text layoutX="156.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" wrappingWidth="77.05926513671875">
+                  <Text layoutX="152.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" wrappingWidth="77.05926513671875">
                      <font>
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="156.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="77.05926513671875">
+                  <Text layoutX="152.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="77.05926513671875">
                      <font>
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="156.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" wrappingWidth="77.05926513671875">
+                  <Text layoutX="152.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" wrappingWidth="77.05926513671875">
                      <font>
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="433.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" wrappingWidth="77.05926513671875">
+                  <Text layoutX="429.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" wrappingWidth="77.05926513671875">
                      <font>
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="433.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specialization" wrappingWidth="100.25927734375">
+                  <Text layoutX="429.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specialization" wrappingWidth="100.25927734375">
                      <font>
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
-                  <Button layoutX="312.0" layoutY="371.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Go Back">
+                  <Button layoutX="270.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="50.0" prefWidth="214.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Torna alla homepage">
                      <font>
                         <Font name="Segoe UI Bold" size="18.0" />
                      </font>
@@ -119,26 +117,7 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Button layoutX="42.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#goToLoginAndRegister" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;">
-                     <font>
-                        <Font name="Segoe UI Bold" size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
-                           <color>
-                              <Color opacity="0.5871559381484985" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <graphic>
-                        <ImageView fitHeight="55.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/arrow.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Text layoutX="302.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dettagli trainer" wrappingWidth="158.65936279296875">
+                  <Text layoutX="298.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dettagli trainer" wrappingWidth="158.65936279296875">
                      <font>
                         <Font name="Segoe UI Black" size="20.0" />
                      </font>
