@@ -132,6 +132,7 @@ public class CourseListGUI extends CommonGUI implements Observer{
         CourseListController courseListController = new CourseListController();
         if(!courseListController.alreadyHasRequest(reservationReqBean)){
             courseListController.sendReservationReq(reservationReqBean);
+            update();
         }else{
             message.setText("Hai già inviato una richiesta!");
             message.setVisible(true);
@@ -142,7 +143,7 @@ public class CourseListGUI extends CommonGUI implements Observer{
             alert.showAndWait();
         }
 
-        update();
+
 
     }
 

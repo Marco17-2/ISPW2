@@ -28,7 +28,7 @@
                               <Image url="@img/undraw_check-boxes_ewf2.png" />
                            </image>
                         </ImageView>
-                        <Button centerShape="false" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="76.0" prefWidth="173.0" scaleShape="false" style="-fx-background-color: #efefef; -fx-background-radius: 22px;" text="Richieste corsi">
+                        <Button centerShape="false" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#retrieveReservationReq" prefHeight="76.0" prefWidth="173.0" scaleShape="false" style="-fx-background-color: #efefef; -fx-background-radius: 22px;" text="Richieste corsi">
                            <font>
                               <Font name="Segoe UI Bold" size="18.0" />
                            </font>
@@ -47,6 +47,18 @@
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
+                  <Button layoutX="619.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#goToLoginAndRegister" prefHeight="29.0" prefWidth="68.0" style="-fx-background-radius: 22px; -fx-background-color: ff0000;" text="Esci" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" height="12.81" offsetY="1.0" radius="5.0625" width="9.44">
+                           <color>
+                              <Color opacity="0.5871559381484985" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Button>
                </children>
             </AnchorPane>
          </center>

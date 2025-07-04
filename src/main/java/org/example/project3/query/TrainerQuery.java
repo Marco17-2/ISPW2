@@ -35,7 +35,7 @@ public class TrainerQuery {
 
 
     public static void modifyTrainer(Connection conn, Trainer trainer) throws DbOperationException {
-        String query = "UPDATE trainer SET name = ?, surname = ?, gender = ?, online = ?, birthday = ? WHERE mail = ?";
+        String query = "UPDATE trainer SET name = ?, surname = ?, gender = ?, online = ?, birthDate = ? WHERE email = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, trainer.getName());
@@ -51,15 +51,15 @@ public class TrainerQuery {
     }
 
     public static ResultSet retrieveTrainer(Connection conn, String mail) throws SQLException {
-        String query = "SELECT mail, name, surname, gender, online, birthday FROM trainer WHERE mail = ?";
+        String query = "SELECT name, surname, gender, online, birthDate FROM trainer WHERE email = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mail);
         return pstmt.executeQuery();
     }
 
     public static void removeTrainer(Connection conn, String mail) throws DbOperationException {
-        String deletePatient = "DELETE FROM trainer WHERE mail = ?";
-        String deleteUser = "DELETE FROM users WHERE mail = ?";
+        String deletePatient = "DELETE FROM trainer WHERE email = ?";
+        String deleteUser = "DELETE FROM users WHERE email = ?";
 
         try (PreparedStatement pstmt1 = conn.prepareStatement(deletePatient);
              PreparedStatement pstmt2 = conn.prepareStatement(deleteUser)) {

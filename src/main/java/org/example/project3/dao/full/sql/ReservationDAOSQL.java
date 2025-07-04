@@ -33,7 +33,7 @@ public class ReservationDAOSQL implements ReservationDAO {
     public void addReservation(Reservation reservation){
 
             try(Connection conn = ConnectionSQL.getConnection()) {
-                ReservationQuery.addRequest(conn, reservation.getCourse().getCourseName(),reservation.getCustomer().getCredentials().getMail(), reservation.getDay(), reservation.getHour());
+                ReservationQuery.addRequest(conn, reservation.getCourse().getCourseID(),reservation.getCustomer().getCredentials().getMail(), reservation.getDay(), reservation.getHour());
             }catch (SQLException | DbOperationException e){
                 throw new DAOException("Errore rimozione reservation", e);
         }

@@ -26,16 +26,13 @@ public class ScheduleDetailsController {
         this.scheduleDAO = FactoryDAO.getScheduleDAO();
     }
 
+
     public void retriveScheduleDetails(CustomerBean customerBean, List<ScheduleBean> scheduleBeans){
+        // converte il bean in model per poter cercare la scheda visto che non si effettua con il bean
         List<Schedule> schedules = new ArrayList<>();
 
         Customer customer = beanAndModelMapperFactory.fromBeanToModel(customerBean, CustomerBean.class);
         scheduleDAO.retrieveSchedule(customer, schedules);
-
-        // --- AGGIUNGI QUI ---
-        System.out.println("DEBUG - Controller: Dopo chiamata DAO, 'schedules' list size: " + schedules.size());
-        // --- FINE AGGIUNTA ---
-
         for(int i = 0; i < schedules.size(); i++){
             ScheduleBean scheduleBean = beanAndModelMapperFactory.fromModelToBean(schedules.get(i), Schedule.class);
 
@@ -47,30 +44,7 @@ public class ScheduleDetailsController {
 
             scheduleBeans.add(scheduleBean);
         }
-        // --- AGGIUNGI QUI ---
-        System.out.println("DEBUG - Controller: Dopo ciclo di mapping, 'scheduleBeans' list size: " + scheduleBeans.size());
-        // --- FINE AGGIUNTA ---
     }
-
-
-//    public void retriveScheduleDetails(CustomerBean customerBean, List<ScheduleBean> scheduleBeans){
-//        // converte il bean in model per poter cercare la scheda visto che non si effettua con il bean
-//        List<Schedule> schedules = new ArrayList<>();
-//
-//        Customer customer = beanAndModelMapperFactory.fromBeanToModel(customerBean, CustomerBean.class);
-//        scheduleDAO.retrieveSchedule(customer, schedules);
-//        for(int i=0;i<schedules.size();i++){
-//            ScheduleBean scheduleBean = beanAndModelMapperFactory.fromModelToBean(schedules.get(i), Schedule.class);
-//
-//            //inserisce i dati nel bean
-//            scheduleBean.setName(schedules.get(i).getName());
-//            scheduleBean.setCustomerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getCustomer(), Customer.class));
-//            scheduleBean.setTrainerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getTrainer(), Trainer.class));
-//
-//            scheduleBeans.add(scheduleBean);
-//
-//        }
-//    }
 
     public void retriveExercises(ScheduleBean scheduleBean){
         Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);

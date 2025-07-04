@@ -17,7 +17,7 @@ public class RequestQuery {
             preparedStatement.setObject(4, LocalDateTime.now());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'invio della richiesta db: " + e.getMessage(), e);
+            throw new DbOperationException("Errore nell'invio della richiesta db: ", e);
         }
     }
 
@@ -82,9 +82,6 @@ public class RequestQuery {
 
             pstmt.executeUpdate();
         }catch(SQLException e) {
-            //da rimuovere
-            System.out.println("Errore nell'invio della richiesta db: " + e.getMessage());
-
             throw new DbOperationException("Errore nella rimozione delle richiesta", e);
         }
     }
@@ -100,7 +97,7 @@ public class RequestQuery {
 
             pstmt.executeUpdate();
         }catch (SQLException e) {
-            throw new DbOperationException("Errore invio richieste"+e.getMessage(), e);
+            throw new DbOperationException("Errore invio richieste", e);
         }
 
     }

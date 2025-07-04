@@ -18,7 +18,7 @@ public class CustomerDAOSQL implements CustomerDAO {
     private static final String SURNAME = "surname";
     private static final String GENDER = "gender";
     private static final String ONLINE = "online";
-    private static final String BIRTHDATE = "birthDate";
+    private static final String BIRTHDATE = "birthday";
     private static final String SUBSCRIPTION = "subscription";
     private static final String INJURY = "injury";
     private static final String STARTDATE = "startDate";

@@ -23,19 +23,19 @@ public class ReservationQuery {
         return pstmt.executeQuery();
     }
 
-    public static void addRequest(Connection conn, String course, String customer, String date, String hour) throws DbOperationException {
+    public static void addRequest(Connection conn, Integer course, String customer, String date, String hour) throws DbOperationException {
         String query = "INSERT INTO reservation(customer, course, date, hour) VALUES (?,?,?,?)";
         String updateCourse ="UPDATE course SET remaining=remaining-1 WHERE id=?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query);
         PreparedStatement pstmt= conn.prepareStatement(updateCourse);) {
 
             preparedStatement.setString(1, customer);
-            preparedStatement.setString(2,course);
+            preparedStatement.setInt(2,course);
             preparedStatement.setString(3,date);
             preparedStatement.setString(4,hour);
             preparedStatement.executeUpdate();
 
-            pstmt.setString(1,course);
+            pstmt.setInt(1,course);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
