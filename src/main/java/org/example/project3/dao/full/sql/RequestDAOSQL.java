@@ -24,15 +24,16 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String REASON = "reason";
     private static final String CUSTOMER = "customer";
     private static final String DATETIME = "datetime";
-    private static final String COURSE = "course";
+    private static final String COURSE = "c.name";
 
-    private static final String NAME = "name";
+    private static final String NAME = "cu.name";
     private static final String SURNAME = "surname";
     private static final String GENDER = "gender";
-    private static final String EMAIL = "email";
+    private static final String EMAIL = "mail";
     private static final String INJURY = "injury";
     private static final String HOUR = "hour";
-    private static final String DAY = "day";
+    private static final String DATE = "date";
+    private static final String BIRTHDAY = "birthday";
 
 
     @Override
@@ -92,7 +93,7 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public void removeCourseRequest(Reservation reservation){
         try(Connection conn = ConnectionSQL.getConnection()) {
-            RequestQuery.removeCourseRequest(conn, reservation.getCustomer().getCredentials().getMail(), reservation.getCourse().getCourseName(), reservation.getDay(), reservation.getHour());
+            RequestQuery.removeCourseRequest(conn, reservation.getCustomer().getCredentials().getMail(), reservation.getCourse().getCourseID(), reservation.getDay(), reservation.getHour());
         }catch (Exception e){
             handleException(e);
         }
@@ -111,15 +112,16 @@ public class RequestDAOSQL implements RequestDAO {
                         rs.getString(SURNAME),
                         rs.getString(GENDER),
                         false,
-                         null
+                        rs.getDate(BIRTHDAY).toLocalDate()
                          // poi da sistemare
                 );
 
                 customer.setInjury(rs.getString(INJURY));
 
                 Course course = new Course(rs.getString(COURSE));
+                course.setCourseID(rs.getInt(ID));
 
-                Reservation reservation = new Reservation (customer, course, rs.getString(DAY), rs.getString(HOUR));
+                Reservation reservation = new Reservation (customer, course, rs.getString(DATE), rs.getString(HOUR));
                 reservationList.add(reservation);
             }
 

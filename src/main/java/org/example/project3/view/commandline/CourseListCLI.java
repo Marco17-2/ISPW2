@@ -38,17 +38,21 @@ public class CourseListCLI extends AbstractState {
                 for(int i=0; i<courses.size(); i++){
                     System.out.println((i+1) + ". " + courses.get(i).getCourseName() + " " + courses.get(i).getRemainingSlots() + " " + courses.get(i).getSlots() + " " + courses.get(i).getDay() + " " + courses.get(i).getHour() + " " + courses.get(i).getLevel());
                 }
-
+                showMenu();
                 int scelta = scanner.nextInt();
 
-                System.out.println( "Selezione il corso: ");
+                System.out.println( "Selezione il corso(Inserici 0 per tornare indietro): ");
                 int selectedIndex = scanner.nextInt();
 
                 if(scelta == 1){
 
                     if(selectedIndex > 0 && selectedIndex < courses.size()){
                         CourseBean selectedCourse = courses.get(selectedIndex - 1);
-                        goNext(context, new TrainerDetailCLI(user, selectedCourse));
+                        ReservationBean reservationBean = new ReservationBean(user, selectedCourse, selectedCourse.getDay(), selectedCourse.getHour());
+                        courseListController.sendReservationReq(reservationBean);
+                        System.out.println( " Richiesta inviata ");
+                        goNext(context,new CourseListCLI(user));
+
                     }else if( selectedIndex == 0 ){
                         goBack(context);
                     } else{
@@ -56,13 +60,9 @@ public class CourseListCLI extends AbstractState {
                     }
 
                 }else if(scelta == 2){
-
                     if(selectedIndex > 0 && selectedIndex < courses.size()){
                         CourseBean selectedCourse = courses.get(selectedIndex - 1);
-                        ReservationBean reservationBean = new ReservationBean(user, selectedCourse, selectedCourse.getDay(), selectedCourse.getHour());
-                        courseListController.sendReservationReq(reservationBean);
-                        System.out.println( " Richiesta inviata ");
-
+                        goNext(context, new TrainerDetailCLI(user, selectedCourse));
                     }else if( selectedIndex == 0 ){
                         goBack(context);
                     } else{

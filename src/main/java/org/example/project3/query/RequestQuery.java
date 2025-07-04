@@ -67,33 +67,33 @@ public class RequestQuery {
 
     public static ResultSet retireveCourseRequest(Connection conn, String trainer) throws SQLException {
 
-        String query = "SELECT cu.mail, cu.name, cu.surname, cu.gender, cu.injury, r.data, r.hour, t.course" +
-                        "FROM customer cu, courseRequest r, trainer t, course c " +
-                        "WHERE r.cliente = cu.mail AND c.name = t.course AND t.mail = ? ";
-
+        String query = "SELECT cu.mail, cu.name, cu.surname, cu.gender, cu.injury, cu.birthday, r.date, r.hour, c.name, c.id FROM customer cu JOIN pending r ON r.customer = cu.mail JOIN course c ON c.id = r.course JOIN trainer t ON t.email=c.trainer WHERE t.email = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, trainer);
         return pstmt.executeQuery();
     }
 
-    public static void removeCourseRequest(Connection conn, String customer, String course, String date, String hour) throws SQLException, DbOperationException {
-        String query = "DELETE FROM courseRequest cu WHERE cu.mail = ? AND cu.name = ? AND cu.date = ? AND cu.hour = ?";
+    public static void removeCourseRequest(Connection conn, String customer, Integer course, String date, String hour) throws SQLException, DbOperationException {
+        String query = "DELETE FROM pending r WHERE r.customer = ? AND r.course = ? AND r.date = ? AND r.hour = ?";
 
         try( PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, customer);
-            pstmt.setString(2, course);
+            pstmt.setInt(2, course);
             pstmt.setString(3, date);
             pstmt.setString(4, hour);
 
 
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
         }catch(SQLException e) {
+            //da rimuovere
+            System.out.println("Errore nell'invio della richiesta db: " + e.getMessage());
+
             throw new DbOperationException("Errore nella rimozione delle richiesta", e);
         }
     }
 
     public static void addCourseRequest(Connection conn,  String customer, Integer course, String date, String hour) throws SQLException, DbOperationException {
-        String query = "INSERT INTO reservation(customer,course,date,hour) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO pending(customer,course,date,hour) VALUES (?, ?, ?, ?)";
 
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, customer);

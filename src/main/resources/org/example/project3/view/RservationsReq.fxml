@@ -43,7 +43,7 @@
                         <Font name="Segoe UI Black" size="20.0" />
                      </font>
                   </Text>
-                  <Button fx:id="indietro" layoutX="48.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
+                  <Button fx:id="indietro" layoutX="48.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#goToTrainerHome" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>

@@ -40,10 +40,26 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
             try{
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 switch(choice){
-                    case 1 -> displayReservation();
-                    case 2 -> handleReservation(true);
-                    case 3 -> handleReservation(false);
-                    case 4 -> viewDetail();
+                    case 1 ->{
+                        displayReservation();
+                        showMenu();
+                        action(context);
+                    }
+                    case 2 -> {
+                        handleReservation(true);
+                        showMenu();
+                        action(context);
+                    }
+                    case 3 -> {
+                        handleReservation(false);
+                        showMenu();
+                        action(context);
+                    }
+                    case 4 -> {
+                        viewDetail();
+                        showMenu();
+                        action(context);
+                    }
                     case 5 -> {
                         goBack(context);
                         running = false;
@@ -106,14 +122,14 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
     }
 
     private void displayReservation(){
-        if(!reservations.isEmpty()){
+        if(reservations.isEmpty()){
             System.out.println("Non sono presneti richieste");
         }else{
             System.out.println("\n ----------------- Lista di Richieste -----------------\n");
             int index = 1;
-            for ( ReservationBean reservation : reservations){
+            for ( ReservationBean reservation : reservations) {
                 System.out.println(index + "Richiesta da: " + reservation.getCustomer().getName() + " | "
-                + "Corso: " + reservation.getCourse().getCourseName() + " | " + reservation.getDay() + " | " + reservation.getHour());
+                        + "Corso: " + reservation.getCourse().getCourseName() + " | " + reservation.getDay() + " | " + reservation.getHour());
                 index++;
             }
         }
@@ -183,6 +199,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         loadReservation();
         stampa();
         showMenu();
+        action(context);
     }
 
     //pattern observer

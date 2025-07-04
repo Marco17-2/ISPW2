@@ -118,6 +118,17 @@ public class ReservationReqGUI extends CommonGUI implements Observer {
         reservationReqApplicationController.deleteReservationReq(reservationBean);
         if(isAccept){
             reservationReqApplicationController.addReservation(reservationBean);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Accetta richiesta");
+            alert.setHeaderText(null);
+            alert.setContentText("Operazione effettuata con successo");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Rifiuta richiesta");
+            alert.setHeaderText(null);
+            alert.setContentText("Rimozione effettuata con successo");
+            alert.showAndWait();
         }
     }
 

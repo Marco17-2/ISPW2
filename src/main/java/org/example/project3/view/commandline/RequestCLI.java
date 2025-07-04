@@ -34,6 +34,7 @@ public class RequestCLI extends AbstractState implements Observer {
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
                     case 1: {
+                        stampa();
                         if (displaySchedules(requestBean)) {
                             loadExercises(requestBean);
                             if (displayExercises(requestBean)) {
@@ -76,13 +77,13 @@ public class RequestCLI extends AbstractState implements Observer {
             System.out.println("--------------------Lista delle schede--------------------\n");
             System.out.println("(1)ID | (2)Nome | (3)Utente | (4)Trainer\n");
             for(ScheduleBean scheduleBean : scheduleBeans){
-                System.out.println(scheduleBean.getId()+" | "+scheduleBean.getName()+" | "+scheduleBean.getCustomerBean().getName()+" | "+scheduleBean.getTrainerBean().getName());
+                System.out.println(scheduleBean.getId()+" | "+scheduleBean.getName()+" | "+scheduleBean.getCustomerBean().getCredentialsBean().getMail()+" | "+scheduleBean.getTrainerBean().getCredentialsBean().getMail());
             }
             System.out.println("Inserici l'ID della scheda che vuoi modificare");
             Long id=Long.parseLong(scanner.nextLine());
             for(ScheduleBean scheduleBean : scheduleBeans){
-                if((id==scheduleBean.getId())&&(!requestModifyController.hasAlreadySentARequest(scheduleBean))){
-                    requestBean= new RequestBean(scheduleBean);
+                if((id.equals(scheduleBean.getId()))&&(!requestModifyController.hasAlreadySentARequest(scheduleBean))){
+                    this.requestBean= new RequestBean(scheduleBean);
                     return true;
                 }
             }
@@ -93,6 +94,7 @@ public class RequestCLI extends AbstractState implements Observer {
     private void loadExercises(RequestBean requestBean){
         exerciseBeans.clear();
         scheduleDetailsController.retriveExercises(requestBean.getScheduleBean());
+        exerciseBeans.addAll(requestBean.getScheduleBean().getExercisesBean());
     }
 
     private boolean displayExercises(RequestBean requestBean){
@@ -135,7 +137,8 @@ public class RequestCLI extends AbstractState implements Observer {
     @Override
     public void enter(StateMachineConcrete context){
         loadSchedules();
-        stampa();
+        showMenu();
+        action(context);
     }
 
     @Override
