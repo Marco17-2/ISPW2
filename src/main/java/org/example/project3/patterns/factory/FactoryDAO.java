@@ -3,6 +3,9 @@ package org.example.project3.patterns.factory;
 
 import org.example.project3.dao.*;
 import org.example.project3.dao.demo.*;
+import org.example.project3.dao.full.json.CredentialsDAOJSON;
+import org.example.project3.dao.full.json.CustomerDAOJSON;
+import org.example.project3.dao.full.json.TrainerDAOJSON;
 import org.example.project3.dao.full.sql.*;
 
 
@@ -74,7 +77,7 @@ public class FactoryDAO {
                     getPersistenceType(),
                     CredentialsDAOSQL::new,
                     CredentialsDAOP::new,
-                    null
+                    CredentialsDAOJSON::getInstance
             );
         }
         return credentialsDAO;
@@ -86,7 +89,7 @@ public class FactoryDAO {
                     getPersistenceType(),
                     CustomerDAOSQL::new,
                     CustomerDAOP::new,
-                    null
+                    CustomerDAOJSON::getInstance
             );
         }
         return customerDAO;
@@ -146,7 +149,7 @@ public class FactoryDAO {
                     getPersistenceType(),
                     TrainerDAOSQL::new,
                     TrainerDAOP::new,
-                    null
+                    TrainerDAOJSON::getInstance
             );
         }
         return trainerDAO;

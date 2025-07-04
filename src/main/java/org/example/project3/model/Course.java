@@ -94,4 +94,8 @@ public class Course {
     public void setRemainingSlots(int remainingSlots) {
         this.remainingSlots = remainingSlots;
     }
+
+    public String getName() {
+        return courseName;
+    }
 }

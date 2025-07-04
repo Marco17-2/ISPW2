@@ -4,6 +4,7 @@ import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ExerciseBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.dao.ScheduleDAO;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
@@ -29,6 +30,8 @@ public class ScheduleDetailsController {
 
     public void retriveScheduleDetails(CustomerBean customerBean, List<ScheduleBean> scheduleBeans){
         // converte il bean in model per poter cercare la scheda visto che non si effettua con il bean
+        try{
+
         List<Schedule> schedules = new ArrayList<>();
 
         Customer customer = beanAndModelMapperFactory.fromBeanToModel(customerBean, CustomerBean.class);
@@ -43,6 +46,9 @@ public class ScheduleDetailsController {
             scheduleBean.setTrainerBean(beanAndModelMapperFactory.fromModelToBean(schedules.get(i).getTrainer(), Trainer.class));
 
             scheduleBeans.add(scheduleBean);
+        }
+    }catch(NoResultException e){
+            throw new NoResultException("Nessuna sheda trovata");
         }
     }
 

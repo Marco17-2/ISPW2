@@ -9,5 +9,7 @@ public interface CredentialsDAO {
     boolean emailExists(String email);
     boolean insertUser(Credentials credentials);
     void login(Credentials credentials) throws WrongEmailOrPasswordException, LoginAndRegistrationException;
-    void modifyCredentials(Credentials newCredentials, Credentials oldCredentials) throws MailAlreadyExistsException;
+    default void modifyCredentials(Credentials newCredentials, Credentials oldCredentials) throws MailAlreadyExistsException{
+        throw new UnsupportedOperationException("Modifica credenziali non supportata da questa implementazione.");
+    };
 }

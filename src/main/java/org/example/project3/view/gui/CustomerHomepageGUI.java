@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.input.MouseEvent;
@@ -40,10 +41,19 @@ public class CustomerHomepageGUI extends CommonGUI{
 
     @FXML
     public void seeSchedules(MouseEvent event) {
+        try{
         ArrayList<ScheduleBean> scheduleBeans = new ArrayList<>();
         ScheduleDetailsController scheduleDetailsController = new ScheduleDetailsController();
         scheduleDetailsController.retriveScheduleDetails((CustomerBean)session.getUser(), scheduleBeans);
         goToRequest(scheduleBeans, event);
+        }catch(NoResultException e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Nessuna scheda");
+            alert.setHeaderText(null);
+            alert.setContentText("Nessuna scheda presente");
+            alert.showAndWait();
+        }
+
     }
 
     private void goToRequest(List<ScheduleBean> scheduleBeans, MouseEvent event){

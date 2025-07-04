@@ -12,5 +12,7 @@ public interface CustomerDAO {
     void registerCustomer(Customer customer) throws MailAlreadyExistsException, LoginAndRegistrationException;
     void retrieveCustomer(Customer customer) throws NoResultException;
     void removeCustomer(Customer customer);
-    void modifyCustomer(Customer customer);
+    default void modifyCustomer(Customer customer){
+        throw new UnsupportedOperationException("MOdifica del cliente non supportata da questa implementazione.");
+    };
 }

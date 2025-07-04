@@ -74,4 +74,8 @@ public class Schedule {
     public void addExercise(Exercise exercise) {
         this.exercises.add(exercise);
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
