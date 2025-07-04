@@ -1,10 +1,7 @@
 package org.example.project3.query;
 
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.model.Customer;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-import org.example.project3.model.Course;
+import org.example.project3.model.*;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -106,6 +103,18 @@ public class RequestQuery {
             throw new DbOperationException("Errore invio richieste"+e.getMessage(), e);
         }
 
+    }
+
+    public static ResultSet alreadyHasRequest(Connection conn, Reservation reservation) throws DbOperationException {
+        String query = "SELECT COUNT(*) FROM pending WHERE customer = ? AND course = ?";
+        try{
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, reservation.getCustomer().getCredentials().getMail());
+            preparedStatement.setInt(2, reservation.getCourse().getCourseID());
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new DbOperationException("Errore nel controllo della richiesta", e);
+        }
     }
 
 

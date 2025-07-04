@@ -49,8 +49,14 @@ public class CourseListCLI extends AbstractState {
                     if(selectedIndex > 0 && selectedIndex < courses.size()){
                         CourseBean selectedCourse = courses.get(selectedIndex - 1);
                         ReservationBean reservationBean = new ReservationBean(user, selectedCourse, selectedCourse.getDay(), selectedCourse.getHour());
-                        courseListController.sendReservationReq(reservationBean);
-                        System.out.println( " Richiesta inviata ");
+                        if(!courseListController.alreadyHasRequest(reservationBean)){
+                            courseListController.sendReservationReq(reservationBean);
+                            System.out.println( " Richiesta inviata ");
+                        }else{
+                            System.out.println( " Hai già iniato una richiesta ");
+                        }
+
+
                         goNext(context,new CourseListCLI(user));
 
                     }else if( selectedIndex == 0 ){

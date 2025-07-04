@@ -2,6 +2,7 @@ package org.example.project3.dao.demo;
 
 import org.example.project3.dao.ReservationDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
+import org.example.project3.model.Course;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Reservation;
 
@@ -36,6 +37,16 @@ public class ReservationDAOP implements ReservationDAO {
 
         // Aggiunge la prenotazione alla mappa
         SharedResources.getInstance().getReservations().computeIfAbsent(customer, k -> new ArrayList<>()).add(reservation);
+
+        Course course = SharedResources.getInstance().getCourses().get(reservation.getCourse().getCourseName());
+
+        if (course.getRemainingSlots() > 0) {
+            course.setRemainingSlots(course.getRemainingSlots() - 1);
+            SharedResources.getInstance().getCourses().put(course.getCourseName(), course);
+            System.out.println("Slot per il corso " + course.getCourseName() + " ridotti a " + course.getRemainingSlots());
+        } else {
+            System.out.println("Nessuno slot disponibile per il corso " + course.getCourseName());
+        }
 
     }
 

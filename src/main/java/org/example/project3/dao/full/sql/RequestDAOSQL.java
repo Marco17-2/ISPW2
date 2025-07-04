@@ -141,6 +141,21 @@ public class RequestDAOSQL implements RequestDAO {
         }
     }
 
+
+    @Override
+    public boolean alreadyHasRequest(Reservation reservation) {
+        try (Connection conn = ConnectionSQL.getConnection()) {
+            ResultSet rs = RequestQuery.alreadyHasRequest(conn, reservation);
+            if(rs.next()){
+                return rs.getInt(1) > 0;
+            }
+            return false;
+        } catch (SQLException | DbOperationException e) {
+            handleException(e);
+            return false;
+        }
+    }
+
     private void handleException(Exception e) {
         System.out.println(String.format("%s", e.getMessage()));
     }

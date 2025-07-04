@@ -25,15 +25,21 @@ public class ReservationQuery {
 
     public static void addRequest(Connection conn, String course, String customer, String date, String hour) throws DbOperationException {
         String query = "INSERT INTO reservation(customer, course, date, hour) VALUES (?,?,?,?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        String updateCourse ="UPDATE course SET remaining=remaining-1 WHERE id=?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query);
+        PreparedStatement pstmt= conn.prepareStatement(updateCourse);) {
 
             preparedStatement.setString(1, customer);
             preparedStatement.setString(2,course);
             preparedStatement.setString(3,date);
             preparedStatement.setString(4,hour);
+            preparedStatement.executeUpdate();
+
+            pstmt.setString(1,course);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore aggiuntar richiesta", e);
+            throw new DbOperationException("Errore aggiunta richiesta", e);
         }
     }
 

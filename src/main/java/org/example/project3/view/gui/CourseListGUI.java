@@ -130,7 +130,18 @@ public class CourseListGUI extends CommonGUI implements Observer{
         String hour = courseBean.getHour();
         ReservationBean reservationReqBean = new ReservationBean(customerBean, courseBean, day, hour);
         CourseListController courseListController = new CourseListController();
-        courseListController.sendReservationReq(reservationReqBean);
+        if(!courseListController.alreadyHasRequest(reservationReqBean)){
+            courseListController.sendReservationReq(reservationReqBean);
+        }else{
+            message.setText("Hai già inviato una richiesta!");
+            message.setVisible(true);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invio richiesta");
+            alert.setHeaderText(null);
+            alert.setContentText("Hai già inviato una richiesta!");
+            alert.showAndWait();
+        }
+
         update();
 
     }
