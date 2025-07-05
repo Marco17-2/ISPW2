@@ -2,14 +2,13 @@ package org.example.project3.controller;
 
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ExerciseBean;
-import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.dao.ScheduleDAO;
 import org.example.project3.model.*;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
-import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
+
 
 import java.util.ArrayList;
 import java.util.List;

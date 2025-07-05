@@ -7,7 +7,6 @@ import org.example.project3.beans.TrainerBean;
 import org.example.project3.controller.LoginController;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.exceptions.WrongEmailOrPasswordException;
-import org.example.project3.model.Trainer;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;
 import org.example.project3.utilities.enums.Role;

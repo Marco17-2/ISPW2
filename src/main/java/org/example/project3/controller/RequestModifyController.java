@@ -1,15 +1,15 @@
 package org.example.project3.controller;
 
-import org.example.project3.beans.CustomerBean;
+
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
-import org.example.project3.beans.TrainerBean;
+
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Customer;
+
 import org.example.project3.model.Request;
 import org.example.project3.model.Schedule;
-import org.example.project3.model.Trainer;
+
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.patterns.observer.RequestManagerConcreteSubject;

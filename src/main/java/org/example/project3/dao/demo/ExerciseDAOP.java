@@ -3,11 +3,10 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Customer;
+
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseDAOP implements ExerciseDAO {

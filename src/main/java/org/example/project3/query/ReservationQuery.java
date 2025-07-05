@@ -1,14 +1,8 @@
 package org.example.project3.query;
 
 import java.sql.*;
-import java.time.LocalDate;
-
-import org.example.project3.model.Customer;
-import org.example.project3.model.Course;
-
 import org.example.project3.exceptions.DbOperationException;
 
-import org.example.project3.exceptions.MailAlreadyExistsException;
 
 public class ReservationQuery {
 

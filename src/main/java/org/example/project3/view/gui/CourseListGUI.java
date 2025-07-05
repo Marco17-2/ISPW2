@@ -1,28 +1,20 @@
 package org.example.project3.view.gui;
 
-import javafx.application.Application;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.text.Text;
 import org.example.project3.beans.*;
 import org.example.project3.controller.CourseListController;
-import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Course;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import org.example.project3.utilities.others.mappers.Session;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.project3.patterns.observer.Observer;
 
 import javafx.scene.control.*;
 import java.util.List;
-import java.util.ArrayList;
-
-import static org.controlsfx.control.action.ActionUtils.createButton;
 
 public class CourseListGUI extends CommonGUI implements Observer{
 

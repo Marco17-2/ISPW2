@@ -11,14 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.project3.beans.CustomerBean;
-import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ScheduleDetailsController;
 import org.example.project3.controller.SearchController;
 import org.example.project3.exceptions.LoadingException;
-import org.example.project3.model.Request;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 

@@ -2,20 +2,15 @@ package org.example.project3.dao.demo;
 
 import org.example.project3.dao.CredentialsDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
-import org.example.project3.dao.full.sql.ConnectionSQL;
+
 import org.example.project3.exceptions.DAOException;
-import org.example.project3.exceptions.DbOperationException;
+
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.WrongEmailOrPasswordException;
 import org.example.project3.model.Credentials;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Trainer;
-import org.example.project3.query.CredentialsQuery;
-import org.example.project3.utilities.enums.Role;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Objects;
 
 public class CredentialsDAOP implements CredentialsDAO {

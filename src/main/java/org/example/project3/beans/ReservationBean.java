@@ -1,7 +1,5 @@
 package org.example.project3.beans;
 
-import java.time.LocalDateTime;
-
 
 public class ReservationBean {
 

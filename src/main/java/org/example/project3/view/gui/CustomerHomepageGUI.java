@@ -14,7 +14,6 @@ import org.example.project3.beans.CourseBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.CourseListController;
-import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ScheduleDetailsController;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.exceptions.NoResultException;

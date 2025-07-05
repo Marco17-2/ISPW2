@@ -1,7 +1,5 @@
 package org.example.project3.patterns.state;
 
-import javafx.animation.Transition;
-
 public interface StateMachine {
 
     public void goNext();

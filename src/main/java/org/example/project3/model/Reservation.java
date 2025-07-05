@@ -1,8 +1,5 @@
 package org.example.project3.model;
 
-import java.time.LocalDate;
-
-
 public class Reservation {
 
     Customer customer;

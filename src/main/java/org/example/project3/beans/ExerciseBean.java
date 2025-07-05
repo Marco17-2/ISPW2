@@ -2,8 +2,6 @@ package org.example.project3.beans;
 
 import org.example.project3.utilities.enums.RestTime;
 
-import java.time.Duration;
-
 public class ExerciseBean {
     public long id;
     public String name;

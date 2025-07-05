@@ -1,10 +1,5 @@
 package org.example.project3.beans;
 
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-
 public class CourseBean {
 
     private int courseID;

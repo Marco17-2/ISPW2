@@ -2,11 +2,9 @@ package org.example.project3.view.gui;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.scene.text.Text;
 import org.example.project3.controller.ReservationListController;
 import org.example.project3.exceptions.NoResultException;

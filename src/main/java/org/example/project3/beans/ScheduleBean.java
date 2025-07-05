@@ -1,6 +1,5 @@
 package org.example.project3.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleBean {

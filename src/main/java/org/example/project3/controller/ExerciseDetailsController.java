@@ -5,7 +5,6 @@ import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.model.Exercise;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
-import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
 
 public class ExerciseDetailsController {
     private final BeanAndModelMapperFactory beanAndModelMapperFactory;

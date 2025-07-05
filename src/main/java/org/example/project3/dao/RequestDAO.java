@@ -1,12 +1,10 @@
 package org.example.project3.dao;
 
-import org.example.project3.model.Customer;
+
 import org.example.project3.model.Request;
 import org.example.project3.model.Trainer;
-import org.example.project3.model.Course;
-import org.example.project3.model.Reservation;
 
-import java.time.LocalDate;
+import org.example.project3.model.Reservation;
 
 import java.util.List;
 
