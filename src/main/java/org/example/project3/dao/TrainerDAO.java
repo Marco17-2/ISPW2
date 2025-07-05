@@ -17,16 +17,16 @@ public abstract interface TrainerDAO {
     void retrieveTrainer(Trainer trainer) throws NoResultException;
     default void removeTrainer(Trainer trainer){
         throw new UnsupportedOperationException("Rimozione del trainer non supportata da questa implementazione.");
-    };
+    }
     default void modifyTrainer(Trainer trainer){
         throw new UnsupportedOperationException("Modifica del trainer non supportata da questa implementazione.");
-    };
+    }
     default Trainer retrieveTrainerCourse(Course course){
         throw new UnsupportedOperationException("Recupero corsi non supportata da questa implementazione.");
-    };
+    }
     default List<String> retrieveSpecialization(Course course) throws SQLException{
         throw new UnsupportedOperationException("Recupero specializzazioni non supportata da questa implementazione.");
-    };
+    }
 
 
 }

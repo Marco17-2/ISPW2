@@ -12,7 +12,6 @@ public interface RequestDAO {
     //metodi per la gestione delle richieste
     void sendRequest(Request request);
     boolean hasAlreadySentRequest(Request request);
-//    void retrieveCustomerRequest(Customer customer, List<Request> requests);
     void deleteRequest(Request request);
 
     void retrieveCourseRequest(Trainer trainer, List<Reservation> reservationList);

@@ -14,5 +14,5 @@ public interface CustomerDAO {
     void removeCustomer(Customer customer);
     default void modifyCustomer(Customer customer){
         throw new UnsupportedOperationException("MOdifica del cliente non supportata da questa implementazione.");
-    };
+    }
 }

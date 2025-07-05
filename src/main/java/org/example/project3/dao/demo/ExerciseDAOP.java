@@ -43,9 +43,9 @@ public class ExerciseDAOP implements ExerciseDAO {
         String lowerSearch = search.toLowerCase();
 
         Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
-//        if (storedSchedule == null) {
-//            throw new NoResultException(schedule.getClass().getSimpleName() + " non trovato");
-//        }
+        if (storedSchedule == null) {
+            throw new NoResultException(schedule.getClass().getSimpleName() + " non trovato");
+        }
         schedule.setExercises(storedSchedule.getExercises());
 
         for (Exercise exercise : schedule.getExercises()) {

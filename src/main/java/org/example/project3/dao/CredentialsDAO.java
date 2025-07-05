@@ -11,5 +11,5 @@ public interface CredentialsDAO {
     void login(Credentials credentials) throws WrongEmailOrPasswordException, LoginAndRegistrationException;
     default void modifyCredentials(Credentials newCredentials, Credentials oldCredentials) throws MailAlreadyExistsException{
         throw new UnsupportedOperationException("Modifica credenziali non supportata da questa implementazione.");
-    };
+    }
 }
