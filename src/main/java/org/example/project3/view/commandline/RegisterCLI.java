@@ -76,9 +76,9 @@ public class RegisterCLI extends AbstractState {
         }
     }
 
-    private static boolean checkDate(String input, LocalDate selectedDate,DateTimeFormatter formatter) {
+    private static boolean checkDate(String input, LocalDate date,DateTimeFormatter formatter) {
         try {
-            selectedDate = LocalDate.parse(input, formatter);
+            date = LocalDate.parse(input, formatter);
             return true;
         } catch (DateTimeParseException _) {
             Printer.errorPrint("Data non valida. Riprova.");

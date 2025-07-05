@@ -156,8 +156,8 @@ public class SharedResources {
 
         // Optional: Add some Courses and Subscriptions if you plan to test those
         Course course1 = new Course(1,"Yoga Basics",30,30,"60 min","basso", "martedì", "14");
-        courses.put(course1.getName(), course1);
-        trainerCourse.put(course1.getName(), trainer1);
+        courses.put(course1.getCourseName(), course1);
+        trainerCourse.put(course1.getCourseName(), trainer1);
 
         Reservation reservation1=new Reservation(customer1,course1,"martedì", "14");
         Reservation reservation2=new Reservation(customer1,course1,"giovedì", "14");
