@@ -5,6 +5,7 @@ import org.example.project3.model.*;
 import org.example.project3.utilities.enums.Role;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.WrongEmailOrPasswordException;
+import org.example.project3.utilities.others.Printer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -47,7 +48,7 @@ public class CredentialsDAOJSON implements CredentialsDAO {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Impossibile caricare gli utenti dal file utenti.");
+                Printer.errorPrint("Impossibile caricare gli utenti dal file utenti.");
             }
         }
 

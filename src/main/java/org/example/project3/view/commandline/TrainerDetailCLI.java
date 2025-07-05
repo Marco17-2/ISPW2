@@ -4,6 +4,7 @@ import org.example.project3.beans.*;
 import org.example.project3.controller.TrainerDescriptionController;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;
+import org.example.project3.utilities.others.Printer;
 
 
 import java.util.Scanner;
@@ -29,22 +30,22 @@ public class TrainerDetailCLI extends AbstractState  {
         TrainerBean trainerBean = trainerDescriptionController.trainerDescription(selectedCourse);
 
         if(trainerBean == null){
-            System.out.println("Trainer non trovato");
+            Printer.errorPrint("Trainer non trovato");
             goBack(context);
         }
 
-        System.out.println("-------------------Trainer-------------------");
-        System.out.println("Name: " + trainerBean.getName());
-        System.out.println("Surname: " + trainerBean.getSurname());
-        System.out.println("Mail" + trainerBean.getCredentialsBean().getMail());
-        System.out.println("gender: " + trainerBean.getGender());
+        Printer.println("-------------------Trainer-------------------");
+        Printer.println("Name: " + trainerBean.getName());
+        Printer.println("Surname: " + trainerBean.getSurname());
+        Printer.println("Mail" + trainerBean.getCredentialsBean().getMail());
+        Printer.println("gender: " + trainerBean.getGender());
 
         List<String> specializations = trainerBean.getSpecializations();
 
-        System.out.println("Specializations: ");
+        Printer.println("Specializations: ");
 
         for (String spec : specializations  ) {
-            System.out.println(spec);
+            Printer.println(spec);
         }
 
         int scelta;
@@ -53,11 +54,11 @@ public class TrainerDetailCLI extends AbstractState  {
 
                 switch(scelta){
                     case 1 -> goBack(context);
-                    default ->  System.out.println("errore di selezione");
+                    default ->  Printer.errorPrint("errore di selezione");
                 }
 
             }catch (Exception e){
-                System.out.println("Scelta non valida");
+                Printer.errorPrint("Scelta non valida");
             }
         }
     }
@@ -65,16 +66,16 @@ public class TrainerDetailCLI extends AbstractState  {
 
     @Override
     public void showMenu() {
-        System.out.println("1.Torna indietro");
-        System.out.println("Opzione scelta:");
+        Printer.println("1.Torna indietro");
+        Printer.println("Opzione scelta:");
     }
 
 
     @Override
     public void stampa() {
-        System.out.println(" ");
-        System.out.println("-------------------Trainer-------------------");
-        System.out.println("Queste sono le informazioni del trainer");
+        Printer.println(" ");
+        Printer.println("-------------------Trainer-------------------");
+        Printer.println("Queste sono le informazioni del trainer");
     }
 
 

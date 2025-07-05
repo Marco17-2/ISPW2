@@ -18,6 +18,7 @@ import org.example.project3.model.Trainer;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 /*********Parte del caso d'uso: Login*********/
 public class LoginController {
@@ -41,7 +42,7 @@ public class LoginController {
         } catch (WrongEmailOrPasswordException e){
             throw new WrongEmailOrPasswordException(e.getMessage());
         } catch (LoginAndRegistrationException e){
-            System.out.println(e.getMessage());
+            Printer.errorPrint(e.getMessage());
         }
     }
 

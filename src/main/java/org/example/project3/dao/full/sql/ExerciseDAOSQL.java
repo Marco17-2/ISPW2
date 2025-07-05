@@ -7,6 +7,7 @@ import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 import org.example.project3.query.ExerciseQuery;
 import org.example.project3.utilities.enums.RestTime;
+import org.example.project3.utilities.others.Printer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -85,6 +86,6 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     }
 
     private void handleException(Exception e) {
-        System.out.println(String.format("%s", e.getMessage()));
+        Printer.println(String.format("%s", e.getMessage()));
     }
 }

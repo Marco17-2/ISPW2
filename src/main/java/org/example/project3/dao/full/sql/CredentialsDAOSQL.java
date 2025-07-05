@@ -7,6 +7,7 @@ import org.example.project3.exceptions.WrongEmailOrPasswordException;
 import org.example.project3.model.Credentials;
 import org.example.project3.query.CredentialsQuery;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -67,6 +68,6 @@ public class CredentialsDAOSQL implements CredentialsDAO {
 
 
     private void handleException(Exception e) {
-        System.out.println(String.format("%s", e.getMessage()));
+        Printer.println(String.format("%s", e.getMessage()));
     }
 }

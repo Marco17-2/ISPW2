@@ -5,6 +5,7 @@ import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;
 import org.example.project3.patterns.state.StateMachineConcrete;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.Scanner;
 
@@ -32,7 +33,7 @@ public class CustomerHomepageCLI extends AbstractState {
                         goNext(context, new InitialState());
                 }
             }catch(Exception e){
-                System.out.println("Scelta non valida!");
+                Printer.errorPrint("Scelta non valida!");
                 scanner.nextLine();
             }
         }
@@ -40,21 +41,21 @@ public class CustomerHomepageCLI extends AbstractState {
 
     @Override
     public void showMenu(){
-        System.out.println("1. Prenotati per un corso");
-        System.out.println("2. Richiedi la modifica di una scheda");
+        Printer.println("1. Prenotati per un corso");
+        Printer.println("2. Richiedi la modifica di una scheda");
 //        System.out.println("3. Vedi progressi");
 //        System.out.println("4. Modifica prenotazione");
 //        System.out.println("5. Richiedi una scheda");
 //        System.out.println("6. Vedi schede");
-        System.out.println("0. Logout");
-        System.out.println("Opzione scelta:");
+        Printer.println("0. Logout");
+        Printer.print("Opzione scelta:");
     }
 
     @Override
     public void stampa(){
-        System.out.println(" ");
-        System.out.println("-------------------Benvenuto nella home di"+ " " + user.getName()+ " "+ user.getSurname() +"-------------------");
-        System.out.println("Ciao"+ " " + user.getName()+ " "+ user.getSurname() +",scegli cosa vuoi fare:");
+        Printer.println(" ");
+        Printer.println("-------------------Benvenuto nella home di"+ " " + user.getName()+ " "+ user.getSurname() +"-------------------");
+        Printer.println("Ciao"+ " " + user.getName()+ " "+ user.getSurname() +",scegli cosa vuoi fare:");
     }
 
     @Override

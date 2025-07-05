@@ -62,7 +62,6 @@ public class ScheduleDetailsController {
                 exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));
             }
             scheduleBean.setExercisesBean(exerciseBeans);
-            System.out.println(scheduleBean.getExercisesBean());
         }catch(NoResultException e){
             throw new NoResultException("Nessuna esercizio trovato per la scheda" + scheduleBean.getId());
         }

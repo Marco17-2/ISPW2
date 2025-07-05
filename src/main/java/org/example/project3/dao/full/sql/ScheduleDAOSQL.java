@@ -8,6 +8,7 @@ import org.example.project3.model.*;
 import org.example.project3.query.ScheduleQuery;
 import org.example.project3.utilities.enums.RestTime;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -108,7 +109,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
 
 
     private void handleException(Exception e) {
-        System.out.println(String.format("%s", e.getMessage()));
+        Printer.errorPrint(String.format("%s", e.getMessage()));
     }
 
 }

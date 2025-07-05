@@ -4,6 +4,7 @@ import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
+import org.example.project3.utilities.others.Printer;
 
 import java.sql.*;
 
@@ -63,7 +64,7 @@ public class ExerciseQuery {
             pstmt.setString(2, schedule.getCustomer().getCredentials().getMail());
             return pstmt.executeQuery();
         } catch (SQLException e) {
-            System.out.println("Errore nella ricerca della scheda");
+            Printer.errorPrint("Errore nella ricerca della scheda");
             return null;
         }
     }

@@ -14,6 +14,7 @@ import org.example.project3.query.CredentialsQuery;
 import org.example.project3.query.CustomerQuery;
 import org.example.project3.query.TrainerQuery;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -107,7 +108,7 @@ public class TrainerDAOSQL implements TrainerDAO {
     }
 
     private void handleException(Exception e) {
-        System.out.println(String.format("%s", e.getMessage()));
+        Printer.errorPrint(String.format("%s", e.getMessage()));
     }
 
     @Override

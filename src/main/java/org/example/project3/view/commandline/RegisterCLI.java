@@ -10,6 +10,7 @@ import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +36,7 @@ public class RegisterCLI extends AbstractState {
             String gender=prompt("Genere: ");
             String email=prompt("Email: ");
             if (isValidMail(email, null)) {
-                System.out.println("Email non valida");
+                Printer.errorPrint("Email non valida");
                 return;
             }
             String password=prompt("Password: ");
@@ -43,13 +44,13 @@ public class RegisterCLI extends AbstractState {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy");
 
             while (selectedDate == null) {
-                System.out.print("Inserisci una data (formato: gg/mm/aaaa): ");
+                Printer.print("Inserisci una data (formato: gg/mm/aaaa): ");
                 String input = scanner.nextLine();
 
                 try {
                     selectedDate = LocalDate.parse(input, formatter);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Data non valida. Riprova.");
+                    Printer.errorPrint("Data non valida. Riprova.");
                     return;
                 }
             }
@@ -59,33 +60,33 @@ public class RegisterCLI extends AbstractState {
                 case "trainer":
                     TrainerBean trainerBean = new TrainerBean(new CredentialsBean(email,password, Role.TRAINER),nome,surname,gender,true,selectedDate);
                     controller.registerTrainer(trainerBean);
-                    System.out.println("Registrazione avvenuta con successo");
+                    Printer.println("Registrazione avvenuta con successo");
                     login.login(trainerBean.getCredentialsBean());
 //                    goNext(context,new TrainerHomepageCLI(trainerBean));
                     break;
                 case "cliente":
                     CustomerBean customerBean = new CustomerBean(new CredentialsBean(email,password,Role.CLIENT),nome,surname,gender,true,selectedDate);
                     controller.registerCustomer(customerBean);
-                    System.out.println("Registrazione avvenuta con successo");
+                    Printer.println("Registrazione avvenuta con successo");
                     login.login(customerBean.getCredentialsBean());
                     goNext(context,new CustomerHomepageCLI(customerBean));
                     break;
                 default:
-                    System.out.println("Ruolo non valido. Scegli 'trainer' o 'cliente'");
+                    Printer.errorPrint("Ruolo non valido. Scegli 'trainer' o 'cliente'");
             }
         } catch (MailAlreadyExistsException e) {
-            System.out.println("Errore: " + e.getMessage());
+            Printer.errorPrint("Errore: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Errore durante la registrazione. Riprova più tardi.");
+            Printer.errorPrint("Errore durante la registrazione. Riprova più tardi.");
         }
     }
 
     //metodo per chiedere l'input
     private String prompt(String message) {
-        System.out.print(message);
+        Printer.print(message);
         String input = scanner.nextLine().trim();
         if (input.isEmpty()) {
-            System.out.println("Inserire un valore valido");
+            Printer.errorPrint("Inserire un valore valido");
             return prompt(message);
         }
         return input;
@@ -111,15 +112,15 @@ public class RegisterCLI extends AbstractState {
 
     @Override
     public void stampa() {
-        System.out.println("-------------- Registrazione --------------");
-        System.out.println("Inserite le informazioni necessarie per la registrazione.");
+        Printer.println("-------------- Registrazione --------------");
+        Printer.println("Inserite le informazioni necessarie per la registrazione.");
     }
 
     @Override
     public void showMenu() {
-        System.out.println("1. Conferma"); //in questo caso facciamo il login in automatico
-        System.out.println("2. Indietro");
-        System.out.println("0. Esci");
-        System.out.println("Opzione scelta: ");
+        Printer.println("1. Conferma"); //in questo caso facciamo il login in automatico
+        Printer.println("2. Indietro");
+        Printer.println("0. Esci");
+        Printer.print("Opzione scelta: ");
     }
 }

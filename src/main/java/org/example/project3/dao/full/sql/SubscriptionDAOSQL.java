@@ -5,6 +5,7 @@ import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Subscription;
 import org.example.project3.query.SubscriptionQuery;
 import org.example.project3.utilities.enums.Type;
+import org.example.project3.utilities.others.Printer;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -60,6 +61,6 @@ public class SubscriptionDAOSQL implements SubscriptionDAO {
     }
 
     private void handleException(Exception e) {
-        System.out.println(String.format("%s", e.getMessage()));
+        Printer.errorPrint(String.format("%s", e.getMessage()));
     }
 }

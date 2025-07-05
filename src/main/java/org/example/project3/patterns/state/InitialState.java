@@ -1,5 +1,6 @@
 package org.example.project3.patterns.state;
 
+import org.example.project3.utilities.others.Printer;
 import org.example.project3.view.commandline.LoginCLI;
 import org.example.project3.view.commandline.RegisterCLI;
 
@@ -31,11 +32,11 @@ public class  InitialState extends AbstractState{
                         goNext(context,nextState);
                         break;
                     default:
-                        System.out.println("Opzione non valida!");
+                        Printer.errorPrint("Opzione non valida!");
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Errore nella scelta!");
+                Printer.errorPrint("Errore nella scelta!");
                 scanner.nextLine();
             }
         }
@@ -43,16 +44,16 @@ public class  InitialState extends AbstractState{
 
     @Override
     public void showMenu() {
-        System.out.println("1) Esci");
-        System.out.println("2) Login");
-        System.out.println("3) Registrati");
-        System.out.print("Scelta: ");
+        Printer.println("1) Esci");
+        Printer.println("2) Login");
+        Printer.println("3) Registrati");
+        Printer.print("Scelta: ");
     }
     @Override
     public void stampa() {
-        System.out.println("");
-        System.out.println("--------------------Benvenuto in Bodybuild--------------------");
-        System.out.println("---------necessario effettuare il login o registrarsi---------");
+        Printer.println("");
+        Printer.println("--------------------Benvenuto in Bodybuild--------------------");
+        Printer.println("---------necessario effettuare il login o registrarsi---------");
     }
     @Override
     public void exit(StateMachineConcrete stateMachine){

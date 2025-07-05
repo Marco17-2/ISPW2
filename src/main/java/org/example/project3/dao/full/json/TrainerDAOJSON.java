@@ -7,6 +7,7 @@ import org.example.project3.model.Customer;
 import org.example.project3.model.LoggedUser;
 import org.example.project3.model.Trainer;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -50,7 +51,7 @@ public class TrainerDAOJSON implements TrainerDAO {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Impossibile caricare gli utenti dal file utenti.");
+            Printer.errorPrint("Impossibile caricare gli utenti dal file utenti.");
         }
     }
 
@@ -84,7 +85,7 @@ public class TrainerDAOJSON implements TrainerDAO {
             writer.write(sb + "\n"); //Aggiunge l'utente al file
             loadFile(); // Ricarica i dati dopo aver aggiunto un nuovo utente
         } catch (IOException e) {
-            System.out.println("Impossibile salvare l'utente sul file JSON.");
+            Printer.errorPrint("Impossibile salvare l'utente sul file JSON.");
         }
     }
 

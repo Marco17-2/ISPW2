@@ -1,11 +1,11 @@
 package org.example.project3.view.commandline;
 
-import javafx.print.Printer;
 import org.example.project3.controller.CourseListController;
 import org.example.project3.model.*;
 import org.example.project3.beans.*;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class CourseListCLI extends AbstractState {
         List<CourseBean> course = new ArrayList<>();
         courseListController.retrieveCourses(course);
         if(course.isEmpty()) {
-            System.out.println("Non ci sono corsi");
+            Printer.errorPrint("Non ci sono corsi");
             return;
         }
         courses.clear();
@@ -45,12 +45,12 @@ public class CourseListCLI extends AbstractState {
                 System.out.println("Seleziona la richiesta");
                 courseIndex = Integer.parseInt(scanner.nextLine().trim()) - 1;
                 if(courseIndex < 0 || courseIndex >= courses.size()){
-                    System.out.println("Errore nella scelta1");
+                    Printer.errorPrint("Errore nella scelta1");
                 }else {
                     valid = true;
                 }
             }catch(NumberFormatException e){
-                System.out.println("Errore nella scelta2");
+                Printer.errorPrint("Errore nella scelta2");
             }
         }
 
@@ -63,12 +63,12 @@ public class CourseListCLI extends AbstractState {
 
                 loadCourses();
 
-                System.out.println("----------------Lista Corsi--------------------");
+                Printer.println("----------------Lista Corsi--------------------");
                 for(int i=0; i<courses.size(); i++){
-                    System.out.println((i+1) + ". " + courses.get(i).getCourseName() + " " + courses.get(i).getRemainingSlots() + " " + courses.get(i).getSlots() + " " + courses.get(i).getDay() + " " + courses.get(i).getHour() + " " + courses.get(i).getLevel());
+                    Printer.println((i+1) + ". " + courses.get(i).getCourseName() + " " + courses.get(i).getRemainingSlots() + " " + courses.get(i).getSlots() + " " + courses.get(i).getDay() + " " + courses.get(i).getHour() + " " + courses.get(i).getLevel());
                 }
 
-                System.out.println(" ");
+        Printer.println(" ");
 
                 int selectedIndex = getCourseIndex();
 
@@ -80,11 +80,11 @@ public class CourseListCLI extends AbstractState {
 
                     while (!validChoice) {
                         try {
-                            System.out.println("Scelta:");
+                            Printer.println("Scelta:");
                             scelta = Integer.parseInt(scanner.nextLine().trim());
                             validChoice = true;
                         } catch (NumberFormatException e) {
-                            System.out.println("Scelta non valida. Inserisci un numero.");
+                            Printer.println("Scelta non valida. Inserisci un numero.");
                         }
                     }
 
@@ -114,24 +114,24 @@ public class CourseListCLI extends AbstractState {
         ReservationBean reservationBean = new ReservationBean(user, selectedCourse, selectedCourse.getDay(), selectedCourse.getHour());
         if(!courseListController.alreadyHasRequest(reservationBean)){
             courseListController.sendReservationReq(reservationBean);
-            System.out.println( " Richiesta inviata ");
+            Printer.println( " Richiesta inviata ");
         }else{
-            System.out.println( " Hai già inviato una richiesta ");
+            Printer.errorPrint( " Hai già inviato una richiesta ");
         }
     }
 
     @Override
     public void showMenu() {
-        System.out.println("1.Prenota Corso");
-        System.out.println("2.Visualizza Dettagli Trainer");
-        System.out.println("3.Indietro");
-        System.out.println("Scelta:");
+        Printer.println("1.Prenota Corso");
+        Printer.println("2.Visualizza Dettagli Trainer");
+        Printer.println("3.Indietro");
+        Printer.print("Scelta:");
     }
 
     @Override
     public void stampa() {
-        System.out.println(" ");
-        System.out.println("-------------------Benvenuto pagina prenotazione corsi -------------------");
+        Printer.println(" ");
+        Printer.println("-------------------Benvenuto pagina prenotazione corsi -------------------");
     }
 
     @Override

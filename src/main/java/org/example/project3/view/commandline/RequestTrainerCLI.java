@@ -12,6 +12,7 @@ import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;
 import org.example.project3.patterns.state.StateMachineConcrete;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.Scanner;
 import java.util.List;
@@ -67,7 +68,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
                 }
 
             }catch(Exception e){
-                System.out.println("Errore durante l'elaborazione");
+                Printer.errorPrint("Errore durante l'elaborazione");
             }
         }
     }
@@ -75,7 +76,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
 
     private void handleReservation(boolean accept){
         if(reservations.isEmpty()){
-            System.out.println("Richieste non trovate");
+            Printer.errorPrint("Richieste non trovate");
             return;
         }
 
@@ -93,9 +94,9 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         reservationReqApplicationController.deleteReservationReq(reservation);
         if(accept){
             reservationReqApplicationController.addReservation(reservation);
-            System.out.println("Richiesta accettata prenotazione registrata");
+            Printer.println("Richiesta accettata prenotazione registrata");
         }else{
-            System.out.println("Richiesta rifiutata");
+            Printer.errorPrint("Richiesta rifiutata");
         }
 
     }
@@ -106,15 +107,15 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         boolean valid = false;
         while(!valid){
             try{
-                System.out.println("Seleziona la richiesta");
+                Printer.println("Seleziona la richiesta");
                 reservationIndex = Integer.parseInt(scanner.nextLine().trim()) -1;
                 if(reservationIndex < 0 || reservationIndex >= reservations.size()){
-                    System.out.println("Errore nella scelta");
+                    Printer.errorPrint("Errore nella scelta");
                 }else {
                     valid = true;
                 }
             }catch(NumberFormatException e){
-                System.out.println("Errore nella scelta");
+                Printer.errorPrint("Errore nella scelta");
             }
         }
 
@@ -123,16 +124,16 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
 
     private void displayReservation(){
         if(reservations.isEmpty()){
-            System.out.println("Non sono presneti richieste");
+            Printer.errorPrint("Non sono presneti richieste");
         }else{
-            System.out.println("\n ----------------- Lista di Richieste -----------------\n");
+            Printer.println("\n ----------------- Lista di Richieste -----------------\n");
             int index = 1;
             for ( ReservationBean reservation : reservations) {
-                System.out.println(index + " Richiesta da: " + reservation.getCustomer().getName() + " | "
+                Printer.println(index + " Richiesta da: " + reservation.getCustomer().getName() + " | "
                         + "Corso: " + reservation.getCourse().getCourseName() + " | " + reservation.getDay() + " | " + reservation.getHour());
                 index++;
             }
-            System.out.println(" ");
+            Printer.println(" ");
         }
     }
 
@@ -142,7 +143,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         reservationListController.getReservationReq((TrainerBean)user, reservationsReq);
 
         if(reservationsReq.isEmpty()){
-            System.out.println("Richieste non presenti");
+            Printer.errorPrint("Richieste non presenti");
             return;
         }
         reservations.clear();
@@ -152,21 +153,21 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
 
     private void showDetail(ReservationBean reservation){
 
-        System.out.println("-------------------Customer-------------------");
-        System.out.println("Name: " + reservation.getCustomer().getName());
-        System.out.println("Surname: " + reservation.getCustomer().getSurname());
-        System.out.println("Mail" + reservation.getCustomer().getCredentialsBean().getMail());
-        System.out.println("gender: " + reservation.getCustomer().getGender());
-        System.out.println("Injury " + reservation.getCustomer().getInjury());
-        System.out.println("--------------------------------------");
-        System.out.println(" ");
+        Printer.println("-------------------Customer-------------------");
+        Printer.println("Name: " + reservation.getCustomer().getName());
+        Printer.println("Surname: " + reservation.getCustomer().getSurname());
+        Printer.println("Mail" + reservation.getCustomer().getCredentialsBean().getMail());
+        Printer.println("gender: " + reservation.getCustomer().getGender());
+        Printer.println("Injury " + reservation.getCustomer().getInjury());
+        Printer.println("--------------------------------------");
+        Printer.println(" ");
 
     }
 
     private void viewDetail(){
 
         if(reservations.isEmpty()){
-            System.out.println("Richieste non trovate");
+            Printer.errorPrint("Richieste non trovate");
             return;
         }
 
@@ -182,19 +183,19 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
 
     @Override
     public void showMenu(){
-        System.out.println("1.Visualizza richieste");
-        System.out.println("2.Accetta Richiesta");
-        System.out.println("3.Rifiuta richiesta");
-        System.out.println("4.Visualizza dettagli richiesta");
-        System.out.println("5.Indietro");
-        System.out.println("Opzione scelta");
+        Printer.println("1.Visualizza richieste");
+        Printer.println("2.Accetta Richiesta");
+        Printer.println("3.Rifiuta richiesta");
+        Printer.println("4.Visualizza dettagli richiesta");
+        Printer.println("5.Indietro");
+        Printer.print("Opzione scelta");
 
     }
 
     @Override
     public void stampa(){
-        System.out.println(" ");
-        System.out.println("----------------------Richieste-----------------------");
+        Printer.println(" ");
+        Printer.println("----------------------Richieste-----------------------");
 
     }
 
@@ -211,9 +212,9 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
     public void update(){
         loadReservation();
         if(reservations.isEmpty()){
-            System.out.println("Richieste non trovate");
+            Printer.errorPrint("Richieste non trovate");
         }else{
-            System.out.println("Aggiornamento Richieste");
+            Printer.println("Aggiornamento Richieste");
         }
     }
 

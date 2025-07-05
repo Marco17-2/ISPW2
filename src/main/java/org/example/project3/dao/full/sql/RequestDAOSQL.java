@@ -6,6 +6,7 @@ import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -157,6 +158,6 @@ public class RequestDAOSQL implements RequestDAO {
     }
 
     private void handleException(Exception e) {
-        System.out.println(String.format("%s", e.getMessage()));
+        Printer.errorPrint(String.format("%s", e.getMessage()));
     }
 }

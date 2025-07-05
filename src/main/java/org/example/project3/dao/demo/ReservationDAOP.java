@@ -5,6 +5,7 @@ import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.model.Course;
 import org.example.project3.model.Customer;
 import org.example.project3.model.Reservation;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -43,9 +44,9 @@ public class ReservationDAOP implements ReservationDAO {
         if (course.getRemainingSlots() > 0) {
             course.setRemainingSlots(course.getRemainingSlots() - 1);
             SharedResources.getInstance().getCourses().put(course.getCourseName(), course);
-            System.out.println("Slot per il corso " + course.getCourseName() + " ridotti a " + course.getRemainingSlots());
+            Printer.println("Slot per il corso " + course.getCourseName() + " ridotti a " + course.getRemainingSlots());
         } else {
-            System.out.println("Nessuno slot disponibile per il corso " + course.getCourseName());
+            Printer.errorPrint("Nessuno slot disponibile per il corso " + course.getCourseName());
         }
 
     }

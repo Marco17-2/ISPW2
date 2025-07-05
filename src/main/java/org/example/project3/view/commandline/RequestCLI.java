@@ -8,6 +8,7 @@ import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;
 import org.example.project3.patterns.state.StateMachineConcrete;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +39,17 @@ public class RequestCLI extends AbstractState implements Observer {
                         if (displaySchedules(requestBean)) {
                             loadExercises(requestBean);
                             if (displayExercises(requestBean)) {
-                                System.out.println("Specifica la motivazione della modifica:");
+                                Printer.println("Specifica la motivazione della modifica:");
                                 String motivazione=scanner.nextLine();
                                 requestBean.setReason(motivazione);
                                 requestModifyController.sendRequest(requestBean);
                                 update();
                                 goNext(context, new CustomerHomepageCLI( user ));
                             } else {
-                                System.out.println("L'esercizio inserito non è presente!");
+                                Printer.errorPrint("L'esercizio inserito non è presente!");
                             }
                         } else {
-                            System.out.println("È state inserito un ID non corretto!");
+                            Printer.errorPrint("È state inserito un ID non corretto!");
                         }
                     }
                     case 2:
@@ -58,7 +59,7 @@ public class RequestCLI extends AbstractState implements Observer {
                         goNext(context, new InitialState());
                 }
             }catch(Exception e){
-                System.out.println("Errore durante la richiesta. Riprova più tardi.");
+                Printer.errorPrint("Errore durante la richiesta. Riprova più tardi.");
                 scanner.nextLine();
             }
         }
@@ -71,15 +72,15 @@ public class RequestCLI extends AbstractState implements Observer {
 
     private boolean displaySchedules(RequestBean requestBean){
         if(scheduleBeans.isEmpty()){
-            System.out.println("Non è stata trovata nessuna scheda!");
+            Printer.errorPrint("Non è stata trovata nessuna scheda!");
             return false;
         }else{
-            System.out.println("--------------------Lista delle schede--------------------\n");
-            System.out.println("(1)ID | (2)Nome | (3)Utente | (4)Trainer\n");
+            Printer.println("--------------------Lista delle schede--------------------\n");
+            Printer.println("(1)ID | (2)Nome | (3)Utente | (4)Trainer\n");
             for(ScheduleBean scheduleBean : scheduleBeans){
-                System.out.println(scheduleBean.getId()+" | "+scheduleBean.getName()+" | "+scheduleBean.getCustomerBean().getCredentialsBean().getMail()+" | "+scheduleBean.getTrainerBean().getCredentialsBean().getMail());
+                Printer.println(scheduleBean.getId()+" | "+scheduleBean.getName()+" | "+scheduleBean.getCustomerBean().getCredentialsBean().getMail()+" | "+scheduleBean.getTrainerBean().getCredentialsBean().getMail());
             }
-            System.out.println("Inserici l'ID della scheda che vuoi modificare");
+            Printer.println("Inserici l'ID della scheda che vuoi modificare");
             Long id=Long.parseLong(scanner.nextLine());
             for(ScheduleBean scheduleBean : scheduleBeans){
                 if((id.equals(scheduleBean.getId()))&&(!requestModifyController.hasAlreadySentARequest(scheduleBean))){
@@ -99,15 +100,15 @@ public class RequestCLI extends AbstractState implements Observer {
 
     private boolean displayExercises(RequestBean requestBean){
         if(exerciseBeans.isEmpty()){
-            System.out.println("Non è stata trovato nessun esercizio!");
+            Printer.errorPrint("Non è stata trovato nessun esercizio!");
             return false;
         }else{
-            System.out.println("--------------------Lista degli esercizi della scheda "+requestBean.getScheduleBean().getName()+"--------------------\n");
-            System.out.println("(1)Nome | (2)Descrizione | (3)Numero di serie | (4)Numero di ripetizioni | (5)Tempo di recupero\n");
+            Printer.println("--------------------Lista degli esercizi della scheda "+requestBean.getScheduleBean().getName()+"--------------------\n");
+            Printer.println("(1)Nome | (2)Descrizione | (3)Numero di serie | (4)Numero di ripetizioni | (5)Tempo di recupero\n");
             for(ExerciseBean exerciseBean : exerciseBeans){
-                System.out.println(exerciseBean.getName()+" | "+exerciseBean.getDescription()+" | "+exerciseBean.getNumberSeries()+" | "+exerciseBean.getNumberReps()+" | "+exerciseBean.getRestTime());
+                Printer.println(exerciseBean.getName()+" | "+exerciseBean.getDescription()+" | "+exerciseBean.getNumberSeries()+" | "+exerciseBean.getNumberReps()+" | "+exerciseBean.getRestTime());
             }
-            System.out.println("Inserici il nome dell'esercizio che vuoi modificare");
+            Printer.println("Inserici il nome dell'esercizio che vuoi modificare");
             String name=scanner.nextLine();
             for(ExerciseBean exerciseBean : exerciseBeans){
                 if(name.toLowerCase().equals(exerciseBean.getName().toLowerCase())){
@@ -121,17 +122,17 @@ public class RequestCLI extends AbstractState implements Observer {
 
     @Override
     public void showMenu() {
-        System.out.println("1. Scegli scheda"); //in questo caso facciamo il login in automatico
-        System.out.println("2. Indietro");
-        System.out.println("0. Esci");
-        System.out.println("Opzione scelta: ");
+        Printer.println("1. Scegli scheda"); //in questo caso facciamo il login in automatico
+        Printer.println("2. Indietro");
+        Printer.println("0. Esci");
+        Printer.print("Opzione scelta: ");
     }
 
     @Override
     public void stampa(){
-        System.out.println(" ");
-        System.out.println("-------------------Modifica scheda-------------------");
-        System.out.println("Ciao"+ " " + user.getName()+ ",scegli quale scheda modificare:");
+        Printer.println(" ");
+        Printer.println("-------------------Modifica scheda-------------------");
+        Printer.println("Ciao"+ " " + user.getName()+ ",scegli quale scheda modificare:");
     }
 
     @Override
@@ -143,6 +144,6 @@ public class RequestCLI extends AbstractState implements Observer {
 
     @Override
     public void update(){
-        System.out.println("Richiesta inviata con successo");
+        Printer.println("Richiesta inviata con successo");
     }
 }

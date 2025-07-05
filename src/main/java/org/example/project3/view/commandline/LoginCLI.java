@@ -11,6 +11,7 @@ import org.example.project3.model.Trainer;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.Scanner;
 
@@ -22,9 +23,9 @@ import java.util.Scanner;
         @Override
         public void action(StateMachineConcrete context) {
             //metodo effettivo per il login
-            System.out.println("---Email: ");
+            Printer.println("---Email: ");
             String email = scanner.next();
-            System.out.println("---Password: ");
+            Printer.println("---Password: ");
             String password = scanner.next();
             //controllo se l'utente è registrato
             //se si, setto l'utente loggato
@@ -46,7 +47,7 @@ import java.util.Scanner;
                 }
                 goNext(context, homeCLI);
             } catch (WrongEmailOrPasswordException | NoResultException e) {
-                System.out.println("Email o password errati");
+                Printer.errorPrint("Email o password errati");
                 action(context);
             }
         }
@@ -69,7 +70,7 @@ import java.util.Scanner;
 
         @Override
         public void stampa() {
-            System.out.println(" ");
-            System.out.println("-------------- LOGIN --------------");
+            Printer.println(" ");
+            Printer.println("-------------- LOGIN --------------");
         }
 }

@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.example.project3.patterns.state.StateMachineConcrete;
 import org.example.project3.utilities.others.FXMLPathConfig;
+import org.example.project3.utilities.others.Printer;
 import org.example.project3.utilities.others.mappers.MapperRegistration;
 import org.example.project3.utilities.others.mappers.Session;
 import org.example.project3.view.gui.CustomerHomepageGUI;
@@ -39,11 +40,10 @@ public class Main extends Application {
                         validInput = true;
                         break;
                     default:
-                        System.out.println("Scelta non valida");
+                        Printer.errorPrint("Scelta non valida");
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
+                Printer.println(e.getMessage());
                 scanner.nextLine();
             }
         }
@@ -74,12 +74,12 @@ public class Main extends Application {
     }
 
     public void showMenu() {
-        System.out.println(" ");
-        System.out.println("-------------- Bodybuild --------------");
-        System.out.println("Scegli l'interfaccia da utilizzare:");
-        System.out.println("1. Interfaccia grafica");
-        System.out.println("2. Interfaccia a riga di comando");
-        System.out.print("Scelta: ");
+        Printer.println(" ");
+        Printer.println("-------------- Bodybuild --------------");
+        Printer.println("Scegli l'interfaccia da utilizzare:");
+        Printer.println("1. Interfaccia grafica");
+        Printer.println("2. Interfaccia a riga di comando");
+        Printer.print("Scelta: ");
     }
 
     public  void interfaceCLI(){
@@ -88,6 +88,6 @@ public class Main extends Application {
             context.goNext();
 
         }
-        System.out.println("Arrivederci");
+        Printer.println("Arrivederci");
     }
 }

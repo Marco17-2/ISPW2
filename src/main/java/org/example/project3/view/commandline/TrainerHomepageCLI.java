@@ -6,6 +6,7 @@ import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;
 import org.example.project3.patterns.state.StateMachineConcrete;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class TrainerHomepageCLI extends AbstractState{
                         goNext(context, new InitialState());
                 }
             }catch(Exception e){
-                System.out.println("Scelta non valida!");
+                Printer.errorPrint("Scelta non valida!");
                 scanner.nextLine();
             }
         }
@@ -42,15 +43,15 @@ public class TrainerHomepageCLI extends AbstractState{
 
     @Override
     public void showMenu(){
-        System.out.println("1. Visualizza Richieste");
-        System.out.println("0. Logout");
+        Printer.println("1. Visualizza Richieste");
+        Printer.println("0. Logout");
 
     }
 
     @Override
     public void stampa(){
-        System.out.println(" ");
-        System.out.println("-------------------Benvenuto nella home del trainer-------------------");
+        Printer.println(" ");
+        Printer.println("-------------------Benvenuto nella home del trainer-------------------");
     }
 
     @Override
