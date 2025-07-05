@@ -27,6 +27,6 @@ public class TrainerBean extends LoggedUserBean {
     }
 
     public void setSpecializations(List<String> specializations) {
-        this.specializations = (ArrayList<String>) specializations;
+        this.specializations = specializations;
     }
 }
