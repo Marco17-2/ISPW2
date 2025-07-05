@@ -109,8 +109,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                     ExerciseBean current = getTableView().getItems().get(getIndex());
 
                     // Se questa riga è quella selezionata, evidenziala
-                    if ((requestBean!=null)&&(current.equals(requestBean.getExerciseBean()))){ radioButton.setSelected(true);}
-                    else{ radioButton.setSelected(false);}
+                    radioButton.setSelected((requestBean!=null)&&(current.equals(requestBean.getExerciseBean())));
 
                     setGraphic(radioButton);
                 }
