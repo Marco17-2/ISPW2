@@ -100,6 +100,7 @@ public class CourseListCLI extends AbstractState {
                         }
 
                         case 3 -> goBack(context);
+                        default -> {Printer.errorPrint("Scelta non valida. ");}
                     }
 
                 }else{
