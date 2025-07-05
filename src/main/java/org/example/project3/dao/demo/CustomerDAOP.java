@@ -2,19 +2,13 @@ package org.example.project3.dao.demo;
 
 import org.example.project3.dao.CustomerDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
-import org.example.project3.dao.full.sql.ConnectionSQL;
-import org.example.project3.exceptions.DbOperationException;
+
 import org.example.project3.exceptions.LoginAndRegistrationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Credentials;
 import org.example.project3.model.Customer;
-import org.example.project3.model.Subscription;
-import org.example.project3.query.CustomerQuery;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class CustomerDAOP implements CustomerDAO {
     public boolean emailExists(String mail) {

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.example.project3.exceptions.DbOperationException;
 
 public class CourseQuery {
 

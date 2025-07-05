@@ -3,8 +3,7 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.SubscriptionDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
+
 import org.example.project3.model.Subscription;
 
 public class SubscriptionDAOP implements SubscriptionDAO {

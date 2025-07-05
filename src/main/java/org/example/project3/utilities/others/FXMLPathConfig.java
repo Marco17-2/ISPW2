@@ -1,7 +1,6 @@
 package org.example.project3.utilities.others;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Properties;
 
 public class FXMLPathConfig {

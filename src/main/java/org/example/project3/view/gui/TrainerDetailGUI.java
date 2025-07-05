@@ -2,14 +2,10 @@ package org.example.project3.view.gui;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.example.project3.controller.CourseListController;
 import org.example.project3.controller.TrainerDescriptionController;
 import org.example.project3.exceptions.LoadingException;

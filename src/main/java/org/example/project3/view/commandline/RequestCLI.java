@@ -3,7 +3,6 @@ package org.example.project3.view.commandline;
 import org.example.project3.beans.*;
 import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ScheduleDetailsController;
-import org.example.project3.model.Schedule;
 import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;

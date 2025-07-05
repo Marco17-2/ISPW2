@@ -1,7 +1,6 @@
 package org.example.project3.view.commandline;
 
 import org.example.project3.controller.CourseListController;
-import org.example.project3.model.*;
 import org.example.project3.beans.*;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.StateMachineConcrete;

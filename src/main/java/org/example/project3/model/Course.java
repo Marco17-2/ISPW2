@@ -1,8 +1,5 @@
 package org.example.project3.model;
 
-
-import java.time.Duration;
-
 // correzione costruttore by bean
 public class Course {
 

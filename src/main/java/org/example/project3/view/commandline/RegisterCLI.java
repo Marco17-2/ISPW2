@@ -15,7 +15,6 @@ import org.example.project3.utilities.others.Printer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RegisterCLI extends AbstractState {

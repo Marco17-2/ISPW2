@@ -6,11 +6,10 @@ import org.example.project3.beans.ReservationBean;
 import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.controller.ReservationListController;
 import org.example.project3.controller.ReservationReqApplicationController;
-import org.example.project3.model.Reservation;
+
 import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 import org.example.project3.patterns.state.AbstractState;
-import org.example.project3.patterns.state.InitialState;
 import org.example.project3.patterns.state.StateMachineConcrete;
 import org.example.project3.utilities.others.Printer;
 

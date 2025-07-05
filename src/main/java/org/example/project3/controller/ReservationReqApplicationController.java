@@ -2,7 +2,7 @@ package org.example.project3.controller;
 
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.ReservationDAO;
-import org.example.project3.exceptions.NoResultException;
+
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 
@@ -10,8 +10,7 @@ import org.example.project3.beans.*;
 import org.example.project3.model.*;
 import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class ReservationReqApplicationController {
 

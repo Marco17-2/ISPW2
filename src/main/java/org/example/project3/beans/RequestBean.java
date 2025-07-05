@@ -1,9 +1,5 @@
 package org.example.project3.beans;
 
-import org.example.project3.model.Course;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-
 import java.time.LocalDateTime;
 
 public class RequestBean {

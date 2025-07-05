@@ -1,10 +1,6 @@
 package org.example.project3.utilities.others.mappers;
 
-import org.example.project3.beans.CourseBean;
-import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ReservationBean;
-import org.example.project3.model.Course;
-import org.example.project3.model.Request;
 import org.example.project3.model.Reservation;
 
 public class ReservationMapper implements BeanAndModelMapper<ReservationBean, Reservation> {

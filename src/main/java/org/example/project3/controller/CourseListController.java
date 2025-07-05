@@ -6,7 +6,6 @@ import org.example.project3.exceptions.NoResultException;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.patterns.observer.ReservationManagerConcreteSubject;
-import org.example.project3.utilities.others.mappers.BeanAndModelMapper;
 
 import org.example.project3.beans.*;
 import org.example.project3.model.*;

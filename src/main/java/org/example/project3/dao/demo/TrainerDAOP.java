@@ -7,7 +7,7 @@ import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Course;
 import org.example.project3.model.Credentials;
-import org.example.project3.model.Customer;
+
 import org.example.project3.model.Trainer;
 
 import java.sql.SQLException;

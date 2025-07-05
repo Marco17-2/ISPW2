@@ -1,7 +1,6 @@
 package org.example.project3.view.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -10,7 +9,6 @@ import org.example.project3.beans.CredentialsBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.TrainerBean;
 import org.example.project3.controller.LoginController;
-import org.example.project3.controller.UserRegistrationController;
 import org.example.project3.exceptions.EmptyFieldException;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.exceptions.NoResultException;

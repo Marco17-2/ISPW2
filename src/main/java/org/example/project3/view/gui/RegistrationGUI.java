@@ -8,7 +8,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.example.project3.beans.CredentialsBean;
 import org.example.project3.beans.CustomerBean;
-import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.controller.LoginController;
 import org.example.project3.controller.UserRegistrationController;
 import org.example.project3.exceptions.EmptyFieldException;
@@ -19,7 +18,6 @@ import org.example.project3.utilities.enums.Role;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
-import java.io.IOException;
 
 public class RegistrationGUI extends CommonGUI {
     protected RegistrationGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }

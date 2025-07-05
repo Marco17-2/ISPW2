@@ -3,7 +3,6 @@ package org.example.project3.query;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.model.Customer;
-import org.example.project3.model.LoggedUser;
 
 import java.sql.*;
 import java.time.LocalDate;
