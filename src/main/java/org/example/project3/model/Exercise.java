@@ -3,12 +3,12 @@ package org.example.project3.model;
 import org.example.project3.utilities.enums.RestTime;
 
 public class Exercise {
-    public long id;
-    public String name;
-    public String description;
-    public Integer numberSeries;
-    public Integer numberReps;
-    public RestTime restTime;
+    private long id;
+    private String name;
+    private String description;
+    private Integer numberSeries;
+    private Integer numberReps;
+    private RestTime restTime;
 
     public Exercise(long id, String name, String description, Integer numberSeries, Integer numberReps, RestTime restTime) {
         this.id = id;

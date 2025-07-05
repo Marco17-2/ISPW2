@@ -3,11 +3,11 @@ package org.example.project3.model;
 import java.util.List;
 
 public class Schedule {
-    public long id;
-    public String name;
-    public Customer customer;
-    public Trainer trainer;
-    public List<Exercise> exercises;
+    private long id;
+    private String name;
+    private Customer customer;
+    private Trainer trainer;
+    private List<Exercise> exercises;
 
     public Schedule(long id, String name, Customer customer, Trainer trainer, List<Exercise> exercises) {
         this.id = id;
