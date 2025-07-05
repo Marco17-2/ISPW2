@@ -1,6 +1,5 @@
 package org.example.project3.dao.full.json;
 
-import org.controlsfx.control.textfield.CustomTextField;
 import org.example.project3.dao.CustomerDAO;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.model.Credentials;
