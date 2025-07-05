@@ -57,6 +57,8 @@ public class RequestCLI extends AbstractState implements Observer {
                     case 0:
                         exit=true;
                         goNext(context, new InitialState());
+                    default:
+                        Printer.errorPrint("Scelta non valida!");
                 }
             }catch(Exception e){
                 Printer.errorPrint("Errore durante la richiesta. Riprova più tardi.");

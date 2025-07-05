@@ -32,6 +32,8 @@ public class TrainerHomepageCLI extends AbstractState{
                     case 0:
                         exit=true;
                         goNext(context, new InitialState());
+                    default:
+                        Printer.errorPrint("Scelta non valida!");
                 }
             }catch(Exception e){
                 Printer.errorPrint("Scelta non valida!");
