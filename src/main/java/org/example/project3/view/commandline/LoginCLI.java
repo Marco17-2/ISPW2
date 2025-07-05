@@ -45,7 +45,7 @@ import java.util.Scanner;
                     homeCLI = new CustomerHomepageCLI(user);
                 }
                 goNext(context, homeCLI);
-            } catch (WrongEmailOrPasswordException | NoResultException e) {
+            } catch (WrongEmailOrPasswordException | NoResultException _) {
                 Printer.errorPrint("Email o password errati");
                 action(context);
             }

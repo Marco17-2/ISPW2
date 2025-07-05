@@ -61,7 +61,7 @@ public class RegisterCLI extends AbstractState {
                     controller.registerTrainer(trainerBean);
                     Printer.println("Registrazione avvenuta con successo");
                     login.login(trainerBean.getCredentialsBean());
-//                    goNext(context,new TrainerHomepageCLI(trainerBean));
+                    goNext(context,new TrainerHomepageCLI(trainerBean));
                     break;
                 case "cliente":
                     CustomerBean customerBean = new CustomerBean(new CredentialsBean(email,password,Role.CLIENT),nome,surname,gender,true,selectedDate);
@@ -75,7 +75,7 @@ public class RegisterCLI extends AbstractState {
             }
         } catch (MailAlreadyExistsException e) {
             Printer.errorPrint("Errore: " + e.getMessage());
-        } catch (Exception e) {
+        } catch (Exception _) {
             Printer.errorPrint("Errore durante la registrazione. Riprova più tardi.");
         }
     }

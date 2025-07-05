@@ -34,7 +34,7 @@ public class CustomerHomepageCLI extends AbstractState {
                     default:
                         Printer.errorPrint("Scelta non valida!");
                 }
-            }catch(Exception e){
+            }catch(Exception _){
                 Printer.errorPrint("Scelta non valida!");
                 scanner.nextLine();
             }
@@ -45,10 +45,6 @@ public class CustomerHomepageCLI extends AbstractState {
     public void showMenu(){
         Printer.println("1. Prenotati per un corso");
         Printer.println("2. Richiedi la modifica di una scheda");
-//        System.out.println("3. Vedi progressi");
-//        System.out.println("4. Modifica prenotazione");
-//        System.out.println("5. Richiedi una scheda");
-//        System.out.println("6. Vedi schede");
         Printer.println("0. Logout");
         Printer.print("Opzione scelta:");
     }
