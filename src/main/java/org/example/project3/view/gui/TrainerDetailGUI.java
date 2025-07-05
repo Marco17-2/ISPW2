@@ -31,7 +31,7 @@ public class TrainerDetailGUI extends CommonGUI{
     @FXML
     private TextField specialization;
 
-    public void TrainerDetail(CourseBean courseBean) throws NoResultException {
+    public void trainerDetail(CourseBean courseBean) throws NoResultException {
 
         TrainerDescriptionController trainerDescriptionController = new TrainerDescriptionController();
         TrainerBean trainer = trainerDescriptionController.trainerDescription(courseBean);

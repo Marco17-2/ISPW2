@@ -24,15 +24,15 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="ExerciseChoice" layoutX="55.0" layoutY="88.0" prefHeight="279.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                  <TableView fx:id="exerciseChoice" layoutX="55.0" layoutY="88.0" prefHeight="279.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
                      <columns>
-                        <TableColumn fx:id="ID" prefWidth="39.999969482421875" text="ID" />
-                        <TableColumn fx:id="Name" prefWidth="108.00000762939453" text="Nome" />
-                        <TableColumn fx:id="Description" prefWidth="216.79998779296875" text="Descrizione" />
-                        <TableColumn fx:id="Series" minWidth="0.0" prefWidth="49.5999755859375" text="Serie" />
-                        <TableColumn fx:id="Reps" prefWidth="81.60000610351562" text="Ripetizioni" />
-                        <TableColumn fx:id="RestTime" prefWidth="112.800048828125" text="Recupero" />
-                        <TableColumn fx:id="Check" prefWidth="42.39996337890625" />
+                        <TableColumn fx:id="id" prefWidth="39.999969482421875" text="ID" />
+                        <TableColumn fx:id="name" prefWidth="108.00000762939453" text="Nome" />
+                        <TableColumn fx:id="description" prefWidth="216.79998779296875" text="Descrizione" />
+                        <TableColumn fx:id="series" minWidth="0.0" prefWidth="49.5999755859375" text="Serie" />
+                        <TableColumn fx:id="reps" prefWidth="81.60000610351562" text="Ripetizioni" />
+                        <TableColumn fx:id="restTime" prefWidth="112.800048828125" text="Recupero" />
+                        <TableColumn fx:id="check" prefWidth="42.39996337890625" />
                      </columns>
                      <effect>
                         <DropShadow height="15.0" radius="7.0" width="15.0">
@@ -90,7 +90,7 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="cerca" layoutX="658.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#SearchButton" prefHeight="25.0" prefWidth="30.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;">
+                  <Button fx:id="cerca" layoutX="658.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#searchButton" prefHeight="25.0" prefWidth="30.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
                      </font>

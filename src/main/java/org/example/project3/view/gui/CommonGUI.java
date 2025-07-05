@@ -189,7 +189,7 @@ public abstract class CommonGUI {
             FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
             fxmlLoader.setControllerFactory(c -> new TrainerDetailGUI(session, fxmlPathConfig));
             Parent root = fxmlLoader.load();
-            ((TrainerDetailGUI) fxmlLoader.getController()).TrainerDetail(coursebean);
+            ((TrainerDetailGUI) fxmlLoader.getController()).trainerDetail(coursebean);
             changeScene(root, event);
 
         }catch(IOException e){

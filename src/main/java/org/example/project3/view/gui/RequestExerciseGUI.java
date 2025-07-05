@@ -16,6 +16,7 @@ import org.example.project3.exceptions.EmptyFieldException;
 import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.observer.RequestManagerConcreteSubject;
 import org.example.project3.utilities.others.FXMLPathConfig;
+import org.example.project3.utilities.others.Printer;
 import org.example.project3.utilities.others.mappers.Session;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,28 +46,28 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     TextField motivazione;
 
     @FXML
-    TableView<ExerciseBean> ExerciseChoice;
+    TableView<ExerciseBean> exerciseChoice;
 
     @FXML
-    TableColumn<ExerciseBean, Long> ID;
+    TableColumn<ExerciseBean, Long> id;
 
     @FXML
-    TableColumn<ExerciseBean, String> Name;
+    TableColumn<ExerciseBean, String> name;
 
     @FXML
-    TableColumn<ExerciseBean, String> Description;
+    TableColumn<ExerciseBean, String> description;
 
     @FXML
-    TableColumn<ExerciseBean, Integer> Series;
+    TableColumn<ExerciseBean, Integer> series;
 
     @FXML
-    TableColumn<ExerciseBean, Integer> Reps;
+    TableColumn<ExerciseBean, Integer> reps;
 
     @FXML
-    TableColumn<ExerciseBean, String> RestTime;
+    TableColumn<ExerciseBean, String> restTime;
 
     @FXML
-    TableColumn<ExerciseBean, Void> Check;
+    TableColumn<ExerciseBean, Void> check;
 
     @FXML
     Text error;
@@ -108,11 +109,8 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                     ExerciseBean current = getTableView().getItems().get(getIndex());
 
                     // Se questa riga è quella selezionata, evidenziala
-                    if (requestBean!=null&&current.equals(requestBean.getExerciseBean())) {
-                        radioButton.setSelected(true);
-                    } else {
-                        radioButton.setSelected(false);
-                    }
+                    if (requestBean!=null&&current.equals(requestBean.getExerciseBean())) radioButton.setSelected(true);
+                    else radioButton.setSelected(false);
 
                     setGraphic(radioButton);
                 }
@@ -128,15 +126,15 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
             exerciseList.addAll(exerciseBeansParam);
         }
         //Imposto valori della tabella
-        ID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        Name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        Description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
-        Series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
-        Reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
-        RestTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().toString()));
-        Check.setCellFactory(param -> createButtonCell());
-        ExerciseChoice.getItems().clear();
-        ExerciseChoice.getItems().addAll(exerciseBeansParam);
+        id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
+        reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
+        restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().toString()));
+        check.setCellFactory(param -> createButtonCell());
+        exerciseChoice.getItems().clear();
+        exerciseChoice.getItems().addAll(exerciseBeansParam);
     }
 
     @FXML
@@ -149,7 +147,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                 update();
                 goToCustomerHomepage(event);
             }else{
-                System.out.println("Hai già inviato una richiesta");
+                Printer.errorPrint("Hai già inviato una richiesta");
                 error.setText("Hai già inviato una richiesta per questo esercizio di questa scheda!");
                 error.setVisible(true);
             }

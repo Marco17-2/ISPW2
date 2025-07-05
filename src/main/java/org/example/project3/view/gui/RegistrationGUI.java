@@ -55,19 +55,19 @@ public class RegistrationGUI extends CommonGUI {
     }
 
     @FXML
-    public void checkFields(TextField fields[], PasswordField password,ChoiceBox genere, DatePicker dataNascita, javafx.scene.text.Text error) throws EmptyFieldException {
+    public void checkFields(TextField[] fields, PasswordField passwordField,ChoiceBox gender, DatePicker dataDiNascita, javafx.scene.text.Text error) throws EmptyFieldException {
         for(TextField field : fields) {
             if(field.getText().isEmpty()) {
                 throw new EmptyFieldException("Compila tutti i campi");
             }
         }
-        if(password.getText().isEmpty()) {
+        if(passwordField.getText().isEmpty()) {
             throw new EmptyFieldException("Inserisci la password");
         }
-        if(genere.getValue() == null) {
+        if(gender.getValue() == null) {
             throw new EmptyFieldException("Inserisci il genere");
         }
-        if(dataNascita.getValue() == null) {
+        if(dataDiNascita.getValue() == null) {
             throw new EmptyFieldException("Inserisci la data di nascita");
         }
     }
@@ -77,10 +77,10 @@ public class RegistrationGUI extends CommonGUI {
         try{
             CustomerBean customerBean = new CustomerBean(new CredentialsBean(email.getText(), password.getText(), Role.CLIENT),nome.getText(), cognome.getText(), genere.getValue().toString(), true,dataNascita.getValue());
             TextField[] fields={nome,cognome,email};
-            ChoiceBox genere = this.genere;
-            PasswordField password = this.password;
-            DatePicker dataNascita = this.dataNascita;
-            checkFields(fields,password,genere,dataNascita,error);
+            ChoiceBox gender = this.genere;
+            PasswordField passwordField = this.password;
+            DatePicker dataDiNascita = this.dataNascita;
+            checkFields(fields,passwordField,gender,dataDiNascita,error);
             if(isValidMail(email.getText(),error)){
                 return;
             }

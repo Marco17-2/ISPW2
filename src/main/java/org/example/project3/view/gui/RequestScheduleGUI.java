@@ -45,13 +45,13 @@ public class RequestScheduleGUI extends CommonGUI{
     TableView<ScheduleBean> ScheduleChoice;
 
     @FXML
-    TableColumn<ScheduleBean, String> Name;
+    TableColumn<ScheduleBean, String> name;
 
     @FXML
-    TableColumn<ScheduleBean, String> Trainer;
+    TableColumn<ScheduleBean, String> trainer;
 
     @FXML
-    TableColumn<ScheduleBean, Void> Seleziona;
+    TableColumn<ScheduleBean, Void> seleziona;
 
     private static List<ScheduleBean> originalSchedules = new ArrayList<>();
 
@@ -89,9 +89,9 @@ public class RequestScheduleGUI extends CommonGUI{
             originalSchedules.addAll(scheduleBeansParam);
         }
         //Imposto valori della tabella
-        Name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        Trainer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTrainerBean().getCredentialsBean().getMail()));
-        Seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
+        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        trainer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTrainerBean().getCredentialsBean().getMail()));
+        seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
         ScheduleChoice.getItems().clear();
         ScheduleChoice.getItems().addAll(scheduleBeansParam);
 
@@ -125,7 +125,7 @@ public class RequestScheduleGUI extends CommonGUI{
     }
 
     @FXML
-    private void SearchButton() {
+    private void searchButton() {
         String searchText = ricerca.getText();
         cancellaRicerca.setVisible(true);
 
