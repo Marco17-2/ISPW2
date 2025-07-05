@@ -22,14 +22,13 @@
                <children>
                   <TableView fx:id="listCourse" layoutX="61.0" layoutY="115.0" prefHeight="302.0" prefWidth="641.0" style="-fx-background-color: efefef; -fx-background-radius: 22;">
                     <columns>
-                      <TableColumn id="NameCourse" fx:id="courseNameColumn" prefWidth="75.0" text="Name" />
-                      <TableColumn id="TrainerCourse" fx:id="trainerButtonColumn" prefWidth="75.0" text="Trainer" />
-                        <TableColumn id="SlotsCourse" fx:id="slotsColumn" prefWidth="75.0" text="Slots" />
-                        <TableColumn id="RemainingCourse" fx:id="remainingColumn" prefWidth="75.0" text="Remaining" />
-                        <TableColumn id="DurationCourse" fx:id="durationColumn" prefWidth="75.0" text="Duration" />
-                        <TableColumn id="DayCourse" fx:id="dayColumn" prefWidth="75.0" text="Day" />
-                        <TableColumn id="HourCourse" fx:id="hourColumn" prefWidth="75.0" text="Hour" />
-                        <TableColumn id="RequestCourse" fx:id="buttonColumn" prefWidth="75.0" text="Request" />
+                      <TableColumn id="NameCourse" fx:id="courseNameColumn" prefWidth="122.40003204345703" text="Name" />
+                      <TableColumn id="TrainerCourse" fx:id="trainerButtonColumn" prefWidth="118.39990234375" text="Trainer" />
+                        <TableColumn id="RemainingCourse" fx:id="remainingColumn" prefWidth="108.00006103515625" text="Remaining" />
+                        <TableColumn id="DurationCourse" fx:id="durationColumn" prefWidth="80.800048828125" text="Duration" />
+                        <TableColumn id="DayCourse" fx:id="dayColumn" prefWidth="59.200042724609375" text="Day" />
+                        <TableColumn id="HourCourse" fx:id="hourColumn" prefWidth="70.4000244140625" text="Hour" />
+                        <TableColumn id="RequestCourse" fx:id="buttonColumn" prefWidth="83.19998168945312" text="Request" />
                     </columns>
                      <effect>
                         <DropShadow height="15.0" radius="7.0" width="15.0">
