@@ -23,7 +23,7 @@ public class TrainerDAOP implements TrainerDAO {
     }
 
     //inserisco l'utente (credenziali) nel database
-    public boolean insertUser(Credentials credentials)  {
+    public boolean insertUser(Credentials credentials) {
         return SharedResources.getInstance().getUserTable().putIfAbsent(credentials.getMail(), credentials) == null;
     }
 
@@ -68,8 +68,7 @@ public class TrainerDAOP implements TrainerDAO {
         Trainer trainer = SharedResources.getInstance().getTrainerCourse().get(course.getCourseName());
         if (trainer != null) {
             return trainer;
-        }
-        else {
+        } else {
             throw new NoResultException();
         }
     }
@@ -78,9 +77,5 @@ public class TrainerDAOP implements TrainerDAO {
     public List<String> retrieveSpecialization(Course course) throws SQLException {
         Trainer trainer = retrieveTrainerCourse(course);
         return trainer.getSpecializations();
-    }
-
-    private boolean matchesCourse(Course course1, String name){
-        return course1.getCourseName().contains(name);
     }
 }

@@ -35,9 +35,6 @@ public class SharedResources {
     // Mappa per tenere traccia delle relazioni pazienti-psicologi
     private final  Map<String, List<Schedule>> customerSchedules = new HashMap<>();
     private final Map<Long,List<Exercise>> exerciseSchedules = new HashMap<>();
-//    private final Map<String, Map<LocalDate,String>> diaryTable= new ConcurrentHashMap<>();//<mail,<data,contenuto>>
-//    private final Map<String, List<ToDoItem>> toDoTable= new ConcurrentHashMap<>();//<mail,listaToDo>
-//    private final Map<String, List<Task>> taskTable= new ConcurrentHashMap<>();//<mail,listaTask>
 
 
     // Singleton per garantire che ci sia una sola istanza della classe
@@ -87,15 +84,6 @@ public class SharedResources {
     public Map<Long,List<Request>> getRequestsSent(){
         return requestsSent;
     }
-//    public Map<String, Map<LocalDate,String>> getDiaryTable(){
-//        return diaryTable;
-//    }
-//    public Map<String, List<ToDoItem>> getToDoTable(){
-//        return toDoTable;
-//    }
-//    public Map<String, List<Task>> getTaskTable(){
-//        return taskTable;
-//    }
 
     public Map<String, Course> getCourses() { return courses; }
 
