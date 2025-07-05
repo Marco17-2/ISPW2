@@ -50,7 +50,7 @@ public class TrainerDAOJSON implements TrainerDAO {
                     userList.add(loggedUser);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException _) {
             Printer.errorPrint("Impossibile caricare gli utenti dal file utenti.");
         }
     }
@@ -84,7 +84,7 @@ public class TrainerDAOJSON implements TrainerDAO {
 
             writer.write(sb + "\n"); //Aggiunge l'utente al file
             loadFile(); // Ricarica i dati dopo aver aggiunto un nuovo utente
-        } catch (IOException e) {
+        } catch (IOException _) {
             Printer.errorPrint("Impossibile salvare l'utente sul file JSON.");
         }
     }

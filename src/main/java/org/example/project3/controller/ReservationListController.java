@@ -40,7 +40,6 @@ public class ReservationListController {
             reservationManagerConcreteSubject.loadReservations(reservationReq);
 
         }catch(Exception e){
-            System.out.println(e.getMessage());
             throw new NoResultException("Errore recupero descrizione trainer");
         }
     }
