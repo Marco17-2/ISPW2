@@ -42,7 +42,7 @@ public class RequestScheduleGUI extends CommonGUI{
     Button cerca;
 
     @FXML
-    TableView<ScheduleBean> ScheduleChoice;
+    TableView<ScheduleBean> scheduleChoice;
 
     @FXML
     TableColumn<ScheduleBean, String> name;
@@ -92,8 +92,8 @@ public class RequestScheduleGUI extends CommonGUI{
         name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         trainer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTrainerBean().getCredentialsBean().getMail()));
         seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
-        ScheduleChoice.getItems().clear();
-        ScheduleChoice.getItems().addAll(scheduleBeansParam);
+        scheduleChoice.getItems().clear();
+        scheduleChoice.getItems().addAll(scheduleBeansParam);
 
     }
 

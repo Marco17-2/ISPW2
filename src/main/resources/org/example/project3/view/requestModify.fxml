@@ -23,7 +23,7 @@
          <center>
             <AnchorPane prefHeight="468.0" prefWidth="762.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="ScheduleChoice" layoutX="55.0" layoutY="86.0" prefHeight="332.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                  <TableView fx:id="scheduleChoice" layoutX="55.0" layoutY="86.0" prefHeight="332.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
                     <columns>
                       <TableColumn fx:id="name" prefWidth="239.20001983642578" text="Nome" />
                       <TableColumn fx:id="trainer" prefWidth="260.7999572753906" text="Trainer" />
