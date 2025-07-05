@@ -84,7 +84,8 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     private TableCell<ExerciseBean, Void> createButtonCell() {
         return new TableCell<>() {
-            private static final RadioButton radioButton = new RadioButton();
+            private final RadioButton radioButton = new RadioButton();
+
 
             {
                 radioButton.setToggleGroup(rowToggleGroup);
