@@ -45,11 +45,7 @@ public class RegisterCLI extends AbstractState {
             while (selectedDate == null) {
                 Printer.print("Inserisci una data (formato: gg/mm/aaaa): ");
                 String input = scanner.nextLine();
-
-                try {
-                    selectedDate = LocalDate.parse(input, formatter);
-                } catch (DateTimeParseException e) {
-                    Printer.errorPrint("Data non valida. Riprova.");
+                if(!checkDate(input,selectedDate,formatter)){
                     return;
                 }
             }
@@ -77,6 +73,16 @@ public class RegisterCLI extends AbstractState {
             Printer.errorPrint("Errore: " + e.getMessage());
         } catch (Exception _) {
             Printer.errorPrint("Errore durante la registrazione. Riprova più tardi.");
+        }
+    }
+
+    private static boolean checkDate(String input, LocalDate selectedDate,DateTimeFormatter formatter) {
+        try {
+            selectedDate = LocalDate.parse(input, formatter);
+            return true;
+        } catch (DateTimeParseException _) {
+            Printer.errorPrint("Data non valida. Riprova.");
+            return false;
         }
     }
 
