@@ -4,11 +4,7 @@ import org.example.project3.dao.ReservationDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.*;
-import org.example.project3.query.RequestQuery;
 import org.example.project3.query.ReservationQuery;
-
-import java.time.LocalDate;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
