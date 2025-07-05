@@ -9,8 +9,8 @@ public class Request {
     private String reason;
     private LocalDateTime dateTime;
 
-    public Request(long ID, Schedule schedule, Exercise exercise, String reason, LocalDateTime dateTime) {
-        this.ID = ID;
+    public Request(long id, Schedule schedule, Exercise exercise, String reason, LocalDateTime dateTime) {
+        this.ID = id;
         this.schedule = schedule;
         this.exercise = exercise;
         this.reason = reason;
