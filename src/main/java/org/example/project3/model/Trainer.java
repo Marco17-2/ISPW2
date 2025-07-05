@@ -17,7 +17,7 @@ public class Trainer extends LoggedUser{
         this.specializations = new ArrayList<>();
     }
 
-    public ArrayList<String> getSpecializations() {
+    public List<String> getSpecializations() {
         return specializations;
     }
 

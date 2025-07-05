@@ -7,6 +7,7 @@ import org.example.project3.dao.full.json.CredentialsDAOJSON;
 import org.example.project3.dao.full.json.CustomerDAOJSON;
 import org.example.project3.dao.full.json.TrainerDAOJSON;
 import org.example.project3.dao.full.sql.*;
+import org.example.project3.utilities.others.Printer;
 
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class FactoryDAO {
             }
             properties.load(input);
         } catch (IOException e) {
-            System.out.println("Error loading properties file: " + e.getMessage());
+            Printer.errorPrint("Error loading properties file: " + e.getMessage());
         }
     }
 
