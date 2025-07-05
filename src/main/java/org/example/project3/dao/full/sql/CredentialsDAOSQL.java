@@ -47,7 +47,7 @@ public class CredentialsDAOSQL implements CredentialsDAO {
             if (rs.next()) {
                 credentials.setRole(Role.valueOf(rs.getString("role")));
             }
-        } catch (SQLException e) {
+        } catch (SQLException _) {
             throw new WrongEmailOrPasswordException("Mail o password errati");
         }
     }

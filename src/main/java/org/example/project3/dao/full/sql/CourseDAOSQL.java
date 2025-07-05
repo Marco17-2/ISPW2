@@ -3,7 +3,6 @@ package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.CourseDAO;
 import org.example.project3.exceptions.DAOException;
-import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Course;
 import org.example.project3.query.CourseQuery;
@@ -11,7 +10,6 @@ import org.example.project3.query.CourseQuery;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDAOSQL implements CourseDAO{

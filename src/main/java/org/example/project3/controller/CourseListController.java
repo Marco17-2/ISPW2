@@ -36,7 +36,7 @@ public class CourseListController
                 courseBean = factory.fromModelToBean(course, Course.class);
                 coursesBean.add(courseBean);
             }
-        }catch(Exception e) {
+        }catch(Exception _) {
             throw new NoResultException("Errore recupero corsi");
         }
     }
@@ -50,7 +50,7 @@ public class CourseListController
             ReservationManagerConcreteSubject reservationManagerConcreteSubject = ReservationManagerConcreteSubject.getInstance();
             reservationManagerConcreteSubject.addReservationReq(reservation);
 
-        }catch(Exception e) {
+        }catch(Exception _) {
             throw new NoResultException("Errore invio richiesta");
         }
     }
@@ -59,8 +59,8 @@ public class CourseListController
         Reservation reservation = factory.fromBeanToModel(reservationBean, ReservationBean.class);
         try{
             return requestDAO.alreadyHasReservation(reservation);
-        }catch(Exception e){
-            throw new NoResultException("Errore nel controllo delle richieste",e);
+        }catch(Exception _){
+            throw new NoResultException("Errore nel controllo delle richieste");
         }
     }
 

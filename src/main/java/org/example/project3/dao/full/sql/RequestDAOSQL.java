@@ -1,22 +1,18 @@
 package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.RequestDAO;
-import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
+import org.example.project3.exceptions.LoadingException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
 import org.example.project3.utilities.enums.Role;
 import org.example.project3.utilities.others.Printer;
 
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.jar.Attributes;
 
 public class RequestDAOSQL implements RequestDAO {
     private static final String ID = "id";
@@ -59,28 +55,6 @@ public class RequestDAOSQL implements RequestDAO {
             return false;
         }
     }
-
-//    @Override
-//    public void retrieveCustomerRequest(Customer customer, List<Request> requests) {
-//        try(Connection conn = ConnectionSQL.getConnection()){
-//            ResultSet rs = RequestQuery.retrieveRequests(conn, customer.getCredentials().getMail());
-//            while(rs.next()){
-//                Request request = new Request(
-//                        rs.getInt(ID),
-//                        rs.getInt(SCHEDULE),
-//                        rs.getInt(EXERCISE),
-//                        rs.getString(REASON),
-//                        customer,
-//                        rs.getObject(DATETIME),
-//                        null
-//                );
-//                requests.add(request);
-//            }
-//
-//        }catch (SQLException e){
-//            throw new DAOException("Errore nel recupero delle richieste", e);
-//        }
-//    }
 
     @Override
     public void deleteRequest(Request request) {
@@ -127,7 +101,7 @@ public class RequestDAOSQL implements RequestDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            handleException(e);
         }
     }
 
