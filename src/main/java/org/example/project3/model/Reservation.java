@@ -2,10 +2,10 @@ package org.example.project3.model;
 
 public class Reservation {
 
-    Customer customer;
-    Course course;
-    String day;
-    String hour;
+    private Customer customer;
+    private Course course;
+    private String day;
+    private String hour;
 
 
     public Reservation(Customer customer, Course course, String day, String hour) {
