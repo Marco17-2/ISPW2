@@ -24,15 +24,13 @@ public class CustomerHomepageCLI extends AbstractState {
             try{
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
-                    case 1:
-                        goNext(context, new CourseListCLI((CustomerBean) user));
-                    case 2:
-                        goNext(context, new RequestCLI(user));
-                    case 0:
+                    case 1 -> goNext(context, new CourseListCLI((CustomerBean) user));
+                    case 2 -> goNext(context, new RequestCLI(user));
+                    case 0-> {
                         exit=true;
                         goNext(context, new InitialState());
-                    default:
-                        Printer.errorPrint("Scelta non valida!");
+                    }
+                    default -> Printer.errorPrint("Scelta non valida!");
                 }
             }catch(Exception _){
                 Printer.errorPrint("Scelta non valida!");
