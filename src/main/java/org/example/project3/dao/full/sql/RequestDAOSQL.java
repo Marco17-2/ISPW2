@@ -2,8 +2,6 @@ package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.exceptions.DbOperationException;
-import org.example.project3.exceptions.LoadingException;
-import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
 import org.example.project3.utilities.enums.Role;

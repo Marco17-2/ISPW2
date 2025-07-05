@@ -112,7 +112,7 @@ public class RequestCLI extends AbstractState implements Observer {
             Printer.println("Inserici il nome dell'esercizio che vuoi modificare");
             String name=scanner.nextLine();
             for(ExerciseBean exerciseBean : exerciseBeans){
-                if(name.toLowerCase().equals(exerciseBean.getName().toLowerCase())){
+                if(name.equalsIgnoreCase(exerciseBean.getName())){
                     requestBean.setExercise(exerciseBean);
                     return true;
                 }

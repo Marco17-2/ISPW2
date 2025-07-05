@@ -27,7 +27,7 @@ public class CustomerHomepageCLI extends AbstractState {
                     case 1:
                         goNext(context, new CourseListCLI((CustomerBean) user));
                     case 2:
-                        goNext(context, new RequestCLI((CustomerBean) user ));
+                        goNext(context, new RequestCLI(user));
                     case 0:
                         exit=true;
                         goNext(context, new InitialState());

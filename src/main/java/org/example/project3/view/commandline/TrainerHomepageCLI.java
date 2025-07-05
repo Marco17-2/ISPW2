@@ -28,7 +28,7 @@ public class TrainerHomepageCLI extends AbstractState{
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
                     case 1:
-                        goNext(context, new RequestTrainerCLI((TrainerBean) user));
+                        goNext(context, new RequestTrainerCLI(user));
                     case 0:
                         exit=true;
                         goNext(context, new InitialState());
