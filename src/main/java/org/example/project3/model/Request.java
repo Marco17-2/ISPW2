@@ -3,14 +3,14 @@ package org.example.project3.model;
 import java.time.LocalDateTime;
 
 public class Request {
-    private long ID;
+    private long id;
     private Schedule schedule;
     private Exercise exercise;
     private String reason;
     private LocalDateTime dateTime;
 
     public Request(long id, Schedule schedule, Exercise exercise, String reason, LocalDateTime dateTime) {
-        this.ID = id;
+        this.id = id;
         this.schedule = schedule;
         this.exercise = exercise;
         this.reason = reason;
@@ -18,7 +18,7 @@ public class Request {
     }
 
     public Request(Schedule schedule) {
-        this.ID = 0;
+        this.id = 0;
         this.schedule = schedule;
         this.exercise = null;
         this.reason = "";
@@ -26,7 +26,7 @@ public class Request {
     }
 
     public long getID() {
-        return ID;
+        return id;
     }
 
     public Schedule getSchedule() {

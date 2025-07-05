@@ -119,7 +119,7 @@ public class TrainerDAOSQL implements TrainerDAO {
             }
             return spec;
 
-            }catch(SQLException e){
+            }catch(SQLException _){
                 throw new DAOException();
             }
     }
@@ -130,7 +130,7 @@ public class TrainerDAOSQL implements TrainerDAO {
             ResultSet rs = TrainerQuery.retrieveCourseTrainer(conn, course.getCourseName());
             if(rs.next()){
 
-                Trainer trainer = new Trainer (
+                return new Trainer (
                         new Credentials(rs.getString(MAIL), Role.TRAINER),
                         rs.getString(NAME),
                         rs.getString(SURNAME),
@@ -139,7 +139,6 @@ public class TrainerDAOSQL implements TrainerDAO {
                         rs.getDate(BIRTHDATE).toLocalDate()
                         );
 
-                return trainer;
             }else {
                 throw new NoResultException();
             }
