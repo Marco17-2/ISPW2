@@ -41,7 +41,7 @@ public class CourseListCLI extends AbstractState {
         boolean valid = false;
         while(!valid){
             try{
-                System.out.println("Seleziona la richiesta");
+                Printer.println("Seleziona la richiesta");
                 courseIndex = Integer.parseInt(scanner.nextLine().trim()) - 1;
                 if(courseIndex < 0 || courseIndex >= courses.size()){
                     Printer.errorPrint("Errore nella scelta1");
@@ -104,7 +104,7 @@ public class CourseListCLI extends AbstractState {
                     }
 
                 }else{
-                    System.out.println("Errore nella scelta");
+                    Printer.errorPrint("Errore nella scelta");
                 }
     }
 
