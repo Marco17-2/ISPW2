@@ -43,22 +43,22 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
                     case 1 ->{
                         displayReservation();
                         showMenu();
-                        action(context);
+
                     }
                     case 2 -> {
                         handleReservation(true);
                         showMenu();
-                        action(context);
+
                     }
                     case 3 -> {
                         handleReservation(false);
                         showMenu();
-                        action(context);
+
                     }
                     case 4 -> {
                         viewDetail();
                         showMenu();
-                        action(context);
+
                     }
                     case 5 -> {
                         goBack(context);
@@ -106,7 +106,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         boolean valid = false;
         while(!valid){
             try{
-                System.out.println("Errore durante l'elaborazione");
+                System.out.println("Seleziona la richiesta");
                 reservationIndex = Integer.parseInt(scanner.nextLine().trim()) -1;
                 if(reservationIndex < 0 || reservationIndex >= reservations.size()){
                     System.out.println("Errore nella scelta");
@@ -128,10 +128,11 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
             System.out.println("\n ----------------- Lista di Richieste -----------------\n");
             int index = 1;
             for ( ReservationBean reservation : reservations) {
-                System.out.println(index + "Richiesta da: " + reservation.getCustomer().getName() + " | "
+                System.out.println(index + " Richiesta da: " + reservation.getCustomer().getName() + " | "
                         + "Corso: " + reservation.getCourse().getCourseName() + " | " + reservation.getDay() + " | " + reservation.getHour());
                 index++;
             }
+            System.out.println(" ");
         }
     }
 
@@ -157,6 +158,8 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         System.out.println("Mail" + reservation.getCustomer().getCredentialsBean().getMail());
         System.out.println("gender: " + reservation.getCustomer().getGender());
         System.out.println("Injury " + reservation.getCustomer().getInjury());
+        System.out.println("--------------------------------------");
+        System.out.println(" ");
 
     }
 
@@ -168,6 +171,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
         }
 
         displayReservation();
+
         int reservationIndex =  getReservationIndex();
         if(reservationIndex >= 0 && reservationIndex < reservations.size()){
             ReservationBean reservation = reservations.get(reservationIndex);

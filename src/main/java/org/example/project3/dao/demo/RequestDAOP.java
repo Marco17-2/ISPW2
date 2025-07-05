@@ -72,7 +72,7 @@ public class RequestDAOP implements RequestDAO {
     }
 
     @Override
-    public boolean alreadyHasRequest(Reservation reservation) {
+    public boolean alreadyHasReservation(Reservation reservation) {
         if (SharedResources.getInstance().getReservationRequests().containsKey(reservation.getCourse().getCourseName())) {
             for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(reservation.getCustomer().getCredentials().getMail())) {
                 if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(reservation.getCourse().getCourseName())) {

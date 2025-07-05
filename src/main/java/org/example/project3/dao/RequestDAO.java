@@ -20,5 +20,5 @@ public interface RequestDAO {
     void retrieveCourseRequest(Trainer trainer, List<Reservation> reservationList);
     void removeCourseRequest(Reservation reservation);
     void addCourseRequest(Reservation reservation);
-    boolean alreadyHasRequest(Reservation reservation);
+    boolean alreadyHasReservation(Reservation reservation);
 }

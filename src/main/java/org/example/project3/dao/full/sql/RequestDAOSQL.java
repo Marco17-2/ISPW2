@@ -143,7 +143,7 @@ public class RequestDAOSQL implements RequestDAO {
 
 
     @Override
-    public boolean alreadyHasRequest(Reservation reservation) {
+    public boolean alreadyHasReservation(Reservation reservation) {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = RequestQuery.alreadyHasRequest(conn, reservation);
             if(rs.next()){

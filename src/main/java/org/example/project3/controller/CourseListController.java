@@ -59,7 +59,7 @@ public class CourseListController
     public boolean alreadyHasRequest(ReservationBean reservationBean) throws NoResultException {
         Reservation reservation = factory.fromBeanToModel(reservationBean, ReservationBean.class);
         try{
-            return requestDAO.alreadyHasRequest(reservation);
+            return requestDAO.alreadyHasReservation(reservation);
         }catch(Exception e){
             throw new NoResultException("Errore nel controllo delle richieste",e);
         }
