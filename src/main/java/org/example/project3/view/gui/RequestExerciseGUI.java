@@ -184,7 +184,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     private SearchController searchController = new SearchController();
 
     @FXML
-    private void SearchButton() {
+    private void searchButton() {
         String searchText = ricerca.getText();
         cancellaRicerca.setVisible(true);
 
