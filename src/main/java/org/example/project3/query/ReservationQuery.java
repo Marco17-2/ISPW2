@@ -5,6 +5,7 @@ import org.example.project3.exceptions.DbOperationException;
 
 
 public class ReservationQuery {
+    private ReservationQuery() {}
 
     public static ResultSet retrieveReservation(Connection conn, String mail) throws SQLException {
 
@@ -43,7 +44,7 @@ public class ReservationQuery {
         try(PreparedStatement pstmt= conn.prepareStatement(query)){
             pstmt.setString(1, course);
             pstmt.setString(2, customer);
-            pstmt.setString(3, date.toString());
+            pstmt.setString(3, date);
             pstmt.setString(4, hour);
 
         }catch(SQLException e){

@@ -35,7 +35,7 @@ public class  InitialState extends AbstractState{
                         Printer.errorPrint("Opzione non valida!");
                         break;
                 }
-            } catch (Exception e) {
+            } catch (Exception _) {
                 Printer.errorPrint("Errore nella scelta!");
                 scanner.nextLine();
             }
@@ -57,6 +57,6 @@ public class  InitialState extends AbstractState{
     }
     @Override
     public void exit(StateMachineConcrete stateMachine){
-        System.out.println("Uscita dallo stato iniziale");
+        Printer.println("Uscita dallo stato iniziale");
     }
 }

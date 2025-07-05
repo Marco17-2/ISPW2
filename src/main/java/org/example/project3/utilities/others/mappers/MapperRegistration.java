@@ -14,7 +14,6 @@ public class MapperRegistration {
         factory.registerMapper(CustomerBean.class, Customer.class, new CustomerMapper());
         factory.registerMapper(TrainerBean.class, Trainer.class, new TrainerMapper());
         factory.registerMapper(CredentialsBean.class, Credentials.class, new CredentialsMapper());
-        //factory.registerMapper(SubscriptionBean.class, Subscription.class, new SubscriptionMapper());
         factory.registerMapper(RequestBean.class, Request.class, new RequestMapper());
         factory.registerMapper(ScheduleBean.class, Schedule.class, new ScheduleMapper());
         factory.registerMapper(ExerciseBean.class, Exercise.class, new ExerciseMapper());

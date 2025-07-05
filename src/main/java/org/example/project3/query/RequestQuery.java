@@ -7,6 +7,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 
 public class RequestQuery {
+    private RequestQuery() {}
 
     public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason) throws DbOperationException {
         String query = "INSERT INTO request (schedule, exercise, reason, datetime) VALUES (?, ?, ?, ?)";

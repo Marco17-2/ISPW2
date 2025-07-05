@@ -48,7 +48,7 @@ public class CourseListCLI extends AbstractState {
                 }else {
                     valid = true;
                 }
-            }catch(NumberFormatException e){
+            }catch(NumberFormatException _){
                 Printer.errorPrint("Errore nella scelta2");
             }
         }
@@ -82,7 +82,7 @@ public class CourseListCLI extends AbstractState {
                             Printer.println("Scelta:");
                             scelta = Integer.parseInt(scanner.nextLine().trim());
                             validChoice = true;
-                        } catch (NumberFormatException e) {
+                        } catch (NumberFormatException _) {
                             Printer.println("Scelta non valida. Inserisci un numero.");
                         }
                     }

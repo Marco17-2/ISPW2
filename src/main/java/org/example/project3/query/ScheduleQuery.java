@@ -51,7 +51,7 @@ public class ScheduleQuery {
             pstmt.setString(2, wildcard);
             pstmt.setString(3, customer.getCredentials().getMail());
             return pstmt.executeQuery();
-        } catch (SQLException e) {
+        } catch (SQLException _) {
             Printer.errorPrint("Errore nella ricerca della scheda");
             return null;
         }
