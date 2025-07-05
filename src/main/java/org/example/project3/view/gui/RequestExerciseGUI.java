@@ -114,7 +114,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                     setGraphic(radioButton);
                 }
             }
-        };
+        }
 
     private TableCell<ExerciseBean, Void> createButtonCell() {
         return new MyRadioButtonCell(); // Istanzia la classe nominata
