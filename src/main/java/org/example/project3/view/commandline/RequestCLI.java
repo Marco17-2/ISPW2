@@ -33,9 +33,9 @@ public class RequestCLI extends AbstractState implements Observer {
             try{
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
-                    case 1: {
+                    case 1 -> {
                         stampa();
-                        if (displaySchedules(requestBean)) {
+                        if (displaySchedules()) {
                             loadExercises(requestBean);
                             if (displayExercises(requestBean)) {
                                 Printer.println("Specifica la motivazione della modifica:");
@@ -51,15 +51,14 @@ public class RequestCLI extends AbstractState implements Observer {
                             Printer.errorPrint("È state inserito un ID non corretto!");
                         }
                     }
-                    case 2:
-                        goNext(context, new CustomerHomepageCLI( user ));
-                    case 0:
+                    case 2 -> goNext(context, new CustomerHomepageCLI( user ));
+                    case 0 ->{
                         exit=true;
                         goNext(context, new InitialState());
-                    default:
-                        Printer.errorPrint("Scelta non valida!");
+                    }
+                    default -> Printer.errorPrint("Scelta non valida!");
                 }
-            }catch(Exception e){
+            }catch(Exception _){
                 Printer.errorPrint("Errore durante la richiesta. Riprova più tardi.");
                 scanner.nextLine();
             }
@@ -71,7 +70,7 @@ public class RequestCLI extends AbstractState implements Observer {
         scheduleDetailsController.retriveScheduleDetails((CustomerBean) user,scheduleBeans);
     }
 
-    private boolean displaySchedules(RequestBean requestBean){
+    private boolean displaySchedules(){
         if(scheduleBeans.isEmpty()){
             Printer.errorPrint("Non è stata trovata nessuna scheda!");
             return false;
