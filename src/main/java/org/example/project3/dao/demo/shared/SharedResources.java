@@ -40,9 +40,6 @@ public class SharedResources {
     // Singleton per garantire che ci sia una sola istanza della classe
     private static SharedResources instance=null;
 
-//    private SharedResources() {
-//        // Costruttore privato per evitare la creazione di istanze esterne
-//    }
     private SharedResources() {
         // Costruttore privato per evitare la creazione di istanze esterne
         // Inizializza con dati di esempio qui
@@ -51,9 +48,7 @@ public class SharedResources {
 
     // Metodo per ottenere l'istanza Singleton
     public static synchronized SharedResources getInstance() {
-//        if (instance == null) {
             instance = new SharedResources();
-//        }
         return instance;
     }
 
