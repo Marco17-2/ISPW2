@@ -82,25 +82,23 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     private static List<ExerciseBean> exerciseList= new ArrayList<>();
 
-    private TableCell<ExerciseBean, Void> createButtonCell() {
-        return new TableCell<>() {
-            private final RadioButton radioButton = new RadioButton();
+    private class MyRadioButtonCell extends TableCell<ExerciseBean, Void> {
+        private final RadioButton radioButton = new RadioButton();
 
+        public MyRadioButtonCell() { // Ora è un costruttore esplicito valido
+            super(); // Chiama il costruttore della superclasse
 
-            {
-                radioButton.setToggleGroup(rowToggleGroup);
+            radioButton.setToggleGroup(rowToggleGroup);
 
-                // Quando il radio viene selezionato, salvi l'oggetto selezionato
-                radioButton.setOnAction(e -> {
-                    if (getIndex() >= 0 && getIndex() < getTableView().getItems().size()) {
-                        ExerciseBean selected = getTableView().getItems().get(getIndex());
-                        // Salva la selezione (può essere in una variabile esterna o controller)
-                        requestBean.setExercise(selected);// ad esempio variabile del controller
-                        motivazione.setVisible(true);
-                        invia.setVisible(true);
-                    }
-                });
-            }
+            radioButton.setOnAction(e -> {
+                if (getIndex() >= 0 && getIndex() < getTableView().getItems().size()) {
+                    ExerciseBean selected = getTableView().getItems().get(getIndex());
+                    requestBean.setExercise(selected);
+                    motivazione.setVisible(true);
+                    invia.setVisible(true);
+                }
+            });
+        }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
@@ -117,6 +115,9 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                 }
             }
         };
+
+    private TableCell<ExerciseBean, Void> createButtonCell() {
+        return new MyRadioButtonCell(); // Istanzia la classe nominata
     }
 
     @FXML
