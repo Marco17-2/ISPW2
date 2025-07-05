@@ -67,7 +67,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
                     default -> Printer.errorPrint("Scelta non valida");
                 }
 
-            }catch(Exception e){
+            }catch(Exception _){
                 Printer.errorPrint("Errore durante l'elaborazione");
             }
         }
@@ -114,7 +114,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
                 }else {
                     valid = true;
                 }
-            }catch(NumberFormatException e){
+            }catch(NumberFormatException _){
                 Printer.errorPrint("Errore nella scelta");
             }
         }

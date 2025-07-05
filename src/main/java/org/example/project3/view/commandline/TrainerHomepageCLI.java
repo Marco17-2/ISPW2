@@ -1,7 +1,6 @@
 package org.example.project3.view.commandline;
 
 
-import org.example.project3.beans.TrainerBean;
 import org.example.project3.beans.LoggedUserBean;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;
