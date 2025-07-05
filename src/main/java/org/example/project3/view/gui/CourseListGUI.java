@@ -41,14 +41,13 @@ public class CourseListGUI extends CommonGUI implements Observer{
     @FXML
     private TableColumn<CourseBean, Void> buttonColumn;
     @FXML
-    private Text message; // da aggiungere
+    private Text message;
 
-    //private final RequestManagerConcreteSubject requestManagerConcreteSubject;
 
     private TableCell<CourseBean, Void> createButtonCell(String buttonText){
         return new TableCell<>(){
             private final Button button = createButton(buttonText);
-            private Button createButton(String buttontext){
+            private Button createButton(String buttonText){
                 Button btn = new Button(buttonText);
                 btn.setOnMouseClicked(event -> {
                     CourseBean courseBean = getTableView().getItems().get(getIndex());
