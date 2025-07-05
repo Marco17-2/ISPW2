@@ -92,7 +92,4 @@ public class Course {
         this.remainingSlots = remainingSlots;
     }
 
-    public String getName() {
-        return courseName;
-    }
 }
