@@ -39,20 +39,7 @@ public class RegisterCLI extends AbstractState {
                 return;
             }
             String password=prompt("Password: ");
-            LocalDate selectedDate = null;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy");
-
-            while (selectedDate == null) {
-                Printer.print("Inserisci una data (formato: gg/mm/aaaa): ");
-                String input = scanner.nextLine();
-
-                try {
-                    selectedDate = LocalDate.parse(input, formatter);
-                } catch (DateTimeParseException _) {
-                    Printer.errorPrint("Data non valida. Riprova.");
-                    return;
-                }
-            }
+            LocalDate selectedDate = getValidatedDateInput();
             String role=prompt("Ruolo (trainer/cliente): ").toLowerCase();
             //Creazione oggetti e registrazione utente
             switch (role){
@@ -78,6 +65,28 @@ public class RegisterCLI extends AbstractState {
         } catch (Exception _) {
             Printer.errorPrint("Errore durante la registrazione. Riprova più tardi.");
         }
+    }
+
+    private LocalDate getValidatedDateInput() {
+        LocalDate selectedDate = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy"); //
+
+        while (selectedDate == null) { //
+            Printer.print("Inserisci una data (formato: gg/mm/aaaa): "); //
+            String input = scanner.nextLine(); //
+
+            try {
+                selectedDate = LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException _) { //
+                Printer.errorPrint("Data non valida. Riprova.");
+                // No 'return' here if we want to loop and ask again.
+                // If a fatal error should exit, re-add 'return' or throw.
+                // For this example, we keep looping until a valid date is entered.
+                // If the original 'return' was meant to exit the entire action,
+                // you might need to propagate an exception or change the flow.
+            }
+        }
+        return selectedDate;
     }
 
     //metodo per chiedere l'input
