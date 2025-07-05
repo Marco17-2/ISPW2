@@ -45,7 +45,7 @@ public class CustomerHomepageGUI extends CommonGUI{
         ScheduleDetailsController scheduleDetailsController = new ScheduleDetailsController();
         scheduleDetailsController.retriveScheduleDetails((CustomerBean)session.getUser(), scheduleBeans);
         goToRequest(scheduleBeans, event);
-        }catch(NoResultException e){
+        }catch(NoResultException _){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Nessuna scheda");
             alert.setHeaderText(null);

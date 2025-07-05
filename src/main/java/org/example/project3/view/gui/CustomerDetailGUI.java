@@ -65,7 +65,7 @@ public class CustomerDetailGUI extends CommonGUI{
 
             goToCourseReservationRequest(event, reservationReqBean);
 
-        }catch(NoResultException exception){
+        }catch(NoResultException _){
             throw new NoResultException("Errore recupero richieste");
         }
     }

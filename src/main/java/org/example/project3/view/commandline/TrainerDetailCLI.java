@@ -58,7 +58,7 @@ public class TrainerDetailCLI extends AbstractState  {
                     Printer.errorPrint("errore di selezione");
                 }
 
-            }catch (Exception e){
+            }catch (Exception _){
                 Printer.errorPrint("Scelta non valida");
             }
         }

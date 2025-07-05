@@ -27,15 +27,15 @@ public class TrainerHomepageCLI extends AbstractState{
             try{
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
-                    case 1:
-                        goNext(context, new RequestTrainerCLI(user));
-                    case 0:
+                    case 1 -> goNext(context, new RequestTrainerCLI(user));
+                    case 0 -> {
                         exit=true;
                         goNext(context, new InitialState());
-                    default:
-                        Printer.errorPrint("Scelta non valida!");
+                    }
+                    default -> Printer.errorPrint("Scelta non valida!");
+
                 }
-            }catch(Exception e){
+            }catch(Exception _){
                 Printer.errorPrint("Scelta non valida!");
                 scanner.nextLine();
             }

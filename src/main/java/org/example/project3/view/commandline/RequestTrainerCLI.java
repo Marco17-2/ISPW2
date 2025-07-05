@@ -64,6 +64,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
                         goBack(context);
                         running = false;
                     }
+                    default -> Printer.errorPrint("Scelta non valida");
                 }
 
             }catch(Exception e){
@@ -75,7 +76,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
 
     private void handleReservation(boolean accept){
         if(reservations.isEmpty()){
-            Printer.errorPrint("Richieste non trovate");
+            Printer.errorPrint("Nessuna richiesta trovata!");
             return;
         }
 
@@ -211,7 +212,7 @@ public class RequestTrainerCLI extends AbstractState implements Observer {
     public void update(){
         loadReservation();
         if(reservations.isEmpty()){
-            Printer.errorPrint("Richieste non trovate");
+            Printer.errorPrint("Non sono presenti richieste");
         }else{
             Printer.println("Aggiornamento Richieste");
         }
