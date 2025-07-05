@@ -2,6 +2,7 @@ package org.example.project3.dao.demo;
 
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
+import org.example.project3.model.Course;
 import org.example.project3.model.Trainer;
 import org.example.project3.model.Request;
 import org.example.project3.model.Reservation;
@@ -45,8 +46,8 @@ public class RequestDAOP implements RequestDAO {
 
     @Override
     public void removeCourseRequest(Reservation reservation){
-
-        List<Reservation> reservationsRequests = SharedResources.getInstance().getReservationRequests().get(reservation.getCustomer().getCredentials().getMail());
+        Trainer trainer = SharedResources.getInstance().getTrainerCourse().get(reservation.getCourse().getCourseName());
+        List<Reservation> reservationsRequests = SharedResources.getInstance().getReservationRequests().get(trainer.getCredentials().getMail());
 
         reservationsRequests.removeIf(r->
                         r.getCourse().equals(reservation.getCourse()) &&

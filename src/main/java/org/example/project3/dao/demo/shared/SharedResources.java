@@ -34,6 +34,7 @@ public class SharedResources {
 
     // Mappa per tenere traccia delle relazioni pazienti-psicologi
     private final  Map<String, List<Schedule>> customerSchedules = new HashMap<>();
+    private final Map<Long,List<Exercise>> exerciseSchedules = new HashMap<>();
 //    private final Map<String, Map<LocalDate,String>> diaryTable= new ConcurrentHashMap<>();//<mail,<data,contenuto>>
 //    private final Map<String, List<ToDoItem>> toDoTable= new ConcurrentHashMap<>();//<mail,listaToDo>
 //    private final Map<String, List<Task>> taskTable= new ConcurrentHashMap<>();//<mail,listaTask>
@@ -53,9 +54,9 @@ public class SharedResources {
 
     // Metodo per ottenere l'istanza Singleton
     public static synchronized SharedResources getInstance() {
-        if (instance == null) {
+//        if (instance == null) {
             instance = new SharedResources();
-        }
+//        }
         return instance;
     }
 
@@ -103,6 +104,9 @@ public class SharedResources {
     public Map<String, Trainer> getTrainerCourse() {
         return trainerCourse;
     }
+    public Map<Long, List<Exercise>> getExerciseSchedules() {
+        return exerciseSchedules;
+    }
 
     // Helper method to populate all sample data
     private void populateSampleData() {
@@ -134,13 +138,16 @@ public class SharedResources {
         exercisesForScheduleA.add(exercise1);
         exercisesForScheduleA.add(exercise2);
         Schedule scheduleA = new Schedule(1,"Beginner Full Body",customer1,trainer1,exercisesForScheduleA);
-        schedules.put(scheduleA.getId(), scheduleA); // Add to general schedules map
+        schedules.put(scheduleA.getId(), scheduleA);// Add to general schedules map
+        exerciseSchedules.put(scheduleA.getId(),exercisesForScheduleA);
+
 
         // Schedule 2 for customer1, by trainer1
         List<Exercise> exercisesForScheduleB = new ArrayList<>();
         exercisesForScheduleB.add(exercise3);
         Schedule scheduleB = new Schedule(2,"Cardio Focus",customer1,trainer1,exercisesForScheduleB);
-        schedules.put(scheduleB.getId(), scheduleB); // Add to general schedules map
+        schedules.put(scheduleB.getId(), scheduleB);
+        exerciseSchedules.put(scheduleB.getId(),exercisesForScheduleB);// Add to general schedules map
 
         // Schedule 3 for customer2, by trainer1
         List<Exercise> exercisesForScheduleC = new ArrayList<>();
@@ -149,7 +156,7 @@ public class SharedResources {
         exercisesForScheduleC.add(exercise3);
         Schedule scheduleC = new Schedule(3,"Advanced Strength",customer1,trainer1,exercisesForScheduleC);
         schedules.put(scheduleC.getId(), scheduleC); // Add to general schedules map
-
+        exerciseSchedules.put(scheduleC.getId(),exercisesForScheduleC);
 
         // 5. Populate customerSchedules map (crucial for retrieveSchedule)
         List<Schedule> customer1Schedules = new ArrayList<>();
@@ -164,12 +171,13 @@ public class SharedResources {
         courses.put(course1.getName(), course1);
         trainerCourse.put(course1.getName(), trainer1);
 
-//        Subscription sub1 = new Subscription();
-//        sub1.setId(1);
-//        sub1.setCustomer(customer1);
-//        sub1.setStartDate(LocalDate.now());
-//        sub1.setEndDate(LocalDate.now().plusMonths(1));
-//        subscriptions.put(sub1.getId(), sub1);
+        Reservation reservation1=new Reservation(customer1,course1,"martedì", "14");
+        Reservation reservation2=new Reservation(customer1,course1,"giovedì", "14");
+        List<Reservation> reservationList=new ArrayList<>();
+        reservationList.add(reservation1);
+        reservationList.add(reservation2);
+        reservationRequests.put(trainer1.getCredentials().getMail(),reservationList);
+
     }
 
 

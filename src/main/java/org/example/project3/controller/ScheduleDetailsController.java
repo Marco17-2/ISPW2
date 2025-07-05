@@ -20,7 +20,6 @@ public class ScheduleDetailsController {
     private final ScheduleDAO scheduleDAO;
     List<Exercise> exercises = new ArrayList<>();
     List<ExerciseBean> exerciseBeans = new ArrayList<>();
-    List<Schedule> schedules = new ArrayList<>();
 
     public ScheduleDetailsController(){
         this.beanAndModelMapperFactory = BeanAndModelMapperFactory.getInstance();
@@ -53,14 +52,19 @@ public class ScheduleDetailsController {
     }
 
     public void retriveExercises(ScheduleBean scheduleBean){
-        Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);
-        scheduleDAO.retrieveExercises(schedule);
-        exercises.clear();
-        exercises = schedule.getExercises();
-        exerciseBeans.clear();
-        for(int i=0;i<exercises.size();i++){
-            exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));
+        try {
+            Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);
+            scheduleDAO.retrieveExercises(schedule);
+            exercises.clear();
+            exercises = schedule.getExercises();
+            exerciseBeans.clear();
+            for (int i = 0; i < exercises.size(); i++) {
+                exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));
+            }
+            scheduleBean.setExercisesBean(exerciseBeans);
+            System.out.println(scheduleBean.getExercisesBean());
+        }catch(NoResultException e){
+            throw new NoResultException("Nessuna esercizio trovato per la scheda" + scheduleBean.getId());
         }
-        scheduleBean.setExercisesBean(exerciseBeans);
     }
 }

@@ -1,7 +1,5 @@
 package org.example.project3.model;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Schedule {
@@ -9,14 +7,14 @@ public class Schedule {
     public String name;
     public Customer customer;
     public Trainer trainer;
-    public ArrayList<Exercise> exercises;
+    public List<Exercise> exercises;
 
     public Schedule(long id, String name, Customer customer, Trainer trainer, List<Exercise> exercises) {
         this.id = id;
         this.name = name;
         this.customer = customer;
         this.trainer = trainer;
-        this.exercises = (ArrayList<Exercise>) exercises;
+        this.exercises = exercises;
     }
 
     public Schedule(long id, String name, Customer customer, Trainer trainer) {
@@ -68,7 +66,7 @@ public class Schedule {
     }
 
     public void setExercises(List<Exercise> exercises) {
-        this.exercises = (ArrayList<Exercise>) exercises;
+        this.exercises = exercises;
     }
 
     public void addExercise(Exercise exercise) {

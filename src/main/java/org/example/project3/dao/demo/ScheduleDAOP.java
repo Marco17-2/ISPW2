@@ -4,8 +4,6 @@ import org.example.project3.dao.ScheduleDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleDAOP implements ScheduleDAO {
@@ -27,7 +25,6 @@ public class ScheduleDAOP implements ScheduleDAO {
         } else if (storedSchedules != null){
             schedules.addAll(storedSchedules);
         }
-
     }
 
     @Override
@@ -36,17 +33,24 @@ public class ScheduleDAOP implements ScheduleDAO {
         if (storedSchedule == null) {
             throw new NoResultException(schedule.getClass().getSimpleName() + " non trovato");
         }
-        schedule.setExercises(storedSchedule.getExercises());
+        List<Exercise> storedExercises = SharedResources.getInstance().getExerciseSchedules().get(storedSchedule.getId());
+        for(Exercise exercise : storedExercises){
+            schedule.addExercise(exercise);
+        }
     }
 
     @Override
     public void searchSchedules(List<Schedule> schedules, String search, Customer user) {
         String lowerSearch = search.toLowerCase();
-
+        Long id =null;
         for (Schedule schedule : SharedResources.getInstance().getSchedules().values()) {
+            try{
+                 id= Long.parseLong(lowerSearch);
+            }catch(NumberFormatException e){}
+            boolean match= (id!=null&&schedule.getId()==id);
             if (schedule.getCustomer().getCredentials().getMail().toLowerCase().contains(user.getCredentials().getMail().toLowerCase())&&
                     schedule.getTrainer().getCredentials().getMail().toLowerCase().contains(lowerSearch)||
-                    schedule.getId()==Long.parseLong(lowerSearch)||
+                    match||
                     schedule.getName().toLowerCase().contains(lowerSearch)
             ) {
                 schedules.add(schedule);
