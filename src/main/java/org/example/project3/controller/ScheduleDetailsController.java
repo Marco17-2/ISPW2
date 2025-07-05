@@ -47,7 +47,7 @@ public class ScheduleDetailsController {
             scheduleBeans.add(scheduleBean);
         }
     }catch(NoResultException e){
-            throw new NoResultException("Nessuna sheda trovata");
+            throw new NoResultException("Nessuna sheda trovata",e);
         }
     }
 
@@ -63,7 +63,7 @@ public class ScheduleDetailsController {
             }
             scheduleBean.setExercisesBean(exerciseBeans);
         }catch(NoResultException e){
-            throw new NoResultException("Nessuna esercizio trovato per la scheda" + scheduleBean.getId());
+            throw new NoResultException("Nessuna esercizio trovato per la scheda" + scheduleBean.getId(),e);
         }
     }
 }

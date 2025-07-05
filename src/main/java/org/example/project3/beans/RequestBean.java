@@ -9,8 +9,8 @@ public class RequestBean {
     private String reason;
     private LocalDateTime dateTime;
 
-    public RequestBean(long ID, ScheduleBean scheduleBean, ExerciseBean exerciseBean, String reason, LocalDateTime dateTime) {
-        this.ID = ID;
+    public RequestBean(long id, ScheduleBean scheduleBean, ExerciseBean exerciseBean, String reason, LocalDateTime dateTime) {
+        this.ID = id;
         this.scheduleBean = scheduleBean;
         this.exerciseBean = exerciseBean;
         this.reason = reason;

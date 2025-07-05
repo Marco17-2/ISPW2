@@ -3,11 +3,11 @@ package org.example.project3.beans;
 import java.util.List;
 
 public class ScheduleBean {
-    public long id;
-    public String name;
-    public CustomerBean customerBean;
-    public TrainerBean trainerBean;
-    public List<ExerciseBean> exercisesBean;
+    private long id;
+    private String name;
+    private CustomerBean customerBean;
+    private TrainerBean trainerBean;
+    private List<ExerciseBean> exercisesBean;
 
     public ScheduleBean(long id, String name, CustomerBean customerBean, TrainerBean trainerBean, List<ExerciseBean> exercisesBean) {
         this.id = id;

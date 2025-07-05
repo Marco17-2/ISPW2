@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TrainerBean extends LoggedUserBean {
 
-    private ArrayList<String> specializations;
+    private List<String> specializations;
 
     public TrainerBean(CredentialsBean credentialsBean, String name, String surname, String gender, boolean isOnline, LocalDate birthday) {
         super(credentialsBean, name, surname, gender, isOnline, birthday);
@@ -18,7 +18,7 @@ public class TrainerBean extends LoggedUserBean {
         this.specializations = new ArrayList<>();
     }
 
-    public ArrayList<String> getSpecializations() {
+    public List<String> getSpecializations() {
         return specializations;
     }
 

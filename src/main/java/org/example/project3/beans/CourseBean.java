@@ -10,7 +10,6 @@ public class CourseBean {
     private String level;
     private String day;
     private String hour;
-//    private List<SessionCourse> sessions;
 
     public CourseBean(Integer id, String courseName, int slots,int remainingSlots, String duration, String level, String day, String hour) {
 
@@ -22,7 +21,6 @@ public class CourseBean {
         this.level = level;
         this.day = day;
         this.hour = hour;
-//        this.sessions = new ArrayList<>();
 
     }
 
@@ -89,20 +87,4 @@ public class CourseBean {
     public void setHour(String hour) {
         this.hour = hour;
     }
-
-//    public List<SessionCourse> getSessions() {
-//        return sessions;
-//    }
-//
-//    public void setSessions(List<SessionCourse> sessions) {
-//        this.sessions = sessions;
-//    }
-//
-//    public void addSessions(SessionCourse session){
-//        this.sessions.add(session);
-//    }
-
-
-
-    //provaprovaprovaprova
 }
