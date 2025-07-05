@@ -64,7 +64,7 @@ public class CourseListCLI extends AbstractState {
 
                 Printer.println("----------------Lista Corsi--------------------");
                 for(int i=0; i<courses.size(); i++){
-                    Printer.println((i+1) + ". " + courses.get(i).getCourseName() + " " + courses.get(i).getRemainingSlots() + " " + courses.get(i).getSlots() + " " + courses.get(i).getDay() + " " + courses.get(i).getHour() + " " + courses.get(i).getLevel());
+                    Printer.println((i+1) + ". " + courses.get(i).getCourseName() + " " + courses.get(i).getRemainingSlots() + " " + courses.get(i).getDay() + " " + courses.get(i).getHour() + " " + courses.get(i).getLevel());
                 }
 
         Printer.println(" ");

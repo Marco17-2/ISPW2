@@ -29,8 +29,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
     @FXML
     private TableColumn<CourseBean, Void> trainerButtonColumn;
     @FXML
-    private TableColumn<CourseBean, Integer> slotsColumn;
-    @FXML
     private TableColumn<CourseBean, Integer> remainingColumn;
     @FXML
     private TableColumn<CourseBean, String> durationColumn;
@@ -102,7 +100,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
         //Associazione colonne ai campi
         ObservableList<CourseBean> courseBeanList = FXCollections.observableList(courseBeans);
         courseNameColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getCourseName()));
-        slotsColumn.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getSlots()));
         remainingColumn.setCellValueFactory(celldata->new ReadOnlyObjectWrapper<>(celldata.getValue().getRemainingSlots()));
         durationColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getDuration()));
         dayColumn.setCellValueFactory(celldata->new SimpleStringProperty(celldata.getValue().getDay()));
@@ -133,8 +130,6 @@ public class CourseListGUI extends CommonGUI implements Observer{
             alert.setContentText("Hai già inviato una richiesta!");
             alert.showAndWait();
         }
-
-
 
     }
 

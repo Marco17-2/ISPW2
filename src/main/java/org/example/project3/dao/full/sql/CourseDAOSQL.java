@@ -16,7 +16,6 @@ public class CourseDAOSQL implements CourseDAO{
 
     private static final String ID="id";
     private static final String NAME = "name";
-    private static final String SLOTS = "slots";
     private static final String REMAINING = "remaining";
     private static final String DURATION = "duration";
     private static final String LEVEL = "level";
@@ -33,7 +32,6 @@ public class CourseDAOSQL implements CourseDAO{
                 Course course = new Course(
                         rs.getInt(ID),
                         rs.getString(NAME),
-                        rs.getInt(SLOTS),
                         rs.getInt(REMAINING),
                         rs.getString(DURATION),
                         rs.getString(LEVEL),

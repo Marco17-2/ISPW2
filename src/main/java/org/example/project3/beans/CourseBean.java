@@ -4,18 +4,16 @@ public class CourseBean {
 
     private int courseID;
     private String courseName;
-    private int slots;
     private int remainingSlots;
     private String duration;
     private String level;
     private String day;
     private String hour;
 
-    public CourseBean(Integer id, String courseName, int slots,int remainingSlots, String duration, String level, String day, String hour) {
+    public CourseBean(Integer id, String courseName,int remainingSlots, String duration, String level, String day, String hour) {
 
         this.courseID = id;
         this.courseName = courseName;
-        this.slots = slots;
         this.remainingSlots = remainingSlots;
         this.duration = duration;
         this.level = level;
@@ -38,14 +36,6 @@ public class CourseBean {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
-
-    public int getSlots() {
-        return slots;
-    }
-
-    public void setSlots(int slots) {
-        this.slots = slots;
     }
 
     public int getRemainingSlots() {
