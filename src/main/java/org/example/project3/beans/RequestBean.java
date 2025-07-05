@@ -3,14 +3,14 @@ package org.example.project3.beans;
 import java.time.LocalDateTime;
 
 public class RequestBean {
-    private long ID;
+    private long id;
     private ScheduleBean scheduleBean;
     private ExerciseBean exerciseBean;
     private String reason;
     private LocalDateTime dateTime;
 
     public RequestBean(long id, ScheduleBean scheduleBean, ExerciseBean exerciseBean, String reason, LocalDateTime dateTime) {
-        this.ID = id;
+        this.id = id;
         this.scheduleBean = scheduleBean;
         this.exerciseBean = exerciseBean;
         this.reason = reason;
@@ -18,7 +18,7 @@ public class RequestBean {
     }
 
     public RequestBean(ScheduleBean scheduleBean) {
-        this.ID = 0;
+        this.id = 0;
         this.scheduleBean = scheduleBean;
         this.exerciseBean = null;
         this.reason = "";
@@ -26,7 +26,7 @@ public class RequestBean {
     }
 
     public long getID() {
-        return ID;
+        return id;
     }
 
     public ScheduleBean getScheduleBean() {

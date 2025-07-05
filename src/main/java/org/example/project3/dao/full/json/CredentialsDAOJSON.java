@@ -3,13 +3,11 @@ package org.example.project3.dao.full.json;
 import org.example.project3.dao.CredentialsDAO;
 import org.example.project3.model.*;
 import org.example.project3.utilities.enums.Role;
-import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.WrongEmailOrPasswordException;
 import org.example.project3.utilities.others.Printer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
