@@ -52,9 +52,10 @@ public class TrainerDetailCLI extends AbstractState  {
         while((scelta = Integer.parseInt(scanner.nextLine())) != 0){
             try{
 
-                switch(scelta){
-                    case 1 -> goBack(context);
-                    default ->  Printer.errorPrint("errore di selezione");
+                if (scelta == 1) {
+                    goBack(context);
+                } else {
+                    Printer.errorPrint("errore di selezione");
                 }
 
             }catch (Exception e){
