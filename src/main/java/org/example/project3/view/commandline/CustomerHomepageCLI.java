@@ -47,16 +47,17 @@ public class CustomerHomepageCLI extends AbstractState {
         Printer.print("Opzione scelta:");
     }
 
-    @Override
-    public void stampa(){
-        Printer.println(" ");
-        Printer.println("-------------------Benvenuto nella home di"+ " " + user.getName()+ " "+ user.getSurname() +"-------------------");
-        Printer.println("Ciao"+ " " + user.getName()+ " "+ user.getSurname() +",scegli cosa vuoi fare:");
-    }
 
     @Override
     public void enter(StateMachineConcrete context) {
         stampa();
         showMenu();
+    }
+
+    @Override
+    public void stampa(){
+        Printer.println(" ");
+        Printer.println("-------------------Benvenuto nella home di"+ " " + user.getName()+ " "+ user.getSurname() +"-------------------");
+        Printer.println("Ciao"+ " " + user.getName()+ " "+ user.getSurname() +",scegli cosa vuoi fare:");
     }
 }

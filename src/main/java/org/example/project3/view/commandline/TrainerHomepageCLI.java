@@ -41,12 +41,10 @@ public class TrainerHomepageCLI extends AbstractState{
         }
     }
 
-
     @Override
-    public void showMenu(){
-        Printer.println("1. Visualizza Richieste");
-        Printer.println("0. Logout");
-
+    public void enter(StateMachineConcrete context){
+        stampa();
+        showMenu();
     }
 
     @Override
@@ -56,8 +54,10 @@ public class TrainerHomepageCLI extends AbstractState{
     }
 
     @Override
-    public void enter(StateMachineConcrete context){
-        stampa();
-        showMenu();
+    public void showMenu(){
+        Printer.println("1. Visualizza Richieste");
+        Printer.println("0. Logout");
+
     }
+
 }
