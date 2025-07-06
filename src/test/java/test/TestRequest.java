@@ -151,16 +151,15 @@ class TestRequest {
         exercisesForScheduleC.add(testExercises.get(1));
         exercisesForScheduleC.add(testExercises.get(2));
         Schedule scheduleC = new Schedule(40,"Advanced Strength",testCustomer,testTrainer,exercisesForScheduleC);
-        List<Schedule> schedules= Arrays.asList(scheduleA,scheduleB,scheduleC);
-        return schedules;
+        return Arrays.asList(scheduleA,scheduleB,scheduleC);
+
     }
 
     private List<Exercise> createExercises(){
         Exercise exercise1 = new Exercise(10,"Push-ups","Standard push-up exercise.",3,10, RestTime.SECONDS60);
         Exercise exercise2 = new Exercise(11,"Squats","Bodyweight squats.",3,10, RestTime.SECONDS60);
         Exercise exercise3 = new Exercise(12,"Plank","Core plank hold.",3,10, RestTime.SECONDS60);
-        List<Exercise> exercises = Arrays.asList(exercise1,exercise2,exercise3);
-        return exercises;
+        return Arrays.asList(exercise1,exercise2,exercise3);
     }
 
     //creo un cliente

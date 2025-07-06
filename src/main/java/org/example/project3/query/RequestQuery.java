@@ -42,7 +42,7 @@ public class RequestQuery {
         return pstmt.executeQuery();
     }
 
-    public static void deleteRequest(Connection conn, String mailCustomer, Long schedule, LocalDateTime date) throws DbOperationException {
+    public static void deleteRequest(Connection conn, String mailCustomer, Long schedule) throws DbOperationException {
         String query = "DELETE FROM request WHERE customer = ? AND schedule = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, mailCustomer);
