@@ -43,12 +43,14 @@ public class SharedResources {
     private SharedResources() {
         // Costruttore privato per evitare la creazione di istanze esterne
         // Inizializza con dati di esempio qui
-        populateSampleData(); //
+//        populateSampleData(); //
     }
 
     // Metodo per ottenere l'istanza Singleton
     public static synchronized SharedResources getInstance() {
+        if(instance==null){
             instance = new SharedResources();
+        }
         return instance;
     }
 

@@ -10,13 +10,12 @@ public class RequestQuery {
     private RequestQuery() {}
 
     public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason) throws DbOperationException {
-        String query = "INSERT INTO request (schedule, exercise, reason, customer, datetime) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO request (schedule, exercise, reason, datetime) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setLong(1, schedule.getId());
             preparedStatement.setLong(2, exercise.getId());
             preparedStatement.setString(3, reason);
-            preparedStatement.setString(4, schedule.getCustomer().getCredentials().getMail());
-            preparedStatement.setObject(5, LocalDateTime.now());
+            preparedStatement.setObject(4, LocalDateTime.now());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nell'invio della richiesta db: "+e.getMessage(), e);
@@ -24,10 +23,11 @@ public class RequestQuery {
     }
 
     public static ResultSet hasAlreadySentARequest(Connection conn, Schedule schedule) throws DbOperationException {
-        String query = "SELECT COUNT(*) FROM request WHERE schedule = ?";
+        String query = "SELECT COUNT(*) FROM request JOIN schedule ON schedule.id= request.schedule WHERE schedule.customer= ? AND schedule.trainer=?";
         try{
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setLong(1, schedule.getId());
+            preparedStatement.setString(1, schedule.getCustomer().getCredentials().getMail());
+            preparedStatement.setString(2, schedule.getTrainer().getCredentials().getMail());
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nel controllo della richiesta", e);
@@ -42,11 +42,13 @@ public class RequestQuery {
         return pstmt.executeQuery();
     }
 
-    public static void deleteRequest(Connection conn, String mailCustomer, Long schedule) throws DbOperationException {
-        String query = "DELETE FROM request WHERE customer = ? AND schedule = ?";
+    public static void deleteRequest(Connection conn,String mailCustomer, String mailTrainer, Long schedule) throws DbOperationException {
+        String query = "DELETE FROM request\n" +
+                "WHERE schedule IN (SELECT id FROM schedule WHERE id = ? AND customer = ? AND trainer = ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, mailCustomer);
-            pstmt.setLong(2, schedule);
+            pstmt.setLong(1, schedule);
+            pstmt.setString(2, mailCustomer);
+            pstmt.setString(3, mailTrainer);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nella rimozione della richiesta"+e.getMessage(), e);

@@ -20,14 +20,20 @@ public class RequestDAOP implements RequestDAO {
 
     @Override
     public boolean hasAlreadySentRequest(Request request) {
-        if (SharedResources.getInstance().getRequestsSent().containsKey(request.getSchedule().getCustomer())) {
-            for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(request.getSchedule().getTrainer())) {
-                if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(request.getSchedule().getCustomer().getCredentials().getMail())) {
-                    return true;  // Se la richiesta esiste già, restituisce true
+        Long scheduleId = request.getID();
+
+        // Controlla se esiste una lista di richieste per questo scheduleId
+        if (SharedResources.getInstance().getRequestsSent().containsKey(scheduleId)) {
+            // Itera sulla lista di richieste associate a questo scheduleId
+            for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(scheduleId)) {
+                // Confronta le email del cliente e del trainer per verificare se la richiesta è la stessa
+                if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(request.getSchedule().getCustomer().getCredentials().getMail()) &&
+                        existingRequest.getSchedule().getTrainer().getCredentials().getMail().equals(request.getSchedule().getTrainer().getCredentials().getMail())) {
+                    return true; // Se esiste già una richiesta identica, restituisce true
                 }
             }
         }
-        return false;  // Altrimenti, non è stata inviata una richiesta
+        return false; // Altrimenti, non è stata inviata una richiesta identica
     }
 
     @Override

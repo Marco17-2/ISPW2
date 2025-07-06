@@ -57,7 +57,7 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public void deleteRequest(Request request) {
         try(Connection conn = ConnectionSQL.getConnection()){
-            RequestQuery.deleteRequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getId());
+            RequestQuery.deleteRequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getTrainer().getCredentials().getMail(),request.getSchedule().getId());
         } catch(SQLException | DbOperationException e){
             handleException(e);
         }

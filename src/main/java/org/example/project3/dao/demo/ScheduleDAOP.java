@@ -6,12 +6,15 @@ import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 import org.example.project3.utilities.others.Printer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleDAOP implements ScheduleDAO {
     @Override
     public void addSchedule(Schedule schedule) {
         SharedResources.getInstance().getSchedules().putIfAbsent(schedule.getId(), schedule);
+        List<Schedule> schedulesForCustomer = SharedResources.getInstance().getCustomerSchedules().computeIfAbsent(schedule.getCustomer().getCredentials().getMail(), k->new ArrayList<>());
+        schedulesForCustomer.add(schedule);
     }
 
     @Override
