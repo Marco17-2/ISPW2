@@ -44,6 +44,8 @@ module org.example.project3 {
     exports org.example.project3.patterns.factory;
     opens org.example.project3.patterns.factory to javafx.fxml;
 
+    exports  org.example.project3.utilities.enums;
+
     exports org.example.project3.patterns.observer;
     opens org.example.project3.patterns.observer to javafx.fxml;
 
