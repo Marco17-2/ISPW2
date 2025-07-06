@@ -86,7 +86,7 @@ public abstract class AbstractUserDAOJSON {
                 String userString = convertUserToString(loggedUser, loggedUser.getCredentials()); // Metodo astratto
                 writer.write(userString + "\n");
                 loadFile();
-            } catch (IOException e) {
+            } catch (IOException _) {
                 Printer.errorPrint("Impossibile salvare l'utente sul file JSON.");
             }
         }
