@@ -10,6 +10,7 @@ module org.example.project3 {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires java.xml.crypto;
 
     opens org.example.project3.view to javafx.fxml;
 
