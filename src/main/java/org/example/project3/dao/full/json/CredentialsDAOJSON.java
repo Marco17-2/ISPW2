@@ -4,12 +4,9 @@ import org.example.project3.dao.CredentialsDAO;
 import org.example.project3.model.*;
 import org.example.project3.exceptions.WrongEmailOrPasswordException;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class CredentialsDAOJSON extends AbstractUserDAOJSON implements CredentialsDAO {
 
-        List<LoggedUser> userList = new ArrayList<>();
     //Singleton
     private static CredentialsDAOJSON instance=null;
     // Costruttore privato per evitare la creazione di nuove istanze

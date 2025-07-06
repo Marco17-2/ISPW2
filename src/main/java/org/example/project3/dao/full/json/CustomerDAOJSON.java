@@ -3,14 +3,10 @@ package org.example.project3.dao.full.json;
 import org.example.project3.dao.CustomerDAO;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.model.Customer;
-import org.example.project3.model.LoggedUser;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class CustomerDAOJSON extends AbstractUserDAOJSON implements CustomerDAO {
 
-    List<LoggedUser> userList = new ArrayList<>();
     //Singleton
     private static CustomerDAOJSON instance=null;
     // Costruttore privato per evitare la creazione di nuove istanze

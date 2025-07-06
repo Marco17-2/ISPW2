@@ -6,12 +6,9 @@ import org.example.project3.model.LoggedUser;
 import org.example.project3.model.Trainer;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class TrainerDAOJSON extends AbstractUserDAOJSON implements TrainerDAO {
 
-    List<LoggedUser> userList = new ArrayList<>();
     //Singleton
     private static TrainerDAOJSON instance=null;
     // Costruttore privato per evitare la creazione di nuove istanze
