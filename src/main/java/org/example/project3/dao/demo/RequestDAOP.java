@@ -29,11 +29,11 @@ public class RequestDAOP implements RequestDAO {
                 // Confronta le email del cliente e del trainer per verificare se la richiesta è la stessa
                 if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(request.getSchedule().getCustomer().getCredentials().getMail()) &&
                         existingRequest.getSchedule().getTrainer().getCredentials().getMail().equals(request.getSchedule().getTrainer().getCredentials().getMail())) {
-                    return true; // Se esiste già una richiesta identica, restituisce true
+                    return true;
                 }
             }
         }
-        return false; // Altrimenti, non è stata inviata una richiesta identica
+        return false;
     }
 
     @Override
@@ -83,11 +83,11 @@ public class RequestDAOP implements RequestDAO {
         if (SharedResources.getInstance().getReservationRequests().containsKey(reservation.getCourse().getCourseName())) {
             for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(reservation.getCustomer().getCredentials().getMail())) {
                 if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(reservation.getCourse().getCourseName())) {
-                    return true;  // Se la richiesta esiste già, restituisce true
+                    return true;
                 }
             }
         }
-        return false;  // Altrimenti, non è stata inviata una richiesta
+        return false;
     }
 
     }

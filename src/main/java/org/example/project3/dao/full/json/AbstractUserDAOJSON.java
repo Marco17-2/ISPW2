@@ -17,19 +17,11 @@ import java.util.List;
 
 public abstract class AbstractUserDAOJSON {
 
-// Necessario per stream
 
-    // Usa un tipo generico se vuoi che la userList contenga il tipo specifico di LoggedUser
         protected static final String PERSISTENCE_FILE = "src/main/resources/org/example/project3/json.json";
         protected List<LoggedUser> userList = new ArrayList<>();
 
-        // Il costruttore può chiamare loadFile se l'inizializzazione dei dati è comune
         protected AbstractUserDAOJSON() {
-            // loadFile(); // Decidi se caricare il file nel costruttore base o solo quando serve (lazy loading)
-            // Nel tuo codice originale, CredentialsDAOJSON lo fa, TrainerDAOJSON no.
-            // Un'opzione è rimuovere le chiamate a loadFile() dai metodi concreti
-            // e chiamarlo una volta all'inizio dell'app o al primo accesso al DAO.
-            // Per ora, lo lascio commentato qui e le singole DAOs decideranno.
         }
 
         protected void loadFile() {
@@ -48,13 +40,12 @@ public abstract class AbstractUserDAOJSON {
                         }
                     }
                 }
-            } catch (IOException _) { // Utilizza la variabile e per un migliore debug se necessario
+            } catch (IOException _) {
                 Printer.errorPrint("Impossibile caricare gli utenti dal file utenti.");
-                // e.printStackTrace(); // Utile per debug, ma Printer.errorPrint è sufficiente per l'output finale
             }
         }
 
-        // Metodo astratto che ogni sottoclasse dovrà implementare per creare il tipo di utente specifico
+
         protected LoggedUser getLoggedUser(Credentials credentials, String[] data){
             LoggedUser loggedUser = null;
             if(credentials.getRole().equals(Role.CLIENT)) {
@@ -68,7 +59,7 @@ public abstract class AbstractUserDAOJSON {
         }
 
         public boolean emailExists(String mail) {
-            // Assicurati che userList sia caricata prima di fare la ricerca
+            // Si assicura che userList sia caricata prima di fare la ricerca
             if (userList.isEmpty()) {
                 loadFile(); // Carica la lista se è vuota
             }
@@ -79,11 +70,10 @@ public abstract class AbstractUserDAOJSON {
             return !emailExists(credentials.getMail());
         }
 
-        // Anche il metodo addToFile può essere reso generico se la logica di scrittura è comune
-        // (potrebbe richiedere un metodo astratto per convertire LoggedUser in stringa)
+
         protected void addToFile(LoggedUser loggedUser) {
-            try (FileWriter writer = new FileWriter(PERSISTENCE_FILE, true)) {// 'true' per append
-                String userString = convertUserToString(loggedUser, loggedUser.getCredentials()); // Metodo astratto
+            try (FileWriter writer = new FileWriter(PERSISTENCE_FILE, true)) {
+                String userString = convertUserToString(loggedUser, loggedUser.getCredentials());
                 writer.write(userString + "\n");
                 loadFile();
             } catch (IOException _) {

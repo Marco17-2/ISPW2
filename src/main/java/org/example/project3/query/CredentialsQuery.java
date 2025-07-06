@@ -18,9 +18,9 @@ public class CredentialsQuery {
             pstmt.setString(1, credentials.getMail());
             pstmt.setString(2, credentials.getPassword());
             pstmt.setString(3, credentials.getRole().toString());
-            return pstmt.executeUpdate(); //restituisce il numero di righe influenzate dalla query
+            return pstmt.executeUpdate();
         }catch (SQLException e) {
-            throw new DbOperationException("Errore nella registrazione"+ e.getMessage(), e);
+            throw new DbOperationException("Errore nella registrazione", e);
         }
     }
 

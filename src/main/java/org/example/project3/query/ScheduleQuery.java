@@ -80,7 +80,7 @@ public class ScheduleQuery {
             pstmt.setString(3, name);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione della scheda"+e.getMessage(), e);
+            throw new DbOperationException("Errore nella rimozione della scheda", e);
         }
     }
 }

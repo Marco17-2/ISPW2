@@ -7,5 +7,6 @@ public class WrongEmailOrPasswordException extends Exception {
         super(message);
     }
 
+    //nel caso in cui email e password siano sbagliate
 
 }

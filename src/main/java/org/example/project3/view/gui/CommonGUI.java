@@ -230,9 +230,6 @@ public abstract class CommonGUI {
         }
     }
 
-
-    //aggiugnere la chiamata di questa funzione nella schermata login trainer
-
     @FXML
     protected void goToTrainerHome(MouseEvent event){
         try {

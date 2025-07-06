@@ -72,7 +72,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
                         rs.getInt(NUMBERREPS),
                         RestTime.convertIntToRestTime(rs.getInt(RESTTIME))
                 );
-                schedule.addExercise(exercise); // Aggiungi direttamente all'oggetto Schedule
+                schedule.addExercise(exercise);
             }
         } catch (SQLException e) {
             handleException(e);

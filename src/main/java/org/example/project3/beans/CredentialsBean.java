@@ -3,7 +3,7 @@ package org.example.project3.beans;
 import org.example.project3.utilities.enums.Role;
 
 public class CredentialsBean {
-    //Le seguenti variabili sono dichiarate come final per garantire l'integrità dei dati dell'ogetto Credentials
+    //Le seguenti variabili sono dichiarate come final per garantire l'integrità dei dati dell'oggetto Credentials
     private String mail;
     private String password;
     private Role role;

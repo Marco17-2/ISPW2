@@ -48,7 +48,7 @@ public class ReservationQuery {
             pstmt.setString(4, hour);
 
         }catch(SQLException e){
-            throw new DbOperationException("Errore aggiuntar richiesta", e);
+            throw new DbOperationException("Errore aggiunta richiesta", e);
         }
     }
 }

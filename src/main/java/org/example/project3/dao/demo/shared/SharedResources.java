@@ -2,11 +2,6 @@ package org.example.project3.dao.demo.shared;
 
 
 import org.example.project3.model.*;
-import org.example.project3.utilities.enums.RestTime;
-import org.example.project3.utilities.enums.Role;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +21,10 @@ public class SharedResources {
 
     //associazione corso-trainer
     private final Map<String, Trainer> trainerCourse = new ConcurrentHashMap<>();
-
-    //Verificarre l'utilità:
-
     private final Map<String, List<Reservation>> reservations = new HashMap<>();
     private final Map<String, List<Reservation>> reservationRequests = new HashMap<>();
 
-    // Mappa per tenere traccia delle relazioni pazienti-psicologi
+    // Mappa per tenere traccia delle relazioni scheda-esercizi e utente-schede
     private final  Map<String, List<Schedule>> customerSchedules = new HashMap<>();
     private final Map<Long,List<Exercise>> exerciseSchedules = new HashMap<>();
 

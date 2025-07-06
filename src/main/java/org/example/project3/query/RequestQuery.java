@@ -18,7 +18,7 @@ public class RequestQuery {
             preparedStatement.setObject(4, LocalDateTime.now());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'invio della richiesta db: "+e.getMessage(), e);
+            throw new DbOperationException("Errore nell'invio della richiesta db: ", e);
         }
     }
 
@@ -35,7 +35,6 @@ public class RequestQuery {
     }
 
     public static ResultSet retrieveRequests(Connection conn, String mailCustomer) throws SQLException {
-        //Mettere un order by date (da più a meno recente)
         String query = "SELECT id, schedule, exercise, reason, date FROM request WHERE schedule.customer = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mailCustomer);
@@ -51,7 +50,7 @@ public class RequestQuery {
             pstmt.setString(3, mailTrainer);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione della richiesta"+e.getMessage(), e);
+            throw new DbOperationException("Errore nella rimozione della richiesta", e);
         }
     }
 

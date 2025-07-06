@@ -85,7 +85,6 @@ public class Schedule {
         if (o == null || getClass() != o.getClass()) return false;
         Schedule schedule = (Schedule) o;
 
-        // Questo confronto ora funziona correttamente perché 'id' è un 'Long'
         if (this.id != 0 && schedule.id != 0) {
             return Objects.equals(this.id, schedule.id);
         }

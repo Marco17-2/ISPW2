@@ -26,7 +26,7 @@ public class TrainerQuery {
                 throw new MailAlreadyExistsException("Mail già esistente");
             }
         }catch (SQLException e) {
-            throw new DbOperationException("Errore nella registrazione"+e.getMessage(), e);
+            throw new DbOperationException("Errore nella registrazione", e);
         }
     }
 
@@ -69,7 +69,7 @@ public class TrainerQuery {
             pstmt2.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione del trainer"+e.getMessage(), e);
+            throw new DbOperationException("Errore nella rimozione del trainer", e);
         }
     }
 

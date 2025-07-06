@@ -28,13 +28,12 @@ public abstract class LoggedUserBean {
         this.online = false;
         this.birthday = null;
     }
-    //getter e setter per i nuovi campi
+    //getter e setter
 
     public CredentialsBean getCredentialsBean() {
         return credentialsBean;
     }
 
-    //FORSE DA TOGLIERE
     public void setCredentialsBean(CredentialsBean credentials) {
         this.credentialsBean = credentials;
     }

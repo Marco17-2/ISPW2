@@ -69,7 +69,7 @@ public class CustomerQuery {
             pstmt2.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione del cliente"+e.getMessage(), e);
+            throw new DbOperationException("Errore nella rimozione del cliente", e);
         }
     }
 

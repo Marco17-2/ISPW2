@@ -20,7 +20,7 @@ import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.utilities.enums.Role;
 import org.example.project3.utilities.others.Printer;
 
-/*********Parte del caso d'uso: Login*********/
+//Parte del caso d'uso: Login
 public class LoginController {
     private final BeanAndModelMapperFactory beanAndModelMapperFactory;
     private final CredentialsDAO loginGeneric;

@@ -2,7 +2,7 @@ package org.example.project3.patterns.state;
 
 public abstract class AbstractState {
 
-    public static final String SCELTA_NON_VALIDA = "Scelta non valida";
+
     protected AbstractState(){}
 
     public void enter(StateMachineConcrete context){}

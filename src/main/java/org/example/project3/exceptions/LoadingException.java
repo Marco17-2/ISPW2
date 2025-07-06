@@ -5,5 +5,5 @@ public class LoadingException extends RuntimeException {
         super(message, cause);
     }
 
-    /*Usato in caso il caricamento della scena fallisca, quindi  segnala il problema.*/
+    //Usato nel caso in cui il caricamento della scena fallisca
 }

@@ -3,7 +3,7 @@ package org.example.project3.model;
 import org.example.project3.utilities.enums.Role;
 
 public class Credentials {
-    //Le seguenti variabili sono dichiarate come final per garantire l'integrità dei dati dell'ogetto Credentials
+    //Le seguenti variabili sono dichiarate come final per garantire l'integrità dei dati dell'oggetto Credentials
     private final String mail;
     private final String password;
     private Role role;

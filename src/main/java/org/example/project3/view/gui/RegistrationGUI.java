@@ -43,11 +43,10 @@ public class RegistrationGUI extends CommonGUI {
 
     @FXML
     public void initialize() {
-        // Definisci le stringhe per la ChoiceBox
         ObservableList<String> opzioniGenere = FXCollections.observableArrayList(
                 "Maschio",
                 "Femmina",
-                "Altro" // O qualsiasi altra opzione tu voglia
+                "Altro"
         );
 
         // Setta gli elementi nella ChoiceBox

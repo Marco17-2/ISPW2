@@ -86,7 +86,6 @@ public class RequestDAOSQL implements RequestDAO {
                         rs.getString(GENDER),
                         false,
                         rs.getDate(BIRTHDAY).toLocalDate()
-                         // poi da sistemare
                 );
 
                 customer.setInjury(rs.getString(INJURY));

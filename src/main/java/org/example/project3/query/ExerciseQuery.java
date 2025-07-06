@@ -18,7 +18,7 @@ public class ExerciseQuery {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'aggiunta dell'esercizio"+e.getMessage(), e);
+            throw new DbOperationException("Errore nell'aggiunta dell'esercizio", e);
         }
     }
 
@@ -35,7 +35,7 @@ public class ExerciseQuery {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'aggiunta dell'esercizio"+e.getMessage(), e);
+            throw new DbOperationException("Errore nell'aggiunta dell'esercizio", e);
         }
     }
 
@@ -53,7 +53,6 @@ public class ExerciseQuery {
     }
 
     public static ResultSet retrieveExercise(Connection conn, Exercise exercise) throws SQLException {
-        //Mettere un order by date (da più a meno recente)
         String query = "SELECT name, description, numberSeries, numberReps, restTime FROM exercise WHERE id = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setLong(1, exercise.getId());
@@ -85,7 +84,7 @@ public class ExerciseQuery {
             pstmt.setLong(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione dell'esercizio"+e.getMessage(), e);
+            throw new DbOperationException("Errore nella rimozione dell'esercizio", e);
         }
     }
 
