@@ -10,14 +10,6 @@ public class Exercise {
     private Integer numberReps;
     private RestTime restTime;
 
-    public Exercise(long id, String name, String description, Integer numberSeries, Integer numberReps, RestTime restTime) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.numberSeries = numberSeries;
-        this.numberReps = numberReps;
-        this.restTime = restTime;
-    }
 
     public Exercise( String name, String description, Integer numberSeries, Integer numberReps, RestTime restTime) {
         this.id = 0;
@@ -28,32 +20,42 @@ public class Exercise {
         this.restTime = restTime;
     }
 
-    public void setName(String name) {
+    public Exercise(long id, String name, String description, Integer numberSeries, Integer numberReps, RestTime restTime) {
+        this.id = id;
         this.name = name;
+        this.description = description;
+        this.numberSeries = numberSeries;
+        this.numberReps = numberReps;
+        this.restTime = restTime;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setNumberSeries(Integer numberSeries) {
-        this.numberSeries = numberSeries;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setNumberReps(Integer numberReps) {
         this.numberReps = numberReps;
     }
 
+
+    public void setNumberSeries(Integer numberSeries) {
+        this.numberSeries = numberSeries;
+    }
+
     public void setRestTime(RestTime restTime) {
         this.restTime = restTime;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getDescription() {
@@ -64,12 +66,12 @@ public class Exercise {
         return numberSeries;
     }
 
-    public Integer getNumberReps() {
-        return numberReps;
-    }
-
     public RestTime getRestTime() {
         return restTime;
+    }
+
+    public Integer getNumberReps() {
+        return numberReps;
     }
 
     public void setId(long id) {

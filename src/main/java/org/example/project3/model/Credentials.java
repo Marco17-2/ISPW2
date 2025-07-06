@@ -9,16 +9,16 @@ public class Credentials {
     private Role role;
 
 
+    public Credentials(String mail, Role role){
+        this.mail = mail;
+        this.password = null;
+        this.role = role;
+    }
+
     //costruttore
     public Credentials(String mail, String password, Role role){
         this.mail = mail;
         this.password = password;
-        this.role = role;
-    }
-
-    public Credentials(String mail, Role role){
-        this.mail = mail;
-        this.password = null;
         this.role = role;
     }
 
@@ -29,11 +29,12 @@ public class Credentials {
 
     public String getPassword(){ return password; }
 
-    public Role getRole(){
-        return role;
-    }
     public void setRole(Role role){
         this.role = role;
+    }
+
+    public Role getRole(){
+        return role;
     }
 
 }
