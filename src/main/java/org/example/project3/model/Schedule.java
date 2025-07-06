@@ -92,7 +92,7 @@ public class Schedule {
 
         // Se gli ID sono nulli, confronta per altri attributi logici
         return id == schedule.id &&
-                name == schedule.name &&
+                name.equals(schedule.name) &&
                 Objects.equals(customer, schedule.customer) &&
                 Objects.equals(trainer, schedule.trainer);
     }

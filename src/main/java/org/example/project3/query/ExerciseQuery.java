@@ -78,7 +78,7 @@ public class ExerciseQuery {
         String participationQuery = "DELETE FROM participation WHERE exercise = ?";
         String query = "DELETE FROM exercise WHERE id = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query);
-        PreparedStatement pstmt1 = conn.prepareStatement(participationQuery);) {
+        PreparedStatement pstmt1 = conn.prepareStatement(participationQuery)) {
             pstmt1.setLong(1, id);
             pstmt1.executeUpdate();
 
