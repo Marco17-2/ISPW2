@@ -2,7 +2,6 @@ package org.example.project3.dao.full.json;
 
 import org.example.project3.dao.TrainerDAO;
 import org.example.project3.exceptions.MailAlreadyExistsException;
-import org.example.project3.model.LoggedUser;
 import org.example.project3.model.Trainer;
 
 
