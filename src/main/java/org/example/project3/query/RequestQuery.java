@@ -10,15 +10,16 @@ public class RequestQuery {
     private RequestQuery() {}
 
     public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason) throws DbOperationException {
-        String query = "INSERT INTO request (schedule, exercise, reason, datetime) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO request (schedule, exercise, reason, customer, datetime) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setLong(1, schedule.getId());
             preparedStatement.setLong(2, exercise.getId());
             preparedStatement.setString(3, reason);
-            preparedStatement.setObject(4, LocalDateTime.now());
+            preparedStatement.setString(4, schedule.getCustomer().getCredentials().getMail());
+            preparedStatement.setObject(5, LocalDateTime.now());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'invio della richiesta db: ", e);
+            throw new DbOperationException("Errore nell'invio della richiesta db: "+e.getMessage(), e);
         }
     }
 
@@ -41,15 +42,14 @@ public class RequestQuery {
         return pstmt.executeQuery();
     }
 
-    public static void deleteRequest(Connection conn, String mailCustomer, String mailTrainer, LocalDateTime date) throws DbOperationException {
-        String query = "DELETE FROM request WHERE schedule.customer = ? AND schedule.trainer = ? AND date = ?";
+    public static void deleteRequest(Connection conn, String mailCustomer, Long schedule, LocalDateTime date) throws DbOperationException {
+        String query = "DELETE FROM request WHERE customer = ? AND schedule = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, mailCustomer);
-            pstmt.setString(2, mailTrainer);
-            pstmt.setObject(3, date);
+            pstmt.setLong(2, schedule);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione della richiesta", e);
+            throw new DbOperationException("Errore nella rimozione della richiesta"+e.getMessage(), e);
         }
     }
 

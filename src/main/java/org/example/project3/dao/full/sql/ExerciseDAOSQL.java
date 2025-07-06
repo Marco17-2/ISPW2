@@ -23,12 +23,21 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     private static final String RESTTIME="restTime";
 
     @Override
-    public void addExercise(Schedule schedule, Exercise exercise){
+    public void addExerciseSchedule(Schedule schedule, Exercise exercise){
         try (Connection conn = ConnectionSQL.getConnection()) {
-            ExerciseQuery.addExercise(conn, schedule, exercise);
+            ExerciseQuery.addExerciseSchedule(conn, schedule, exercise);
         } catch (SQLException | DbOperationException e) {
             handleException(e);
         }
+    }
+
+    @Override
+    public void addExercise(Exercise exercise){
+            try (Connection conn = ConnectionSQL.getConnection()) {
+                ExerciseQuery.addExercise(conn, exercise);
+            } catch (SQLException | DbOperationException e) {
+                handleException(e);
+            }
     }
 
     @Override

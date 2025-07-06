@@ -15,14 +15,15 @@ public class ScheduleQuery {
     private ScheduleQuery(){}
 
     public static void addSchedule(Connection conn, Schedule schedule) throws DbOperationException {
-        String query = "INSERT INTO schedule (name, customer, trainer) VALUES (?, ?, ?)";
+        String query = "INSERT INTO schedule (id,name, customer, trainer) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-            preparedStatement.setString(1, schedule.getName());
-            preparedStatement.setString(2, schedule.getCustomer().getCredentials().getMail());
-            preparedStatement.setString(3, schedule.getTrainer().getCredentials().getMail());
+            preparedStatement.setLong(1, schedule.getId());
+            preparedStatement.setString(2, schedule.getName());
+            preparedStatement.setString(3, schedule.getCustomer().getCredentials().getMail());
+            preparedStatement.setString(4, schedule.getTrainer().getCredentials().getMail());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'aggiunta della scheda", e);
+            throw new DbOperationException("Errore nell'aggiunta della scheda"+e.getMessage(), e);
         }
     }
 
@@ -79,7 +80,7 @@ public class ScheduleQuery {
             pstmt.setString(3, name);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione della scheda", e);
+            throw new DbOperationException("Errore nella rimozione della scheda"+e.getMessage(), e);
         }
     }
 }

@@ -150,7 +150,7 @@ public class SharedResources {
 
 
         // Optional: Add some Courses and Subscriptions if you plan to test those
-        Course course1 = new Course(1,"Yoga Basics",30,30,"60 min","basso", "martedì", "14");
+        Course course1 = new Course(1,"Yoga Basics",30,"60 min","basso", "martedì", "14");
         courses.put(course1.getCourseName(), course1);
         trainerCourse.put(course1.getCourseName(), trainer1);
 

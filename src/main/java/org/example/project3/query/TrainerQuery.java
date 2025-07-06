@@ -13,7 +13,7 @@ public class TrainerQuery {
     private TrainerQuery(){}
 
     public static void registerTrainer(Connection conn, Trainer trainer) throws SQLException, MailAlreadyExistsException, DbOperationException {
-        String query = "INSERT INTO trainer (mail, name, surname, gender, online, birthDate) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO trainer (email, name, surname, gender, online, birthDate) VALUES (?,?,?,?,?,?)";
         try(PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, trainer.getCredentials().getMail());
             pstmt.setString(2, trainer.getName());
@@ -26,7 +26,7 @@ public class TrainerQuery {
                 throw new MailAlreadyExistsException("Mail già esistente");
             }
         }catch (SQLException e) {
-            throw new DbOperationException("Errore nella registrazione", e);
+            throw new DbOperationException("Errore nella registrazione"+e.getMessage(), e);
         }
     }
 
@@ -69,7 +69,7 @@ public class TrainerQuery {
             pstmt2.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione del trainer", e);
+            throw new DbOperationException("Errore nella rimozione del trainer"+e.getMessage(), e);
         }
     }
 

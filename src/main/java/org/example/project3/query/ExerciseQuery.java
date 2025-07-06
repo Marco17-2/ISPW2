@@ -10,26 +10,32 @@ import java.sql.*;
 public class ExerciseQuery {
     private ExerciseQuery(){}
 
-    public static void addExercise(Connection conn, Schedule schedule, Exercise exercise) throws DbOperationException {
-        String insertExercise = "INSERT INTO exercise (name, description, numberseries, numberReps, restTime) VALUES (?, ?, ?, ?, ?)";
+    public static void addExerciseSchedule(Connection conn, Schedule schedule, Exercise exercise) throws DbOperationException {
         String intoSchedule = "INSERT INTO participation (schedule, exercise) VALUES (?, ?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(insertExercise);
-             PreparedStatement pstmt = conn.prepareStatement(intoSchedule)) {
-
-            preparedStatement.setString(1, exercise.getName());
-            preparedStatement.setString(2, exercise.getDescription());
-            preparedStatement.setInt(3, exercise.getNumberSeries());
-            preparedStatement.setInt(4, exercise.getNumberReps());
-            preparedStatement.setInt(5, exercise.getRestTime().getId());
-            preparedStatement.executeUpdate();
-
-
+        try (PreparedStatement pstmt = conn.prepareStatement(intoSchedule)) {
             pstmt.setLong(1, schedule.getId());
             pstmt.setLong(2, exercise.getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'aggiunta dell'esercizio", e);
+            throw new DbOperationException("Errore nell'aggiunta dell'esercizio"+e.getMessage(), e);
+        }
+    }
+
+    public static void addExercise( Connection conn, Exercise exercise) throws DbOperationException {
+        String insertExercise = "INSERT INTO exercise (id, name, description, numberseries, numberReps, restTime) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(insertExercise)) {
+
+            preparedStatement.setLong(1, exercise.getId());
+            preparedStatement.setString(2, exercise.getName());
+            preparedStatement.setString(3, exercise.getDescription());
+            preparedStatement.setInt(4, exercise.getNumberSeries());
+            preparedStatement.setInt(5, exercise.getNumberReps());
+            preparedStatement.setString(6, String.valueOf(exercise.getRestTime().getId()));
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DbOperationException("Errore nell'aggiunta dell'esercizio"+e.getMessage(), e);
         }
     }
 
@@ -69,12 +75,17 @@ public class ExerciseQuery {
     }
 
     public static void deleteExercise(Connection conn, Long id) throws DbOperationException {
+        String participationQuery = "DELETE FROM participation WHERE exercise = ?";
         String query = "DELETE FROM exercise WHERE id = ? ";
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (PreparedStatement pstmt = conn.prepareStatement(query);
+        PreparedStatement pstmt1 = conn.prepareStatement(participationQuery);) {
+            pstmt1.setLong(1, id);
+            pstmt1.executeUpdate();
+
             pstmt.setLong(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione dell'esercizio", e);
+            throw new DbOperationException("Errore nella rimozione dell'esercizio"+e.getMessage(), e);
         }
     }
 

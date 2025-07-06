@@ -11,13 +11,17 @@ import java.util.List;
 
 public class ExerciseDAOP implements ExerciseDAO {
     @Override
-    public void addExercise(Schedule schedule, Exercise exercise) {
-        SharedResources.getInstance().getExercises().putIfAbsent(exercise.getId(), exercise);
+    public void addExerciseSchedule(Schedule schedule, Exercise exercise) {
         if (schedule == null) {
             throw new NoResultException(exercise.getClass().getSimpleName() + " non trovato");
         }
         schedule.addExercise(exercise);
         SharedResources.getInstance().getSchedules().put(schedule.getId(), schedule);
+    }
+
+    @Override
+    public void addExercise(Exercise exercise) {
+        SharedResources.getInstance().getExercises().putIfAbsent(exercise.getId(), exercise);
     }
 
     @Override

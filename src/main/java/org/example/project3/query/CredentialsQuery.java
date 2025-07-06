@@ -20,7 +20,7 @@ public class CredentialsQuery {
             pstmt.setString(3, credentials.getRole().toString());
             return pstmt.executeUpdate(); //restituisce il numero di righe influenzate dalla query
         }catch (SQLException e) {
-            throw new DbOperationException("Errore nella registrazione", e);
+            throw new DbOperationException("Errore nella registrazione"+ e.getMessage(), e);
         }
     }
 
