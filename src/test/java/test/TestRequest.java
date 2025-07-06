@@ -27,8 +27,8 @@ class TestRequest {
     private String passwordTrainer;
     private String testEmailCustomer;
     private String testEmailTrainer;
-    private final LocalDate TEST_BIRTHDAY = LocalDate.now();
 
+    private final LocalDate TEST_BIRTHDAY = LocalDate.now();
     private static final String TEST_NAME = "TestName";
     private static final String TEST_SURNAME = "TestSurname";
     private static final String TEST_GENDER = "Gender";
