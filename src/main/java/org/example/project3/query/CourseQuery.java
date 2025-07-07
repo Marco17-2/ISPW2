@@ -17,7 +17,7 @@ public class CourseQuery {
         return pstmt.executeQuery();
     }
 
-    public static void insertCourse(Connection conn, String courseName, int remaining, String duration, String level, String day, String hour, String email) throws SQLException, DbOperationException {
+    public static void insertCourse(Connection conn, String courseName, int remaining, String duration, String level, String day, String hour, String email) throws SQLException{
         int courseId;
 
         // Inserisci il corso (senza specificare ID)
