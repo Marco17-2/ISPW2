@@ -12,5 +12,16 @@ public class CourseDAOP implements CourseDAO {
     @Override
     public void searchCourses(List<Course> courses) throws NoResultException {
         courses.addAll(SharedResources.getInstance().getCourses().values());
-        }
+    }
+
+    @Override
+    public void addCourse(Course course, String email){
+            SharedResources.getInstance().getCourses().
+            putIfAbsent(course.getCourseName(), course);
+    }
+
+    @Override
+    public void removeCourse(Course course) {
+        SharedResources.getInstance().getCourses().remove(course.getCourseName());
+    }
 }

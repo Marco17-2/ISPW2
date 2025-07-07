@@ -14,14 +14,22 @@ import java.util.List;
 
 public class ReservationDAOSQL implements ReservationDAO {
 
-    private static final String COURSE = "course";
-    private static final String DATE = "date";
-    private static final String HOUR = "hour";
+    private static final String NAME = "name";
+    private static final String ID = "id";
+    private static final String REMAINING = "remaining";
+    private static final String DURATION = "duration";
+    private static final String LEVEL = "level";
+    private static final String TRAINER = "trainer";
+    private static final String DAY = "c.day";
+    private static final String HOUR = "c.hour";
+
+    private static final String DATE = "r.date";
+    private static final String HOURR = "r.hour";
 
     @Override
     public void removeReservation(Reservation reservation) {
         try (Connection conn = ConnectionSQL.getConnection()) {
-            ReservationQuery.removeReservation(conn, reservation.getCourse().getCourseName(), reservation.getCustomer().getCredentials().getMail(), reservation.getDay(), reservation.getHour());
+            ReservationQuery.removeReservation(conn, reservation.getCourse().getCourseID(), reservation.getCustomer().getCredentials().getMail(), reservation.getDay(), reservation.getHour());
         } catch (SQLException | DbOperationException e) {
             throw new DAOException("Errore rimozione reservation", e);
         }
@@ -43,8 +51,8 @@ public class ReservationDAOSQL implements ReservationDAO {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = ReservationQuery.retrieveReservation(conn, customer.getCredentials().getMail());
             while (rs.next()) {
-                Course course = new Course(rs.getString(COURSE));
-                Reservation reservation = new Reservation(customer, course, rs.getString(DATE), rs.getString(HOUR));
+                Course course = new Course(rs.getInt(ID), rs.getString(NAME), rs.getInt(REMAINING), rs.getString(DURATION), rs.getString(LEVEL), rs.getString(DATE), rs.getString(HOURR));
+                Reservation reservation = new Reservation(customer, course, rs.getString(DATE), rs.getString(HOURR));
                 reservations.add(reservation);
             }
 

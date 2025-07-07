@@ -22,6 +22,15 @@ public class Course {
 
     }
 
+    public Course(String courseName, int remainingSlots, String duration, String level, String day, String hour) {
+        this.courseName = courseName;
+        this.hour = hour;
+        this.remainingSlots = remainingSlots;
+        this.day = day;
+        this.level = level;
+        this.duration = duration;
+    }
+
     public Course(String coursName){
         this.courseName = coursName;
     }   // verificare se utile per reservation

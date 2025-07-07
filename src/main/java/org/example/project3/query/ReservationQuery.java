@@ -9,9 +9,9 @@ public class ReservationQuery {
 
     public static ResultSet retrieveReservation(Connection conn, String mail) throws SQLException {
 
-        String query = "SELECT c.name, r.date, r.hour " +
+        String query = "SELECT c.name, c.id, c.remaining, c.duration, c.level, r.date, r.hour " +
                 "FROM course c, reservation r" +
-                " WHERE c.name = r.course AND r.email = ?";
+                " WHERE c.id = r.course AND r.customer = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mail);
@@ -38,14 +38,16 @@ public class ReservationQuery {
         }
     }
 
-    public static void removeReservation(Connection conn, String course, String customer, String date, String hour) throws DbOperationException {
-        String query = "REMOVE FROM reservation WHERE customer = ? AND course = ? AND date = ? AND hour = ?";
+    public static void removeReservation(Connection conn, int course, String customer, String date, String hour) throws DbOperationException {
+        String query = "DELETE FROM reservation WHERE customer = ? AND course = ? AND date = ? AND hour = ?";
 
         try(PreparedStatement pstmt= conn.prepareStatement(query)){
-            pstmt.setString(1, course);
-            pstmt.setString(2, customer);
+            pstmt.setString(1, customer);
+            pstmt.setInt(2, course);
             pstmt.setString(3, date);
             pstmt.setString(4, hour);
+
+            pstmt.executeUpdate();
 
         }catch(SQLException e){
             throw new DbOperationException("Errore aggiunta richiesta", e);

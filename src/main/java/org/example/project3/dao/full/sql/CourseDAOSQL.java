@@ -3,6 +3,7 @@ package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.CourseDAO;
 import org.example.project3.exceptions.DAOException;
+import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Course;
 import org.example.project3.query.CourseQuery;
@@ -46,4 +47,25 @@ public class CourseDAOSQL implements CourseDAO{
             throw new DAOException("Errore ricerca corsi", e);
         }
     }
+
+    @Override
+    public void addCourse(Course course, String email){
+        try(Connection conn = ConnectionSQL.getConnection()) {
+            CourseQuery.insertCourse(conn, course.getCourseName(), course.getRemainingSlots(), course.getDuration(), course.getLevel(), course.getDay(), course.getHour(), email);
+        }catch (SQLException | DbOperationException e){
+            throw new DAOException("Errore rimozione reservation", e);
+        }
+    }
+
+    @Override
+    public void removeCourse(Course course) {
+        try (Connection conn = ConnectionSQL.getConnection()) {
+            CourseQuery.deleteCourse(conn, course.getCourseID());
+        } catch (SQLException e) {
+            throw new DAOException("Errore durante la rimozione del corso", e);
+        }
+    }
+
+
+
 }
