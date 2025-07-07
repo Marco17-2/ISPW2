@@ -53,10 +53,6 @@ public class CourseQuery {
         }
     }
 
-    public static void addCourseTime(Connection conn, String courseName, String day, String hour){
-
-    }
-
     public static void deleteCourse(Connection conn, int courseId) throws SQLException {
         // Prima cancella le sessioni collegate
         String deleteSessionQuery = "DELETE FROM session WHERE course = ?";
