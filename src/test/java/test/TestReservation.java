@@ -27,6 +27,8 @@ import java.util.UUID;
 
 class TestReservation {
 
+    // De Santis Marco, 0309540
+
     private String passwordT;
     private String passwordC;
     private String testTrainerEmail;
