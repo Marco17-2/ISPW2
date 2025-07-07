@@ -1,12 +1,9 @@
 package org.example.project3.query;
 
-import org.example.project3.exceptions.DbOperationException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 public class CourseQuery {
     private CourseQuery() {}
