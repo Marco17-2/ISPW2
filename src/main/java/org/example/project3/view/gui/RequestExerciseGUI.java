@@ -15,6 +15,7 @@ import org.example.project3.controller.SearchController;
 import org.example.project3.exceptions.EmptyFieldException;
 import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.observer.RequestManagerConcreteSubject;
+import org.example.project3.utilities.enums.RestTime;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.Printer;
 import org.example.project3.utilities.others.mappers.Session;
@@ -133,7 +134,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
         series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
         reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
-        restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().toString()));
+        restTime.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getRestTime().getId())+" secondi"));
         check.setCellFactory(param -> createButtonCell());
         exerciseChoice.getItems().clear();
         exerciseChoice.getItems().addAll(exerciseBeansParam);

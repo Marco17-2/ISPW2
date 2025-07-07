@@ -16,9 +16,9 @@ import java.util.Scanner;
 public class RequestCLI extends AbstractState implements Observer {
 
     protected ScheduleDetailsController scheduleDetailsController = new ScheduleDetailsController();
-    List<ScheduleBean> scheduleBeans=new ArrayList<>();
-    List<ExerciseBean> exerciseBeans=new ArrayList<>();
-    RequestBean requestBean;
+    protected List<ScheduleBean> scheduleBeans=new ArrayList<>();
+    protected List<ExerciseBean> exerciseBeans=new ArrayList<>();
+    protected RequestBean requestBean;
     protected RequestModifyController requestModifyController = new RequestModifyController();
     protected LoggedUserBean user;
     public RequestCLI(LoggedUserBean user) {

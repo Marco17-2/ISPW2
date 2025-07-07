@@ -21,7 +21,7 @@
          <center>
             <AnchorPane prefHeight="428.0" prefWidth="762.0" BorderPane.alignment="CENTER">
                <children>
-                  <ButtonBar layoutX="256.0" layoutY="171.0" onMouseClicked="#retrieveReservationReq" prefHeight="78.0" prefWidth="250.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                  <ButtonBar layoutX="250.0" layoutY="121.0" onMouseClicked="#retrieveReservationReq" prefHeight="78.0" prefWidth="258.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
                      <buttons>
                         <ImageView blendMode="MULTIPLY" fitHeight="56.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,6 +59,27 @@
                         </DropShadow>
                      </effect>
                   </Button>
+                  <ButtonBar layoutX="250.0" layoutY="265.0" prefHeight="78.0" prefWidth="262.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                     <buttons>
+                        <ImageView blendMode="MULTIPLY" fitHeight="55.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                           <image>
+                              <Image url="@img/undraw_collaboration_dtwk.png" />
+                           </image>
+                        </ImageView>
+                        <Button centerShape="false" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="62.0" prefWidth="175.0" scaleShape="false" style="-fx-background-color: #efefef; -fx-background-radius: 22px;" text="Richieste schede" wrapText="true">
+                           <font>
+                              <Font name="Segoe UI Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </buttons>
+                     <effect>
+                        <DropShadow height="15.0" radius="7.0" width="15.0">
+                           <color>
+                              <Color opacity="0.6911315321922302" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </ButtonBar>
                </children>
             </AnchorPane>
          </center>
