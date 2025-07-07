@@ -85,8 +85,8 @@ public class RequestScheduleGUI extends CommonGUI{
 
     @FXML
     public void loadSchedule(List<ScheduleBean> scheduleBeansParam){
-        if(originalSchedules.isEmpty()&&!scheduleBeansParam.isEmpty()){
-            originalSchedules.addAll(scheduleBeansParam);
+        if(this.originalSchedules.isEmpty()&&!scheduleBeansParam.isEmpty()){
+            this.originalSchedules.addAll(scheduleBeansParam);
         }
         //Imposto valori della tabella
         name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));

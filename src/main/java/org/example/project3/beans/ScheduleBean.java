@@ -25,8 +25,8 @@ public class ScheduleBean {
         this.exercisesBean = null;
     }
 
-    public ScheduleBean(List<ExerciseBean> exercisesBean) {
-        this.id = 0;
+    public ScheduleBean(Long id, List<ExerciseBean> exercisesBean) {
+        this.id = id;
         this.name = null;
         this.customerBean = null;
         this.trainerBean = null;

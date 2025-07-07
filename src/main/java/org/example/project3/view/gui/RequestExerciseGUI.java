@@ -81,7 +81,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     private RequestBean requestBean;
 
-    private static List<ExerciseBean> exerciseList= new ArrayList<>();
+    private List<ExerciseBean> exerciseList= new ArrayList<>();
 
     private class MyRadioButtonCell extends TableCell<ExerciseBean, Void> {
         private final RadioButton radioButton = new RadioButton();
@@ -124,9 +124,9 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
     @FXML
     public void loadExercises(RequestBean request) {
         List<ExerciseBean> exerciseBeansParam = request.getScheduleBean().getExercisesBean();
-        if(requestBean==null&&exerciseList.isEmpty()){
-            requestBean = request;
-            exerciseList.addAll(exerciseBeansParam);
+        if(this.requestBean==null&&this.exerciseList.isEmpty()){
+            this.requestBean = request;
+            this.exerciseList.addAll(exerciseBeansParam);
         }
         //Imposto valori della tabella
         id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
@@ -163,6 +163,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     @FXML
     public void cancelSearch(){
+        requestBean.getScheduleBean().setExercisesBean(exerciseList);
         loadExercises(requestBean);
         ricerca.setText("");
         cancellaRicerca.setVisible(false);
@@ -194,11 +195,11 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         if (searchText != null && !searchText.trim().isEmpty()) {
             // Il campo non è vuoto, esegui la ricerca
             List<ExerciseBean> exercisesTemp = new ArrayList<>();
-            searchController.searchExercises(exercisesTemp, searchText,requestBean.getScheduleBean());
-            RequestBean requestTemp= new RequestBean(new ScheduleBean(exercisesTemp));
+            searchController.searchExercises(exercisesTemp, searchText,this.requestBean.getScheduleBean());
+            RequestBean requestTemp= new RequestBean(new ScheduleBean(this.requestBean.getScheduleBean().getId(),exercisesTemp));
             loadExercises(requestTemp);
         } else {
-            loadExercises(requestBean);
+            loadExercises(this.requestBean);
         }
     }
 

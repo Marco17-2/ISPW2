@@ -43,7 +43,7 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public boolean hasAlreadySentRequest(Request request) {
         try (Connection conn = ConnectionSQL.getConnection()) {
-            ResultSet rs = RequestQuery.hasAlreadySentARequest(conn, request.getSchedule());
+            ResultSet rs = RequestQuery.hasAlreadySentARequest(conn, request);
             if(rs.next()){
                 return rs.getInt(1) > 0;
             }

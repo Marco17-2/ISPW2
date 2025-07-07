@@ -22,12 +22,13 @@ public class RequestQuery {
         }
     }
 
-    public static ResultSet hasAlreadySentARequest(Connection conn, Schedule schedule) throws DbOperationException {
-        String query = "SELECT COUNT(*) FROM request JOIN schedule ON schedule.id= request.schedule WHERE schedule.customer= ? AND schedule.trainer=?";
+    public static ResultSet hasAlreadySentARequest(Connection conn, Request request) throws DbOperationException {
+        String query = "SELECT COUNT(*) FROM request JOIN schedule ON schedule.id = request.schedule WHERE schedule.customer= ? AND schedule.trainer= ? AND schedule.id=? ";
         try{
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, schedule.getCustomer().getCredentials().getMail());
-            preparedStatement.setString(2, schedule.getTrainer().getCredentials().getMail());
+            preparedStatement.setString(1, request.getSchedule().getCustomer().getCredentials().getMail());
+            preparedStatement.setString(2,request.getSchedule().getTrainer().getCredentials().getMail());
+            preparedStatement.setLong(3, request.getSchedule().getId());
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nel controllo della richiesta", e);
@@ -105,11 +106,13 @@ public class RequestQuery {
     }
 
     public static ResultSet alreadyHasRequest(Connection conn, Reservation reservation) throws DbOperationException {
-        String query = "SELECT COUNT(*) FROM pending WHERE customer = ? AND course = ?";
+        String query = "SELECT COUNT(*) FROM pending WHERE customer = ? AND course = ? AND day = ? AND hour = ?";
         try{
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, reservation.getCustomer().getCredentials().getMail());
             preparedStatement.setInt(2, reservation.getCourse().getCourseID());
+            preparedStatement.setString(3, reservation.getDay());
+            preparedStatement.setString(4, reservation.getHour());
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nel controllo della richiesta", e);

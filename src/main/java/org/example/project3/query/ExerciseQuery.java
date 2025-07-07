@@ -61,11 +61,11 @@ public class ExerciseQuery {
 
     public static ResultSet searchExercises(Connection conn, String search, Schedule schedule) throws SQLException {
         try {
-            String query = "SELECT exercise.id, exercise.name, exercise.description, exercise.numberSeries, exercise.numberReps, exercise.restTime FROM exercise JOIN participation ON participation.exercise = exercise.id JOIN schedule ON schedule.id = participation.schedule WHERE LOWER(exercise.name) LIKE LOWER(?) AND schedule.customer = LOWER(?)";
+            String query = "SELECT exercise.id, exercise.name, exercise.description, exercise.numberSeries, exercise.numberReps, exercise.restTime FROM exercise JOIN participation ON participation.exercise = exercise.id JOIN schedule ON schedule.id = participation.schedule WHERE LOWER(exercise.name) LIKE LOWER(?) AND schedule.id = LOWER(?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             String wildcard = "%" + search + "%";
             pstmt.setString(1, wildcard);
-            pstmt.setString(2, schedule.getCustomer().getCredentials().getMail());
+            pstmt.setLong(2, schedule.getId());
             return pstmt.executeQuery();
         } catch (SQLException _) {
             Printer.errorPrint("Errore nella ricerca della scheda");
