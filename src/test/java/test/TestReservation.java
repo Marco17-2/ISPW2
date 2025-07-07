@@ -2,11 +2,9 @@ package test;
 
 import org.example.project3.dao.*;
 
-import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.LoginAndRegistrationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.utilities.enums.Role;
-import org.example.project3.exceptions.LoadingException;
 
 import org.example.project3.model.Customer;
 import org.example.project3.model.Reservation;
@@ -21,15 +19,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 
-public class TestReservation {
+class TestReservation {
 
     private String passwordT;
     private String passwordC;
@@ -56,7 +52,6 @@ public class TestReservation {
     private ReservationDAO reservationDAO;
     private CustomerDAO customerDAO;
     private RequestDAO requestDAO;
-    private CredentialsDAO credentialsDAO;
     private CourseDAO courseDAO;
     private TrainerDAO trainerDAO;
 
@@ -73,7 +68,6 @@ public class TestReservation {
         reservationDAO = FactoryDAO.getReservationDAO();
         requestDAO = FactoryDAO.getRequestDAO();
         customerDAO = FactoryDAO.getCustomerDAO();
-        credentialsDAO = FactoryDAO.getDAO();
         courseDAO = FactoryDAO.getCourseDAO();
         trainerDAO = FactoryDAO.getTrainerDAO();
 
