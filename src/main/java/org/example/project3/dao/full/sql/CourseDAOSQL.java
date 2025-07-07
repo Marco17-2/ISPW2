@@ -49,7 +49,7 @@ public class CourseDAOSQL implements CourseDAO{
     @Override
     public void addCourse(Course course, String email){
         try(Connection conn = ConnectionSQL.getConnection()) {
-            CourseQuery.insertCourse(conn, course.getCourseName(), course.getRemainingSlots(), course.getDuration(), course.getLevel(), course.getDay(), course.getHour(), email);
+            CourseQuery.insertCourse(conn, course, email);
         }catch (SQLException  e){
             throw new DAOException("Errore rimozione reservation", e);
         }

@@ -1,5 +1,7 @@
 package org.example.project3.query;
 
+import org.example.project3.model.Course;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,16 +16,16 @@ public class CourseQuery {
         return pstmt.executeQuery();
     }
 
-    public static void insertCourse(Connection conn, String courseName, int remaining, String duration, String level, String day, String hour, String email) throws SQLException{
+    public static void insertCourse(Connection conn, Course course, String email) throws SQLException{
         int courseId;
 
         // Inserisci il corso (senza specificare ID)
         String insertCourse = "INSERT INTO course (name, remaining, duration, level, trainer) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement pstmtCourse = conn.prepareStatement(insertCourse)) {
-            pstmtCourse.setString(1, courseName);
-            pstmtCourse.setInt(2, remaining);
-            pstmtCourse.setString(3, duration);
-            pstmtCourse.setString(4, level);
+            pstmtCourse.setString(1, course.getCourseName());
+            pstmtCourse.setInt(2, course.getRemainingSlots());
+            pstmtCourse.setString(3, course.getDuration());
+            pstmtCourse.setString(4, course.getLevel());
             pstmtCourse.setString(5, email);
             pstmtCourse.executeUpdate();
         }
@@ -31,7 +33,7 @@ public class CourseQuery {
         // Recupera l'ID del corso appena inserito tramite il nome
         String selectId = "SELECT id FROM course WHERE name = ? ORDER BY id DESC LIMIT 1";
         try (PreparedStatement pstmtSelect = conn.prepareStatement(selectId)) {
-            pstmtSelect.setString(1, courseName);
+            pstmtSelect.setString(1, course.getCourseName());
             try (ResultSet rs = pstmtSelect.executeQuery()) {
                 if (rs.next()) {
                     courseId = rs.getInt("id");
@@ -45,10 +47,14 @@ public class CourseQuery {
         String insertSession = "INSERT INTO session (course, day, hour) VALUES (?, ?, ?)";
         try (PreparedStatement pstmtSession = conn.prepareStatement(insertSession)) {
             pstmtSession.setInt(1, courseId);
-            pstmtSession.setString(2, day);
-            pstmtSession.setString(3, hour);
+            pstmtSession.setString(2, course.getDay());
+            pstmtSession.setString(3, course.getHour());
             pstmtSession.executeUpdate();
         }
+    }
+
+    public static void addCourseTime(Connection conn, String courseName, String day, String hour){
+
     }
 
     public static void deleteCourse(Connection conn, int courseId) throws SQLException {
