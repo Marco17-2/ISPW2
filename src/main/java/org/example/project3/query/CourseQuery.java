@@ -54,7 +54,8 @@ public class CourseQuery {
     }
 
     public static void deleteCourse(Connection conn, int courseId) throws SQLException {
-        // Prima cancella le sessioni collegate
+
+
         String deleteSessionQuery = "DELETE FROM session WHERE course = ?";
         try (PreparedStatement psSession = conn.prepareStatement(deleteSessionQuery)) {
             psSession.setInt(1, courseId);
