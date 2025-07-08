@@ -53,7 +53,7 @@ public class RequestScheduleGUI extends CommonGUI{
     @FXML
     TableColumn<ScheduleBean, Void> seleziona;
 
-    private static List<ScheduleBean> originalSchedules = new ArrayList<>();
+    private List<ScheduleBean> originalSchedules = new ArrayList<>();
 
     private RequestModifyController requestModifyController= new RequestModifyController();
     private ScheduleDetailsController scheduleDetailsController= new ScheduleDetailsController();
