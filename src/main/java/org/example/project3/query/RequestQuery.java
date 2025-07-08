@@ -106,7 +106,7 @@ public class RequestQuery {
     }
 
     public static ResultSet alreadyHasRequest(Connection conn, Reservation reservation) throws DbOperationException {
-        String query = "SELECT COUNT(*) FROM pending WHERE customer = ? AND course = ? AND day = ? AND hour = ?";
+        String query = "SELECT COUNT(*) FROM pending WHERE customer = ? AND course = ? AND date = ? AND hour = ?";
         try{
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, reservation.getCustomer().getCredentials().getMail());
