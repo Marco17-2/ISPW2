@@ -1,6 +1,5 @@
 package org.example.project3.query;
 
-import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Course;
 
 import java.sql.Connection;
@@ -72,13 +71,10 @@ public class CourseQuery {
 
     public static void createAssociation(Connection conn, int courseId, String email) throws SQLException{
         String query = "UPDATE course SET trainer = ? WHERE id = ?";
-        try{
-        PreparedStatement pstmt = conn.prepareStatement(query);
+        try(PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setString(1, email);
             pstmt.setInt(2, courseId);
             pstmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }

@@ -3,7 +3,6 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 
-import org.example.project3.model.Course;
 import org.example.project3.model.Trainer;
 import org.example.project3.model.Request;
 import org.example.project3.model.Reservation;
