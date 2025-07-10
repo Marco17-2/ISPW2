@@ -3,6 +3,7 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 
+import org.example.project3.model.Course;
 import org.example.project3.model.Trainer;
 import org.example.project3.model.Request;
 import org.example.project3.model.Reservation;
@@ -71,18 +72,22 @@ public class RequestDAOP implements RequestDAO {
 
     @Override
     public void addCourseRequest(Reservation reservation){
-
-        String course = reservation.getCourse().getCourseName();
+        Trainer trainer = SharedResources.getInstance().getTrainerCourse().get(reservation.getCourse().getCourseName());
 
         // Aggiunge la prenotazione alla mappa
-        SharedResources.getInstance().getReservationRequests() .computeIfAbsent(course, k -> new ArrayList<>()).add(reservation);
+        SharedResources.getInstance().getReservationRequests() .computeIfAbsent(trainer.getCredentials().getMail(), k -> new ArrayList<>()).add(reservation);
     }
 
     @Override
     public boolean alreadyHasReservation(Reservation reservation) {
-        if (SharedResources.getInstance().getReservationRequests().containsKey(reservation.getCourse().getCourseName())) {
-            for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(reservation.getCustomer().getCredentials().getMail())) {
-                if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(reservation.getCourse().getCourseName())) {
+        Trainer trainer = SharedResources.getInstance().getTrainerCourse().get(reservation.getCourse().getCourseName());
+
+        if (SharedResources.getInstance().getReservationRequests().containsKey(trainer.getCredentials().getMail())) {
+            for (Reservation existingReservation : SharedResources.getInstance().getReservationRequests().get(trainer.getCredentials().getMail())) {
+                if (existingReservation.getCourse().getCourseName().equals(reservation.getCourse().getCourseName())
+                        && existingReservation.getCustomer().getCredentials().getMail().equals(reservation.getCustomer().getCredentials().getMail())
+                        && existingReservation.getHour().equals(reservation.getHour())
+                        && existingReservation.getDay().equals(reservation.getDay())){
                     return true;
                 }
             }

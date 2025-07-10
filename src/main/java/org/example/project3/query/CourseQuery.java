@@ -1,5 +1,6 @@
 package org.example.project3.query;
 
+import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.Course;
 
 import java.sql.Connection;
@@ -16,17 +17,16 @@ public class CourseQuery {
         return pstmt.executeQuery();
     }
 
-    public static void insertCourse(Connection conn, Course course, String email) throws SQLException{
+    public static void insertCourse(Connection conn, Course course) throws SQLException{
         int courseId;
 
         // Inserisci il corso (senza specificare ID)
-        String insertCourse = "INSERT INTO course (name, remaining, duration, level, trainer) VALUES (?, ?, ?, ?, ?)";
+        String insertCourse = "INSERT INTO course (name, remaining, duration, level) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmtCourse = conn.prepareStatement(insertCourse)) {
             pstmtCourse.setString(1, course.getCourseName());
             pstmtCourse.setInt(2, course.getRemainingSlots());
             pstmtCourse.setString(3, course.getDuration());
             pstmtCourse.setString(4, course.getLevel());
-            pstmtCourse.setString(5, email);
             pstmtCourse.executeUpdate();
         }
 
@@ -70,4 +70,15 @@ public class CourseQuery {
         }
     }
 
+    public static void createAssociation(Connection conn, int courseId, String email) throws SQLException{
+        String query = "UPDATE course SET trainer = ? WHERE id = ?";
+        try{
+        PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, email);
+            pstmt.setInt(2, courseId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

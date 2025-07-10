@@ -39,6 +39,7 @@ class TestReservation {
 
     //COURSE
     private static final String TEST_NAME = "test name";
+    private static final String TEST2_NAME = "test2 name";
     private static final String TEST_DURATION = "test duration";
     private static final int TEST_REMAINING = 1;
     private static final String TEST_LEVEL = "test level";
@@ -87,7 +88,8 @@ class TestReservation {
         registerTrainer();
         registerCustomer();
         registerCourse();
-        loadCourse();
+        loadCourse(TEST_NAME);
+        createAssociation();
 
         testReservationReq = createReservation();
         registerReservationReq();
@@ -188,7 +190,7 @@ class TestReservation {
     }
 
     private Course createCourse(){
-        testCourse = new Course(TEST_NAME, TEST_REMAINING, TEST_DURATION, TEST_LEVEL, uniqueDay, uniqueHour);
+        testCourse = new Course(1,TEST_NAME, TEST_REMAINING, TEST_DURATION, TEST_LEVEL, uniqueDay, uniqueHour);
         return testCourse;
     }
 
@@ -216,7 +218,7 @@ class TestReservation {
 
     private void registerCourse(){
         try{
-            courseDAO.addCourse(testCourse, testTrainerEmail);
+            courseDAO.addCourse(testCourse);
         }catch(Exception e){
             throw new RuntimeException(e);
         }
@@ -235,13 +237,13 @@ class TestReservation {
         }
     }
 
-    private void loadCourse(){
+    private void loadCourse(String testName){
 
         List<Course> courses = new ArrayList<>();
         courseDAO.searchCourses(courses);
 
         testtCourse = (Course) courses.stream()
-                .filter(c -> c.getCourseName().equals(TEST_NAME) &&
+                .filter(c -> c.getCourseName().equals(testName) &&
                         c.getDuration().equals(TEST_DURATION) &&
                         c.getLevel().equals(TEST_LEVEL) &&
                         c.getDay().equals(uniqueDay) &&
@@ -267,12 +269,13 @@ class TestReservation {
             uniqueDay = createDay();
             uniqueHour = createHour();
 
-            testCourse = createCourse();
+            testCourse = new Course(1,TEST2_NAME, TEST_REMAINING, TEST_DURATION, TEST_LEVEL, uniqueDay, uniqueHour);
             testTrainer = createTrainer();
 
             registerTrainer();
             registerCourse();
-            loadCourse();
+            loadCourse(TEST2_NAME);
+            createAssociation();
 
             Reservation reservationR = new Reservation(testCustomer, testtCourse, uniqueDay, uniqueHour);
 
@@ -282,6 +285,10 @@ class TestReservation {
         }catch(Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void createAssociation(){
+        courseDAO.createAssociation(testtCourse, testTrainer);
     }
 
     private String generatePassword() {

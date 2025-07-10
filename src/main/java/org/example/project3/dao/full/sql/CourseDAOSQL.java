@@ -4,6 +4,7 @@ import org.example.project3.dao.CourseDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Course;
+import org.example.project3.model.Trainer;
 import org.example.project3.query.CourseQuery;
 
 import java.sql.Connection;
@@ -47,9 +48,9 @@ public class CourseDAOSQL implements CourseDAO{
     }
 
     @Override
-    public void addCourse(Course course, String email){
+    public void addCourse(Course course){
         try(Connection conn = ConnectionSQL.getConnection()) {
-            CourseQuery.insertCourse(conn, course, email);
+            CourseQuery.insertCourse(conn, course);
         }catch (SQLException  e){
             throw new DAOException("Errore rimozione reservation", e);
         }
@@ -64,6 +65,12 @@ public class CourseDAOSQL implements CourseDAO{
         }
     }
 
-
-
+    @Override
+    public void createAssociation(Course course, Trainer trainer){
+        try (Connection conn = ConnectionSQL.getConnection()) {
+            CourseQuery.createAssociation(conn, course.getCourseID(), trainer.getCredentials().getMail());
+        } catch (SQLException e) {
+            throw new DAOException("Errore durante la rimozione del corso", e);
+        }
+    }
 }
