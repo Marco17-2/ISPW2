@@ -137,7 +137,7 @@ public class RequestCLI extends AbstractState implements Observer {
     }
 
     private void handleException(Exception e){
-        Printer.println(String.format("Errore nel DAO. Riprova. %s", e.getMessage()));;
+        Printer.println(String.format("Errore nel DAO. Riprova. %s", e.getMessage()));
     }
 
     @Override

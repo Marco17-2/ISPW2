@@ -74,8 +74,8 @@ public class RequestScheduleGUI extends CommonGUI{
                         scheduleController.retriveExercises(scheduleBean);
                         RequestBean requestBean = new RequestBean(scheduleBean);
                         completeRequest(requestBean, event);
-                    }catch(DAOException e){
-                        error.setText(e.getMessage());
+                    }catch(DAOException _){
+                        error.setText("Errore nel DAO");
                         error.setVisible(true);
                     }
                 });
