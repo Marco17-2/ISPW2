@@ -2,7 +2,8 @@ package org.example.project3.view.commandline;
 
 import org.example.project3.beans.*;
 import org.example.project3.controller.RequestModifyController;
-import org.example.project3.controller.ScheduleDetailsController;
+import org.example.project3.controller.ScheduleController;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.state.AbstractState;
 import org.example.project3.patterns.state.InitialState;
@@ -15,7 +16,7 @@ import java.util.Scanner;
 
 public class RequestCLI extends AbstractState implements Observer {
 
-    protected ScheduleDetailsController scheduleDetailsController = new ScheduleDetailsController();
+    protected ScheduleController scheduleController = new ScheduleController();
     protected List<ScheduleBean> scheduleBeans=new ArrayList<>();
     protected List<ExerciseBean> exerciseBeans=new ArrayList<>();
     protected RequestBean requestBean;
@@ -66,36 +67,51 @@ public class RequestCLI extends AbstractState implements Observer {
     }
 
     private void loadSchedules(){
-        scheduleBeans.clear();
-        scheduleDetailsController.retriveScheduleDetails((CustomerBean) user,scheduleBeans);
+        try {
+            scheduleBeans.clear();
+            scheduleController.retriveScheduleDetails((CustomerBean) user, scheduleBeans);
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
+            scanner.nextLine();
+        }
     }
 
     private boolean displaySchedules(){
-        if(scheduleBeans.isEmpty()){
-            Printer.errorPrint("Non è stata trovata nessuna scheda!");
-            return false;
-        }else{
-            Printer.println("--------------------Lista delle schede--------------------\n");
-            Printer.println("(1)ID | (2)Nome | (3)Utente | (4)Trainer\n");
-            for(ScheduleBean scheduleBean : scheduleBeans){
-                Printer.println(scheduleBean.getId()+" | "+scheduleBean.getName()+" | "+scheduleBean.getCustomerBean().getCredentialsBean().getMail()+" | "+scheduleBean.getTrainerBean().getCredentialsBean().getMail());
-            }
-            Printer.println("Inserici l'ID della scheda che vuoi modificare");
-            Long id=Long.parseLong(scanner.nextLine());
-            for(ScheduleBean scheduleBean : scheduleBeans){
-                if((id.equals(scheduleBean.getId()))&&(!requestModifyController.hasAlreadySentARequest(scheduleBean))){
-                    this.requestBean= new RequestBean(scheduleBean);
-                    return true;
+        try {
+            if (scheduleBeans.isEmpty()) {
+                Printer.errorPrint("Non è stata trovata nessuna scheda!");
+                return false;
+            } else {
+                Printer.println("--------------------Lista delle schede--------------------\n");
+                Printer.println("(1)ID | (2)Nome | (3)Utente | (4)Trainer\n");
+                for (ScheduleBean scheduleBean : scheduleBeans) {
+                    Printer.println(scheduleBean.getId() + " | " + scheduleBean.getName() + " | " + scheduleBean.getCustomerBean().getCredentialsBean().getMail() + " | " + scheduleBean.getTrainerBean().getCredentialsBean().getMail());
                 }
+                Printer.println("Inserici l'ID della scheda che vuoi modificare");
+                Long id = Long.parseLong(scanner.nextLine());
+                for (ScheduleBean scheduleBean : scheduleBeans) {
+                    if ((id.equals(scheduleBean.getId())) && (!requestModifyController.hasAlreadySentARequest(scheduleBean))) {
+                        this.requestBean = new RequestBean(scheduleBean);
+                        return true;
+                    }
+                }
+                return false;
             }
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
             return false;
         }
     }
 
     private void loadExercises(RequestBean requestBean){
-        exerciseBeans.clear();
-        scheduleDetailsController.retriveExercises(requestBean.getScheduleBean());
-        exerciseBeans.addAll(requestBean.getScheduleBean().getExercisesBean());
+        try {
+            exerciseBeans.clear();
+            scheduleController.retriveExercises(requestBean.getScheduleBean());
+            exerciseBeans.addAll(requestBean.getScheduleBean().getExercisesBean());
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
+            scanner.nextLine();
+        }
     }
 
     private boolean displayExercises(RequestBean requestBean){
@@ -106,7 +122,7 @@ public class RequestCLI extends AbstractState implements Observer {
             Printer.println("--------------------Lista degli esercizi della scheda "+requestBean.getScheduleBean().getName()+"--------------------\n");
             Printer.println("(1)Nome | (2)Descrizione | (3)Numero di serie | (4)Numero di ripetizioni | (5)Tempo di recupero\n");
             for(ExerciseBean exerciseBean : exerciseBeans){
-                Printer.println(exerciseBean.getName()+" | "+exerciseBean.getDescription()+" | "+exerciseBean.getNumberSeries()+" | "+exerciseBean.getNumberReps()+" | "+exerciseBean.getRestTime());
+                Printer.println(exerciseBean.getName()+" | "+exerciseBean.getDescription()+" | "+exerciseBean.getNumberSeries()+" | "+exerciseBean.getNumberReps()+" | "+ String.valueOf(exerciseBean.getRestTime().getId()+" secondi"));
             }
             Printer.println("Inserici il nome dell'esercizio che vuoi modificare");
             String name=scanner.nextLine();

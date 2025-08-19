@@ -11,14 +11,16 @@ import org.example.project3.beans.ExerciseBean;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
-import org.example.project3.controller.SearchController;
+import org.example.project3.controller.ScheduleController;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.EmptyFieldException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.patterns.observer.Observer;
 import org.example.project3.patterns.observer.RequestManagerConcreteSubject;
-import org.example.project3.utilities.enums.RestTime;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.Printer;
 import org.example.project3.utilities.others.mappers.Session;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,6 +125,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     @FXML
     public void loadExercises(RequestBean request) {
+        error.setVisible(false);
         List<ExerciseBean> exerciseBeansParam = request.getScheduleBean().getExercisesBean();
         if(this.requestBean==null&&this.exerciseList.isEmpty()){
             this.requestBean = request;
@@ -154,7 +157,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                 error.setText("Hai già inviato una richiesta per questo esercizio di questa scheda!");
                 error.setVisible(true);
             }
-        }catch(EmptyFieldException e){
+        }catch(EmptyFieldException | DAOException e){
             error.setText(e.getMessage());
             error.setVisible(true);
         }
@@ -185,7 +188,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         }
     }
 
-    private SearchController searchController = new SearchController();
+    private ScheduleController scheduleController = new ScheduleController();
 
     @FXML
     private void searchButton() {
@@ -195,9 +198,15 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
         if (searchText != null && !searchText.trim().isEmpty()) {
             // Il campo non è vuoto, esegui la ricerca
             List<ExerciseBean> exercisesTemp = new ArrayList<>();
-            searchController.searchExercises(exercisesTemp, searchText,this.requestBean.getScheduleBean());
-            RequestBean requestTemp= new RequestBean(new ScheduleBean(this.requestBean.getScheduleBean().getId(),exercisesTemp));
-            loadExercises(requestTemp);
+            try{
+                scheduleController.searchExercises(exercisesTemp, searchText,this.requestBean.getScheduleBean());
+                RequestBean requestTemp= new RequestBean(new ScheduleBean(this.requestBean.getScheduleBean().getId(),exercisesTemp));
+                loadExercises(requestTemp);
+            }catch(NoResultException e){
+                error.setText(e.getMessage());
+                error.setVisible(true);
+            }
+
         } else {
             loadExercises(this.requestBean);
         }

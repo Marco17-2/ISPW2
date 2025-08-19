@@ -2,6 +2,7 @@ package org.example.project3.dao.demo;
 
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 
 import org.example.project3.model.Exercise;
@@ -11,26 +12,42 @@ import java.util.List;
 
 public class ExerciseDAOP implements ExerciseDAO {
     @Override
-    public void addExerciseSchedule(Schedule schedule, Exercise exercise) {
-        if (schedule == null) {
-            throw new NoResultException(exercise.getClass().getSimpleName() + " non trovato");
+    public void addExerciseSchedule(Schedule schedule, Exercise exercise) throws DAOException{
+        if (schedule == null || exercise == null) {
+            throw new DAOException("Parametri non validi: schedule o exercise null");
+        }
+        Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
+        if (storedSchedule == null) {
+            throw new DAOException("Scheda non trovata con ID: " + schedule.getId());
         }
         schedule.addExercise(exercise);
         SharedResources.getInstance().getSchedules().put(schedule.getId(), schedule);
     }
 
     @Override
-    public void addExercise(Exercise exercise) {
+    public void addExercise(Exercise exercise) throws DAOException {
+        if (exercise == null) {
+            throw new DAOException("Esercizio non valido: null");
+        }
+        if (SharedResources.getInstance().getExercises().containsKey(exercise.getId())) {
+            throw new DAOException("Esercizio con ID " + exercise.getId() + " già esistente");
+        }
         SharedResources.getInstance().getExercises().putIfAbsent(exercise.getId(), exercise);
     }
 
     @Override
-    public void deleteExercise(Exercise exercise) {
-        SharedResources.getInstance().getCustomers().remove(exercise.getId());
+    public void deleteExercise(Exercise exercise) throws DAOException {
+        if (exercise == null ){
+            throw new DAOException("Errore nel DAO");
+        }
+        SharedResources.getInstance().getExercises().remove(exercise.getId());
     }
 
     @Override
-    public void retrieveExercise(Exercise exercise) throws NoResultException {
+    public void retrieveExercise(Exercise exercise) throws NoResultException,DAOException {
+        if (exercise == null) {
+            throw new DAOException("Esercizio non valido: null");
+        }
         Exercise storedExercise = SharedResources.getInstance().getExercises().get(exercise.getId());
         if (storedExercise == null) {
             throw new NoResultException(exercise.getClass().getSimpleName() + " non trovato");
@@ -43,12 +60,15 @@ public class ExerciseDAOP implements ExerciseDAO {
     }
 
     @Override
-    public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) {
+    public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) throws DAOException ,NoResultException{
+        if (search == null || schedule == null) {
+                throw new DAOException("Parametri non validi: search o schedule null");
+        }
         String lowerSearch = search.toLowerCase();
 
         Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
         if (storedSchedule == null) {
-            throw new NoResultException(schedule.getClass().getSimpleName() + " non trovato");
+            throw new DAOException(schedule.getClass().getSimpleName() + " non trovato");
         }
         schedule.setExercises(storedSchedule.getExercises());
 
@@ -64,7 +84,13 @@ public class ExerciseDAOP implements ExerciseDAO {
     }
 
     @Override
-    public void updateExercise(Exercise exercise) {
+    public void updateExercise(Exercise exercise) throws DAOException {
+        if (exercise == null) {
+            throw new DAOException("Esercizio non valido: null");
+        }
+        if (!SharedResources.getInstance().getExercises().containsKey(exercise.getId())) {
+            throw new DAOException("Esercizio non trovato con ID: " + exercise.getId());
+        }
         SharedResources.getInstance().getExercises().put(exercise.getId(), exercise);
     }
 }

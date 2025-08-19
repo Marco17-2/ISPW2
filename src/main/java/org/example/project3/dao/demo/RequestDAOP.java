@@ -3,6 +3,7 @@ package org.example.project3.dao.demo;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.model.Trainer;
 import org.example.project3.model.Request;
 import org.example.project3.model.Reservation;
@@ -12,19 +13,27 @@ import java.util.List;
 
 public class RequestDAOP implements RequestDAO {
     @Override
-    public void sendRequest(Request request) {
-        // Usa computeIfAbsent per evitare il controllo esplicito e creazione della lista
+    public void sendRequest(Request request) throws DAOException {
+        if(request==null){
+            throw new DAOException("Richiesta non valida: null");
+        }
+        if(SharedResources.getInstance().getRequestsSent().containsKey(request.getSchedule().getId())){
+            throw new DAOException("Richiesta con id " + request.getSchedule().getId() + " esiste già");
+        }
         SharedResources.getInstance().getRequestsSent()
-                .computeIfAbsent(request.getID(), k -> new ArrayList<>()).add(request);
+                .computeIfAbsent(request.getSchedule().getId(), k -> new ArrayList<>()).add(request);
     }
 
     @Override
-    public boolean hasAlreadySentRequest(Request request) {
-        Long scheduleId = request.getID();
+    public boolean hasAlreadySentRequest(Request request) throws DAOException {
+        if(request==null){
+            throw new  DAOException("Richiesta non valida: null");
+        }
+        Long scheduleId = request.getSchedule().getId();
 
-        // Controlla se esiste una lista di richieste per questo scheduleId
+        // Controlla se esiste una lista di richieste per questo Id
         if (SharedResources.getInstance().getRequestsSent().containsKey(scheduleId)) {
-            // Itera sulla lista di richieste associate a questo scheduleId
+            // Itera sulla lista di richieste associate a questo Id
             for (Request existingRequest : SharedResources.getInstance().getRequestsSent().get(scheduleId)) {
                 // Confronta le email del cliente e del trainer per verificare se la richiesta è la stessa
                 if (existingRequest.getSchedule().getCustomer().getCredentials().getMail().equals(request.getSchedule().getCustomer().getCredentials().getMail()) &&
@@ -37,8 +46,11 @@ public class RequestDAOP implements RequestDAO {
     }
 
     @Override
-    public void deleteRequest(Request request) {
-        SharedResources.getInstance().getRequestsSent().remove(request.getID());
+    public void deleteRequest(Request request) throws DAOException {
+        if(request==null){
+            throw new DAOException("Errore nel DAO");
+        }
+        SharedResources.getInstance().getRequestsSent().remove(request.getSchedule().getId());
     }
 
 

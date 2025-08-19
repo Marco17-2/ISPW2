@@ -1,6 +1,7 @@
 package org.example.project3.dao.full.sql;
 
 import org.example.project3.dao.RequestDAO;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
@@ -32,16 +33,16 @@ public class RequestDAOSQL implements RequestDAO {
 
 
     @Override
-    public void sendRequest(Request request) {
+    public void sendRequest(Request request) throws DAOException {
         try(Connection conn = ConnectionSQL.getConnection()) {
             RequestQuery.sendRequest(conn, request.getSchedule(), request.getExercise(), request.getReason());
         } catch (SQLException | DbOperationException e){
-            handleException(e);
+            sendException(e);
         }
     }
 
     @Override
-    public boolean hasAlreadySentRequest(Request request) {
+    public boolean hasAlreadySentRequest(Request request) throws DAOException {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = RequestQuery.hasAlreadySentARequest(conn, request);
             if(rs.next()){
@@ -49,17 +50,17 @@ public class RequestDAOSQL implements RequestDAO {
             }
             return false;
         } catch (SQLException | DbOperationException e) {
-            handleException(e);
+            sendException(e);
             return false;
         }
     }
 
     @Override
-    public void deleteRequest(Request request) {
+    public void deleteRequest(Request request) throws DAOException {
         try(Connection conn = ConnectionSQL.getConnection()){
             RequestQuery.deleteRequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getTrainer().getCredentials().getMail(),request.getSchedule().getId());
         } catch(SQLException | DbOperationException e){
-            handleException(e);
+            sendException(e);
         }
     }
 
@@ -103,7 +104,7 @@ public class RequestDAOSQL implements RequestDAO {
     }
 
     @Override
-    public void addCourseRequest(Reservation reservation){
+    public void addCourseRequest(Reservation reservation) {
 
         try(Connection conn = ConnectionSQL.getConnection()) {
             RequestQuery.addCourseRequest(conn, reservation.getCustomer().getCredentials().getMail(), reservation.getCourse().getCourseID(), reservation.getDay(), reservation.getHour());
@@ -115,7 +116,7 @@ public class RequestDAOSQL implements RequestDAO {
 
 
     @Override
-    public boolean alreadyHasReservation(Reservation reservation) {
+    public boolean alreadyHasReservation(Reservation reservation){
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = RequestQuery.alreadyHasRequest(conn, reservation);
             if(rs.next()){
@@ -128,7 +129,12 @@ public class RequestDAOSQL implements RequestDAO {
         }
     }
 
-    private void handleException(Exception e) {
+    private void sendException(Exception e)throws DAOException{
+        Printer.errorPrint(String.format("%s", e.getMessage()));
+        throw new DAOException(e.getMessage());
+    }
+
+    private void handleException(Exception e){
         Printer.errorPrint(String.format("%s", e.getMessage()));
     }
 }

@@ -1,6 +1,7 @@
 package test;
 
 import org.example.project3.dao.*;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.LoginAndRegistrationException;
 import org.example.project3.exceptions.MailAlreadyExistsException;
 import org.example.project3.exceptions.WrongEmailOrPasswordException;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 class TestRequest {
-    //Adamo Luca,matricola 0307348
+    //Adamo Luca, matricola 0307348
 
 
 
@@ -80,17 +81,21 @@ class TestRequest {
         // Azione che viene svolta dopo ogni test
         @AfterEach
         void tearDown() {
-            if(testCustomer!=null){
+        try {
+            if (testCustomer != null) {
                 requestDAO.deleteRequest(testRequest);
-                for(Exercise exercise:testExercises){
+                for (Exercise exercise : testExercises) {
                     exerciseDAO.deleteExercise(exercise);
                 }
-                for(Schedule s: testSchedules){
+                for (Schedule s : testSchedules) {
                     scheduleDAO.deleteSchedule(s);
                 }
                 customerDAO.removeCustomer(testCustomer);
                 trainerDAO.removeTrainer(testTrainer);
             }
+        }catch(DAOException e){
+            throw new RuntimeException(e.getMessage());
+        }
 
         }
 
@@ -111,54 +116,79 @@ class TestRequest {
     //Test per il corretto recupero delle schede
     @Test
     void testSchedules(){
+        try {
+            registerSchedules();
+            registerExercises();
+            List<Schedule> schedules = new ArrayList<>();
+            scheduleDAO.retrieveSchedule(testCustomer, schedules);
 
-        registerSchedules();
-        registerExercises();
-        List<Schedule> schedules = new ArrayList<>();
-        scheduleDAO.retrieveSchedule(testCustomer,schedules);
+            for (int i = 0; i < schedules.size(); i++) {
+                Schedule actual = schedules.get(i);
+                Schedule expected = testSchedules.get(i);
 
-        Assertions.assertEquals(schedules, testSchedules,
-                "Il contenuto delle schede recuperate non corrisponde a quello previsto.");
+                Assertions.assertEquals(expected.getId(), actual.getId(),
+                        "Gli ID delle schede non corrispondono.");
+                Assertions.assertEquals(expected.getName(), actual.getName(),
+                        "I nomi delle schede non corrispondono.");
+                Assertions.assertEquals(expected.getCustomer().getCredentials().getMail(), actual.getCustomer().getCredentials().getMail(),
+                        "I clienti delle schede non corrispondono.");
+                Assertions.assertEquals(expected.getTrainer().getCredentials().getMail(), actual.getTrainer().getCredentials().getMail(),
+                        "I trainer delle schede non corrispondono.");
+            }
+        }catch(DAOException e){
+            Assertions.fail("Errore: " + e.getMessage());
+        }
+
     }
 
     //Test per la corretta registrazione della richiesta
     @Test
     void testRequest(){
+        try {
 
-        registerSchedules();
-        registerExercises();
+            registerSchedules();
+            registerExercises();
             requestDAO.sendRequest(testRequest);
 
             Assertions.assertTrue(requestDAO.hasAlreadySentRequest(testRequest),
                     "La richiesta non è stata registrata correttamente.");
+        }catch(DAOException e){
+            Assertions.fail("Errore: " + e.getMessage());
+        }
     }
 
     private Request createRequest() {
-        return new Request(10, testSchedules.get(0),testExercises.get(0),"i don't like", LocalDateTime.now());
+        Random random = new Random();
+        int baseId = random.nextInt(1000000);
+        return new Request(baseId+7, testSchedules.get(0),testExercises.get(0),"i don't like", LocalDateTime.now());
 
     }
 
     private List<Schedule> createSchedules(){
+        Random random = new Random();
+        int baseId = random.nextInt(1000000);
         List<Exercise> exercisesForScheduleA = new ArrayList<>();
         exercisesForScheduleA.add(testExercises.get(0));
         exercisesForScheduleA.add(testExercises.get(1));
-        Schedule scheduleA = new Schedule(70,"Beginner Full Body",testCustomer,testTrainer,exercisesForScheduleA);
+        Schedule scheduleA = new Schedule(baseId+1,"Beginner Full Body",testCustomer,testTrainer,exercisesForScheduleA);
         List<Exercise> exercisesForScheduleB = new ArrayList<>();
         exercisesForScheduleB.add(testExercises.get(2));
-        Schedule scheduleB = new Schedule(80,"Cardio Focus",testCustomer,testTrainer,exercisesForScheduleB);
+        Schedule scheduleB = new Schedule(baseId+2,"Cardio Focus",testCustomer,testTrainer,exercisesForScheduleB);
         List<Exercise> exercisesForScheduleC = new ArrayList<>();
         exercisesForScheduleC.add(testExercises.get(0));
         exercisesForScheduleC.add(testExercises.get(1));
         exercisesForScheduleC.add(testExercises.get(2));
-        Schedule scheduleC = new Schedule(90,"Advanced Strength",testCustomer,testTrainer,exercisesForScheduleC);
+        Schedule scheduleC = new Schedule(baseId+3,"Advanced Strength",testCustomer,testTrainer,exercisesForScheduleC);
         return Arrays.asList(scheduleA,scheduleB,scheduleC);
 
     }
 
     private List<Exercise> createExercises(){
-        Exercise exercise1 = new Exercise(60,"Push-ups","Standard push-up exercise.",3,10, RestTime.SECONDS60);
-        Exercise exercise2 = new Exercise(61,"Squats","Bodyweight squats.",3,10, RestTime.SECONDS60);
-        Exercise exercise3 = new Exercise(62,"Plank","Core plank hold.",3,10, RestTime.SECONDS60);
+        Random random = new Random();
+        int baseId = random.nextInt(1000000);
+        Exercise exercise1 = new Exercise(baseId+4,"Push-ups","Standard push-up exercise.",3,10, RestTime.SECONDS60);
+        Exercise exercise2 = new Exercise(baseId+5,"Squats","Bodyweight squats.",3,10, RestTime.SECONDS60);
+        Exercise exercise3 = new Exercise(baseId+6,"Plank","Core plank hold.",3,10, RestTime.SECONDS60);
         return Arrays.asList(exercise1,exercise2,exercise3);
     }
 
@@ -221,7 +251,7 @@ class TestRequest {
             exerciseDAO.addExerciseSchedule(testSchedules.get(2),testExercises.get(1));
             exerciseDAO.addExerciseSchedule(testSchedules.get(2),testExercises.get(2));
         }  catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -231,7 +261,7 @@ class TestRequest {
             scheduleDAO.addSchedule(testSchedules.get(1));
             scheduleDAO.addSchedule(testSchedules.get(2));
         }  catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

@@ -23,7 +23,7 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     private static final String RESTTIME="restTime";
 
     @Override
-    public void addExerciseSchedule(Schedule schedule, Exercise exercise){
+    public void addExerciseSchedule(Schedule schedule, Exercise exercise) throws DAOException{
         try (Connection conn = ConnectionSQL.getConnection()) {
             ExerciseQuery.addExerciseSchedule(conn, schedule, exercise);
         } catch (SQLException | DbOperationException e) {
@@ -32,7 +32,7 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     }
 
     @Override
-    public void addExercise(Exercise exercise){
+    public void addExercise(Exercise exercise) throws DAOException{
             try (Connection conn = ConnectionSQL.getConnection()) {
                 ExerciseQuery.addExercise(conn, exercise);
             } catch (SQLException | DbOperationException e) {
@@ -41,7 +41,7 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     }
 
     @Override
-    public void retrieveExercise(Exercise exercise) {
+    public void retrieveExercise(Exercise exercise) throws NoResultException,DAOException {
         try (Connection conn = ConnectionSQL.getConnection();
              ResultSet rs = ExerciseQuery.retrieveExercise(conn, exercise)){
             if (rs.next()) {
@@ -53,11 +53,13 @@ public class ExerciseDAOSQL implements ExerciseDAO {
             }
         } catch (SQLException e) {
             handleException(e);
+        }catch(NoResultException e){
+            throw new NoResultException("Nessun esercizio trovato", e);
         }
     }
 
     @Override
-    public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) {
+    public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) throws NoResultException,DAOException{
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = ExerciseQuery.searchExercises(conn, search, schedule);
             while (rs.next()) {
@@ -71,13 +73,15 @@ public class ExerciseDAOSQL implements ExerciseDAO {
                 );
                 exercises.add(exercise);
             }
-        } catch (SQLException | NoResultException e) {
+        } catch (SQLException e) {
             throw new DAOException("Errore nella ricerca della scheda", e);
+        } catch (NoResultException e) {
+            throw new NoResultException("Non è stato trovato nessun esercizio", e);
         }
     }
 
     @Override
-    public void deleteExercise(Exercise exercise) {
+    public void deleteExercise(Exercise exercise) throws DAOException{
         try (Connection conn = ConnectionSQL.getConnection()) {
             ExerciseQuery.deleteExercise(conn, exercise.getId());
         } catch (SQLException | DbOperationException e) {
@@ -86,7 +90,7 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     }
 
     @Override
-    public void updateExercise( Exercise exercise) {
+    public void updateExercise( Exercise exercise) throws DAOException{
         try(Connection conn = ConnectionSQL.getConnection()){
             ExerciseQuery.modifyExercise(conn, exercise);
         } catch(SQLException | DbOperationException e){
@@ -94,7 +98,8 @@ public class ExerciseDAOSQL implements ExerciseDAO {
         }
     }
 
-    private void handleException(Exception e) {
+    private void handleException(Exception e) throws DAOException {
         Printer.println(String.format("%s", e.getMessage()));
+        throw new DAOException("Errore nell'operazione sul database", e);
     }
 }

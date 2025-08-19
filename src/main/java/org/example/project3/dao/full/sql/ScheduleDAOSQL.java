@@ -28,7 +28,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
     private static final String RESTTIME="restTime";
 
     @Override
-    public void addSchedule(Schedule schedule){
+    public void addSchedule(Schedule schedule) throws DAOException {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ScheduleQuery.addSchedule(conn, schedule);
         } catch (SQLException | DbOperationException e) {
@@ -38,7 +38,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
 
 
     @Override
-    public void retrieveSchedule(Customer customer,List<Schedule> schedules) {
+    public void retrieveSchedule(Customer customer,List<Schedule> schedules) throws NoResultException, DAOException {
         try (Connection conn = ConnectionSQL.getConnection();
              ResultSet rs = ScheduleQuery.retrieveSchedules(conn, customer.getCredentials().getMail())){
             while (rs.next()) {
@@ -51,11 +51,13 @@ public class ScheduleDAOSQL implements ScheduleDAO {
             }
         } catch (SQLException e) {
             handleException(e);
+        }catch (NoResultException e){
+            throw new NoResultException("Nessuna scheda trovata");
         }
     }
 
     @Override
-    public void retrieveExercises(Schedule schedule) {
+    public void retrieveExercises(Schedule schedule) throws NoResultException,DAOException {
         if (schedule.getExercises() == null) {
             schedule.setExercises(new ArrayList<>());
         } else {
@@ -76,11 +78,13 @@ public class ScheduleDAOSQL implements ScheduleDAO {
             }
         } catch (SQLException e) {
             handleException(e);
+        }catch(NoResultException e){
+            throw new NoResultException("Nessuna scheda trovata", e);
         }
     }
 
     @Override
-    public void searchSchedules(List<Schedule> schedules, String search, Customer user) {
+    public void searchSchedules(List<Schedule> schedules, String search, Customer user) throws NoResultException,DAOException{
         try (Connection conn = ConnectionSQL.getConnection()) {
             ResultSet rs = ScheduleQuery.searchSchedules(conn, search, user);
             if (rs.next()) {
@@ -92,14 +96,16 @@ public class ScheduleDAOSQL implements ScheduleDAO {
                 );
                 schedules.add(schedule);
             }
-        } catch (SQLException | NoResultException e) {
+        } catch (SQLException  e) {
             throw new DAOException("Errore nella ricerca della scheda", e);
+        } catch (NoResultException e){
+            throw new NoResultException("Non è stato trovata nessuna scheda", e);
         }
     }
 
 
     @Override
-    public void deleteSchedule(Schedule schedule) {
+    public void deleteSchedule(Schedule schedule) throws DAOException {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ScheduleQuery.deleteSchedule(conn, schedule.getCustomer().getCredentials().getMail(), schedule.getTrainer().getCredentials().getMail(), schedule.getName());
         } catch (SQLException | DbOperationException e) {
@@ -108,8 +114,9 @@ public class ScheduleDAOSQL implements ScheduleDAO {
     }
 
 
-    private void handleException(Exception e) {
+    private void handleException(Exception e) throws DAOException {
         Printer.errorPrint(String.format("%s", e.getMessage()));
+        throw new DAOException("Errore nell'operazione sul database", e);
     }
 
 }

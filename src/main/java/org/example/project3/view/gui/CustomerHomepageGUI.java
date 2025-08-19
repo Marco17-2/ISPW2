@@ -14,7 +14,7 @@ import org.example.project3.beans.CourseBean;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.CourseListController;
-import org.example.project3.controller.ScheduleDetailsController;
+import org.example.project3.controller.ScheduleController;
 import org.example.project3.exceptions.LoadingException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.FXMLPathConfig;
@@ -42,8 +42,8 @@ public class CustomerHomepageGUI extends CommonGUI{
     public void seeSchedules(MouseEvent event) {
         try{
         ArrayList<ScheduleBean> scheduleBeans = new ArrayList<>();
-        ScheduleDetailsController scheduleDetailsController = new ScheduleDetailsController();
-        scheduleDetailsController.retriveScheduleDetails((CustomerBean)session.getUser(), scheduleBeans);
+        ScheduleController scheduleController = new ScheduleController();
+        scheduleController.retriveScheduleDetails((CustomerBean)session.getUser(), scheduleBeans);
         goToRequest(scheduleBeans, event);
         }catch(NoResultException _){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

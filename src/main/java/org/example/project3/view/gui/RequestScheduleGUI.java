@@ -9,14 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.project3.beans.CustomerBean;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
-import org.example.project3.controller.ScheduleDetailsController;
-import org.example.project3.controller.SearchController;
+import org.example.project3.controller.ScheduleController;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.LoadingException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
@@ -53,10 +55,13 @@ public class RequestScheduleGUI extends CommonGUI{
     @FXML
     TableColumn<ScheduleBean, Void> seleziona;
 
+    @FXML
+    Text error;
+
     private List<ScheduleBean> originalSchedules = new ArrayList<>();
 
     private RequestModifyController requestModifyController= new RequestModifyController();
-    private ScheduleDetailsController scheduleDetailsController= new ScheduleDetailsController();
+    private ScheduleController scheduleController = new ScheduleController();
 
     private TableCell<ScheduleBean, Void> createButtonCell(String buttonText) {
         return new TableCell<>() {
@@ -64,10 +69,15 @@ public class RequestScheduleGUI extends CommonGUI{
             private Button createButton(String buttonText) {
                 Button btn = new Button(buttonText);
                 btn.setOnMouseClicked(event -> {
-                    ScheduleBean scheduleBean = getTableView().getItems().get(getIndex());
-                    scheduleDetailsController.retriveExercises(scheduleBean);
-                    RequestBean requestBean= new RequestBean(scheduleBean);
-                    completeRequest(requestBean, event);
+                    try {
+                        ScheduleBean scheduleBean = getTableView().getItems().get(getIndex());
+                        scheduleController.retriveExercises(scheduleBean);
+                        RequestBean requestBean = new RequestBean(scheduleBean);
+                        completeRequest(requestBean, event);
+                    }catch(DAOException e){
+                        error.setText(e.getMessage());
+                        error.setVisible(true);
+                    }
                 });
                 return btn;
             }
@@ -85,6 +95,7 @@ public class RequestScheduleGUI extends CommonGUI{
 
     @FXML
     public void loadSchedule(List<ScheduleBean> scheduleBeansParam){
+        error.setVisible(false);
         if(this.originalSchedules.isEmpty()&&!scheduleBeansParam.isEmpty()){
             this.originalSchedules.addAll(scheduleBeansParam);
         }
@@ -114,8 +125,6 @@ public class RequestScheduleGUI extends CommonGUI{
         }
     }
 
-    private SearchController searchController = new SearchController();
-
     @FXML
     private void cancelSearch(){
         loadSchedule(originalSchedules);
@@ -132,8 +141,14 @@ public class RequestScheduleGUI extends CommonGUI{
         if (searchText != null && !searchText.trim().isEmpty()) {
             // Il campo non è vuoto, esegui la ricerca
             List<ScheduleBean> schedulesTemp = new ArrayList<>();
-            searchController.searchSchedules(schedulesTemp, searchText, (CustomerBean) session.getUser());
-            loadSchedule(schedulesTemp);
+            try {
+                scheduleController.searchSchedules(schedulesTemp, searchText, (CustomerBean) session.getUser());
+                loadSchedule(schedulesTemp);
+            }catch (NoResultException | DAOException e){
+                error.setText(e.getMessage());
+                error.setVisible(true);
+            }
+
         } else {
             loadSchedule(originalSchedules);
         }

@@ -5,6 +5,7 @@ import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 
 import org.example.project3.dao.RequestDAO;
+import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 
 import org.example.project3.model.Request;
@@ -26,10 +27,14 @@ public class RequestModifyController {
 
     //metodo per eliminare una richiesta
     public void deleteRequest(RequestBean requestBean) {
-        RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();  //recupero istanza del ConcreteSubject
-        Request request = beanAndModelMapperFactory.fromBeanToModel(requestBean, RequestBean.class);
-        requestDAO.deleteRequest(request);
-        requestManagerConcreteSubject.removeRequest(request);   //rimuovo la richiesta dalla lista salvata nel ConcreteSubject
+        try {
+            RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();  //recupero istanza del ConcreteSubject
+            Request request = beanAndModelMapperFactory.fromBeanToModel(requestBean, RequestBean.class);
+            requestDAO.deleteRequest(request);
+            requestManagerConcreteSubject.removeRequest(request);//rimuovo la richiesta dalla lista salvata nel ConcreteSubject
+        }catch(DAOException e){
+            throw new DAOException("Errore nel DAO",e);
+        }
     }
 
     //metodo per creare una richiesta
@@ -38,15 +43,14 @@ public class RequestModifyController {
     }
 
     //Metodo per inviare una richiesta
-    public void sendRequest(RequestBean requestBean) throws NoResultException {
+    public void sendRequest(RequestBean requestBean) throws DAOException {
         Request request = beanAndModelMapperFactory.fromBeanToModel(requestBean, RequestBean.class);
         try{
             requestDAO.sendRequest(request);
             RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();
             requestManagerConcreteSubject.addRequest(request);
         } catch (Exception e){
-            throw new NoResultException("Errore nell'invio della richiesta controller",e);
-
+            throw new DAOException("Errore nell'invio della richiesta controller",e);
         }
     }
 

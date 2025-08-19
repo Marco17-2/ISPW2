@@ -18,6 +18,8 @@ import org.example.project3.utilities.enums.Role;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
 
+import java.time.LocalDate;
+
 
 public class RegistrationGUI extends CommonGUI {
     protected RegistrationGUI(FXMLPathConfig fxmlPathConfig, Session session) { super(session, fxmlPathConfig); }
@@ -68,6 +70,9 @@ public class RegistrationGUI extends CommonGUI {
         }
         if(dataDiNascita.getValue() == null) {
             throw new EmptyFieldException("Inserisci la data di nascita");
+        }
+        if(dataDiNascita.getValue().isAfter(LocalDate.now().minusYears(12))) {
+            throw new EmptyFieldException("Inserisci una data di nascita valida");
         }
     }
 
