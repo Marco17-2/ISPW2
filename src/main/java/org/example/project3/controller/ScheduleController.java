@@ -112,7 +112,7 @@ public class ScheduleController {
     public void searchExercises(List<ExerciseBean> exerciseBeans, String search, ScheduleBean scheduleBean) throws NoResultException,DAOException{
         try {
             exerciseBeans.clear();
-            List<Exercise> exercises = new ArrayList<>();
+            exercises.clear();
             Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);
             exerciseDAO.searchExercises(exercises, search, schedule);
             for (Exercise exercise : exercises) {

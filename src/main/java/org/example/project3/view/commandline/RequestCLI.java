@@ -70,8 +70,8 @@ public class RequestCLI extends AbstractState implements Observer {
         try {
             scheduleBeans.clear();
             scheduleController.retriveScheduleDetails((CustomerBean) user, scheduleBeans);
-        }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+        }catch(DAOException e){
+            handleException(e);
             scanner.nextLine();
         }
     }
@@ -97,8 +97,8 @@ public class RequestCLI extends AbstractState implements Observer {
                 }
                 return false;
             }
-        }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+        }catch(DAOException e){
+            handleException(e);
             return false;
         }
     }
@@ -122,7 +122,7 @@ public class RequestCLI extends AbstractState implements Observer {
             Printer.println("--------------------Lista degli esercizi della scheda "+requestBean.getScheduleBean().getName()+"--------------------\n");
             Printer.println("(1)Nome | (2)Descrizione | (3)Numero di serie | (4)Numero di ripetizioni | (5)Tempo di recupero\n");
             for(ExerciseBean exerciseBean : exerciseBeans){
-                Printer.println(exerciseBean.getName()+" | "+exerciseBean.getDescription()+" | "+exerciseBean.getNumberSeries()+" | "+exerciseBean.getNumberReps()+" | "+ String.valueOf(exerciseBean.getRestTime().getId()+" secondi"));
+                Printer.println(exerciseBean.getName()+" | "+exerciseBean.getDescription()+" | "+exerciseBean.getNumberSeries()+" | "+exerciseBean.getNumberReps()+" | "+ exerciseBean.getRestTime().getId()+" secondi");
             }
             Printer.println("Inserici il nome dell'esercizio che vuoi modificare");
             String name=scanner.nextLine();
@@ -134,6 +134,9 @@ public class RequestCLI extends AbstractState implements Observer {
             }
             return false;
         }
+    }
+    private void handleException(Exception e){
+        Printer.errorPrint("Errore nel DAO. Riprova.");
     }
 
     @Override

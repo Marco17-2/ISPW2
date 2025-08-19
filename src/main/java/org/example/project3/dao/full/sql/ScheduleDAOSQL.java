@@ -51,7 +51,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
             }
         } catch (SQLException e) {
             handleException(e);
-        }catch (NoResultException e){
+        }catch (NoResultException _){
             throw new NoResultException("Nessuna scheda trovata");
         }
     }
