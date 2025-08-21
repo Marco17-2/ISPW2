@@ -80,6 +80,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }
     }
 
+
     private void requestChoice(StateMachineConcrete context) {
         if (displayRequests()) {
             Printer.println("1. Accetta modifica"); //in questo caso facciamo il login in automatico
