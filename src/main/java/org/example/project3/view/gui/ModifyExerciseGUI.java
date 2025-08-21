@@ -25,16 +25,16 @@ public class ModifyExerciseGUI extends CommonGUI {
     }
 
     @FXML
-    Button indietro;
-
-    @FXML
     ImageView cancellaRicerca;
 
     @FXML
-    TextField ricerca;
+    Button indietro;
 
     @FXML
     Button cerca;
+
+    @FXML
+    TextField ricerca;
 
     @FXML
     TableView<ExerciseBean> exerciseChoice;
@@ -43,27 +43,25 @@ public class ModifyExerciseGUI extends CommonGUI {
     TableColumn<ExerciseBean, Long> id;
 
     @FXML
-    TableColumn<ExerciseBean, String> name;
-
-    @FXML
     TableColumn<ExerciseBean, String> description;
 
     @FXML
-    TableColumn<ExerciseBean, Integer> series;
+    TableColumn<ExerciseBean, String> name;
 
     @FXML
     TableColumn<ExerciseBean, Integer> reps;
 
     @FXML
-    TableColumn<ExerciseBean, String> restTime;
+    TableColumn<ExerciseBean, Integer> series;
 
     @FXML
     TableColumn<ExerciseBean, Void> seleziona;
 
     @FXML
+    TableColumn<ExerciseBean, String> restTime;
+
+    @FXML
     Text error;
-
-
 
     private ScheduleController scheduleController = new ScheduleController();
 
@@ -135,18 +133,18 @@ public class ModifyExerciseGUI extends CommonGUI {
     }
 
     private void initializeRequestAndExercises(RequestBean request, List<ExerciseBean> exerciseBeansParam) {
-        if (this.requestBean == null && this.exerciseList.isEmpty()) {
-            this.requestBean = request;
+        if (this.exerciseList.isEmpty() && this.requestBean == null) {
             this.exerciseList.addAll(exerciseBeansParam);
+            this.requestBean = request;
         }
     }
 
     private void setupTable(List<ExerciseBean> exerciseBeans) {
         id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
-        series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
         reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
+        description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
         restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().getId() + " secondi"));
         seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
         exerciseChoice.getItems().clear();
