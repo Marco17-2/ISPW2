@@ -36,33 +36,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
                 switch(choice){
                     case 1 -> {
                         stampa();
-                        if (displayRequests()) {
-                            Printer.println("1. Accetta modifica"); //in questo caso facciamo il login in automatico
-                            Printer.println("2. Rifiuta modifica");
-                            Printer.print("Opzione scelta: ");
-                            int scelta = Integer.parseInt(scanner.nextLine());
-                            switch(scelta){
-                                case 1->{
-                                    loadExercises();
-                                    if(displayExercises(requestBean)){
-                                        update();
-                                        goNext(context, new TrainerHomepageCLI( user ));
-                                    }else{
-                                        Printer.errorPrint("L'esercizio inserito non è presente!");
-                                    }
-                                }
-                                case 2-> {
-                                    deleteRequest(requestBean);
-                                    Printer.println("Richiesta eliminata con successo!");
-                                    goNext(context, new TrainerHomepageCLI( user ));
-                                }
-                                default -> Printer.errorPrint("Scelta non valida!");
-                            }
-                        } else {
-                            if(!requestBeans.isEmpty()) {
-                                Printer.errorPrint("È state inserito un ID non corretto!");
-                            }
-                        }
+                        requestChoice(context);
                     }
                     case 2 -> goNext(context, new CustomerHomepageCLI( user ));
                     case 0 ->{
@@ -106,6 +80,17 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }
     }
 
+    private void requestChoice(StateMachineConcrete context) {
+        if (displayRequests()) {
+            Printer.println("1. Accetta modifica"); //in questo caso facciamo il login in automatico
+            Printer.println("2. Rifiuta modifica");
+            Printer.print("Opzione scelta: ");
+            handleRequestOption(context);
+        } else if (!requestBeans.isEmpty()) {
+            Printer.errorPrint("È stato inserito un ID non corretto!");
+        }
+    }
+
 
     private void loadRequests(){
         try {
@@ -115,6 +100,31 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
             handleException(e);
             scanner.nextLine();
         }
+    }
+
+    private void handleRequestOption(StateMachineConcrete context) {
+        int scelta = Integer.parseInt(scanner.nextLine());
+        switch (scelta) {
+            case 1 -> handleAcceptRequest(context);
+            case 2 -> handleRejectRequest(context);
+            default -> Printer.errorPrint("Scelta non valida!");
+        }
+    }
+
+    private void handleAcceptRequest(StateMachineConcrete context) {
+        loadExercises();
+        if (displayExercises(requestBean)) {
+            update();
+            goNext(context, new TrainerHomepageCLI(user));
+        } else {
+            Printer.errorPrint("L'esercizio inserito non è presente!");
+        }
+    }
+
+    private void handleRejectRequest(StateMachineConcrete context) {
+        deleteRequest(requestBean);
+        Printer.println("Richiesta eliminata con successo!");
+        goNext(context, new TrainerHomepageCLI(user));
     }
 
     private boolean displayExercises(RequestBean requestBean){
