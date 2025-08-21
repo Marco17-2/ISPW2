@@ -124,38 +124,34 @@ public class ModifyExerciseGUI extends CommonGUI {
     }
 
     @FXML
-    public void loadExercises(RequestBean request, List<ExerciseBean>exerciseBeansParam) {
-
+    public void loadExercises(RequestBean request, List<ExerciseBean> exerciseBeansParam) {
         try {
-
             error.setVisible(false);
-
-            if (this.requestBean==null&&this.exerciseList.isEmpty()) {
-                this.requestBean = request;
-                this.exerciseList.addAll(exerciseBeansParam);
-            }
-
-            //Imposto valori della tabella
-            id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-            name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-            description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
-            series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
-            reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
-            restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().getId() + " secondi"));
-            seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
-            exerciseChoice.getItems().clear();
-            exerciseChoice.getItems().addAll(exerciseBeansParam);
-
+            initializeRequestAndExercises(request, exerciseBeansParam);
+            setupTable(exerciseBeansParam);
         } catch (NoResultException | DAOException e) {
-
-            error.setText(e.getMessage());
-            error.setVisible(true);
+            handleException(e);
         }
     }
 
+    private void initializeRequestAndExercises(RequestBean request, List<ExerciseBean> exerciseBeansParam) {
+        if (this.requestBean == null && this.exerciseList.isEmpty()) {
+            this.requestBean = request;
+            this.exerciseList.addAll(exerciseBeansParam);
+        }
+    }
 
-
-
+    private void setupTable(List<ExerciseBean> exerciseBeans) {
+        id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
+        reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
+        restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().getId() + " secondi"));
+        seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
+        exerciseChoice.getItems().clear();
+        exerciseChoice.getItems().addAll(exerciseBeans);
+    }
 
 
     @FXML
@@ -171,13 +167,17 @@ public class ModifyExerciseGUI extends CommonGUI {
                 RequestBean requestTemp = new RequestBean(new ScheduleBean(this.requestBean.getScheduleBean().getId(), exercisesTemp));
                 loadExercises(requestTemp,exercisesTemp);
             } catch (NoResultException e) {
-                error.setText(e.getMessage());
-                error.setVisible(true);
+                handleException(e);
             }
 
         } else {
             loadExercises(this.requestBean,exerciseList);
         }
+    }
+
+    private void handleException(Exception e) {
+        error.setText(e.getMessage());
+        error.setVisible(true);
     }
 
 
