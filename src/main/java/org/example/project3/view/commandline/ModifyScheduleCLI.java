@@ -106,6 +106,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }
     }
 
+
     private void loadRequests(){
         try {
             requestBeans.clear();
