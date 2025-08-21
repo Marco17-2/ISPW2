@@ -71,7 +71,7 @@ public class ScheduleController {
 
     public void retriveAllExercises(List<ExerciseBean> exerciseBeans)throws NoResultException,DAOException{
         try {
-            List<Exercise> exercises = new ArrayList<>();
+            exercises.clear();
             exerciseDAO.retrieveAllExercises(exercises);
             for (int i = 0; i < exercises.size(); i++) {
                 exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));

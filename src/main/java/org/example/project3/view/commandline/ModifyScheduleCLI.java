@@ -96,14 +96,14 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
             } else {
                 Printer.println("--------------------Lista delle richieste--------------------\n");
                 Printer.println("(1)ID | (2)Cliente | (3)Scheda | (4)Esercizio | (5)Motivazione\n");
-                for (RequestBean requestBean : requestBeans) {
-                    Printer.println(requestBean.getID() + " | " + requestBean.getScheduleBean().getCustomerBean().getCredentialsBean().getMail() + " | " + requestBean.getScheduleBean().getName() + " | " + requestBean.getExerciseBean().getName() + " | " + requestBean.getReason());
+                for (RequestBean request : requestBeans) {
+                    Printer.println(request.getID() + " | " + request.getScheduleBean().getCustomerBean().getCredentialsBean().getMail() + " | " + request.getScheduleBean().getName() + " | " + request.getExerciseBean().getName() + " | " + requestBean.getReason());
                 }
                 Printer.println("Inserici l'ID della richiesta che vuoi gestire");
                 Long id = Long.parseLong(scanner.nextLine());
-                for (RequestBean requestBean : requestBeans) {
+                for (RequestBean requestTemp : requestBeans) {
                     if ((id.equals(requestBean.getID()))) {
-                        this.requestBean = requestBean;
+                        this.requestBean = requestTemp;
                         return true;
                     }
                 }
