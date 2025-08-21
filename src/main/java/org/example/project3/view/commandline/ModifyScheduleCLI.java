@@ -175,9 +175,6 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }
     }
 
-    private void handleException(Exception e){
-        Printer.println(String.format("Errore nel DAO. Riprova. %s", e.getMessage()));
-    }
 
     @Override
     public void showMenu() {
@@ -187,22 +184,33 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         Printer.print("Opzione scelta: ");
     }
 
-    @Override
-    public void stampa(){
-        Printer.println(" ");
-        Printer.println("-------------------Richieste Modifiche schede-------------------");
-        Printer.println("Ciao"+ " " + user.getName()+ ",scegli quale scheda modificare:");
+
+    private void handleException(Exception e){
+        Printer.println(String.format("Errore nel DAO. Riprova. %s", e.getMessage()));
     }
+
+
+
+    @Override
+    public void update(){
+
+        Printer.println("Scheda modificata con successo");
+    }
+
+
 
     @Override
     public void enter(StateMachineConcrete context){
+
         loadRequests();
         showMenu();
         action(context);
     }
 
     @Override
-    public void update(){
-        Printer.println("Scheda modificata con successo");
+    public void stampa(){
+        Printer.println(" ");
+        Printer.println("-------------------Richieste Modifiche schede-------------------");
+        Printer.println("Ciao"+ " " + user.getName()+ ",scegli quale scheda modificare:");
     }
 }
