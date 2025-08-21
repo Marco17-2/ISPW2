@@ -109,6 +109,14 @@ public class ModifyExerciseGUI extends CommonGUI {
     }
 
     @FXML
+    public void cancelSearch() {
+        requestBean.getScheduleBean().setExercisesBean(exerciseList);
+        loadExercises(requestBean,exerciseList);
+        ricerca.setText("");
+        cancellaRicerca.setVisible(false);
+    }
+
+    @FXML
     public void loadExercises(RequestBean request, List<ExerciseBean>exerciseBeansParam) {
         try {
             error.setVisible(false);
@@ -132,13 +140,10 @@ public class ModifyExerciseGUI extends CommonGUI {
         }
     }
 
-    @FXML
-    public void cancelSearch() {
-        requestBean.getScheduleBean().setExercisesBean(exerciseList);
-        loadExercises(requestBean,exerciseList);
-        ricerca.setText("");
-        cancellaRicerca.setVisible(false);
-    }
+
+
+
+
 
     @FXML
     private void searchButton() {
