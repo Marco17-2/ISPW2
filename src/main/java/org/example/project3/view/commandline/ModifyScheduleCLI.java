@@ -78,15 +78,6 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }
     }
 
-    private void loadRequests(){
-        try {
-            requestBeans.clear();
-            requestModifyController.retrieveRequests((TrainerBean) user, requestBeans);
-        }catch(DAOException e){
-            handleException(e);
-            scanner.nextLine();
-        }
-    }
 
     private boolean displayRequests(){
         try {
@@ -115,12 +106,12 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }
     }
 
-    private void loadExercises(){
+    private void loadRequests(){
         try {
-            exerciseBeans.clear();
-            scheduleController.retriveAllExercises(exerciseBeans);
-        }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            requestBeans.clear();
+            requestModifyController.retrieveRequests((TrainerBean) user, requestBeans);
+        }catch(DAOException e){
+            handleException(e);
             scanner.nextLine();
         }
     }
@@ -150,6 +141,16 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         }catch(DAOException e){
             handleException(e);
             return false;
+        }
+    }
+
+    private void loadExercises(){
+        try {
+            exerciseBeans.clear();
+            scheduleController.retriveAllExercises(exerciseBeans);
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
+            scanner.nextLine();
         }
     }
 
