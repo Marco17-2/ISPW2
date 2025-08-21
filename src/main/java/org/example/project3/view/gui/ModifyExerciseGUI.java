@@ -64,15 +64,20 @@ public class ModifyExerciseGUI extends CommonGUI {
     Text error;
 
 
-    private RequestModifyController requestModifyController = new RequestModifyController();
+
     private ScheduleController scheduleController = new ScheduleController();
 
-    private RequestBean requestBean;
+    private RequestModifyController requestModifyController = new RequestModifyController();
 
     private List<ExerciseBean> exerciseList = new ArrayList<>();
+    private RequestBean requestBean;
+
+
 
     private TableCell<ExerciseBean, Void> createButtonCell(String buttonText) {
+
         return new TableCell<>() {
+
             private final Button button = createButton(buttonText);
 
             private Button createButton(String buttonText) {
@@ -110,20 +115,26 @@ public class ModifyExerciseGUI extends CommonGUI {
 
     @FXML
     public void cancelSearch() {
+
         requestBean.getScheduleBean().setExercisesBean(exerciseList);
         loadExercises(requestBean,exerciseList);
         ricerca.setText("");
         cancellaRicerca.setVisible(false);
+
     }
 
     @FXML
     public void loadExercises(RequestBean request, List<ExerciseBean>exerciseBeansParam) {
+
         try {
+
             error.setVisible(false);
+
             if (this.requestBean==null&&this.exerciseList.isEmpty()) {
                 this.requestBean = request;
                 this.exerciseList.addAll(exerciseBeansParam);
             }
+
             //Imposto valori della tabella
             id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
             name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -134,7 +145,9 @@ public class ModifyExerciseGUI extends CommonGUI {
             seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
             exerciseChoice.getItems().clear();
             exerciseChoice.getItems().addAll(exerciseBeansParam);
+
         } catch (NoResultException | DAOException e) {
+
             error.setText(e.getMessage());
             error.setVisible(true);
         }
