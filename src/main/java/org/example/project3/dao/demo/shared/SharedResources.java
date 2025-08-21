@@ -27,6 +27,7 @@ public class SharedResources {
     // Mappa per tenere traccia delle relazioni scheda-esercizi e utente-schede
     private final  Map<String, List<Schedule>> customerSchedules = new HashMap<>();
     private final Map<Long,List<Exercise>> exerciseSchedules = new HashMap<>();
+    private final Map<String, List<Request>> requestTrainer = new HashMap<>();
 
 
     // Singleton per garantire che ci sia una sola istanza della classe
@@ -80,6 +81,9 @@ public class SharedResources {
     }
     public Map<Long, List<Exercise>> getExerciseSchedules() {
         return exerciseSchedules;
+    }
+    public Map<String, List<Request>> getRequestTrainer() {
+        return requestTrainer;
     }
 
 

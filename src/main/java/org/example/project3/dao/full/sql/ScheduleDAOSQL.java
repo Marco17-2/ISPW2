@@ -26,6 +26,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
     private static final String NUMBERSERIES="numberSeries";
     private static final String NUMBERREPS="numberReps";
     private static final String RESTTIME="restTime";
+    private static final String SCHEDULETRAINER="schedule.trainer";
 
     @Override
     public void addSchedule(Schedule schedule) throws DAOException {
@@ -113,6 +114,29 @@ public class ScheduleDAOSQL implements ScheduleDAO {
         }
     }
 
+    @Override
+    public void retrieveTrainer(Schedule schedule) throws NoResultException, DAOException {
+        try (Connection conn = ConnectionSQL.getConnection();
+             ResultSet rs = ScheduleQuery.retrieveTrainer(conn, schedule)){
+            if (rs.next()) {
+                Trainer trainer = new Trainer(new Credentials(rs.getString(SCHEDULETRAINER), Role.TRAINER));
+                schedule.setTrainer(trainer);
+            }
+        } catch (SQLException e) {
+            handleException(e);
+        }catch (NoResultException _){
+            throw new NoResultException("Nessuna scheda trovata");
+        }
+    }
+
+    @Override
+    public void updateSchedule(Request request, Exercise exercise) throws DAOException {
+        try (Connection conn = ConnectionSQL.getConnection()) {
+            ScheduleQuery.modifySchedule(conn, request.getSchedule(), exercise, request.getExercise());
+        } catch (SQLException | DbOperationException e) {
+            handleException(e);
+        }
+    }
 
     private void handleException(Exception e) throws DAOException {
         Printer.errorPrint(String.format("%s", e.getMessage()));

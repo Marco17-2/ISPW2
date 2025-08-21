@@ -89,4 +89,48 @@ public class ScheduleDAOP implements ScheduleDAO {
             throw new NoResultException("Nessuna scheda trovata per: " + search);
         }
     }
+
+    @Override
+    public void retrieveTrainer(Schedule schedule) throws NoResultException, DAOException {
+        if (schedule == null) {
+            throw new DAOException("Scheda non valida: null");
+        }
+        Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
+        if (storedSchedule == null) {
+            throw new DAOException(schedule.getClass().getSimpleName() + " non trovato");
+        }
+            for (Schedule searchSchedule : SharedResources.getInstance().getSchedules().values()) {
+                if (searchSchedule.getId()== schedule.getId()) {
+                    schedule.setTrainer(searchSchedule.getTrainer());
+                }
+            }
+            if (schedule.getTrainer()==null) {
+            throw new NoResultException("Nessun trainer trovato per la scheda con id: " + schedule.getId());
+        }
+    }
+
+    @Override
+    public void updateSchedule(Request request, Exercise exercise) throws DAOException {
+        if (request == null||exercise == null) {
+            throw new DAOException("Parametri non validi: exercise o schedule null");
+        }
+        Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(request.getSchedule().getId());
+        if (storedSchedule == null) {
+            throw new DAOException(request.getSchedule().getClass().getSimpleName() + " non trovato");
+        }
+        List<Exercise> storedExercises = SharedResources.getInstance().getExerciseSchedules().get(storedSchedule.getId());
+        if (storedExercises == null) {
+            throw new NoResultException(("Nessun esercizio trovato per: " + storedSchedule.getId()));
+        }
+        for (int i = 0; i < storedExercises.size(); i++) {
+            Exercise foundExercise = storedExercises.get(i);
+            if (foundExercise.getId() == request.getExercise().getId()) {
+                storedExercises.set(i, exercise); // Sostituisce foundExercise con exercise
+                break; // Esce dal ciclo una volta trovata la corrispondenza
+            }
+        }
+        SharedResources.getInstance().getExerciseSchedules().remove(storedSchedule.getId());
+        SharedResources.getInstance().getExerciseSchedules().put(storedSchedule.getId(), storedExercises);
+    }
+
 }

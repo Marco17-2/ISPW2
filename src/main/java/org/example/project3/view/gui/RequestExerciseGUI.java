@@ -202,7 +202,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                 scheduleController.searchExercises(exercisesTemp, searchText,this.requestBean.getScheduleBean());
                 RequestBean requestTemp= new RequestBean(new ScheduleBean(this.requestBean.getScheduleBean().getId(),exercisesTemp));
                 loadExercises(requestTemp);
-            }catch(NoResultException e){
+            }catch(NoResultException|DAOException e){
                 error.setText(e.getMessage());
                 error.setVisible(true);
             }

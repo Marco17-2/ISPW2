@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.text.Text;
+import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ReservationListController;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.mappers.Session;
@@ -30,6 +31,24 @@ public class TrainerHomepageGUI extends CommonGUI{
             reservationController.getReservationReq((TrainerBean)session.getUser(), reservationReqBean);
 
             goToCourseReservationRequest(event, reservationReqBean);
+
+        }catch(NoResultException exception){
+
+            errorMessage.setText(exception.getMessage());
+            errorMessage.setVisible(true);
+        }
+
+    }
+
+    @FXML
+    protected void retrieveRequests(MouseEvent event){
+        try{
+            List<RequestBean> requestBeans = new ArrayList<>();
+
+            RequestModifyController requestModifyController = new RequestModifyController();
+            requestModifyController.retrieveRequests((TrainerBean)session.getUser(), requestBeans);
+
+            goToTrainerRequests(event, requestBeans);
 
         }catch(NoResultException exception){
 

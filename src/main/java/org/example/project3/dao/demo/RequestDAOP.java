@@ -4,9 +4,8 @@ import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 
 import org.example.project3.exceptions.DAOException;
-import org.example.project3.model.Trainer;
-import org.example.project3.model.Request;
-import org.example.project3.model.Reservation;
+import org.example.project3.exceptions.NoResultException;
+import org.example.project3.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,8 @@ public class RequestDAOP implements RequestDAO {
         }
         SharedResources.getInstance().getRequestsSent()
                 .computeIfAbsent(request.getSchedule().getId(), k -> new ArrayList<>()).add(request);
+        SharedResources.getInstance().getRequestTrainer()
+                .computeIfAbsent(request.getSchedule().getTrainer().getCredentials().getMail(), k -> new ArrayList<>()).add(request);
     }
 
     @Override
@@ -53,6 +54,22 @@ public class RequestDAOP implements RequestDAO {
         SharedResources.getInstance().getRequestsSent().remove(request.getSchedule().getId());
     }
 
+    @Override
+    public void retrieveRequests(Trainer trainer, List<Request> requests)throws DAOException, NoResultException{
+            if (trainer == null) {
+                throw new DAOException("Trainer non valido: null");
+            }
+            Trainer storedTrainer = SharedResources.getInstance().getTrainers().get(trainer.getCredentials().getMail());
+            if (storedTrainer == null) {
+                throw new DAOException(trainer.getClass().getSimpleName() + " non trovato");
+            }
+            List<Request> storedRequests = SharedResources.getInstance().getRequestTrainer().get(storedTrainer.getCredentials().getMail());
+            if (storedRequests == null) {
+                throw new NoResultException(("Nessuna richiesta trovata per: " + storedTrainer.getName()));
+            }
+            requests.addAll(storedRequests);
+
+    }
 
 
     // chiave per la lista Corso,

@@ -4,16 +4,19 @@ package org.example.project3.controller;
 import org.example.project3.beans.RequestBean;
 import org.example.project3.beans.ScheduleBean;
 
+import org.example.project3.beans.TrainerBean;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 
-import org.example.project3.model.Request;
-import org.example.project3.model.Schedule;
+import org.example.project3.model.*;
 
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.patterns.observer.RequestManagerConcreteSubject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RequestModifyController {
     private final BeanAndModelMapperFactory beanAndModelMapperFactory;
@@ -62,6 +65,34 @@ public class RequestModifyController {
             return requestDAO.hasAlreadySentRequest(request);
         } catch (Exception e){
             throw new NoResultException("Errore nel controllo delle richieste",e);
+        }
+    }
+
+    //Metodo per recuperare le richieste del trainer
+    public void retrieveRequests(TrainerBean trainerBean, List<RequestBean> requestBeans) throws NoResultException {
+        // converte il bean in model per poter cercare la scheda visto che non si effettua con il bean
+        try{
+
+            List<Request> requests = new ArrayList<>();
+
+            Trainer trainer = beanAndModelMapperFactory.fromBeanToModel(trainerBean, TrainerBean.class);
+            requestDAO.retrieveRequests(trainer, requests);
+            for(int i = 0; i < requests.size(); i++){
+                RequestBean requestBean = beanAndModelMapperFactory.fromModelToBean(requests.get(i), Request.class);
+
+                //inserisce i dati nel bean
+                requestBean.setID(requests.get(i).getID());
+                requestBean.setSchedule(beanAndModelMapperFactory.fromModelToBean(requests.get(i).getSchedule(), Schedule.class));
+                requestBean.setExercise(beanAndModelMapperFactory.fromModelToBean(requests.get(i).getExercise(), Exercise.class));
+                requestBean.setReason(requests.get(i).getReason());
+                requestBean.setDateTime(requests.get(i).getDateTime());
+
+                requestBeans.add(requestBean);
+            }
+        }catch(NoResultException _){
+            throw new NoResultException("Nessuna scheda trovata");
+        }catch(DAOException e){
+            throw new DAOException("Errore durante la ricerca",e);
         }
     }
 }

@@ -24,6 +24,9 @@ public class RequestBean {
         this.reason = "";
         this.dateTime = null;
     }
+    public void setID(long id){
+        this.id = id;
+    }
 
     public long getID() {
         return id;

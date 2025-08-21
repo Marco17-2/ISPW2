@@ -29,6 +29,15 @@ public class Exercise {
         this.restTime = restTime;
     }
 
+    public Exercise(String name) {
+        this.id = 0;
+        this.name = name;
+        this.description = null;
+        this.numberSeries = null;
+        this.numberReps = null;
+        this.restTime = null;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

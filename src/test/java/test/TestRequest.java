@@ -160,7 +160,7 @@ class TestRequest {
     private Request createRequest() {
         Random random = new Random();
         int baseId = random.nextInt(1000000);
-        return new Request(baseId+7, testSchedules.get(0),testExercises.get(0),"i don't like", LocalDateTime.now());
+        return new Request(50, testSchedules.get(0),testExercises.get(0),"i don't like", LocalDateTime.now());
 
     }
 

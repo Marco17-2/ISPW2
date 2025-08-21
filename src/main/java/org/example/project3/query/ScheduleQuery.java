@@ -83,4 +83,12 @@ public class ScheduleQuery {
             throw new DbOperationException("Errore nella rimozione della scheda", e);
         }
     }
+
+    public static ResultSet retrieveTrainer(Connection conn, Schedule schedule) throws SQLException {
+        //Mettere un order by date (da più a meno recente)
+        String query = "SELECT schedule.trainer FROM request JOIN schedule ON schedule.id = request.schedule WHERE schedule.id = ? ";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setLong(1, schedule.getId());
+        return pstmt.executeQuery();
+    }
 }

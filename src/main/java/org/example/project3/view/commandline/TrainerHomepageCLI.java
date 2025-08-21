@@ -27,6 +27,7 @@ public class TrainerHomepageCLI extends AbstractState{
                 int choice=Integer.parseInt(scanner.nextLine());
                 switch(choice){
                     case 1 -> goNext(context, new RequestTrainerCLI(user));
+                    case 2 -> goNext(context, new ModifyScheduleCLI(user));
                     case 0 -> {
                         exit=true;
                         goNext(context, new InitialState());
@@ -55,7 +56,8 @@ public class TrainerHomepageCLI extends AbstractState{
 
     @Override
     public void showMenu(){
-        Printer.println("1. Visualizza Richieste");
+        Printer.println("1. Visualizza Richieste Corsi");
+        Printer.println("2. Visualizza Richieste Modifiche Schede");
         Printer.println("0. Logout");
 
     }

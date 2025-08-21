@@ -1,16 +1,11 @@
 package org.example.project3.controller;
 
-import org.example.project3.beans.CustomerBean;
-import org.example.project3.beans.ExerciseBean;
-import org.example.project3.beans.ScheduleBean;
+import org.example.project3.beans.*;
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.dao.ScheduleDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
-import org.example.project3.model.Customer;
-import org.example.project3.model.Exercise;
-import org.example.project3.model.Schedule;
-import org.example.project3.model.Trainer;
+import org.example.project3.model.*;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 
@@ -74,6 +69,20 @@ public class ScheduleController {
         }
     }
 
+    public void retriveAllExercises(List<ExerciseBean> exerciseBeans)throws NoResultException,DAOException{
+        try {
+            List<Exercise> exercises = new ArrayList<>();
+            exerciseDAO.retrieveAllExercises(exercises);
+            for (int i = 0; i < exercises.size(); i++) {
+                exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));
+            }
+        }catch(NoResultException _){
+            throw new NoResultException("Nessuna esercizio trovato");
+        }catch(DAOException e){
+            throw new DAOException("Errore durante la ricerca",e);
+        }
+    }
+
     public void retrieveExerciseDetails(ExerciseBean exerciseBean) throws NoResultException,DAOException{
         try {
             Exercise exercise = beanAndModelMapperFactory.fromBeanToModel(exerciseBean, ExerciseBean.class);
@@ -85,6 +94,19 @@ public class ScheduleController {
             exerciseBean.setRestTime(exercise.getRestTime());
         }catch(NoResultException _){
             throw new NoResultException("Nessun esercizio trovato");
+        }catch(DAOException e){
+            throw new DAOException("Errore durante la ricerca",e);
+        }
+    }
+
+    public void retrieveTrainer(ScheduleBean scheduleBean) throws NoResultException,DAOException{
+        try {
+            Schedule schedule = beanAndModelMapperFactory.fromBeanToModel(scheduleBean, ScheduleBean.class);
+            scheduleDAO.retrieveTrainer(schedule);
+            TrainerBean trainerBean= new TrainerBean(beanAndModelMapperFactory.fromModelToBean(schedule.getTrainer().getCredentials(), Credentials.class));
+            scheduleBean.setTrainerBean(trainerBean);
+        }catch(NoResultException _){
+            throw new NoResultException("Nessun trainer trovato per la scheda" + scheduleBean.getId());
         }catch(DAOException e){
             throw new DAOException("Errore durante la ricerca",e);
         }
@@ -126,6 +148,35 @@ public class ScheduleController {
             throw new DAOException("Errore nella ricerca della scheda", e);
         }
 
+    }
+
+    public void searchAllExercises(List<ExerciseBean> exerciseBeans, String search) throws NoResultException,DAOException{
+        try {
+            exerciseBeans.clear();
+            exercises.clear();
+            exerciseDAO.searchAllExercises(exercises, search);
+            for (Exercise exercise : exercises) {
+                ExerciseBean exerciseBean = beanAndModelMapperFactory.fromModelToBean(exercise, Exercise.class);
+                exerciseBean.setName(exercise.getName());
+
+                exerciseBeans.add(exerciseBean);
+            }
+        }catch(NoResultException _){
+            throw new NoResultException("Non è stato trovato nessun esercizio");
+        }catch(DAOException e){
+            throw new DAOException("Errore nella ricerca della scheda", e);
+        }
+
+    }
+
+    public void updateSchedule(RequestBean requestBean, ExerciseBean exerciseBean) throws DAOException {
+        Request request = beanAndModelMapperFactory.fromBeanToModel(requestBean, RequestBean.class);
+        Exercise exercise = beanAndModelMapperFactory.fromBeanToModel(exerciseBean, ExerciseBean.class);
+        try{
+            scheduleDAO.updateSchedule(request,exercise);
+        } catch (Exception e){
+            throw new DAOException("Errore nell'invio della richiesta controller",e);
+        }
     }
 
 }

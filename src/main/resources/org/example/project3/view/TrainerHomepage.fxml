@@ -59,7 +59,7 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <ButtonBar layoutX="250.0" layoutY="265.0" prefHeight="78.0" prefWidth="262.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                  <ButtonBar layoutX="250.0" layoutY="265.0" prefHeight="78.0" onMouseClicked="#retrieveRequests" prefWidth="262.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
                      <buttons>
                         <ImageView blendMode="MULTIPLY" fitHeight="55.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                            <image>

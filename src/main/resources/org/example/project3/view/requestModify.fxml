@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.view.gui.RequestScheduleGUI">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.project3.view.gui.RequestScheduleGUI">
    <children>
       <fx:include source="commonPanel.fxml" />
       <BorderPane prefHeight="542.4" prefWidth="762.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -24,20 +24,6 @@
          <center>
             <AnchorPane prefHeight="468.0" prefWidth="762.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView fx:id="scheduleChoice" layoutX="55.0" layoutY="86.0" prefHeight="332.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
-                    <columns>
-                      <TableColumn fx:id="name" prefWidth="239.20001983642578" text="Nome" />
-                      <TableColumn fx:id="trainer" prefWidth="260.7999572753906" text="Trainer" />
-                        <TableColumn fx:id="seleziona" prefWidth="151.20001220703125" text="Seleziona" />
-                    </columns>
-                     <effect>
-                        <DropShadow height="15.0" radius="7.0" width="15.0">
-                           <color>
-                              <Color opacity="0.6850152611732483" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </TableView>
                   <Button fx:id="indietro" layoutX="55.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#goToCustomerHomepage" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 22px; -fx-background-color: #efefef;" text="Indietro">
                      <font>
                         <Font name="Segoe UI Semibold" size="14.0" />
@@ -91,6 +77,20 @@
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                   </Text>
+                  <TableView fx:id="scheduleChoice" layoutX="55.0" layoutY="89.0" prefHeight="330.0" prefWidth="651.0" style="-fx-background-color: #efefef; -fx-background-radius: 22px;">
+                     <columns>
+                        <TableColumn fx:id="name" prefWidth="172.79999542236328" text="Nome" />
+                        <TableColumn fx:id="trainer" prefWidth="328.7999572753906" text="Trainer" />
+                        <TableColumn fx:id="seleziona" prefWidth="148.7999267578125" />
+                     </columns>
+                     <effect>
+                        <DropShadow height="15.0" radius="7.0" width="15.0">
+                           <color>
+                              <Color opacity="0.6850152611732483" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </TableView>
                </children>
             </AnchorPane>
          </center>

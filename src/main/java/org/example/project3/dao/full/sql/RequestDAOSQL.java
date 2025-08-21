@@ -3,6 +3,7 @@ package org.example.project3.dao.full.sql;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
+import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 import org.example.project3.query.RequestQuery;
 import org.example.project3.utilities.enums.Role;
@@ -21,6 +22,11 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String CUSTOMER = "customer";
     private static final String DATETIME = "datetime";
     private static final String COURSE = "c.name";
+    private static final String EXERCISENAME = "exercise.name";
+    private static final String SCHEDULENAME = "schedule.name";
+    private static final String SCHEDULECUSTOMER = "schedule.customer";
+    private static final String SCHEDULEID = "schedule.id";
+    private static final String REQUESTID = "request.id";
 
     private static final String NAME = "cu.name";
     private static final String SURNAME = "surname";
@@ -30,6 +36,7 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String HOUR = "hour";
     private static final String DATE = "date";
     private static final String BIRTHDAY = "birthday";
+
 
 
     @Override
@@ -58,11 +65,32 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public void deleteRequest(Request request) throws DAOException {
         try(Connection conn = ConnectionSQL.getConnection()){
-            RequestQuery.deleteRequest(conn, request.getSchedule().getCustomer().getCredentials().getMail(), request.getSchedule().getTrainer().getCredentials().getMail(),request.getSchedule().getId());
+            RequestQuery.deleteRequest(conn, request);
+
         } catch(SQLException | DbOperationException e){
             sendException(e);
         }
     }
+
+    @Override
+    public void retrieveRequests(Trainer trainer, List<Request> requests)throws DAOException, NoResultException{
+        try (Connection conn = ConnectionSQL.getConnection();
+             ResultSet rs = RequestQuery.retrieveRequests(conn, trainer.getCredentials().getMail())){
+            while (rs.next()) {
+                Request request = new Request(rs.getLong(REQUESTID),
+                        new Schedule(rs.getLong(SCHEDULEID),rs.getString(SCHEDULENAME),new Customer(new Credentials(rs.getString(SCHEDULECUSTOMER), Role.CLIENT)),trainer),
+                        new Exercise(rs.getString(EXERCISENAME)),
+                        rs.getString(REASON),
+                        rs.getTimestamp(DATETIME).toLocalDateTime());
+                requests.add(request);
+            }
+        } catch (SQLException e) {
+            sendException(e);
+        }catch (NoResultException _){
+            throw new NoResultException("Nessuna richiesta trovata");
+        }
+    }
+
 
     @Override
     public void removeCourseRequest(Reservation reservation){

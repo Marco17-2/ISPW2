@@ -13,5 +13,7 @@ public interface ExerciseDAO {
     void updateExercise(Exercise exercise) throws DAOException;
     void retrieveExercise(Exercise exercise) throws DAOException, NoResultException;
     void searchExercises(List<Exercise> exercises, String search, Schedule schedule) throws DAOException, NoResultException;
+    void searchAllExercises(List<Exercise> exercises, String search) throws DAOException, NoResultException;
     void deleteExercise(Exercise exercise) throws DAOException;
+    void retrieveAllExercises(List<Exercise> exercises)  throws DAOException;
 }

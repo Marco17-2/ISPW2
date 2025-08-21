@@ -25,6 +25,10 @@ public class Request {
         this.dateTime = null;
     }
 
+    public void  setId(long id) {
+        this.id = id;
+    }
+
     public long getID() {
         return id;
     }

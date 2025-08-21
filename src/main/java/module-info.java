@@ -11,6 +11,8 @@ module org.example.project3 {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires java.xml.crypto;
+    requires javafx.base;
+    requires javafx.graphics;
 
     opens org.example.project3.view to javafx.fxml;
 

@@ -59,6 +59,17 @@ public class ExerciseQuery {
         return pstmt.executeQuery();
     }
 
+    public static ResultSet retrieveAllExercises(Connection conn) throws DbOperationException {
+        try{
+            String query = "SELECT id, name, description, numberSeries, numberReps, restTime FROM exercise ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new DbOperationException("Errore nel recupero degli esercizi"+e.getMessage(), e);
+        }
+    }
+
+
     public static ResultSet searchExercises(Connection conn, String search, Schedule schedule) throws SQLException {
         try {
             String query = "SELECT exercise.id, exercise.name, exercise.description, exercise.numberSeries, exercise.numberReps, exercise.restTime FROM exercise JOIN participation ON participation.exercise = exercise.id JOIN schedule ON schedule.id = participation.schedule WHERE LOWER(exercise.name) LIKE LOWER(?) AND schedule.id = LOWER(?)";
@@ -68,8 +79,20 @@ public class ExerciseQuery {
             pstmt.setLong(2, schedule.getId());
             return pstmt.executeQuery();
         } catch (SQLException _) {
-            Printer.errorPrint("Errore nella ricerca della scheda");
+            Printer.errorPrint("Errore nella ricerca degli esercizi");
             return null;
+        }
+    }
+
+    public static ResultSet searchAllExercises(Connection conn, String search) throws DbOperationException {
+        try {
+            String query = "SELECT id, name, description, numberSeries, numberReps, restTime FROM exercise WHERE LOWER(name) LIKE LOWER(?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            String wildcard = "%" + search + "%";
+            pstmt.setString(1, wildcard);
+            return pstmt.executeQuery();
+        }catch (SQLException e) {
+            throw new DbOperationException("Errore nella ricerca", e);
         }
     }
 
@@ -84,7 +107,7 @@ public class ExerciseQuery {
             pstmt.setLong(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella rimozione dell'esercizio", e);
+            throw new DbOperationException("Errore nella rimozione dell'esercizio"+e.getMessage(), e);
         }
     }
 

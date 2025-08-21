@@ -8,7 +8,9 @@ import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Schedule;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ExerciseDAOP implements ExerciseDAO {
     @Override
@@ -60,6 +62,26 @@ public class ExerciseDAOP implements ExerciseDAO {
     }
 
     @Override
+    public void retrieveAllExercises(List<Exercise> exercises) throws NoResultException,DAOException {
+        if (exercises == null) {
+            throw new DAOException("La lista passata come parametro è null");
+        }
+
+        Map<?, Exercise> exercisesMap = SharedResources.getInstance().getExercises();
+        if (exercisesMap == null) {
+            throw new DAOException("Errore nel recupero della mappa degli esercizi");
+        }
+
+        List<Exercise> retrievedExercises = new ArrayList<>(exercisesMap.values());
+        if (retrievedExercises.isEmpty()) {
+            throw new NoResultException("Nessun esercizio trovato.");
+        }
+
+        exercises.clear(); // Pulisci la lista esistente
+        exercises.addAll(retrievedExercises);
+    }
+
+    @Override
     public void searchExercises(List<Exercise> exercises, String search, Schedule schedule) throws DAOException ,NoResultException{
         if (search == null || schedule == null) {
                 throw new DAOException("Parametri non validi: search o schedule null");
@@ -78,6 +100,28 @@ public class ExerciseDAOP implements ExerciseDAO {
             }
         }
 
+        if (exercises.isEmpty()) {
+            throw new NoResultException("Nessun esercizio trovato per: " + search);
+        }
+    }
+
+    @Override
+    public void searchAllExercises(List<Exercise> exercises, String search) throws DAOException ,NoResultException{
+        if (search == null) {
+            throw new DAOException("Parametri non validi: search o schedule null");
+        }
+        String lowerSearch = search.toLowerCase();
+
+        List<Exercise> storedExercises = new ArrayList<>(SharedResources.getInstance().getExercises().values());
+        if (storedExercises == null) {
+            throw new DAOException("Errore nel recupero degli esercizi nel DAO");
+        }
+
+        for (Exercise exercise : storedExercises) {
+            if (exercise.getName().toLowerCase().contains(lowerSearch)) {
+                exercises.add(exercise);
+            }
+        }
         if (exercises.isEmpty()) {
             throw new NoResultException("Nessun esercizio trovato per: " + search);
         }

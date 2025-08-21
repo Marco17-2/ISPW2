@@ -23,7 +23,7 @@ public class RequestQuery {
     }
 
     public static ResultSet hasAlreadySentARequest(Connection conn, Request request) throws DbOperationException {
-        String query = "SELECT COUNT(*) FROM request JOIN schedule ON schedule.id = request.schedule WHERE schedule.customer= ? AND schedule.trainer= ? AND schedule.id=? ";
+        String query = "SELECT COUNT(*) FROM request JOIN schedule ON schedule.id = request.schedule WHERE schedule.customer= ? AND schedule.trainer= ? AND schedule.id=?";
         try{
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, request.getSchedule().getCustomer().getCredentials().getMail());
@@ -31,24 +31,21 @@ public class RequestQuery {
             preparedStatement.setLong(3, request.getSchedule().getId());
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nel controllo della richiesta", e);
+            throw new DbOperationException("Errore nel controllo della richiesta"+ e.getMessage(), e);
         }
     }
 
     public static ResultSet retrieveRequests(Connection conn, String mailCustomer) throws SQLException {
-        String query = "SELECT id, schedule, exercise, reason, date FROM request WHERE schedule.customer = ?";
+        String query = "SELECT request.id, schedule.id,schedule.name, schedule.customer, exercise.name, reason, datetime FROM request JOIN schedule ON request.schedule=schedule.id JOIN exercise ON exercise.id=request.exercise WHERE schedule.trainer = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mailCustomer);
         return pstmt.executeQuery();
     }
 
-    public static void deleteRequest(Connection conn,String mailCustomer, String mailTrainer, Long schedule) throws DbOperationException {
-        String query = "DELETE FROM request\n" +
-                "WHERE schedule IN (SELECT id FROM schedule WHERE id = ? AND customer = ? AND trainer = ?)";
+    public static void deleteRequest(Connection conn,Request request) throws DbOperationException {
+        String query = "DELETE FROM request WHERE schedule=? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setLong(1, schedule);
-            pstmt.setString(2, mailCustomer);
-            pstmt.setString(3, mailTrainer);
+            pstmt.setLong(1, request.getSchedule().getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nella rimozione della richiesta", e);

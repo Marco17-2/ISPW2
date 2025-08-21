@@ -72,6 +72,7 @@ public class RequestScheduleGUI extends CommonGUI{
                     try {
                         ScheduleBean scheduleBean = getTableView().getItems().get(getIndex());
                         scheduleController.retriveExercises(scheduleBean);
+                        scheduleController.retrieveTrainer(scheduleBean);
                         RequestBean requestBean = new RequestBean(scheduleBean);
                         completeRequest(requestBean, event);
                     }catch(DAOException _){

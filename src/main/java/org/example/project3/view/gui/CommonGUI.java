@@ -38,6 +38,8 @@ public abstract class CommonGUI {
     protected static final String COURSE_LIST="COURSE_LIST";
     protected static final String CUSTOMER_DETAILS="CUSTOMER_DETAILS";
     protected static final String TRAINER_HOMEPAGE="TRAINER_HOMEPAGE";
+    protected static final String REQUEST_TRAINER="REQUEST_TRAINER";
+    protected static final String REQUEST_EXERCISE="REQUEST_EXERCISE";
 
 
 
@@ -244,6 +246,25 @@ public abstract class CommonGUI {
             throw new LoadingException("Errore durante il caricamento della scena", e);
         }
     }
+
+    @FXML
+    protected void goToTrainerRequests(MouseEvent event, List<RequestBean> requestBeans){
+        try {
+            String fxmlPath = fxmlPathConfig.getFXMLPath(REQUEST_TRAINER);
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            FXMLLoader fxmlLoader = new FXMLLoader(resourceUrl);
+            fxmlLoader.setControllerFactory(c -> new RequestTrainerGUI(session, fxmlPathConfig));
+            Parent root = fxmlLoader.load();
+            ((RequestTrainerGUI) fxmlLoader.getController()).initializeObserver();
+            ((RequestTrainerGUI) fxmlLoader.getController()).loadRequests(requestBeans);
+            changeScene(root, event);
+
+        }catch(IOException e){
+            throw new LoadingException("Errore durante il caricamento della scena", e);
+        }
+    }
+
+
 
     //Metodo per cambiare finestra
     protected void changeScene(Parent root, MouseEvent event) {
