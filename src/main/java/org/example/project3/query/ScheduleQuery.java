@@ -23,7 +23,7 @@ public class ScheduleQuery {
             preparedStatement.setString(4, schedule.getTrainer().getCredentials().getMail());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'aggiunta della scheda"+e.getMessage(), e);
+            throw new DbOperationException("Errore nell'aggiunta della scheda", e);
         }
     }
 
@@ -60,18 +60,34 @@ public class ScheduleQuery {
 
 
     public static void modifySchedule(Connection conn, Schedule schedule, Exercise newExercise, Exercise oldExercise) throws DbOperationException {
-        String query = "UPDATE participation SET exercise = ? WHERE schedule = ? AND exercise = ?";
+        String checkQuery = "SELECT COUNT(*) FROM participation WHERE schedule = ? AND exercise = ?";
+        String updateQuery = "UPDATE participation SET exercise = ? WHERE schedule = ? AND exercise = ?";
+
         try {
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setLong(1, newExercise.getId());
-            pstmt.setLong(2, schedule.getId());
-            pstmt.setLong(3, oldExercise.getId());
-            pstmt.executeUpdate();
+            // Check if the new exercise already exists for this schedule
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setLong(1, schedule.getId());
+                checkStmt.setLong(2, newExercise.getId());
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next()) {
+                    throw new DbOperationException("L'esercizio è già associato a questa scheda.");
+                }
+            }
+
+            // Perform the update
+            try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+                updateStmt.setLong(1, newExercise.getId());
+                updateStmt.setLong(2, schedule.getId());
+                updateStmt.setLong(3, oldExercise.getId());
+                int rowsAffected = updateStmt.executeUpdate();
+                if (rowsAffected == 0) {
+                    throw new DbOperationException("Nessuna riga aggiornata. Verifica i dati della scheda e dell'esercizio.");
+                }
+            }
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nella modifica del scheda", e);
+            throw new DbOperationException("Errore nella modifica del scheda: " + e.getMessage(), e);
         }
     }
-
     public static void deleteSchedule(Connection conn, String mailCustomer, String mailTrainer, String name) throws DbOperationException {
         String query = "DELETE FROM schedule WHERE customer = ? AND trainer = ? AND name = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {

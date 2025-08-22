@@ -59,10 +59,11 @@ public class ExerciseQuery {
         return pstmt.executeQuery();
     }
 
-    public static ResultSet retrieveAllExercises(Connection conn) throws DbOperationException {
+    public static ResultSet retrieveAllExercises(Connection conn,Schedule schedule) throws DbOperationException {
         try{
-            String query = "SELECT id, name, description, numberSeries, numberReps, restTime FROM exercise ";
+            String query = "SELECT id, name, description, numberSeries, numberReps, restTime FROM exercise WHERE id NOT IN  (  SELECT exercise  FROM participation WHERE schedule = ?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setLong(1, schedule.getId());
             return pstmt.executeQuery();
         } catch (SQLException e) {
             throw new DbOperationException("Errore nel recupero degli esercizi"+e.getMessage(), e);

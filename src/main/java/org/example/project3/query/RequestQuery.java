@@ -36,7 +36,7 @@ public class RequestQuery {
     }
 
     public static ResultSet retrieveRequests(Connection conn, String mailCustomer) throws SQLException {
-        String query = "SELECT request.id, schedule.id,schedule.name, schedule.customer, exercise.name, reason, datetime FROM request JOIN schedule ON request.schedule=schedule.id JOIN exercise ON exercise.id=request.exercise WHERE schedule.trainer = ?";
+        String query = "SELECT request.id, schedule.id, schedule.name, schedule.customer, exercise.id, exercise.name, reason, datetime FROM request JOIN schedule ON request.schedule=schedule.id JOIN exercise ON exercise.id=request.exercise WHERE schedule.trainer = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, mailCustomer);
         return pstmt.executeQuery();

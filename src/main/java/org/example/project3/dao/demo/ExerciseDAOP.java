@@ -6,6 +6,7 @@ import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 
 import org.example.project3.model.Exercise;
+import org.example.project3.model.Request;
 import org.example.project3.model.Schedule;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class ExerciseDAOP implements ExerciseDAO {
     }
 
     @Override
-    public void retrieveAllExercises(List<Exercise> exercises) throws NoResultException,DAOException {
+    public void retrieveAllExercises(Request request, List<Exercise> exercises) throws NoResultException,DAOException {
         if (exercises == null) {
             throw new DAOException("La lista passata come parametro è null");
         }
@@ -72,7 +73,19 @@ public class ExerciseDAOP implements ExerciseDAO {
             throw new DAOException("Errore nel recupero della mappa degli esercizi");
         }
 
+        List<Exercise> scheduleExercises = request.getSchedule().getExercises();
+        if (scheduleExercises == null) {
+            scheduleExercises = new ArrayList<>(); // Inizializza come vuota se null
+        }
+
         List<Exercise> retrievedExercises = new ArrayList<>(exercisesMap.values());
+        for (Exercise exercise : exercisesMap.values()) {
+            boolean isInSchedule = scheduleExercises.stream()
+                    .anyMatch(se -> se.getId() == exercise.getId());
+            if (!isInSchedule) {
+                retrievedExercises.add(exercise);
+            }
+        }
         if (retrievedExercises.isEmpty()) {
             throw new NoResultException("Nessun esercizio trovato.");
         }

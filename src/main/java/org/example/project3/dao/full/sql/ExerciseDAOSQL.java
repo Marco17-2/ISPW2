@@ -1,5 +1,6 @@
 package org.example.project3.dao.full.sql;
 
+import org.example.project3.beans.RequestBean;
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
@@ -59,9 +60,9 @@ public class ExerciseDAOSQL implements ExerciseDAO {
     }
 
     @Override
-    public void retrieveAllExercises(List<Exercise> exercises) throws NoResultException,DAOException {
+    public void retrieveAllExercises(Request request,List<Exercise> exercises) throws NoResultException,DAOException {
         try (Connection conn = ConnectionSQL.getConnection();
-             ResultSet rs = ExerciseQuery.retrieveAllExercises(conn)){
+             ResultSet rs = ExerciseQuery.retrieveAllExercises(conn,request.getSchedule())){
             while (rs.next()) {
                 Exercise exercise = new Exercise(
                         rs.getInt(ID),

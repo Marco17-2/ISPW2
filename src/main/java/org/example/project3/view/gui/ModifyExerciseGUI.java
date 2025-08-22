@@ -91,8 +91,8 @@ public class ModifyExerciseGUI extends CommonGUI {
                         alert.setContentText("Richiesta modificata con successo");
                         alert.showAndWait();
                         goToTrainerHome(event);
-                    } catch (DAOException _) {
-                        error.setText("Errore nel DAO");
+                    } catch (DAOException e) {
+                        error.setText(e.getMessage());
                         error.setVisible(true);
                     }
                 });

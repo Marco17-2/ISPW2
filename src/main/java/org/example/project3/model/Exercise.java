@@ -29,8 +29,8 @@ public class Exercise {
         this.restTime = restTime;
     }
 
-    public Exercise(String name) {
-        this.id = 0;
+    public Exercise(long id,String name) {
+        this.id = id;
         this.name = name;
         this.description = null;
         this.numberSeries = null;

@@ -69,10 +69,11 @@ public class ScheduleController {
         }
     }
 
-    public void retriveAllExercises(List<ExerciseBean> exerciseBeans)throws NoResultException,DAOException{
+    public void retriveAllExercises(RequestBean requestBean,List<ExerciseBean> exerciseBeans)throws NoResultException,DAOException{
         try {
+            Request request= beanAndModelMapperFactory.fromBeanToModel(requestBean, RequestBean.class);
             exercises.clear();
-            exerciseDAO.retrieveAllExercises(exercises);
+            exerciseDAO.retrieveAllExercises(request,exercises);
             for (int i = 0; i < exercises.size(); i++) {
                 exerciseBeans.add(beanAndModelMapperFactory.fromModelToBean(exercises.get(i), Exercise.class));
             }
@@ -175,7 +176,7 @@ public class ScheduleController {
         try{
             scheduleDAO.updateSchedule(request,exercise);
         } catch (Exception e){
-            throw new DAOException("Errore nell'invio della richiesta controller",e);
+            throw new DAOException(e.getMessage(),e);
         }
     }
 

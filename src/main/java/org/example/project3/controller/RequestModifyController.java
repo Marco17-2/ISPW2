@@ -14,6 +14,7 @@ import org.example.project3.model.*;
 import org.example.project3.patterns.factory.BeanAndModelMapperFactory;
 import org.example.project3.patterns.factory.FactoryDAO;
 import org.example.project3.patterns.observer.RequestManagerConcreteSubject;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.ArrayList;
 import java.util.List;

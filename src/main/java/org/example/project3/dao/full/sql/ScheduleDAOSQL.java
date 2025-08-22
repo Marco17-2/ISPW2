@@ -134,7 +134,7 @@ public class ScheduleDAOSQL implements ScheduleDAO {
         try (Connection conn = ConnectionSQL.getConnection()) {
             ScheduleQuery.modifySchedule(conn, request.getSchedule(), exercise, request.getExercise());
         } catch (SQLException | DbOperationException e) {
-            handleException(e);
+            throw new DAOException(e.getMessage(), e);
         }
     }
 

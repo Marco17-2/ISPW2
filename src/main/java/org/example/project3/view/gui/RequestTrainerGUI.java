@@ -142,7 +142,7 @@ public class RequestTrainerGUI extends CommonGUI implements Observer {
             fxmlLoader.setControllerFactory(c -> new ModifyExerciseGUI( fxmlPathConfig,session));
             Parent root = fxmlLoader.load();
             List<ExerciseBean> exerciseBeansParam = new ArrayList<>();
-            scheduleController.retriveAllExercises(exerciseBeansParam);
+            scheduleController.retriveAllExercises(requestBean,exerciseBeansParam);
             ((ModifyExerciseGUI)fxmlLoader.getController()).loadExercises(requestBean,exerciseBeansParam);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -27,6 +27,7 @@ public class RequestDAOSQL implements RequestDAO {
     private static final String SCHEDULECUSTOMER = "schedule.customer";
     private static final String SCHEDULEID = "schedule.id";
     private static final String REQUESTID = "request.id";
+    private static final String EXERCISEID = "exercise.id";
 
     private static final String NAME = "cu.name";
     private static final String SURNAME = "surname";
@@ -79,7 +80,7 @@ public class RequestDAOSQL implements RequestDAO {
             while (rs.next()) {
                 Request request = new Request(rs.getLong(REQUESTID),
                         new Schedule(rs.getLong(SCHEDULEID),rs.getString(SCHEDULENAME),new Customer(new Credentials(rs.getString(SCHEDULECUSTOMER), Role.CLIENT)),trainer),
-                        new Exercise(rs.getString(EXERCISENAME)),
+                        new Exercise(rs.getLong(EXERCISEID),rs.getString(EXERCISENAME)),
                         rs.getString(REASON),
                         rs.getTimestamp(DATETIME).toLocalDateTime());
                 requests.add(request);
