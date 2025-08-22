@@ -159,7 +159,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
     private void loadExercises(){
         try {
             exerciseBeans.clear();
-            scheduleController.retriveAllExercises(exerciseBeans);
+            scheduleController.retriveAllExercises(requestBean,exerciseBeans);
         }catch(DAOException _){
             Printer.errorPrint("Errore nel DAO. Riprova.");
             scanner.nextLine();

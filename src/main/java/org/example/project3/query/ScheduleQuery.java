@@ -69,10 +69,12 @@ public class ScheduleQuery {
                 checkStmt.setLong(1, schedule.getId());
                 checkStmt.setLong(2, newExercise.getId());
                 ResultSet rs = checkStmt.executeQuery();
-                if (rs.next()) {
+                if (rs.next() && rs.getInt(1) > 0) {
                     throw new DbOperationException("L'esercizio è già associato a questa scheda.");
                 }
             }
+
+            System.out.println("Schedule ID: " + schedule.getId() + ", Old Exercise ID: " + oldExercise.getId() +", New Exercise ID: " + newExercise.getId());
 
             // Perform the update
             try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {

@@ -84,7 +84,8 @@ public class ModifyExerciseGUI extends CommonGUI {
                 Button btn = new Button(buttonText);
                 btn.setOnMouseClicked(event -> {
                         ExerciseBean exerciseBean = getTableView().getItems().get(getIndex());
-                        send(exerciseBean,event);
+                        send(exerciseBean);
+                        goToTrainerHome(event);
                 });
                 return btn;
             }
@@ -101,7 +102,7 @@ public class ModifyExerciseGUI extends CommonGUI {
         };
     }
 
-    private void send(ExerciseBean exerciseBean, MouseEvent event) {
+    private void send(ExerciseBean exerciseBean) {
         try {
             scheduleController.updateSchedule(requestBean, exerciseBean);
             requestModifyController.deleteRequest(requestBean);
@@ -110,7 +111,6 @@ public class ModifyExerciseGUI extends CommonGUI {
             alert.setHeaderText(null);
             alert.setContentText("Richiesta modificata con successo");
             alert.showAndWait();
-            goToTrainerHome(event);
         }catch(DAOException e){
             handleException(e);
         }
