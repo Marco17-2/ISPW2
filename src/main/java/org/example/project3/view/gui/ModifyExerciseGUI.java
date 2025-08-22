@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.example.project3.beans.ExerciseBean;
 import org.example.project3.beans.RequestBean;
@@ -82,21 +83,8 @@ public class ModifyExerciseGUI extends CommonGUI {
             private Button createButton(String buttonText) throws DAOException {
                 Button btn = new Button(buttonText);
                 btn.setOnMouseClicked(event -> {
-                    try {
                         ExerciseBean exerciseBean = getTableView().getItems().get(getIndex());
-                        scheduleController.updateSchedule(requestBean, exerciseBean);
-                        requestModifyController.deleteRequest(requestBean);
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Invio modifica");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Richiesta modificata con successo");
-                        alert.showAndWait();
-                        goToTrainerHome(event);
-                    }catch(DAOException e){
-                        String errorMessage=e.getMessage();
-                        error.setText(errorMessage);
-                        error.setVisible(true);
-                    }
+                        send(exerciseBean,event);
                 });
                 return btn;
             }
@@ -111,6 +99,22 @@ public class ModifyExerciseGUI extends CommonGUI {
                 }
             }
         };
+    }
+
+    private void send(ExerciseBean exerciseBean, MouseEvent event) {
+        try {
+            scheduleController.updateSchedule(requestBean, exerciseBean);
+            requestModifyController.deleteRequest(requestBean);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invio modifica");
+            alert.setHeaderText(null);
+            alert.setContentText("Richiesta modificata con successo");
+            alert.showAndWait();
+            goToTrainerHome(event);
+        }catch(DAOException e){
+            handleException(e);
+        }
+
     }
 
     @FXML
