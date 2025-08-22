@@ -12,6 +12,7 @@ import org.example.project3.beans.ScheduleBean;
 import org.example.project3.controller.RequestModifyController;
 import org.example.project3.controller.ScheduleController;
 import org.example.project3.exceptions.DAOException;
+import org.example.project3.exceptions.DbOperationException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.utilities.others.FXMLPathConfig;
 import org.example.project3.utilities.others.mappers.Session;
@@ -78,7 +79,7 @@ public class ModifyExerciseGUI extends CommonGUI {
 
             private final Button button = createButton(buttonText);
 
-            private Button createButton(String buttonText) {
+            private Button createButton(String buttonText) throws DAOException {
                 Button btn = new Button(buttonText);
                 btn.setOnMouseClicked(event -> {
                     try {
@@ -91,9 +92,8 @@ public class ModifyExerciseGUI extends CommonGUI {
                         alert.setContentText("Richiesta modificata con successo");
                         alert.showAndWait();
                         goToTrainerHome(event);
-                    } catch (DAOException e) {
-                        error.setText(e.getMessage());
-                        error.setVisible(true);
+                    }catch(DAOException e){
+                        throw new DAOException(e.getMessage(),e);
                     }
                 });
                 return btn;
@@ -140,15 +140,20 @@ public class ModifyExerciseGUI extends CommonGUI {
     }
 
     private void setupTable(List<ExerciseBean> exerciseBeans) {
-        id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
-        description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
-        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
-        restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().getId() + " secondi"));
-        seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
-        exerciseChoice.getItems().clear();
-        exerciseChoice.getItems().addAll(exerciseBeans);
+        try {
+            id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
+            reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
+            description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+            name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+            series.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberSeries()));
+            restTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRestTime().getId() + " secondi"));
+            seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
+            exerciseChoice.getItems().clear();
+            exerciseChoice.getItems().addAll(exerciseBeans);
+        } catch (DAOException e) {
+            error.setText(e.getMessage());
+            error.setVisible(true);
+        }
     }
 
 
