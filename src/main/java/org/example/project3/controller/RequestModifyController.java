@@ -53,7 +53,7 @@ public class RequestModifyController {
             RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();
             requestManagerConcreteSubject.addRequest(request);
         } catch (Exception e){
-            throw new DAOException("Errore nell'invio della richiesta controller",e);
+            throw new DAOException("Errore nell'invio della richiesta controller"+e.getMessage(),e);
         }
     }
 
@@ -89,6 +89,8 @@ public class RequestModifyController {
 
                 requestBeans.add(requestBean);
             }
+            RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();
+            requestManagerConcreteSubject.loadRequests(requests);
         }catch(NoResultException _){
             throw new NoResultException("Nessuna scheda trovata");
         }catch(DAOException e){

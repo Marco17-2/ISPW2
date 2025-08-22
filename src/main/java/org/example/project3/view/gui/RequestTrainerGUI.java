@@ -65,6 +65,7 @@ public class RequestTrainerGUI extends CommonGUI implements Observer {
                 btn.setOnMouseClicked(event -> {
                     RequestBean requestBean = getTableView().getItems().get(getIndex());
                     manageRequest(requestBean, isAccept, event);
+
                 });
                 return btn;
             }
@@ -91,8 +92,9 @@ public class RequestTrainerGUI extends CommonGUI implements Observer {
                 alert.setTitle("Rifiuta richiesta");
                 alert.setHeaderText(null);
                 alert.setContentText("Rimozione effettuata con successo");
+//                goToTrainerHome(event);
                 alert.showAndWait();
-                goToTrainerHome(event);
+
             }catch(DAOException e){
                 error.setText(e.getMessage());
                 error.setVisible(true);
@@ -121,17 +123,20 @@ public class RequestTrainerGUI extends CommonGUI implements Observer {
     public void update(){
         //restituzione lista aggionrata
         List<Request> request = requestManagerConcreteSubject.getRequests();
-        // aggiorna lista dei vean
-        requestBeans.clear();
-        for(Request req : request){
-            requestBeans.add(requestModifyController.createRequestBean(req));
-        }
-        refreshTableView();
+        javafx.application.Platform.runLater(() -> {
+            // aggiorna lista dei bean
+            requestBeans.clear();
+            for(Request req : request){
+                requestBeans.add(requestModifyController.createRequestBean(req));
+            }
+            refreshTableView();
+        });
     }
 
     private void refreshTableView() {
         requestList.getItems().clear();
         requestList.getItems().addAll(requestBeans);
+        requestList.refresh();
     }
 
     protected void completeRequest(MouseEvent event, RequestBean requestBean){

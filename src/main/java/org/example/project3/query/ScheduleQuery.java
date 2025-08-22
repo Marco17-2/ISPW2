@@ -73,9 +73,6 @@ public class ScheduleQuery {
                     throw new DbOperationException("L'esercizio è già associato a questa scheda.");
                 }
             }
-
-            System.out.println("Schedule ID: " + schedule.getId() + ", Old Exercise ID: " + oldExercise.getId() +", New Exercise ID: " + newExercise.getId());
-
             // Perform the update
             try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
                 updateStmt.setLong(1, newExercise.getId());
@@ -90,6 +87,7 @@ public class ScheduleQuery {
             throw new DbOperationException("Errore nella modifica del scheda: " + e.getMessage(), e);
         }
     }
+
     public static void deleteSchedule(Connection conn, String mailCustomer, String mailTrainer, String name) throws DbOperationException {
         String query = "DELETE FROM schedule WHERE customer = ? AND trainer = ? AND name = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {

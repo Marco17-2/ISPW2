@@ -43,7 +43,8 @@ public class RequestDAOSQL implements RequestDAO {
     @Override
     public void sendRequest(Request request) throws DAOException {
         try(Connection conn = ConnectionSQL.getConnection()) {
-            RequestQuery.sendRequest(conn, request.getSchedule(), request.getExercise(), request.getReason());
+            long id=RequestQuery.sendRequest(conn, request.getSchedule(), request.getExercise(), request.getReason());
+            request.setId(id);
         } catch (SQLException | DbOperationException e){
             sendException(e);
         }

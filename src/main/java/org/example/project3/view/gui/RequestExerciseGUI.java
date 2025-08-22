@@ -154,7 +154,7 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
                 goToCustomerHomepage(event);
             }else{
                 Printer.errorPrint("Hai già inviato una richiesta");
-                error.setText("Hai già inviato una richiesta per questo esercizio di questa scheda!");
+                error.setText("Hai già inviato una richiesta per questa scheda!");
                 error.setVisible(true);
             }
         }catch(EmptyFieldException | DAOException e){

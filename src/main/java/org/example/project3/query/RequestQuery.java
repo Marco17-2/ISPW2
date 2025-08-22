@@ -9,16 +9,24 @@ import java.time.LocalDateTime;
 public class RequestQuery {
     private RequestQuery() {}
 
-    public static void sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason) throws DbOperationException {
+    public static long sendRequest(Connection conn, Schedule schedule, Exercise exercise, String reason) throws DbOperationException, SQLException {
         String query = "INSERT INTO request (schedule, exercise, reason, datetime) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(1, schedule.getId());
             preparedStatement.setLong(2, exercise.getId());
             preparedStatement.setString(3, reason);
             preparedStatement.setObject(4, LocalDateTime.now());
             preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getLong(1);
+                } else {
+                    throw new DbOperationException("No ID obtained after insertion.");
+                }
+            }
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nell'invio della richiesta db: ", e);
+            throw new DbOperationException("Errore nell'invio della richiesta db: " + e.getMessage(), e);
         }
     }
 
@@ -31,7 +39,7 @@ public class RequestQuery {
             preparedStatement.setLong(3, request.getSchedule().getId());
             return preparedStatement.executeQuery();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nel controllo della richiesta"+ e.getMessage(), e);
+            throw new DbOperationException("Errore nel controllo della richiesta", e);
         }
     }
 
