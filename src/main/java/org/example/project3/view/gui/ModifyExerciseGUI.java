@@ -93,7 +93,7 @@ public class ModifyExerciseGUI extends CommonGUI {
                         alert.showAndWait();
                         goToTrainerHome(event);
                     }catch(DAOException e){
-                        throw new DAOException(e.getMessage(),e);
+                        handleException(e);
                     }
                 });
                 return btn;
@@ -140,7 +140,6 @@ public class ModifyExerciseGUI extends CommonGUI {
     }
 
     private void setupTable(List<ExerciseBean> exerciseBeans) {
-        try {
             id.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
             reps.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getNumberReps()));
             description.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
@@ -150,10 +149,6 @@ public class ModifyExerciseGUI extends CommonGUI {
             seleziona.setCellFactory(param -> createButtonCell("Seleziona"));
             exerciseChoice.getItems().clear();
             exerciseChoice.getItems().addAll(exerciseBeans);
-        } catch (DAOException e) {
-            error.setText(e.getMessage());
-            error.setVisible(true);
-        }
     }
 
 
