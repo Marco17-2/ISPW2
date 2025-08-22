@@ -166,8 +166,8 @@ public class RequestExerciseGUI extends CommonGUI implements Observer {
 
     @FXML
     public void cancelSearch(){
-        requestBean.getScheduleBean().setExercisesBean(exerciseList);
-        loadExercises(requestBean);
+        this.requestBean.getScheduleBean().setExercisesBean(exerciseList);
+        loadExercises(this.requestBean);
         ricerca.setText("");
         cancellaRicerca.setVisible(false);
     }
