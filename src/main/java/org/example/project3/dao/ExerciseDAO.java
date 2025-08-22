@@ -1,6 +1,6 @@
 package org.example.project3.dao;
 
-import org.example.project3.beans.RequestBean;
+
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Exercise;

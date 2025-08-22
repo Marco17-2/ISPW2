@@ -1,6 +1,5 @@
 package org.example.project3.dao.full.sql;
 
-import org.example.project3.beans.RequestBean;
 import org.example.project3.dao.ExerciseDAO;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.DbOperationException;
