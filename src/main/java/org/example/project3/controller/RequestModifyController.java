@@ -29,7 +29,7 @@ public class RequestModifyController {
     }
 
     //metodo per eliminare una richiesta
-    public void deleteRequest(RequestBean requestBean) {
+    public void deleteRequest(RequestBean requestBean) throws DAOException{
         try {
             RequestManagerConcreteSubject requestManagerConcreteSubject = RequestManagerConcreteSubject.getInstance();  //recupero istanza del ConcreteSubject
             Request request = beanAndModelMapperFactory.fromBeanToModel(requestBean, RequestBean.class);
