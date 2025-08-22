@@ -93,7 +93,9 @@ public class ModifyExerciseGUI extends CommonGUI {
                         alert.showAndWait();
                         goToTrainerHome(event);
                     }catch(DAOException e){
-                        handleException(e);
+                        String errorMessage=e.getMessage();
+                        error.setText(errorMessage);
+                        error.setVisible(true);
                     }
                 });
                 return btn;
