@@ -95,7 +95,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
                 goNext(context, new TrainerHomepageCLI(user));
             }
         }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            printException();
         }
     }
 
@@ -119,7 +119,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
                 default -> Printer.errorPrint("Scelta non valida!");
             }
         }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            printException();
         }
     }
 
@@ -136,7 +136,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
                 goNext(context, new TrainerHomepageCLI(user));
             }
         }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            printException();
         }
     }
 
@@ -146,7 +146,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
             Printer.println("Richiesta eliminata con successo!");
             goNext(context, new TrainerHomepageCLI(user));
         }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            printException();
         }
     }
 
@@ -185,7 +185,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
             scheduleController.retriveAllExercises(requestBean,exerciseTemp);
             exerciseBeans.addAll(exerciseTemp);
         }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            printException();
         }
     }
 
@@ -193,7 +193,7 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         try {
             requestModifyController.deleteRequest(requestBean);
         }catch(DAOException _){
-            Printer.errorPrint("Errore nel DAO. Riprova.");
+            printException();
         }
     }
 
@@ -206,6 +206,9 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
         Printer.print("Opzione scelta: ");
     }
 
+    private void printException(){
+        Printer.errorPrint("Errore nel DAO. Riprova.");
+    }
 
     private void handleException(Exception e){
         Printer.println(String.format("Errore nel DAO. Riprova. %s", e.getMessage()));

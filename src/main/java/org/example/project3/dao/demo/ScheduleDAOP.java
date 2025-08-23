@@ -5,7 +5,6 @@ import org.example.project3.dao.demo.shared.SharedResources;
 import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
-import org.example.project3.utilities.others.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +77,7 @@ public class ScheduleDAOP implements ScheduleDAO {
         for (Schedule schedule : SharedResources.getInstance().getSchedules().values()) {
             try{
                  id= Long.parseLong(lowerSearch);
-            }catch(NumberFormatException e){}
+            }catch(NumberFormatException _){}
             boolean match= (id!=null&&schedule.getId()==id);
             if (schedule.getCustomer().getCredentials().getMail().toLowerCase().contains(user.getCredentials().getMail().toLowerCase())&&
                     schedule.getTrainer().getCredentials().getMail().toLowerCase().contains(lowerSearch)||

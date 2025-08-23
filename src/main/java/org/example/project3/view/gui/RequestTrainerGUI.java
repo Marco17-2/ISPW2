@@ -92,7 +92,6 @@ public class RequestTrainerGUI extends CommonGUI implements Observer {
                 alert.setTitle("Rifiuta richiesta");
                 alert.setHeaderText(null);
                 alert.setContentText("Rimozione effettuata con successo");
-//                goToTrainerHome(event);
                 alert.showAndWait();
 
             }catch(DAOException e){

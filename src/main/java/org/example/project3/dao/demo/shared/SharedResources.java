@@ -4,9 +4,9 @@ package org.example.project3.dao.demo.shared;
 import org.example.project3.model.*;
 import org.example.project3.utilities.enums.RestTime;
 import org.example.project3.utilities.enums.Role;
+import org.example.project3.utilities.others.Printer;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -122,13 +122,13 @@ public class SharedResources {
         exerciseList2.add(exercise3);
         exerciseList2.add(exercise4);
         for(Exercise exercise: exerciseList2){
-            System.out.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
+            Printer.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
         }
         List<Exercise> exerciseList3= new ArrayList<>();
         exerciseList3.add(exercise1);
         exerciseList3.add(exercise3);
         for(Exercise exercise:exerciseList3){
-            System.out.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
+            Printer.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
         }
         Schedule schedule1=new Schedule(1,"full body",customer,trainer,exerciseList1);
         Schedule schedule2=new Schedule(2,"upper",customer,trainer,exerciseList2);
@@ -143,23 +143,23 @@ public class SharedResources {
 
 
         // DEBUGGING: Stampa il contenuto della mappa exerciseSchedules
-        System.out.println("----------------------------------------------");
-        System.out.println("Contenuto della mappa exerciseSchedules:");
+        Printer.println("----------------------------------------------");
+        Printer.println("Contenuto della mappa exerciseSchedules:");
 
 // Itera su tutte le entry (chiave-valore) della mappa
         for (Map.Entry<Long, List<Exercise>> entry : exerciseSchedules.entrySet()) {
             Long scheduleId = entry.getKey();
             List<Exercise> exercises = entry.getValue();
 
-            System.out.println("\nID Scheda: " + scheduleId);
+            Printer.println("\nID Scheda: " + scheduleId);
             if (exercises != null && !exercises.isEmpty()) {
-                System.out.println("Esercizi:");
+                Printer.println("Esercizi:");
                 // Itera sulla lista di esercizi per ogni scheda
                 for (Exercise exercise : exercises) {
-                    System.out.println("  - " + exercise.getName() + " (ID: " + exercise.getId() + ")");
+                    Printer.println("  - " + exercise.getName() + " (ID: " + exercise.getId() + ")");
                 }
             } else {
-                System.out.println("  - Nessun esercizio trovato per questa scheda.");
+                Printer.println("  - Nessun esercizio trovato per questa scheda.");
             }
         }
         System.out.println("----------------------------------------------");

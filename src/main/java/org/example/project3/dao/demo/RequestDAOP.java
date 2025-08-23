@@ -1,6 +1,5 @@
 package org.example.project3.dao.demo;
 
-import com.mysql.cj.ServerPreparedQueryTestcaseGenerator;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 
@@ -57,7 +56,6 @@ public class RequestDAOP implements RequestDAO {
             throw new DAOException("Errore nel DAO");
         }
         SharedResources.getInstance().getRequestsSent().remove(request.getSchedule().getId());
-//        SharedResources.getInstance().getRequestTrainer().get(request.getSchedule().getTrainer().getCredentials().getMail()).removeIf(r -> r.getID()==request.getID());
 
         List<Request> trainerRequests = SharedResources.getInstance().getRequestTrainer().get(request.getSchedule().getTrainer().getCredentials().getMail());
 

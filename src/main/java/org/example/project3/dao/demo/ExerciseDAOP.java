@@ -111,7 +111,7 @@ public class ExerciseDAOP implements ExerciseDAO {
         for (Exercise exercise : schedule.getExercises()) {
             try{
                 id= Long.parseLong(lowerSearch);
-            }catch(NumberFormatException e){}
+            }catch(NumberFormatException _){}
             boolean match= (id!=null&&exercise.getId()==id);
             if (exercise.getName().toLowerCase().contains(lowerSearch)||match) {
                 exercises.add(exercise);
@@ -139,7 +139,7 @@ public class ExerciseDAOP implements ExerciseDAO {
         for (Exercise exercise : storedExercises) {
             try{
                 id= Long.parseLong(lowerSearch);
-            }catch(NumberFormatException e){}
+            }catch(NumberFormatException _){}
             boolean match= (id!=null&&exercise.getId()==id);
             if (exercise.getName().toLowerCase().contains(lowerSearch)||match) {
                 exercises.add(exercise);
