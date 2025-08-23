@@ -66,7 +66,7 @@ public class ExerciseQuery {
             pstmt.setLong(1, schedule.getId());
             return pstmt.executeQuery();
         } catch (SQLException e) {
-            throw new DbOperationException("Errore nel recupero degli esercizi"+e.getMessage(), e);
+            throw new DbOperationException("Errore nel recupero degli esercizi", e);
         }
     }
 

@@ -62,12 +62,12 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
                 Printer.println("--------------------Lista delle richieste--------------------\n");
                 Printer.println("(1)ID | (2)Cliente | (3)Scheda | (4)Esercizio | (5)Motivazione\n");
                 for (RequestBean request : requestBeans) {
-                    Printer.println(request.getID() + " | " + request.getScheduleBean().getCustomerBean().getCredentialsBean().getMail() + " | " + request.getScheduleBean().getName() + " | " + request.getExerciseBean().getName() + " | " + requestBean.getReason());
+                    Printer.println(request.getID() + " | " + request.getScheduleBean().getCustomerBean().getCredentialsBean().getMail() + " | " + request.getScheduleBean().getName() + " | " + request.getExerciseBean().getName() + " | " + request.getReason());
                 }
                 Printer.println("Inserici l'ID della richiesta che vuoi gestire");
                 Long id = Long.parseLong(scanner.nextLine());
                 for (RequestBean requestTemp : requestBeans) {
-                    if ((id.equals(requestBean.getID()))) {
+                    if ((id.equals(requestTemp.getID()))) {
                         this.requestBean = requestTemp;
                         return true;
                     }
@@ -82,13 +82,20 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
 
 
     private void requestChoice(StateMachineConcrete context) {
-        if (displayRequests()) {
-            Printer.println("1. Accetta modifica"); //in questo caso facciamo il login in automatico
-            Printer.println("2. Rifiuta modifica");
-            Printer.print("Opzione scelta: ");
-            handleRequestOption(context);
-        } else if (!requestBeans.isEmpty()) {
-            Printer.errorPrint("È stato inserito un ID non corretto!");
+        try {
+            if (displayRequests()) {
+                Printer.println("1. Accetta modifica"); //in questo caso facciamo il login in automatico
+                Printer.println("2. Rifiuta modifica");
+                Printer.print("Opzione scelta: ");
+                handleRequestOption(context);
+            } else if (!requestBeans.isEmpty()) {
+                Printer.errorPrint("È stato inserito un ID non corretto!");
+                requestChoice(context);
+            } else {
+                goNext(context, new TrainerHomepageCLI(user));
+            }
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
         }
     }
 
@@ -104,34 +111,49 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
     }
 
     private void handleRequestOption(StateMachineConcrete context) {
-        int scelta = Integer.parseInt(scanner.nextLine());
-        switch (scelta) {
-            case 1 -> handleAcceptRequest(context);
-            case 2 -> handleRejectRequest(context);
-            default -> Printer.errorPrint("Scelta non valida!");
+        try {
+            int scelta = Integer.parseInt(scanner.nextLine());
+            switch (scelta) {
+                case 1 -> handleAcceptRequest(context);
+                case 2 -> handleRejectRequest(context);
+                default -> Printer.errorPrint("Scelta non valida!");
+            }
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
         }
     }
 
     private void handleAcceptRequest(StateMachineConcrete context) {
-        loadExercises();
-        if (displayExercises(requestBean)) {
-            update();
-            goNext(context, new TrainerHomepageCLI(user));
-        } else {
-            Printer.errorPrint("L'esercizio inserito non è presente!");
+        try {
+            loadExercises();
+            if (displayExercises(requestBean)) {
+                update();
+                goNext(context, new TrainerHomepageCLI(user));
+            } else if (!exerciseBeans.isEmpty()) {
+                Printer.errorPrint("È stato inserito un nome non corretto!");
+                handleAcceptRequest(context);
+            } else {
+                goNext(context, new TrainerHomepageCLI(user));
+            }
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
         }
     }
 
     private void handleRejectRequest(StateMachineConcrete context) {
-        deleteRequest(requestBean);
-        Printer.println("Richiesta eliminata con successo!");
-        goNext(context, new TrainerHomepageCLI(user));
+        try {
+            deleteRequest(requestBean);
+            Printer.println("Richiesta eliminata con successo!");
+            goNext(context, new TrainerHomepageCLI(user));
+        }catch(DAOException _){
+            Printer.errorPrint("Errore nel DAO. Riprova.");
+        }
     }
 
     private boolean displayExercises(RequestBean requestBean){
         try {
             if (exerciseBeans.isEmpty()) {
-                Printer.errorPrint("Non è stata trovato nessun esercizio!");
+                Printer.errorPrint("Non è stata trovato nessun esercizio con cui poterlo sostituire!");
                 return false;
             } else {
                 Printer.println("--------------------Lista degli esercizi ----------------------\n");
@@ -159,10 +181,11 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
     private void loadExercises(){
         try {
             exerciseBeans.clear();
-            scheduleController.retriveAllExercises(requestBean,exerciseBeans);
+            List<ExerciseBean> exerciseTemp=new ArrayList<>();
+            scheduleController.retriveAllExercises(requestBean,exerciseTemp);
+            exerciseBeans.addAll(exerciseTemp);
         }catch(DAOException _){
             Printer.errorPrint("Errore nel DAO. Riprova.");
-            scanner.nextLine();
         }
     }
 
@@ -171,7 +194,6 @@ public class ModifyScheduleCLI extends AbstractState implements Observer {
             requestModifyController.deleteRequest(requestBean);
         }catch(DAOException _){
             Printer.errorPrint("Errore nel DAO. Riprova.");
-            scanner.nextLine();
         }
     }
 

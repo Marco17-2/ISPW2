@@ -50,13 +50,18 @@ public class ScheduleDAOP implements ScheduleDAO {
         if (schedule == null) {
             throw new DAOException("Scheda non valida: null");
         }
+        if(schedule.getExercises() == null){
+            schedule.setExercises(new ArrayList<>());
+        }else{
+            schedule.getExercises().clear();
+        }
         Schedule storedSchedule = SharedResources.getInstance().getSchedules().get(schedule.getId());
         if (storedSchedule == null) {
             throw new DAOException(schedule.getClass().getSimpleName() + " non trovato");
         }
-        List<Exercise> storedExercises = SharedResources.getInstance().getExerciseSchedules().get(storedSchedule.getId());
+        List<Exercise> storedExercises = SharedResources.getInstance().getExerciseSchedules().get(schedule.getId());
         if (storedExercises == null) {
-            throw new NoResultException(("Nessun esercizio trovato per: " + storedSchedule.getId()));
+            throw new NoResultException("Nessun esercizio trovato per: " + storedSchedule.getId());
         }
         for(Exercise exercise : storedExercises){
             schedule.addExercise(exercise);
@@ -73,8 +78,7 @@ public class ScheduleDAOP implements ScheduleDAO {
         for (Schedule schedule : SharedResources.getInstance().getSchedules().values()) {
             try{
                  id= Long.parseLong(lowerSearch);
-            }catch(NumberFormatException e){
-                Printer.errorPrint(""+e);}
+            }catch(NumberFormatException e){}
             boolean match= (id!=null&&schedule.getId()==id);
             if (schedule.getCustomer().getCredentials().getMail().toLowerCase().contains(user.getCredentials().getMail().toLowerCase())&&
                     schedule.getTrainer().getCredentials().getMail().toLowerCase().contains(lowerSearch)||

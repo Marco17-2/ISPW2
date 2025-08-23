@@ -73,12 +73,12 @@ public class ExerciseDAOP implements ExerciseDAO {
             throw new DAOException("Errore nel recupero della mappa degli esercizi");
         }
 
-        List<Exercise> scheduleExercises = request.getSchedule().getExercises();
+        List<Exercise> scheduleExercises = SharedResources.getInstance().getExerciseSchedules().get(request.getSchedule().getId());
         if (scheduleExercises == null) {
             scheduleExercises = new ArrayList<>(); // Inizializza come vuota se null
         }
 
-        List<Exercise> retrievedExercises = new ArrayList<>(exercisesMap.values());
+        List<Exercise> retrievedExercises = new ArrayList<>();
         for (Exercise exercise : exercisesMap.values()) {
             boolean isInSchedule = scheduleExercises.stream()
                     .anyMatch(se -> se.getId() == exercise.getId());
@@ -107,8 +107,13 @@ public class ExerciseDAOP implements ExerciseDAO {
         }
         schedule.setExercises(storedSchedule.getExercises());
 
+        Long id=null;
         for (Exercise exercise : schedule.getExercises()) {
-            if (exercise.getName().toLowerCase().contains(lowerSearch)) {
+            try{
+                id= Long.parseLong(lowerSearch);
+            }catch(NumberFormatException e){}
+            boolean match= (id!=null&&exercise.getId()==id);
+            if (exercise.getName().toLowerCase().contains(lowerSearch)||match) {
                 exercises.add(exercise);
             }
         }
@@ -130,8 +135,13 @@ public class ExerciseDAOP implements ExerciseDAO {
             throw new DAOException("Errore nel recupero degli esercizi nel DAO");
         }
 
+        Long id=null;
         for (Exercise exercise : storedExercises) {
-            if (exercise.getName().toLowerCase().contains(lowerSearch)) {
+            try{
+                id= Long.parseLong(lowerSearch);
+            }catch(NumberFormatException e){}
+            boolean match= (id!=null&&exercise.getId()==id);
+            if (exercise.getName().toLowerCase().contains(lowerSearch)||match) {
                 exercises.add(exercise);
             }
         }

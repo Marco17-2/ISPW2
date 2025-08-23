@@ -2,6 +2,12 @@ package org.example.project3.dao.demo.shared;
 
 
 import org.example.project3.model.*;
+import org.example.project3.utilities.enums.RestTime;
+import org.example.project3.utilities.enums.Role;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +92,86 @@ public class SharedResources {
         return requestTrainer;
     }
 
+    public void populateData(){
+        Exercise exercise1=new Exercise(10,"Push ups","basic push ups",4,10, RestTime.SECONDS60);
+        Exercise exercise2=new Exercise(20,"Squat","basic squat",4,10, RestTime.SECONDS60);
+        Exercise exercise3=new Exercise(30,"Crunch","basic crunch",4,10, RestTime.SECONDS60);
+        Exercise exercise4=new Exercise(40,"Lat machine","prone lat machine",4,10, RestTime.SECONDS60);
+        exercises.put(exercise1.getId(),exercise1);
+        exercises.put(exercise2.getId(),exercise2);
+        exercises.put(exercise3.getId(),exercise3);
+        exercises.put(exercise4.getId(),exercise4);
+
+        Customer customer= new Customer(new Credentials("mario.rossi@gmail.com","mariorossi", Role.CLIENT),"mario","rossi","maschio",true, LocalDate.now().minusYears(20));
+        customers.put(customer.getCredentials().getMail(),customer);
+        userTable.put(customer.getCredentials().getMail(),customer.getCredentials());
+
+        Trainer trainer= new Trainer(new Credentials("mattia.verdi@gmail.com","mattiaverdi", Role.TRAINER),"mattia","verdi","maschio",true, LocalDate.now().minusYears(20));
+        trainers.put(trainer.getCredentials().getMail(),trainer);
+        userTable.put(trainer.getCredentials().getMail(),trainer.getCredentials());
+
+        List<Exercise> exerciseList1= new ArrayList<>();
+        exerciseList1.add(exercise1);
+        exerciseList1.add(exercise2);
+        exerciseList1.add(exercise3);
+        for(Exercise exercise:exerciseList1){
+            System.out.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
+        }
+        List<Exercise> exerciseList2= new ArrayList<>();
+        exerciseList2.add(exercise2);
+        exerciseList2.add(exercise3);
+        exerciseList2.add(exercise4);
+        for(Exercise exercise: exerciseList2){
+            System.out.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
+        }
+        List<Exercise> exerciseList3= new ArrayList<>();
+        exerciseList3.add(exercise1);
+        exerciseList3.add(exercise3);
+        for(Exercise exercise:exerciseList3){
+            System.out.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
+        }
+        Schedule schedule1=new Schedule(1,"full body",customer,trainer,exerciseList1);
+        Schedule schedule2=new Schedule(2,"upper",customer,trainer,exerciseList2);
+        Schedule schedule3=new Schedule(3,"gambe",customer,trainer,exerciseList3);
+        schedules.put(schedule1.getId(),schedule1);
+        exerciseSchedules.put(schedule1.getId(),exerciseList1);
+        schedules.put(schedule2.getId(),schedule2);
+        exerciseSchedules.put(schedule2.getId(),exerciseList2);
+        schedules.put(schedule3.getId(),schedule3);
+        exerciseSchedules.put(schedule3.getId(),exerciseList3);
+
+
+
+        // DEBUGGING: Stampa il contenuto della mappa exerciseSchedules
+        System.out.println("----------------------------------------------");
+        System.out.println("Contenuto della mappa exerciseSchedules:");
+
+// Itera su tutte le entry (chiave-valore) della mappa
+        for (Map.Entry<Long, List<Exercise>> entry : exerciseSchedules.entrySet()) {
+            Long scheduleId = entry.getKey();
+            List<Exercise> exercises = entry.getValue();
+
+            System.out.println("\nID Scheda: " + scheduleId);
+            if (exercises != null && !exercises.isEmpty()) {
+                System.out.println("Esercizi:");
+                // Itera sulla lista di esercizi per ogni scheda
+                for (Exercise exercise : exercises) {
+                    System.out.println("  - " + exercise.getName() + " (ID: " + exercise.getId() + ")");
+                }
+            } else {
+                System.out.println("  - Nessun esercizio trovato per questa scheda.");
+            }
+        }
+        System.out.println("----------------------------------------------");
+
+        List<Schedule> scheduleList1= new ArrayList<>();
+        scheduleList1.add(schedule1);
+        scheduleList1.add(schedule2);
+        scheduleList1.add(schedule3);
+        customerSchedules.put(customer.getCredentials().getMail(),scheduleList1);
+
+
+    }
 
 
 }

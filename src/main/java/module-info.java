@@ -13,6 +13,7 @@ module org.example.project3 {
     requires java.xml.crypto;
     requires javafx.base;
     requires javafx.graphics;
+    requires mysql.connector.j;
 
     opens org.example.project3.view to javafx.fxml;
 

@@ -1,5 +1,6 @@
 package org.example.project3.dao.demo;
 
+import com.mysql.cj.ServerPreparedQueryTestcaseGenerator;
 import org.example.project3.dao.RequestDAO;
 import org.example.project3.dao.demo.shared.SharedResources;
 
@@ -7,6 +8,7 @@ import org.example.project3.exceptions.DAOException;
 import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,9 @@ public class RequestDAOP implements RequestDAO {
     public void sendRequest(Request request) throws DAOException {
         if(request==null){
             throw new DAOException("Richiesta non valida: null");
+        }else{
+            long id = LocalDateTime.now().getNano();
+            request.setId(id);
         }
         if(SharedResources.getInstance().getRequestsSent().containsKey(request.getSchedule().getId())){
             throw new DAOException("Richiesta con id " + request.getSchedule().getId() + " esiste già");
@@ -52,6 +57,13 @@ public class RequestDAOP implements RequestDAO {
             throw new DAOException("Errore nel DAO");
         }
         SharedResources.getInstance().getRequestsSent().remove(request.getSchedule().getId());
+//        SharedResources.getInstance().getRequestTrainer().get(request.getSchedule().getTrainer().getCredentials().getMail()).removeIf(r -> r.getID()==request.getID());
+
+        List<Request> trainerRequests = SharedResources.getInstance().getRequestTrainer().get(request.getSchedule().getTrainer().getCredentials().getMail());
+
+        if(trainerRequests != null) {
+            trainerRequests.removeIf(req -> req.getID()==request.getID());
+        }
     }
 
     @Override
