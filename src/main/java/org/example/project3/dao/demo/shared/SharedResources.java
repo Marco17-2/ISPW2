@@ -115,7 +115,7 @@ public class SharedResources {
         exerciseList1.add(exercise2);
         exerciseList1.add(exercise3);
         for(Exercise exercise:exerciseList1){
-            System.out.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
+            Printer.println(" "+exercise.getId()+" "+exercise.getName() +" "+exercise.getDescription());
         }
         List<Exercise> exerciseList2= new ArrayList<>();
         exerciseList2.add(exercise2);
@@ -149,20 +149,20 @@ public class SharedResources {
 // Itera su tutte le entry (chiave-valore) della mappa
         for (Map.Entry<Long, List<Exercise>> entry : exerciseSchedules.entrySet()) {
             Long scheduleId = entry.getKey();
-            List<Exercise> exercises = entry.getValue();
+            List<Exercise> exs = entry.getValue();
 
             Printer.println("\nID Scheda: " + scheduleId);
-            if (exercises != null && !exercises.isEmpty()) {
+            if (exs != null && !exs.isEmpty()) {
                 Printer.println("Esercizi:");
                 // Itera sulla lista di esercizi per ogni scheda
-                for (Exercise exercise : exercises) {
+                for (Exercise exercise : exs) {
                     Printer.println("  - " + exercise.getName() + " (ID: " + exercise.getId() + ")");
                 }
             } else {
                 Printer.println("  - Nessun esercizio trovato per questa scheda.");
             }
         }
-        System.out.println("----------------------------------------------");
+        Printer.println("----------------------------------------------");
 
         List<Schedule> scheduleList1= new ArrayList<>();
         scheduleList1.add(schedule1);

@@ -8,6 +8,7 @@ import org.example.project3.exceptions.NoResultException;
 import org.example.project3.model.Exercise;
 import org.example.project3.model.Request;
 import org.example.project3.model.Schedule;
+import org.example.project3.utilities.others.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +112,9 @@ public class ExerciseDAOP implements ExerciseDAO {
         for (Exercise exercise : schedule.getExercises()) {
             try{
                 id= Long.parseLong(lowerSearch);
-            }catch(NumberFormatException _){}
+            }catch(NumberFormatException e){
+                Printer.errorPrint("");
+            }
             boolean match= (id!=null&&exercise.getId()==id);
             if (exercise.getName().toLowerCase().contains(lowerSearch)||match) {
                 exercises.add(exercise);
@@ -139,9 +142,9 @@ public class ExerciseDAOP implements ExerciseDAO {
         for (Exercise exercise : storedExercises) {
             try{
                 id= Long.parseLong(lowerSearch);
-            }catch(NumberFormatException _){}
+            }catch(NumberFormatException e){Printer.errorPrint("");}
             boolean match= (id!=null&&exercise.getId()==id);
-            if (exercise.getName().toLowerCase().contains(lowerSearch)||match) {
+            if (exercise.getName().toLowerCase().contains(lowerSearch)) {
                 exercises.add(exercise);
             }
         }
